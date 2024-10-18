@@ -19,7 +19,7 @@ class CollectionHostValidator<T> {
     reset();
   }
 
-  CollectionHostValidator<T> start() {
+  private CollectionHostValidator<T> start() {
     nextCallbackIndex = 0;
     modificationCount = 0;
     this.id = "";
@@ -30,10 +30,6 @@ class CollectionHostValidator<T> {
   CollectionHostValidator<T> setRepeat(int repeat) {
     this.repeat = repeat;
     return this;
-  }
-
-  CollectionHostValidator<T> trace() {
-    return trace();
   }
 
   CollectionHostValidator<T> reset() {
@@ -130,7 +126,7 @@ class CollectionHostValidator<T> {
     return getHost("");
   }
 
-  CollectionHost<T> getHost(String host) {
+  private CollectionHost<T> getHost(String host) {
     return new CollectionHost<>() {
       @Override
       public void adding(int index, @Nullable T s, @Nullable Object v) {
@@ -174,10 +170,15 @@ class CollectionHostValidator<T> {
     out.append(' ').append(callBack).append('(');
     boolean first = true;
     for (Object param : params) {
-      if (first) first = false;
-      else out.append(", ");
-      if (param == null) out.append("null");
-      else
+      if (first) {
+        first = false;
+      } else {
+        out.append(", ");
+      }
+
+      if (param == null) {
+        out.append("null");
+      } else {
         out.append(
                 param
                     .getClass()
@@ -185,6 +186,7 @@ class CollectionHostValidator<T> {
                     .substring(param.getClass().getPackage().getName().length() + 1))
             .append(' ')
             .append(param);
+      }
     }
     out.append(')');
     return out.toString();

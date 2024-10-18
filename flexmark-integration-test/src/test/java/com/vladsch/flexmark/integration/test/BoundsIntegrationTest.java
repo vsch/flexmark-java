@@ -18,7 +18,7 @@ import org.junit.runners.Parameterized;
 public class BoundsIntegrationTest {
   private static final Parser PARSER = Parser.builder().build();
 
-  protected final String input;
+  private final String input;
 
   public BoundsIntegrationTest(String input) {
     this.input = input;

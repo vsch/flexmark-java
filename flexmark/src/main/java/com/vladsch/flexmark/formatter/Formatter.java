@@ -507,13 +507,15 @@ public class Formatter implements IRender {
 
     @Override
     protected void removeApiPoint(@NotNull Object apiPoint) {
-      if (apiPoint instanceof AttributeProviderFactory)
+      if (apiPoint instanceof AttributeProviderFactory) {
         this.attributeProviderFactories.remove(apiPoint);
-      else if (apiPoint instanceof NodeFormatterFactory)
+      } else if (apiPoint instanceof NodeFormatterFactory) {
         this.nodeFormatterFactories.remove(apiPoint);
-      else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
-      else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
-      else {
+      } else if (apiPoint instanceof LinkResolverFactory) {
+        this.linkResolverFactories.remove(apiPoint);
+      } else if (apiPoint instanceof HeaderIdGeneratorFactory) {
+        this.htmlIdGeneratorFactory = null;
+      } else {
         throw new IllegalStateException(
             "Unknown data point type: " + apiPoint.getClass().getName());
       }
@@ -834,9 +836,11 @@ public class Formatter implements IRender {
     @Override
     public void postProcessNonTranslating(
         @NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
-      if (translationHandler != null)
+      if (translationHandler != null) {
         translationHandler.postProcessNonTranslating(postProcessor, scope);
-      else scope.run();
+      } else {
+        scope.run();
+      }
     }
 
     @NotNull
@@ -1084,8 +1088,11 @@ public class Formatter implements IRender {
         }
 
         if (isFormatControlEnabled && controlProcessor.isFormattingOff()) {
-          if (node instanceof BlankLine) subContext.markdown.blankLine();
-          else subContext.markdown.append(node.getChars());
+          if (node instanceof BlankLine) {
+            subContext.markdown.blankLine();
+          } else {
+            subContext.markdown.append(node.getChars());
+          }
         } else {
           List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(node.getClass());
 

@@ -177,9 +177,13 @@ public class CharPredicateTest {
       char c1 = (i & 2) != 0 ? ' ' : '\t';
       char c2 = (i & 4) != 0 ? ' ' : '\t';
       char c3 = (i & 8) != 0 ? ' ' : '\t';
-      if (i == 0) assertSame(TAB, standardOrAnyOf(c0, c1, c2, c3));
-      else if (i == 15) assertSame(SPACE, standardOrAnyOf(c0, c1, c2, c3));
-      else assertSame(SPACE_TAB, standardOrAnyOf(c0, c1, c2, c3));
+      if (i == 0) {
+        assertSame(TAB, standardOrAnyOf(c0, c1, c2, c3));
+      } else if (i == 15) {
+        assertSame(SPACE, standardOrAnyOf(c0, c1, c2, c3));
+      } else {
+        assertSame(SPACE_TAB, standardOrAnyOf(c0, c1, c2, c3));
+      }
     }
 
     for (int i = 0; i < 16; i++) {
@@ -192,8 +196,11 @@ public class CharPredicateTest {
       char c2 = (i & 4) != 0 ? '\n' : '\r';
       char c3 = (i & 8) != 0 ? '\n' : '\r';
 
-      if (i == 15) assertSame(EOL, standardOrAnyOf(c0, c1, c2, c3));
-      else assertSame(ANY_EOL, standardOrAnyOf(c0, c1, c2, c3));
+      if (i == 15) {
+        assertSame(EOL, standardOrAnyOf(c0, c1, c2, c3));
+      } else {
+        assertSame(ANY_EOL, standardOrAnyOf(c0, c1, c2, c3));
+      }
     }
 
     CharPredicate test1 = standardOrAnyOf('a', 'b', 'c', 'd');
@@ -270,9 +277,13 @@ public class CharPredicateTest {
       char c1 = (i & 2) != 0 ? ' ' : '\t';
       char c2 = (i & 4) != 0 ? ' ' : '\t';
       char c3 = (i & 8) != 0 ? ' ' : '\t';
-      if (i == 0) assertSame(TAB, anyOf(c0, c1, c2, c3));
-      else if (i == 15) assertSame(SPACE, anyOf(c0, c1, c2, c3));
-      else assertSame(SPACE_TAB, anyOf(c0, c1, c2, c3));
+      if (i == 0) {
+        assertSame(TAB, anyOf(c0, c1, c2, c3));
+      } else if (i == 15) {
+        assertSame(SPACE, anyOf(c0, c1, c2, c3));
+      } else {
+        assertSame(SPACE_TAB, anyOf(c0, c1, c2, c3));
+      }
     }
 
     for (int i = 0; i < 16; i++) {
@@ -285,8 +296,11 @@ public class CharPredicateTest {
       char c2 = (i & 4) != 0 ? '\n' : '\r';
       char c3 = (i & 8) != 0 ? '\n' : '\r';
 
-      if (i == 15) assertSame(EOL, anyOf(c0, c1, c2, c3));
-      else assertSame(ANY_EOL, anyOf(c0, c1, c2, c3));
+      if (i == 15) {
+        assertSame(EOL, anyOf(c0, c1, c2, c3));
+      } else {
+        assertSame(ANY_EOL, anyOf(c0, c1, c2, c3));
+      }
     }
 
     for (int i = 0; i < 500; i++) {

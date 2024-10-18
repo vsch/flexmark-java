@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.collection.BoundedMaxAggregator;
 import com.vladsch.flexmark.util.collection.BoundedMinAggregator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BinaryOperator;
@@ -15,7 +15,8 @@ public class TableCellOffsetInfo {
   private static final int TEXT_END = 0x0004;
   private static final int ROW_END = 0x0008;
 
-  private static final Map<TableSectionType, Integer> DEFAULT_STOP_POINTS_MAP = new HashMap<>();
+  private static final Map<TableSectionType, Integer> DEFAULT_STOP_POINTS_MAP =
+      new EnumMap<>(TableSectionType.class);
 
   static {
     DEFAULT_STOP_POINTS_MAP.put(TableSectionType.HEADER, TEXT_END);

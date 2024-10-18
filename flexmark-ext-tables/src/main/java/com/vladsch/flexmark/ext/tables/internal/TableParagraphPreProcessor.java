@@ -262,8 +262,11 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         tableRowNumber = 0;
       } else {
         sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
-        if (rowNumber < separatorLineNumber) tableRowNumber = rowNumber + 1;
-        else tableRowNumber = rowNumber - separatorLineNumber;
+        if (rowNumber < separatorLineNumber) {
+          tableRowNumber = rowNumber + 1;
+        } else {
+          tableRowNumber = rowNumber - separatorLineNumber;
+        }
 
         // can have table separators embedded inside inline elements, need to convert them to text
         // and remove them from sepList
@@ -370,12 +373,17 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
         accumulatedSpanOffset += span - 1;
 
-        if (closingMarker != null) tableCell.setClosingMarker(closingMarker);
+        if (closingMarker != null) {
+          tableCell.setClosingMarker(closingMarker);
+        }
         tableCell.setChars(tableCell.getChildChars());
         // option to keep cell whitespace, if yes, then convert it to text and merge adjacent text
         // nodes
-        if (options.trimCellWhitespace) tableCell.trimWhiteSpace();
-        else tableCell.mergeWhiteSpace();
+        if (options.trimCellWhitespace) {
+          tableCell.trimWhiteSpace();
+        } else {
+          tableCell.mergeWhiteSpace();
+        }
 
         // NOTE: here we get only chars which do not reflect out-of-base characters, prefixes and
         // removed text

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
-import static com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder.F_INCLUDE_ANCHORS;
-import static com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder.F_TRACK_FIRST256;
+import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
+import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
 import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -1575,7 +1575,6 @@ public class BasedSegmentBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       segments.append(trim.getSourceRange());
       segments.append("\n");
     }
@@ -1657,7 +1656,6 @@ public class BasedSegmentBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       segments.append(trim.getSourceRange());
       segments.append("\n");
     }
@@ -1673,11 +1671,6 @@ public class BasedSegmentBuilderTest {
         "" + "line 1\n" + "line 2\n" + "\n" + "line 3\n" + "", segments.toString(sequence));
   }
 
-  // ************************************************************************
-  // CAUTION: BasedSegmentBuilder Unique Test, Not in Segment Builder Tests
-  //   Do NOT blow away if synchronizing the two test files
-  // ************************************************************************
-
   @Test
   public void test_extractRangesDefault() {
     String input = "0123456789";
@@ -1686,10 +1679,6 @@ public class BasedSegmentBuilderTest {
     BasedSegmentBuilder segments =
         BasedSegmentBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
-    // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working
-    // 100%
-    // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3,
-    // 6), Range.of(8, 12));
     segments.append(Range.of(0, 0));
     segments.append(Range.of(0, 1));
     segments.append(Range.of(3, 6));
@@ -1711,10 +1700,6 @@ public class BasedSegmentBuilderTest {
         BasedSegmentBuilder.emptyBuilder(
             sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
-    // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working
-    // 100%
-    // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3,
-    // 6), Range.of(8, 12));
     segments.append(Range.of(0, 0));
     segments.append(Range.of(0, 1));
     segments.append(Range.of(3, 6));
@@ -1734,11 +1719,6 @@ public class BasedSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
     BasedSegmentBuilder segments =
         BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
-
-    // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working
-    // 100%
-    // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3,
-    // 6), Range.of(8, 12));
     segments.append(Range.of(0, 0));
     segments.append(Range.of(0, 1));
     segments.append(Range.of(3, 6));
@@ -1758,11 +1738,6 @@ public class BasedSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
     BasedSegmentBuilder segments =
         BasedSegmentBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
-
-    // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working
-    // 100%
-    // BasedSequence replaced = sequence.replace(0, 1, "^");
-    // assertEquals("^123456789", replaced.toString());
 
     segments.append(Range.of(0, 0));
     segments.append("^");
@@ -1784,11 +1759,6 @@ public class BasedSegmentBuilderTest {
         BasedSegmentBuilder.emptyBuilder(
             sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
-    // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working
-    // 100%
-    // BasedSequence replaced = sequence.replace(0, 1, "^");
-    // assertEquals("^123456789", replaced.toString());
-
     segments.append(Range.of(0, 0));
     segments.append("^");
     segments.append(Range.of(1, 10));
@@ -1807,11 +1777,6 @@ public class BasedSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
     BasedSegmentBuilder segments =
         BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
-
-    // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working
-    // 100%
-    // BasedSequence replaced = sequence.replace(0, 1, "^");
-    // assertEquals("^123456789", replaced.toString());
 
     segments.append(Range.of(0, 0));
     segments.append("^");

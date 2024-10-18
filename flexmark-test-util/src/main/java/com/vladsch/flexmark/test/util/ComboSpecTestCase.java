@@ -28,7 +28,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
   protected final @NotNull Map<String, DataHolder> optionsMap = new HashMap<>();
   protected final @Nullable DataHolder myDefaultOptions;
 
-  public ComboSpecTestCase(
+  protected ComboSpecTestCase(
       @NotNull SpecExample example,
       @Nullable Map<String, ? extends DataHolder> optionMap,
       @Nullable DataHolder... defaultOptions) {

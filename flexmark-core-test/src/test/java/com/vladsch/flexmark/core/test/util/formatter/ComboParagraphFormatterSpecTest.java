@@ -75,7 +75,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   }
 
   static class ParagraphTextNode extends Node {
-    public ParagraphTextNode(@NotNull BasedSequence chars) {
+    ParagraphTextNode(@NotNull BasedSequence chars) {
       super(chars);
     }
 
@@ -87,7 +87,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   }
 
   private static class ParagraphParser extends IParseBase {
-    ParagraphParser() {
+    private ParagraphParser() {
       super();
     }
 
@@ -103,13 +103,13 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   }
 
   private static class ParagraphFormatter extends IRenderBase {
-    ParagraphFormatter(DataHolder options) {
-      super(options);
-    }
-
     private static final String BANNER_TRACKED_OFFSETS = TestUtils.bannerText("Tracked Offsets");
     private static final String BANNER_WITH_RANGES = TestUtils.bannerText("Ranges");
     private static final String BANNER_RESULT = TestUtils.bannerText("Result");
+
+    private ParagraphFormatter(DataHolder options) {
+      super(options);
+    }
 
     @Override
     public void render(@NotNull Node document, @NotNull Appendable output) {

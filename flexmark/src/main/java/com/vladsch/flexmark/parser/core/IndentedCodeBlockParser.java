@@ -70,9 +70,11 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
         trailingBlankLines++;
       }
 
-      if (trailingBlankLines > 0)
+      if (trailingBlankLines > 0) {
         block.setContent(lines.subList(0, lines.size() - trailingBlankLines));
-      else block.setContent(content);
+      } else {
+        block.setContent(content);
+      }
     } else {
       block.setContent(content);
     }

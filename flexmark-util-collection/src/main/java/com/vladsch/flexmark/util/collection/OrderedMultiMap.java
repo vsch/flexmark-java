@@ -158,8 +158,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     if (host != null && !host.skipHostUpdate()) {
       host.adding(index, new Pair<>(k, (V) v), null);
     }
-    if (v == null) valueSet.addNulls(index);
-    else valueSet.add((V) v);
+    if (v == null) {
+      valueSet.addNulls(index);
+    } else {
+      valueSet.add((V) v);
+    }
     isInValueUpdate = false;
   }
 
@@ -187,8 +190,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     if (host != null && !host.skipHostUpdate()) {
       host.adding(index, new Pair<>((K) k, v), null);
     }
-    if (k == null) keySet.addNulls(index);
-    else keySet.add((K) k);
+    if (k == null) {
+      keySet.addNulls(index);
+    } else {
+      keySet.add((K) k);
+    }
     isInKeyUpdate = false;
   }
 
@@ -197,7 +203,9 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     if (host != null && !host.skipHostUpdate()) {
       host.addingNulls(index);
     }
-    while (keySet.size() <= index) keySet.add(null);
+    while (keySet.size() <= index) {
+      keySet.add(null);
+    }
     isInKeyUpdate = false;
   }
 
@@ -294,11 +302,17 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         host.adding(keySet.getValueList().size(), new Pair<>(k, v), null);
       }
 
-      if (k == null) keySet.addNull();
-      else keySet.add(k, v);
+      if (k == null) {
+        keySet.addNull();
+      } else {
+        keySet.add(k, v);
+      }
 
-      if (k == null) valueSet.addNull();
-      else valueSet.add(v, k);
+      if (k == null) {
+        valueSet.addNull();
+      } else {
+        valueSet.add(v, k);
+      }
 
       isInValueUpdate = false;
       isInKeyUpdate = false;
@@ -313,8 +327,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         host.adding(valueIndex, new Pair<>(k, v), null);
       }
 
-      if (k == null) keySet.removeIndex(valueIndex);
-      else keySet.setValueAt(valueIndex, k, v);
+      if (k == null) {
+        keySet.removeIndex(valueIndex);
+      } else {
+        keySet.setValueAt(valueIndex, k, v);
+      }
 
       isInValueUpdate = false;
       isInKeyUpdate = false;
@@ -328,8 +345,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         host.adding(keyIndex, new Pair<>(k, v), null);
       }
 
-      if (k == null) valueSet.removeIndex(valueIndex);
-      else valueSet.setValueAt(keyIndex, v, k);
+      if (k == null) {
+        valueSet.removeIndex(valueIndex);
+      } else {
+        valueSet.setValueAt(keyIndex, v, k);
+      }
 
       isInValueUpdate = false;
       return true;

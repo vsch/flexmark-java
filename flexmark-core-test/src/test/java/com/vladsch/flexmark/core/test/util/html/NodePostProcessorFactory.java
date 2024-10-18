@@ -10,11 +10,10 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class NodePostProcessorFactory implements PostProcessorFactory {
+abstract class NodePostProcessorFactory implements PostProcessorFactory {
   private final Map<Class<?>, Set<Class<?>>> nodeMap = new HashMap<>();
 
-  // added to force constructor
-  public NodePostProcessorFactory(boolean ignored) {}
+  NodePostProcessorFactory() {}
 
   @Nullable
   @Override
@@ -33,7 +32,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     return false;
   }
 
-  protected final void addNodes(Class<?>... nodeTypes) {
+  final void addNodes(Class<?>... nodeTypes) {
     for (Class<?> nodeType : nodeTypes) {
       nodeMap.put(nodeType, Collections.emptySet());
     }

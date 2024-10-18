@@ -169,9 +169,11 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         } else {
           baseRefId.append(Character.toLowerCase(c));
         }
-      } else if (Character.isDigit(c)) baseRefId.append(c);
-      else if (nonDashChars.indexOf(c) != -1) baseRefId.append(c);
-      else if (toDashChars.indexOf(c) != -1
+      } else if (Character.isDigit(c)) {
+        baseRefId.append(c);
+      } else if (nonDashChars.indexOf(c) != -1) {
+        baseRefId.append(c);
+      } else if (toDashChars.indexOf(c) != -1
           && (!noDupedDashes
               || ((c == '-' && baseRefId.length() == 0)
                   || baseRefId.length() != 0 && baseRefId.charAt(baseRefId.length() - 1) != '-')))

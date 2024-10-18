@@ -16,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Extension for GFM style task list items
  *
- * <p>Create it with {@link #create()} and then configure it on the builders
- *
  * <p>The bullet list items that begin with [ ], [x] or [X] are turned into TaskListItem nodes
  */
 public class TaskListExtension
@@ -69,11 +67,7 @@ public class TaskListExtension
   public static final DataKey<Map<Character, Integer>> FORMAT_TASK_ITEM_PRIORITIES =
       new DataKey<>("FORMAT_TASK_ITEM_PRIORITIES", DEFAULT_PRIORITIES);
 
-  private TaskListExtension() {}
-
-  static TaskListExtension create() {
-    return new TaskListExtension();
-  }
+  TaskListExtension() {}
 
   @Override
   public void extend(Formatter.Builder formatterBuilder) {
@@ -98,7 +92,6 @@ public class TaskListExtension
       @NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
     if (htmlRendererBuilder.isRendererType("HTML")) {
       htmlRendererBuilder.nodeRendererFactory(new TaskListNodeRenderer.Factory());
-    } else if (htmlRendererBuilder.isRendererType("JIRA")) {
     }
   }
 }

@@ -29,8 +29,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class YamlFrontMatterBlockParser extends AbstractBlockParser {
   private static final Pattern REGEX_METADATA =
-      Pattern.compile("^[ ]{0,3}([A-Za-z0-9_\\-.]+):\\s*(.*)");
-  private static final Pattern REGEX_METADATA_LIST = Pattern.compile("^[ ]+-\\s*(.*)");
+      Pattern.compile("^ {0,3}([A-Za-z0-9_\\-.]+):\\s*(.*)");
+  private static final Pattern REGEX_METADATA_LIST = Pattern.compile("^ +-\\s*(.*)");
   private static final Pattern REGEX_METADATA_LITERAL = Pattern.compile("^\\s*(.*)");
   private static final Pattern REGEX_BEGIN = Pattern.compile("^-{3}(\\s.*)?");
   private static final Pattern REGEX_END = Pattern.compile("^(-{3}|\\.{3})(\\s.*)?");
@@ -163,12 +163,12 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     @NotNull
     @Override
     public BlockParserFactory apply(@NotNull DataHolder options) {
-      return new BlockFactory(options);
+      return new BlockFactory();
     }
   }
 
   private static class BlockFactory extends AbstractBlockParserFactory {
-    private BlockFactory(DataHolder options) {
+    private BlockFactory() {
       super();
     }
 

@@ -43,8 +43,11 @@ public class MutableAttributes extends Attributes {
       attribute = AttributeImpl.of(useKey, value);
     } else {
       attribute = attributes.get(useKey);
-      if (attribute != null) attribute = attribute.replaceValue(value);
-      else attribute = AttributeImpl.of(useKey, value);
+      if (attribute != null) {
+        attribute = attribute.replaceValue(value);
+      } else {
+        attribute = AttributeImpl.of(useKey, value);
+      }
     }
     getAttributes().put(useKey, attribute);
     return attribute;
@@ -64,8 +67,11 @@ public class MutableAttributes extends Attributes {
       attribute = AttributeImpl.of(key, value);
     } else {
       attribute = attributes.get(useKey);
-      if (attribute != null) attribute = attribute.setValue(value);
-      else attribute = AttributeImpl.of(useKey, value);
+      if (attribute != null) {
+        attribute = attribute.setValue(value);
+      } else {
+        attribute = AttributeImpl.of(useKey, value);
+      }
     }
     getAttributes().put(useKey, attribute);
     return attribute;

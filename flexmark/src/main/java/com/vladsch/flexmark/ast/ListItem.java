@@ -39,10 +39,17 @@ public abstract class ListItem extends Block
   public void getAstExtra(@NotNull StringBuilder out) {
     segmentSpanChars(out, openingMarker, "open");
     segmentSpanChars(out, markerSuffix, "openSuffix");
-    if (isTight()) out.append(" isTight");
-    else out.append(" isLoose");
-    if (isHadBlankAfterItemParagraph()) out.append(" hadBlankLineAfter");
-    else if (isContainsBlankLine()) out.append(" hadBlankLine");
+    if (isTight()) {
+      out.append(" isTight");
+    } else {
+      out.append(" isLoose");
+    }
+
+    if (isHadBlankAfterItemParagraph()) {
+      out.append(" hadBlankLineAfter");
+    } else if (isContainsBlankLine()) {
+      out.append(" hadBlankLine");
+    }
   }
 
   @NotNull

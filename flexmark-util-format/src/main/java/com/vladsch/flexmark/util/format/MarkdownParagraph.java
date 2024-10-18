@@ -791,8 +791,11 @@ public class MarkdownParagraph {
               index++;
               break;
             } else {
-              if (c == ' ') lastConsecutiveSpaces++;
-              else lastConsecutiveSpaces = 0;
+              if (c == ' ') {
+                lastConsecutiveSpaces++;
+              } else {
+                lastConsecutiveSpaces = 0;
+              }
               index++;
             }
           }

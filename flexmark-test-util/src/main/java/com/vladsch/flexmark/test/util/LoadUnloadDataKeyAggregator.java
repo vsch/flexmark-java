@@ -40,8 +40,7 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
         if (!loadExtensions.isEmpty() || !unloadExtensions.isEmpty() && !extensions.isEmpty()) {
           LinkedHashSet<Extension> resolvedExtensions = new LinkedHashSet<>(extensions);
           resolvedExtensions.addAll(loadExtensions);
-          resolvedExtensions.removeIf(
-              (extension) -> unloadExtensions.contains(extension.getClass()));
+          resolvedExtensions.removeIf(extension -> unloadExtensions.contains(extension.getClass()));
           return combined
               .toMutable()
               .remove(LOAD_EXTENSIONS)

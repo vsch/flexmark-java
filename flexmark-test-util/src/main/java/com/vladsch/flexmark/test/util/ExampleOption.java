@@ -73,9 +73,6 @@ public class ExampleOption {
     BUILT_IN_OPTIONS_MAP.put(FILE_EOL_OPTION_NAME, build(FILE_EOL_OPTION_NAME));
     BUILT_IN_OPTIONS_MAP.put(IGNORE_OPTION_NAME, build(IGNORE_OPTION_NAME));
     BUILT_IN_OPTIONS_MAP.put(NO_FILE_EOL_OPTION_NAME, build(NO_FILE_EOL_OPTION_NAME));
-    // NOTE: this one is not an option to use in spec example but set in data holder
-    //        BUILT_IN_OPTIONS_MAP.put(TIMED_ITERATIONS_OPTION_NAME,
-    // build(TIMED_ITERATIONS_OPTION_NAME));
     BUILT_IN_OPTIONS_MAP.put(TIMED_OPTION_NAME, build(TIMED_OPTION_NAME));
   }
 

@@ -4,10 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.ast.FencedCodeBlock;
 import com.vladsch.flexmark.ast.Image;
-import com.vladsch.flexmark.ast.ImageRef;
 import com.vladsch.flexmark.ast.Link;
-import com.vladsch.flexmark.ast.LinkRef;
-import com.vladsch.flexmark.ast.RefNode;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -419,7 +416,7 @@ public class HtmlRendererTest {
         defaultRenderer().render(parse("![foo &auml;](/url)\n")));
   }
 
-  private static class CustomLinkResolverImpl implements LinkResolver {
+  static class CustomLinkResolverImpl implements LinkResolver {
     static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
 
     private final String docUrl;
@@ -453,36 +450,10 @@ public class HtmlRendererTest {
   @Test
   public void withOptions_customLinkResolver() {
     // make sure custom link resolver is preserved when using withOptions() on HTML builder
-    HtmlRenderer renderer =
-        HtmlRenderer.builder().linkResolverFactory(new CustomRefLinkResolverImpl.Factory()).build();
+    HtmlRenderer renderer = HtmlRenderer.builder().linkResolverFactory(new Factory()).build();
     String rendered = renderer.render(parse("foo [:bar]"));
 
     assertEquals("<p>foo [:bar]</p>\n", rendered);
-  }
-
-  static class CustomRefLinkResolverImpl implements LinkResolver {
-    CustomRefLinkResolverImpl() {}
-
-    @NotNull
-    @Override
-    public ResolvedLink resolveLink(
-        @NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
-      if (node instanceof LinkRef || node instanceof ImageRef) {
-        RefNode linkNode = (RefNode) node;
-        if (linkNode.getReference().startsWith(":")) {
-          return link.withUrl("");
-        }
-      }
-      return link;
-    }
-
-    static class Factory extends IndependentLinkResolverFactory {
-      @NotNull
-      @Override
-      public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
-        return new CustomLinkResolverImpl(context);
-      }
-    }
   }
 
   @Test

@@ -80,7 +80,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     private final char delimiterChar;
     private final int delimiterUse;
 
-    CustomDelimiterProcessor(char delimiterChar, int delimiterUse) {
+    private CustomDelimiterProcessor(char delimiterChar, int delimiterUse) {
       this.delimiterChar = delimiterChar;
       this.delimiterUse = delimiterUse;
     }
@@ -146,7 +146,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
   }
 
   private static class AsymmetricDelimiterProcessor implements DelimiterProcessor {
-    AsymmetricDelimiterProcessor() {}
+    private AsymmetricDelimiterProcessor() {}
 
     @Override
     public char getOpeningCharacter() {
@@ -268,7 +268,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
   }
 
   private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
-    UpperCaseNodeRendererFactory() {}
+    private UpperCaseNodeRendererFactory() {}
 
     @NotNull
     @Override
@@ -278,7 +278,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
   }
 
   private static class UpperCaseNodeRenderer implements NodeRenderer {
-    UpperCaseNodeRenderer() {}
+    private UpperCaseNodeRenderer() {}
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {

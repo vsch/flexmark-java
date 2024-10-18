@@ -30,10 +30,10 @@ public class UsageExampleTest {
   }
 
   private static class WordCountVisitor {
-    int wordCount = 0;
+    private int wordCount = 0;
     private final NodeVisitor myVisitor;
 
-    WordCountVisitor() {
+    private WordCountVisitor() {
       myVisitor = new NodeVisitor(new VisitHandler<>(Text.class, WordCountVisitor.this::visit));
     }
 

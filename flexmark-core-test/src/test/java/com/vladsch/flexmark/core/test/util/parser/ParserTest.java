@@ -406,7 +406,7 @@ public class ParserTest {
     return input;
   }
 
-  String unEscape(String input, Parser parser) {
+  private static String unEscape(String input, Parser parser) {
     BasedSequence baseSeq = BasedSequence.of(input);
     List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
     StringBuilder sb = new StringBuilder();
@@ -744,7 +744,7 @@ public class ParserTest {
   }
 
   private static class DashBlock extends Block {
-    DashBlock() {}
+    private DashBlock() {}
 
     @NotNull
     @Override
@@ -756,7 +756,7 @@ public class ParserTest {
   private static class DashBlockParser extends AbstractBlockParser {
     private final DashBlock dash;
 
-    public DashBlockParser(BasedSequence line) {
+    private DashBlockParser(BasedSequence line) {
       dash = new DashBlock();
       dash.setChars(line);
     }
@@ -798,12 +798,12 @@ public class ParserTest {
     @NotNull
     @Override
     public BlockParserFactory apply(@NotNull DataHolder options) {
-      return new BlockFactory(options);
+      return new BlockFactory();
     }
   }
 
   private static class BlockFactory extends AbstractBlockParserFactory {
-    BlockFactory(DataHolder options) {
+    private BlockFactory() {
       super();
     }
 

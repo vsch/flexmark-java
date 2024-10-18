@@ -93,7 +93,7 @@ public class SegmentTest {
     private final char myChar;
     private final int myLength;
 
-    DummyCharSequence(char aChar, int length) {
+    private DummyCharSequence(char aChar, int length) {
       myChar = aChar;
       myLength = length;
     }

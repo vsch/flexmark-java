@@ -293,26 +293,6 @@ public class TableCell {
     return !closeMarker.isEmpty() ? closeMarker.getStartOffset() : text.getEndOffset();
   }
 
-  int getCellSize(TableCell previousCell) {
-    return getEndOffset() - getStartOffset(previousCell);
-  }
-
-  int insideToTextOffset(int insideOffset, TableCell previousCell) {
-    return Utils.maxLimit(
-        text.length(),
-        Utils.minLimit(
-            insideOffset - getInsideStartOffset(previousCell) + getTextStartOffset(previousCell),
-            0));
-  }
-
-  int textToInsideOffset(int insideOffset, TableCell previousCell) {
-    return Utils.maxLimit(
-        getCellSize(previousCell),
-        Utils.minLimit(
-            insideOffset - getTextStartOffset(previousCell) + getInsideStartOffset(previousCell),
-            0));
-  }
-
   private static CharSequence dumpSequence(BasedSequence sequence) {
     StringBuilder sb = new StringBuilder();
     sb.append("{ \"")

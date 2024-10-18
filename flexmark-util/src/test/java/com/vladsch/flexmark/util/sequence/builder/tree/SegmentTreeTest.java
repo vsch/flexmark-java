@@ -277,8 +277,7 @@ public class SegmentTreeTest {
   public void test_build1() {
     String input = "0123456789";
     BasedSequence sequence = BasedSequence.of(input);
-    PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+    PlainSegmentBuilder segments = new PlainSegmentBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
     segments.append(0, 0);
     segments.append(2, 5);
@@ -299,8 +298,7 @@ public class SegmentTreeTest {
   public void test_build2() {
     String input = "0123456789";
     BasedSequence sequence = BasedSequence.of(input);
-    PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+    PlainSegmentBuilder segments = new PlainSegmentBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
     segments.append(0, 0);
     segments.append(2, 5);
@@ -322,8 +320,7 @@ public class SegmentTreeTest {
   public void test_buildSubSequence() {
     String input = "0123456789";
     BasedSequence sequence = BasedSequence.of(input);
-    PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+    PlainSegmentBuilder segments = new PlainSegmentBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
     segments.append("> ");
     segments.append(0, 10);
@@ -359,8 +356,7 @@ public class SegmentTreeTest {
   public void test_buildSubSequence2() {
     String input = "0123456789";
     BasedSequence sequence = BasedSequence.of(input);
-    PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+    PlainSegmentBuilder segments = new PlainSegmentBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
     segments.append("> ");
     segments.append(0, 10);

@@ -58,11 +58,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
   private final Map<String, Integer> myOriginalRefTargets; // map ref target id to translation index
   private final Map<Integer, String>
       myTranslatedRefTargets; // map translation index to translated ref target id
-  private final Map<String, String> myOriginalAnchors; // map placeholder id to original ref id
-
-  private final Map<String, String>
-      myTranslatedAnchors; // map placeholder id to translated ref target id
-
   private int myPlaceholderId = 0;
   private int myAnchorId = 0;
   private int myTranslatingSpanId = 0;
@@ -81,8 +76,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
     myAnchorTexts = new HashMap<>();
     myTranslatingTexts = new HashMap<>();
     myTranslatedTexts = new HashMap<>();
-    myOriginalAnchors = new HashMap<>();
-    myTranslatedAnchors = new HashMap<>();
     myTranslatedRefTargets = new HashMap<>();
     myOriginalRefTargets = new HashMap<>();
     myTranslatingSpans = new ArrayList<>();

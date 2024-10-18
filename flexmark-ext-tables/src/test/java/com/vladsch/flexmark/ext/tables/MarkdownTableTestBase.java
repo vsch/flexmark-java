@@ -25,7 +25,7 @@ class MarkdownTableTestBase {
     return getTables(markdown, null);
   }
 
-  private MarkdownTable[] getTables(CharSequence markdown, DataHolder options) {
+  private static MarkdownTable[] getTables(CharSequence markdown, DataHolder options) {
     if (options == null) {
       options =
           new MutableDataSet()

@@ -98,11 +98,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     return TestUtils.ast(myDocument);
   }
 
-  @Override
-  public void finalizeRender() {
-    super.finalizeRender();
-  }
-
   @NotNull
   public final IParse getParser() {
     return myParser;

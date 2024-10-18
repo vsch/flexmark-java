@@ -19,7 +19,7 @@ public class ComboGfmTaskListSpecTest extends RendererSpecTest {
   private static final String SPEC_RESOURCE = "/ext_gfm_tasklist_ast_spec.md";
   private static final DataHolder OPTIONS =
       new MutableDataSet()
-          .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
+          .set(Parser.EXTENSIONS, Collections.singleton(new TaskListExtension()))
           .toImmutable();
 
   private static final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -57,12 +57,12 @@ public class ComboGfmTaskListSpecTest extends RendererSpecTest {
         "kramdown",
         new MutableDataSet()
             .setFrom(ParserEmulationProfile.KRAMDOWN.getOptions())
-            .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create())));
+            .set(Parser.EXTENSIONS, Collections.singleton(new TaskListExtension())));
     optionsMap.put(
         "markdown",
         new MutableDataSet()
             .setFrom(ParserEmulationProfile.MARKDOWN.getOptions())
-            .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create())));
+            .set(Parser.EXTENSIONS, Collections.singleton(new TaskListExtension())));
   }
 
   public ComboGfmTaskListSpecTest(@NotNull SpecExample example) {

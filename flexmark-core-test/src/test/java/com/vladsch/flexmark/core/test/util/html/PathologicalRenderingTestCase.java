@@ -42,11 +42,9 @@ abstract class PathologicalRenderingTestCase extends RenderingTestCase {
         true);
   }
 
-  private int x = 100000;
-
-  @Rule public Timeout timeout = new Timeout(3, TimeUnit.SECONDS);
-
-  @Rule public Stopwatch stopwatch = new Stopwatch();
+  private int x = 100_000;
+  @Rule public final Timeout timeout = new Timeout(3, TimeUnit.SECONDS);
+  @Rule public final Stopwatch stopwatch = new Stopwatch();
 
   @Test
   public void nestedStrongEmphasis() {

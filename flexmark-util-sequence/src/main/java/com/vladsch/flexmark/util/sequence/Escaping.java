@@ -491,8 +491,11 @@ public class Escaping {
           break;
         case 4:
           String encoded = encode(c);
-          if (encoded != null) sb.append(encoded);
-          else sb.append(c);
+          if (encoded != null) {
+            sb.append(encoded);
+          } else {
+            sb.append(c);
+          }
       }
     }
     return sb.toString();

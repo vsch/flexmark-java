@@ -19,7 +19,7 @@ public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
   private static final String SPEC_RESOURCE = "/ext_gfm_tasklist_formatter_spec.md";
   private static final DataHolder OPTIONS =
       new MutableDataSet()
-          .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
+          .set(Parser.EXTENSIONS, Collections.singleton(new TaskListExtension()))
           .set(Parser.BLANK_LINES_IN_AST, true)
           .toImmutable();
 

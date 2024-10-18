@@ -185,7 +185,6 @@ public class SpecReader {
             exampleNumber++;
             contentLineNumber = lineNumber;
             // NOTE: let dump spec reader get the actual definition line for comparison
-            // lineAbsorbed = true;
           }
         }
         break;

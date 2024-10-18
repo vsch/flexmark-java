@@ -9,11 +9,11 @@ import org.jetbrains.annotations.Nullable;
 public abstract class IRenderBase implements IRender {
   private final DataHolder myOptions;
 
-  public IRenderBase() {
+  protected IRenderBase() {
     this(null);
   }
 
-  public IRenderBase(DataHolder options) {
+  protected IRenderBase(DataHolder options) {
     myOptions = options;
   }
 

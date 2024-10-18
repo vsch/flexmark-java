@@ -1246,9 +1246,9 @@ public interface SequenceUtils {
 
     for (i = iMax; i-- > startIndex; ) {
       char c = thizz.charAt(i);
-      if (eolChars.test(c))
+      if (eolChars.test(c)) {
         lastEOL = Math.min(i + Math.min(eolStartLength(thizz, i), 1), fromIndex);
-      else if (c != ' ' && c != '\t') {
+      } else if (c != ' ' && c != '\t') {
         break;
       }
     }
@@ -1419,10 +1419,15 @@ public interface SequenceUtils {
       int limit,
       int flags,
       @Nullable CharPredicate trimChars) {
-    if (trimChars == null) trimChars = CharPredicate.WHITESPACE;
-    else flags |= SPLIT_TRIM_PARTS;
+    if (trimChars == null) {
+      trimChars = CharPredicate.WHITESPACE;
+    } else {
+      flags |= SPLIT_TRIM_PARTS;
+    }
 
-    if (limit < 1) limit = Integer.MAX_VALUE;
+    if (limit < 1) {
+      limit = Integer.MAX_VALUE;
+    }
 
     boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
     int includeDelimiter =

@@ -34,7 +34,10 @@ public abstract class ListBlock extends Block implements BlankLineContainer {
   @Override
   public void getAstExtra(@NotNull StringBuilder out) {
     super.getAstExtra(out);
-    if (isTight()) out.append(" isTight");
-    else out.append(" isLoose");
+    if (isTight()) {
+      out.append(" isTight");
+    } else {
+      out.append(" isLoose");
+    }
   }
 }

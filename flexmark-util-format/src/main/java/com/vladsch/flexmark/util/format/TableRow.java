@@ -303,8 +303,11 @@ public class TableRow {
     int column = 0;
     while (column < cells.size()) {
       TableCell cell = cells.get(column);
-      if (cell == null || cell == TableCell.NULL) cells.remove(column);
-      else column++;
+      if (cell == null || cell == TableCell.NULL) {
+        cells.remove(column);
+      } else {
+        column++;
+      }
     }
     normalized = true;
   }

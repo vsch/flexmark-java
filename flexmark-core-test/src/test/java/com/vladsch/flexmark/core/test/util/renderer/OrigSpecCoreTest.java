@@ -22,7 +22,7 @@ public abstract class OrigSpecCoreTest extends FullSpecTestCase {
 
   private final @Nullable DataHolder myDefaultOptions;
 
-  public OrigSpecCoreTest(@Nullable DataHolder defaultOptions) {
+  protected OrigSpecCoreTest(@Nullable DataHolder defaultOptions) {
     myDefaultOptions = DataSet.aggregate(OPTIONS, defaultOptions);
   }
 

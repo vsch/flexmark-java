@@ -685,8 +685,11 @@ public class LineAppendableImpl implements LineAppendable {
   @NotNull
   @Override
   public LineAppendable lineOnFirstText(boolean value) {
-    if (value) eolOnFirstText++;
-    else if (eolOnFirstText > 0) eolOnFirstText--;
+    if (value) {
+      eolOnFirstText++;
+    } else if (eolOnFirstText > 0) {
+      eolOnFirstText--;
+    }
     return this;
   }
 
@@ -907,11 +910,17 @@ public class LineAppendableImpl implements LineAppendable {
             && (tailEOL
                 || i < lastNonBlankLine
                 || info.isPreformatted() && info.getPreformatted() != LineInfo.Preformatted.LAST)) {
-          if (withPrefixes) out.append(info.lineSeq);
-          else out.append(info.getText());
+          if (withPrefixes) {
+            out.append(info.lineSeq);
+          } else {
+            out.append(info.getText());
+          }
         } else {
-          if (withPrefixes) out.append(info.getLineNoEOL());
-          else out.append(info.getText());
+          if (withPrefixes) {
+            out.append(info.getLineNoEOL());
+          } else {
+            out.append(info.getText());
+          }
         }
       }
     }
@@ -1082,8 +1091,11 @@ public class LineAppendableImpl implements LineAppendable {
     CharSequence text = content;
     CharSequence eol = trimmedEOL(content);
 
-    if (eol == null) eol = SequenceUtils.EOL;
-    else text = text.subSequence(0, text.length() - eol.length());
+    if (eol == null) {
+      eol = SequenceUtils.EOL;
+    } else {
+      text = text.subSequence(0, text.length() - eol.length());
+    }
 
     if (text.length() == 0) {
       prefix = SequenceUtils.trimEnd(prefix);

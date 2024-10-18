@@ -61,7 +61,7 @@ public class HtmlEmbeddedAttributeTest {
   private static class TestNodePostProcessor extends NodePostProcessor {
     private static class TestNodeFactory extends NodePostProcessorFactory {
       TestNodeFactory() {
-        super(false);
+        super();
         addNodes(Paragraph.class);
       }
 

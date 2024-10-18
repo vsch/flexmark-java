@@ -227,8 +227,11 @@ public class TableNodeFormatter implements NodeFormatter {
                   : node.getAlignment().cellAlignment()));
     } else {
       if (node.getPrevious() == null) {
-        if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');
-        else markdown.append(node.getOpeningMarker());
+        if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) {
+          markdown.append('|');
+        } else {
+          markdown.append(node.getOpeningMarker());
+        }
       } else {
         markdown.append(node.getOpeningMarker());
       }
@@ -247,10 +250,15 @@ public class TableNodeFormatter implements NodeFormatter {
 
       if (!myTable.isSeparator()
           && options.spaceAroundPipes
-          && (!childText[0].endsWith(" ") || parserTrimCellWhiteSpace)) markdown.append(' ');
+          && (!childText[0].endsWith(" ") || parserTrimCellWhiteSpace)) {
+        markdown.append(' ');
+      }
       if (node.getNext() == null) {
-        if (options.leadTrailPipes && node.getClosingMarker().isEmpty()) markdown.append('|');
-        else markdown.append(node.getClosingMarker());
+        if (options.leadTrailPipes && node.getClosingMarker().isEmpty()) {
+          markdown.append('|');
+        } else {
+          markdown.append(node.getClosingMarker());
+        }
       } else {
         markdown.append(node.getClosingMarker());
       }
@@ -258,7 +266,6 @@ public class TableNodeFormatter implements NodeFormatter {
   }
 
   private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-    // if (TABLE_HEADER_SEPARATOR.matcher(node.getChars()).matches()) {
     if (myTable != null && myTable.isSeparator()) {
       Node parent = node.getAncestorOfType(Paragraph.class);
       if (parent instanceof Paragraph && ((Paragraph) parent).hasTableSeparator()) {
