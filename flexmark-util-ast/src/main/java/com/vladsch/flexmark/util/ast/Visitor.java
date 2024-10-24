@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.visitor.AstAction;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Node visitor interface
@@ -9,5 +8,5 @@ import org.jetbrains.annotations.NotNull;
  * @param <N> specific node type
  */
 public interface Visitor<N extends Node> extends AstAction {
-  void visit(@NotNull N node);
+  void visit(N node);
 }

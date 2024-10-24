@@ -1,8 +1,5 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends CharSequence>
     extends Appendable {
   /**
@@ -12,20 +9,16 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
    * @return sub-sequence of base representing the single segment or null if sequence not
    *     representable by a single subsequence
    */
-  @Nullable
   S getSingleBasedSequence();
 
-  @NotNull
   T getBuilder();
 
-  @NotNull
   default T addAll(Iterable<? extends CharSequence> sequences) {
     return append(sequences);
   }
 
   char charAt(int index);
 
-  @NotNull
   default T append(Iterable<? extends CharSequence> sequences) {
     for (CharSequence chars : sequences) {
       append(chars, 0, chars.length());
@@ -33,22 +26,19 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
     return (T) this;
   }
 
-  @NotNull
-  default T add(@Nullable CharSequence chars) {
+  default T add(CharSequence chars) {
     return append(chars);
   }
 
   @Override
-  @NotNull
-  default T append(@Nullable CharSequence chars) {
+  default T append(CharSequence chars) {
     if (chars != null) {
       return append(chars, 0, chars.length());
     }
     return (T) this;
   }
 
-  @NotNull
-  default T append(@Nullable CharSequence chars, int startIndex) {
+  default T append(CharSequence chars, int startIndex) {
     if (chars != null) {
       return append(chars, startIndex, chars.length());
     }
@@ -56,17 +46,13 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
   }
 
   @Override
-  @NotNull
-  T append(@Nullable CharSequence chars, int startIndex, int endIndex);
+  T append(CharSequence chars, int startIndex, int endIndex);
 
   @Override
-  @NotNull
   T append(char c);
 
-  @NotNull
   T append(char c, int count);
 
-  @NotNull
   S toSequence();
 
   int length();

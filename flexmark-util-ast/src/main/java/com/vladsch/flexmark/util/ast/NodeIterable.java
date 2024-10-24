@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
 
 class NodeIterable implements ReversiblePeekingIterable<Node> {
   private final Node firstNode;
@@ -17,7 +16,6 @@ class NodeIterable implements ReversiblePeekingIterable<Node> {
     this.reversed = reversed;
   }
 
-  @NotNull
   @Override
   public ReversiblePeekingIterator<Node> iterator() {
     return new NodeIterator(firstNode, lastNode, reversed);
@@ -31,7 +29,6 @@ class NodeIterable implements ReversiblePeekingIterable<Node> {
     }
   }
 
-  @NotNull
   @Override
   public ReversiblePeekingIterable<Node> reversed() {
     return new NodeIterable(firstNode, lastNode, !reversed);
@@ -42,7 +39,6 @@ class NodeIterable implements ReversiblePeekingIterable<Node> {
     return reversed;
   }
 
-  @NotNull
   @Override
   public ReversiblePeekingIterator<Node> reversedIterator() {
     return new NodeIterator(firstNode, lastNode, !reversed);
@@ -50,13 +46,12 @@ class NodeIterable implements ReversiblePeekingIterable<Node> {
 
   static final ReversiblePeekingIterable<Node> EMPTY =
       new ReversiblePeekingIterable<>() {
-        @NotNull
+
         @Override
         public ReversiblePeekingIterator<Node> iterator() {
           return NodeIterator.EMPTY;
         }
 
-        @NotNull
         @Override
         public ReversiblePeekingIterable<Node> reversed() {
           return this;
@@ -70,7 +65,6 @@ class NodeIterable implements ReversiblePeekingIterable<Node> {
           return false;
         }
 
-        @NotNull
         @Override
         public ReversiblePeekingIterator<Node> reversedIterator() {
           return NodeIterator.EMPTY;

@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ExampleOption {
   private static final Set<String> BUILT_IN_OPTIONS_SET = new HashSet<>();
@@ -30,7 +28,7 @@ public class ExampleOption {
     BUILT_IN_OPTIONS_SET.add(TIMED_OPTION_NAME);
   }
 
-  private static ExampleOption build(@NotNull CharSequence option) {
+  private static ExampleOption build(CharSequence option) {
     BasedSequence optionName;
     BasedSequence customParams;
     boolean isDisabled = false;
@@ -61,7 +59,7 @@ public class ExampleOption {
         !optionName.isBlank());
   }
 
-  public static ExampleOption of(@NotNull CharSequence optionText) {
+  public static ExampleOption of(CharSequence optionText) {
     return build(optionText);
   }
 
@@ -76,23 +74,22 @@ public class ExampleOption {
     BUILT_IN_OPTIONS_MAP.put(TIMED_OPTION_NAME, build(TIMED_OPTION_NAME));
   }
 
-  @NotNull
   public static Map<String, ExampleOption> getBuiltInOptions() {
     return new HashMap<>(BUILT_IN_OPTIONS_MAP);
   }
 
-  public final @NotNull BasedSequence optionText;
-  public final @NotNull BasedSequence optionName;
-  public final @NotNull BasedSequence customParams;
+  public final BasedSequence optionText;
+  public final BasedSequence optionName;
+  public final BasedSequence customParams;
   public final boolean isBuiltIn;
   public final boolean isDisabled;
   public final boolean isCustom;
   public final boolean isValid;
 
   private ExampleOption(
-      @NotNull BasedSequence optionText,
-      @NotNull BasedSequence optionName,
-      @NotNull BasedSequence customParams,
+      BasedSequence optionText,
+      BasedSequence optionName,
+      BasedSequence customParams,
       boolean isBuiltIn,
       boolean isDisabled,
       boolean isCustom,
@@ -106,17 +103,14 @@ public class ExampleOption {
     this.isValid = isValid;
   }
 
-  @NotNull
   public String getOptionText() {
     return optionText.toString();
   }
 
-  @NotNull
   public String getOptionName() {
     return optionName.toString();
   }
 
-  @Nullable
   public String getCustomParams() {
     return customParams.isNull() ? null : customParams.toString();
   }

@@ -35,8 +35,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ListBlockParser extends AbstractBlockParser {
   private final ListBlock myBlock;
@@ -418,7 +416,7 @@ public class ListBlockParser extends AbstractBlockParser {
   }
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return new HashSet<>(
@@ -430,7 +428,6 @@ public class ListBlockParser extends AbstractBlockParser {
               ThematicBreakParser.Factory.class));
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       Set<Class<?>> set = new HashSet<>();
@@ -443,14 +440,13 @@ public class ListBlockParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
 
     @Override
-    public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+    public SpecialLeadInHandler getLeadInHandler(DataHolder options) {
       return ListItemLeadInHandler.create(
           Parser.LISTS_ITEM_PREFIX_CHARS.get(options),
           Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options));
@@ -465,8 +461,7 @@ public class ListBlockParser extends AbstractBlockParser {
     private static final SpecialLeadInHandler ORDERED_DELIM_DOT_PARENS_HANDLER =
         new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), false);
 
-    @NotNull
-    static SpecialLeadInHandler create(@NotNull CharSequence listItemDelims, boolean dotOnly) {
+    static SpecialLeadInHandler create(CharSequence listItemDelims, boolean dotOnly) {
       return SequenceUtils.equals(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), listItemDelims)
           ? dotOnly ? ORDERED_DELIM_DOT_HANDLER : ORDERED_DELIM_DOT_PARENS_HANDLER
           : new ListItemLeadInHandler(listItemDelims, dotOnly);
@@ -481,9 +476,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean escape(
-        @NotNull BasedSequence sequence,
-        @Nullable DataHolder options,
-        @NotNull Consumer<CharSequence> consumer) {
+        BasedSequence sequence, DataHolder options, Consumer<CharSequence> consumer) {
       if (super.escape(sequence, options, consumer)) {
         return true;
       }
@@ -503,9 +496,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean unEscape(
-        @NotNull BasedSequence sequence,
-        @Nullable DataHolder options,
-        @NotNull Consumer<CharSequence> consumer) {
+        BasedSequence sequence, DataHolder options, Consumer<CharSequence> consumer) {
       if (super.unEscape(sequence, options, consumer)) {
         return true;
       }

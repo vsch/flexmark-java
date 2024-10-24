@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
 
 public class SegmentedSequenceStats {
   private static class StatsEntry implements Comparable<StatsEntry> {
@@ -27,7 +26,7 @@ public class SegmentedSequenceStats {
       this.overhead.add(overhead);
     }
 
-    void add(@NotNull StatsEntry other) {
+    void add(StatsEntry other) {
       count += other.count;
       this.segStats.add(other.segStats);
       this.length.add(other.length);
@@ -35,7 +34,7 @@ public class SegmentedSequenceStats {
     }
 
     @Override
-    public int compareTo(@NotNull SegmentedSequenceStats.StatsEntry o) {
+    public int compareTo(SegmentedSequenceStats.StatsEntry o) {
       int segs = Integer.compare(segments, o.segments);
       if (segs != 0) {
         return segs;
@@ -71,7 +70,6 @@ public class SegmentedSequenceStats {
     entry.add(segments, length, overhead);
   }
 
-  @NotNull
   private String getStatsText(List<StatsEntry> entries) {
     StringBuilder out = new StringBuilder();
     int iMax = entries.size();
@@ -109,7 +107,6 @@ public class SegmentedSequenceStats {
     return out.toString();
   }
 
-  @NotNull
   public String getAggregatedStatsText() {
     return getStatsText(getAggregatedStats());
   }
@@ -137,7 +134,6 @@ public class SegmentedSequenceStats {
 
   private static final int MAX_BUCKETS = AGGR_STEPS.size();
 
-  @NotNull
   public List<StatsEntry> getAggregatedStats() {
     if (aggregatedStats == null) {
       List<StatsEntry> entries = getStats();
@@ -180,13 +176,11 @@ public class SegmentedSequenceStats {
     return aggregatedStats;
   }
 
-  @NotNull
   public String getStatsText() {
     List<StatsEntry> entries = getStats();
     return getStatsText(entries);
   }
 
-  @NotNull
   public List<StatsEntry> getStats() {
     List<StatsEntry> entries = new ArrayList<>(stats.keySet());
 
@@ -194,7 +188,6 @@ public class SegmentedSequenceStats {
     return entries;
   }
 
-  @NotNull
   static SegmentedSequenceStats getInstance() {
     return new SegmentedSequenceStats();
   }

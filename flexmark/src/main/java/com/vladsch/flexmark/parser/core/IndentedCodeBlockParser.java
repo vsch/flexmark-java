@@ -22,8 +22,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class IndentedCodeBlockParser extends AbstractBlockParser {
   private final IndentedCodeBlock block = new IndentedCodeBlock();
@@ -87,7 +85,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
   }
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return new HashSet<>(
@@ -100,7 +98,6 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
               ListBlockParser.Factory.class));
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return Collections.emptySet();
@@ -111,9 +108,8 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
   }

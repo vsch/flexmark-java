@@ -8,26 +8,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
   private final List<T> nodeList = new ArrayList<>();
   private final Map<String, T> nodeMap = new HashMap<>();
   private final KeepType keepType;
 
-  public abstract @NotNull DataKey<? extends NodeRepository<T>> getDataKey();
+  public abstract DataKey<? extends NodeRepository<T>> getDataKey();
 
-  public abstract @NotNull DataKey<KeepType> getKeepDataKey();
+  public abstract DataKey<KeepType> getKeepDataKey();
 
   // function implementing extraction of referenced elements by given node or its children
-  public abstract @NotNull Set<T> getReferencedElements(Node parent);
+  public abstract Set<T> getReferencedElements(Node parent);
 
   @SafeVarargs
   protected static final void visitNodes(
-      @NotNull Node parent,
-      @NotNull Consumer<Node> runnable,
-      @NotNull Class<? extends Node>... classes) {
+      Node parent, Consumer<Node> runnable, Class<? extends Node>... classes) {
     NodeVisitor visitor = new NodeVisitor();
     for (Class<? extends Node> clazz : classes) {
       visitor.addHandler(new VisitHandler<>(clazz, runnable::accept));
@@ -35,23 +31,23 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     visitor.visit(parent);
   }
 
-  protected NodeRepository(@Nullable KeepType keepType) {
+  protected NodeRepository(KeepType keepType) {
     this.keepType = keepType == null ? KeepType.LOCKED : keepType;
   }
 
-  public @NotNull String normalizeKey(@NotNull CharSequence key) {
+  public String normalizeKey(CharSequence key) {
     return key.toString();
   }
 
-  public @NotNull Collection<T> getValues() {
+  public Collection<T> getValues() {
     return nodeMap.values();
   }
 
   public static <T> boolean transferReferences(
-      @NotNull NodeRepository<T> destination,
-      @NotNull NodeRepository<T> included,
+      NodeRepository<T> destination,
+      NodeRepository<T> included,
       boolean onlyIfUndefined,
-      @Nullable Map<String, String> referenceIdMap) {
+      Map<String, String> referenceIdMap) {
     // copy references but only if they are not defined in the original document
     boolean transferred = false;
     for (Map.Entry<String, T> entry : included.entrySet()) {
@@ -69,7 +65,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public @Nullable T put(@NotNull String s, @NotNull T t) {
+  public T put(String s, T t) {
     nodeList.add(t);
 
     if (keepType == KeepType.LOCKED)
@@ -87,7 +83,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public void putAll(@NotNull Map<? extends String, ? extends T> map) {
+  public void putAll(Map<? extends String, ? extends T> map) {
     if (keepType == KeepType.LOCKED)
       throw new IllegalStateException("Not allowed to modify LOCKED repository");
     if (keepType != KeepType.LAST) {
@@ -100,7 +96,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public @Nullable T remove(@NotNull Object o) {
+  public T remove(Object o) {
     if (keepType == KeepType.LOCKED)
       throw new IllegalStateException("Not allowed to modify LOCKED repository");
     return nodeMap.remove(o);
@@ -124,7 +120,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public boolean containsKey(@NotNull Object o) {
+  public boolean containsKey(Object o) {
     return nodeMap.containsKey(o);
   }
 
@@ -134,23 +130,20 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public @Nullable T get(@NotNull Object object) {
+  public T get(Object object) {
     return nodeMap.get(object);
   }
 
-  @NotNull
   @Override
   public Set<String> keySet() {
     return nodeMap.keySet();
   }
 
-  @NotNull
   @Override
   public List<T> values() {
     return nodeList;
   }
 
-  @NotNull
   @Override
   public Set<Entry<String, T>> entrySet() {
     return nodeMap.entrySet();

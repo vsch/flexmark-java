@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
   private final Map<K, S> bag;
@@ -15,7 +13,7 @@ abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S,
   }
 
   @Override
-  public boolean addItem(@NotNull M key, int item) {
+  public boolean addItem(M key, int item) {
     K mapKey = mapKey(key);
     S itemSet = bag.get(mapKey);
     if (itemSet == null) {
@@ -26,14 +24,14 @@ abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S,
   }
 
   @Override
-  public boolean removeItem(@NotNull M key, int item) {
+  public boolean removeItem(M key, int item) {
     K mapKey = mapKey(key);
     S itemSet = bag.get(mapKey);
     return itemSet != null && removeSetItem(itemSet, item);
   }
 
   @Override
-  public boolean containsItem(@NotNull M key, int item) {
+  public boolean containsItem(M key, int item) {
     K mapKey = mapKey(key);
     S itemSet = bag.get(mapKey);
     return itemSet != null && containsSetItem(itemSet, item);
@@ -50,32 +48,32 @@ abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S,
   }
 
   @Override
-  public boolean containsKey(@Nullable Object o) {
+  public boolean containsKey(Object o) {
     return bag.containsKey(o);
   }
 
   @Override
-  public boolean containsValue(@Nullable Object o) {
+  public boolean containsValue(Object o) {
     return bag.containsValue(o);
   }
 
   @Override
-  public @Nullable S get(@Nullable Object o) {
+  public S get(Object o) {
     return bag.get(o);
   }
 
   @Override
-  public @Nullable S put(@NotNull K k, @NotNull S vs) {
+  public S put(K k, S vs) {
     return bag.put(k, vs);
   }
 
   @Override
-  public @Nullable S remove(@Nullable Object o) {
+  public S remove(Object o) {
     return bag.remove(o);
   }
 
   @Override
-  public void putAll(@NotNull Map<? extends K, ? extends S> map) {
+  public void putAll(Map<? extends K, ? extends S> map) {
     bag.putAll(map);
   }
 
@@ -85,17 +83,17 @@ abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S,
   }
 
   @Override
-  public @NotNull Set<K> keySet() {
+  public Set<K> keySet() {
     return bag.keySet();
   }
 
   @Override
-  public @NotNull Collection<S> values() {
+  public Collection<S> values() {
     return bag.values();
   }
 
   @Override
-  public @NotNull Set<Entry<K, S>> entrySet() {
+  public Set<Entry<K, S>> entrySet() {
     return bag.entrySet();
   }
 }

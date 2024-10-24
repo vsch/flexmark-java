@@ -1,11 +1,8 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
-  private final @NotNull String name;
-  private final @NotNull DataValueFactory<T> factory;
+  private final String name;
+  private final DataValueFactory<T> factory;
   private final T defaultValue;
 
   /**
@@ -19,18 +16,16 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
    * @param factory data value factory for creating a new default value for the key for a non-null
    *     data holder
    */
-  DataKeyBase(@NotNull String name, T defaultValue, @NotNull DataValueFactory<T> factory) {
+  DataKeyBase(String name, T defaultValue, DataValueFactory<T> factory) {
     this.name = name;
     this.defaultValue = defaultValue;
     this.factory = factory;
   }
 
-  @NotNull
   public String getName() {
     return name;
   }
 
-  @NotNull
   public DataValueFactory<T> getFactory() {
     return factory;
   }
@@ -39,11 +34,11 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
     return defaultValue;
   }
 
-  public T getDefaultValue(@NotNull DataHolder holder) {
+  public T getDefaultValue(DataHolder holder) {
     return factory.apply(holder);
   }
 
-  public T get(@Nullable DataHolder holder) {
+  public T get(DataHolder holder) {
     return holder == null ? defaultValue : (T) holder.getOrCompute(this, this::getDefaultValue);
   }
 

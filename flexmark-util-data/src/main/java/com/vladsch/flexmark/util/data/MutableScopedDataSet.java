@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 class MutableScopedDataSet extends MutableDataSet {
   private final DataHolder parent;
@@ -21,7 +19,7 @@ class MutableScopedDataSet extends MutableDataSet {
   }
 
   @Override
-  public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
+  public Map<? extends DataKeyBase<?>, Object> getAll() {
     if (parent != null) {
       Map<DataKeyBase<?>, Object> all = new HashMap<>(super.getAll());
       for (DataKeyBase<?> key : parent.getKeys()) {
@@ -37,7 +35,7 @@ class MutableScopedDataSet extends MutableDataSet {
   }
 
   @Override
-  public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
+  public Collection<? extends DataKeyBase<?>> getKeys() {
     if (parent != null) {
       List<DataKeyBase<?>> all = new ArrayList<>(super.getKeys());
       for (DataKeyBase<?> key : parent.getKeys()) {
@@ -53,13 +51,12 @@ class MutableScopedDataSet extends MutableDataSet {
   }
 
   @Override
-  public boolean contains(@NotNull DataKeyBase<?> key) {
+  public boolean contains(DataKeyBase<?> key) {
     return super.contains(key) || (parent != null && parent.contains(key));
   }
 
   @Override
-  public @Nullable Object getOrCompute(
-      @NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+  public Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory) {
     if (parent == null || super.contains(key) || !parent.contains(key)) {
       return super.getOrCompute(key, factory);
     }

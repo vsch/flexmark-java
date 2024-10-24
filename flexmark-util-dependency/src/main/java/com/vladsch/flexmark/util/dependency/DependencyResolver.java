@@ -10,14 +10,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public final class DependencyResolver {
-  public static <D extends Dependent> @NotNull List<D> resolveFlatDependencies(
-      @NotNull List<D> dependentsList,
-      @Nullable UnaryOperator<DependentItemMap<D>> itemSorter,
-      @Nullable Function<? super D, Class<?>> classExtractor) {
+  public static <D extends Dependent> List<D> resolveFlatDependencies(
+      List<D> dependentsList,
+      UnaryOperator<DependentItemMap<D>> itemSorter,
+      Function<? super D, Class<?>> classExtractor) {
     List<List<D>> list = resolveDependencies(dependentsList, itemSorter, classExtractor);
     if (list.isEmpty()) {
       return Collections.emptyList();
@@ -37,10 +35,10 @@ public final class DependencyResolver {
     }
   }
 
-  public static <D extends Dependent> @NotNull List<List<D>> resolveDependencies(
-      @NotNull List<D> dependentsList,
-      @Nullable UnaryOperator<DependentItemMap<D>> itemSorter,
-      @Nullable Function<? super D, Class<?>> classExtractor) {
+  public static <D extends Dependent> List<List<D>> resolveDependencies(
+      List<D> dependentsList,
+      UnaryOperator<DependentItemMap<D>> itemSorter,
+      Function<? super D, Class<?>> classExtractor) {
     if (dependentsList.isEmpty()) {
       return Collections.emptyList();
     } else if (dependentsList.size() == 1) {

@@ -6,18 +6,16 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import java.util.HashMap;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** A Builder for Segmented BasedSequences */
 public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedSequence> {
   private final BasedSegmentBuilder segments;
-  private final @NotNull BasedSequence baseSeq;
-  private final @NotNull BasedSequence
+  private final BasedSequence baseSeq;
+  private final BasedSequence
       altBase; // sequence used for creating the builder, needed for validation for alt sequence
   // creation
-  private final @NotNull HashMap<BasedSequence, Boolean> equivalentBases;
-  private @Nullable BasedSequence resultSeq;
+  private final HashMap<BasedSequence, Boolean> equivalentBases;
+  private BasedSequence resultSeq;
 
   /**
    * Construct a base sequence builder for given base sequence with default options.
@@ -31,14 +29,14 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
    * @param base base sequence for which to create a builder
    * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
    */
-  private SequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer) {
+  private SequenceBuilder(BasedSequence base, SegmentOptimizer optimizer) {
     this(base, optimizer, new HashMap<>());
   }
 
   private SequenceBuilder(
-      @NotNull BasedSequence base,
-      @Nullable SegmentOptimizer optimizer,
-      @NotNull HashMap<BasedSequence, Boolean> equivalentBases) {
+      BasedSequence base,
+      SegmentOptimizer optimizer,
+      HashMap<BasedSequence, Boolean> equivalentBases) {
     altBase = base;
     baseSeq = base.getBaseSequence();
     this.equivalentBases = equivalentBases;
@@ -69,10 +67,10 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
    * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
    */
   private SequenceBuilder(
-      @NotNull BasedSequence base,
+      BasedSequence base,
       int options,
-      @Nullable SegmentOptimizer optimizer,
-      @NotNull HashMap<BasedSequence, Boolean> equivalentBases) {
+      SegmentOptimizer optimizer,
+      HashMap<BasedSequence, Boolean> equivalentBases) {
     altBase = base;
     baseSeq = base.getBaseSequence();
     this.equivalentBases = equivalentBases;
@@ -88,24 +86,20 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             : BasedSegmentBuilder.emptyBuilder(baseSeq, optimizer, options);
   }
 
-  @NotNull
   public BasedSequence getBaseSequence() {
     return baseSeq;
   }
 
-  @NotNull
   public BasedSegmentBuilder getSegmentBuilder() {
     return segments;
   }
 
-  @Nullable
   @Override
   public BasedSequence getSingleBasedSequence() {
     Range range = segments.getBaseSubSequenceRange();
     return range == null ? null : baseSeq.subSequence(range.getStart(), range.getEnd());
   }
 
-  @NotNull
   @Override
   public SequenceBuilder getBuilder() {
     return new SequenceBuilder(altBase, segments.options, segments.optimizer, equivalentBases);
@@ -116,7 +110,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return toSequence().charAt(index);
   }
 
-  private boolean isCommonBaseSequence(@NotNull BasedSequence chars) {
+  private boolean isCommonBaseSequence(BasedSequence chars) {
     if (chars.isNull()) {
       return false;
     }
@@ -137,9 +131,8 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return equivalent;
   }
 
-  @NotNull
   @Override
-  public SequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
+  public SequenceBuilder append(CharSequence chars, int startIndex, int endIndex) {
     if (chars instanceof BasedSequence && isCommonBaseSequence((BasedSequence) chars)) {
       if (((BasedSequence) chars).isNotNull()) {
         if (startIndex == 0 && endIndex == chars.length()) {
@@ -161,7 +154,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @Override
-  @NotNull
   public SequenceBuilder append(char c) {
     segments.append(c);
     resultSeq = null;
@@ -169,7 +161,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @Override
-  @NotNull
   public SequenceBuilder append(char c, int count) {
     if (count > 0) {
       segments.append(c, count);
@@ -178,24 +169,20 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return this;
   }
 
-  @NotNull
   public SequenceBuilder append(int startOffset, int endOffset) {
     return addByOffsets(startOffset, endOffset);
   }
 
-  @NotNull
-  SequenceBuilder append(@NotNull Range chars) {
+  SequenceBuilder append(Range chars) {
     return addRange(chars);
   }
 
-  @NotNull
-  private SequenceBuilder addRange(@NotNull Range range) {
+  private SequenceBuilder addRange(Range range) {
     segments.append(range);
     resultSeq = null;
     return this;
   }
 
-  @NotNull
   private SequenceBuilder addByOffsets(int startOffset, int endOffset) {
     if (startOffset < 0 || startOffset > endOffset || endOffset > baseSeq.length()) {
       throw new IllegalArgumentException(
@@ -212,7 +199,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return this;
   }
 
-  @NotNull
   @Override
   public BasedSequence toSequence() {
     if (resultSeq == null) {
@@ -228,8 +214,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
    * @param altSequence based sequence which is character identical to this builder's baseSeq
    * @return builder with offsets mapped to altSequence
    */
-  @NotNull
-  public BasedSequence toSequence(@NotNull BasedSequence altSequence) {
+  public BasedSequence toSequence(BasedSequence altSequence) {
     return toSequence(altSequence, null, null);
   }
 
@@ -243,11 +228,8 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
    *     (Space, Tab, EOL, usually)
    * @return builder with offsets mapped to altSequence
    */
-  @NotNull
   public BasedSequence toSequence(
-      @NotNull BasedSequence altSequence,
-      @Nullable CharPredicate trimStart,
-      @Nullable CharPredicate ignoreCharDiff) {
+      BasedSequence altSequence, CharPredicate trimStart, CharPredicate ignoreCharDiff) {
     if (altSequence == altBase) {
       return toSequence();
     }
@@ -289,12 +271,10 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return segments.length();
   }
 
-  @NotNull
   public String toStringWithRanges() {
     return segments.toStringWithRangesVisibleWhitespace(baseSeq);
   }
 
-  @NotNull
   public String toStringWithRanges(boolean toVisibleWhiteSpace) {
     return toVisibleWhiteSpace
         ? segments.toStringWithRangesVisibleWhitespace(baseSeq)
@@ -302,7 +282,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @Override
-  @NotNull
   public String toString() {
     StringBuilder sb = new StringBuilder();
     for (Object part : segments) {
@@ -321,25 +300,19 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return sb.toString();
   }
 
-  @NotNull
-  public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base) {
+  public static SequenceBuilder emptyBuilder(BasedSequence base) {
     return new SequenceBuilder(base, null);
   }
 
-  @NotNull
-  static SequenceBuilder emptyBuilder(
-      @NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
+  static SequenceBuilder emptyBuilder(BasedSequence base, SegmentOptimizer optimizer) {
     return new SequenceBuilder(base, optimizer);
   }
 
-  @NotNull
-  public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options) {
+  public static SequenceBuilder emptyBuilder(BasedSequence base, int options) {
     return new SequenceBuilder(base, options, null, new HashMap<>());
   }
 
-  @NotNull
-  static SequenceBuilder emptyBuilder(
-      @NotNull BasedSequence base, int options, @NotNull SegmentOptimizer optimizer) {
+  static SequenceBuilder emptyBuilder(BasedSequence base, int options, SegmentOptimizer optimizer) {
     return new SequenceBuilder(base, options, optimizer, new HashMap<>());
   }
 }

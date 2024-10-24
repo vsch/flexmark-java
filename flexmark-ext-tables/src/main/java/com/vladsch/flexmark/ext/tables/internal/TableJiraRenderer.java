@@ -17,7 +17,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class TableJiraRenderer implements NodeRenderer {
   public TableJiraRenderer() {}
@@ -92,9 +91,9 @@ public class TableJiraRenderer implements NodeRenderer {
   }
 
   public static class Factory implements NodeRendererFactory {
-    @NotNull
+
     @Override
-    public NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
       return new TableJiraRenderer();
     }
   }

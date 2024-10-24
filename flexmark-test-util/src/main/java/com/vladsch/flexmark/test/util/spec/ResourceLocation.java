@@ -8,18 +8,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import org.jetbrains.annotations.NotNull;
 
 public class ResourceLocation {
   public static final ResourceLocation NULL = of(Object.class, "", "");
 
-  private final @NotNull Class<?> resourceClass;
-  private final @NotNull String resourcePath;
-  private final @NotNull String fileUrl;
-  private final @NotNull String resolvedResourcePath;
+  private final Class<?> resourceClass;
+  private final String resourcePath;
+  private final String fileUrl;
+  private final String resolvedResourcePath;
 
-  public ResourceLocation(
-      @NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String fileUrl) {
+  public ResourceLocation(Class<?> resourceClass, String resourcePath, String fileUrl) {
     this(
         resourceClass,
         resourcePath,
@@ -28,32 +26,25 @@ public class ResourceLocation {
   }
 
   private ResourceLocation(
-      @NotNull Class<?> resourceClass,
-      @NotNull String resourcePath,
-      @NotNull String fileUrl,
-      @NotNull String resolvedResourcePath) {
+      Class<?> resourceClass, String resourcePath, String fileUrl, String resolvedResourcePath) {
     this.resourceClass = resourceClass;
     this.resourcePath = resourcePath;
     this.fileUrl = fileUrl;
     this.resolvedResourcePath = resolvedResourcePath;
   }
 
-  @NotNull
   private Class<?> getResourceClass() {
     return resourceClass;
   }
 
-  @NotNull
   public String getFileUrl() {
     return fileUrl;
   }
 
-  @NotNull
   public String getFileUrl(int lineNumber) {
     return TestUtils.getUrlWithLineNumber(getFileUrl(), lineNumber);
   }
 
-  @NotNull
   private String getResolvedResourcePath() {
     return resolvedResourcePath;
   }
@@ -62,12 +53,10 @@ public class ResourceLocation {
     return this == NULL;
   }
 
-  @NotNull
   public InputStream getResourceInputStream() {
     return getResourceInputStream(this);
   }
 
-  @NotNull
   public String getResourceText() {
     return getResourceText(this);
   }
@@ -115,7 +104,7 @@ public class ResourceLocation {
         + '}';
   }
 
-  public static @NotNull ResourceLocation of(@NotNull String resourcePath) {
+  public static ResourceLocation of(String resourcePath) {
     return new ResourceLocation(
         ComboSpecTestCase.class,
         resourcePath,
@@ -123,8 +112,7 @@ public class ResourceLocation {
         TestUtils.getResolvedSpecResourcePath(ComboSpecTestCase.class.getName(), resourcePath));
   }
 
-  public static @NotNull ResourceLocation of(
-      @NotNull Class<?> resourceClass, @NotNull String resourcePath) {
+  public static ResourceLocation of(Class<?> resourceClass, String resourcePath) {
     return new ResourceLocation(
         resourceClass,
         resourcePath,
@@ -132,13 +120,11 @@ public class ResourceLocation {
         TestUtils.getResolvedSpecResourcePath(resourceClass.getName(), resourcePath));
   }
 
-  private static @NotNull ResourceLocation of(
-      @NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String fileUrl) {
+  private static ResourceLocation of(Class<?> resourceClass, String resourcePath, String fileUrl) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl);
   }
 
-  @NotNull
-  private static String getResourceText(@NotNull ResourceLocation location) {
+  private static String getResourceText(ResourceLocation location) {
     StringBuilder sb = new StringBuilder();
     try {
       String line;
@@ -156,8 +142,7 @@ public class ResourceLocation {
     }
   }
 
-  @NotNull
-  private static InputStream getResourceInputStream(@NotNull ResourceLocation location) {
+  private static InputStream getResourceInputStream(ResourceLocation location) {
     String useSpecResource = location.getResolvedResourcePath();
     InputStream stream = location.getResourceClass().getResourceAsStream(useSpecResource);
     if (stream == null) {

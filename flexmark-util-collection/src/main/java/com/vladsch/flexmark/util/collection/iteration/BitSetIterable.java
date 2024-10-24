@@ -1,17 +1,16 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
 import java.util.BitSet;
-import org.jetbrains.annotations.NotNull;
 
 public class BitSetIterable implements ReversibleIterable<Integer> {
-  private final @NotNull BitSet bitSet;
+  private final BitSet bitSet;
   private final boolean reversed;
 
-  public BitSetIterable(@NotNull BitSet bitSet) {
+  public BitSetIterable(BitSet bitSet) {
     this(bitSet, false);
   }
 
-  public BitSetIterable(@NotNull BitSet bitSet, boolean reversed) {
+  public BitSetIterable(BitSet bitSet, boolean reversed) {
     this.bitSet = bitSet;
     this.reversed = reversed;
   }
@@ -21,19 +20,16 @@ public class BitSetIterable implements ReversibleIterable<Integer> {
     return reversed;
   }
 
-  @NotNull
   @Override
   public ReversibleIterator<Integer> iterator() {
     return new BitSetIterator(bitSet, reversed);
   }
 
-  @NotNull
   @Override
   public ReversibleIterable<Integer> reversed() {
     return new BitSetIterable(bitSet, !reversed);
   }
 
-  @NotNull
   @Override
   public ReversibleIterator<Integer> reversedIterator() {
     return new BitSetIterator(bitSet, !reversed);

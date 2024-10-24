@@ -8,7 +8,6 @@ import static org.junit.Assert.assertEquals;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class PlainSegmentBuilderTest {
@@ -517,17 +516,15 @@ public class PlainSegmentBuilderTest {
     }
 
     @Override
-    protected Object[] optimizeText(@NotNull Object[] parts) {
+    protected Object[] optimizeText(Object[] parts) {
       return myOptimizer.apply(myBase, parts);
     }
 
-    @NotNull
     public static OptimizedSegmentBuilder2 emptyBuilder(
         CharSequence base, CharRecoveryOptimizer optimizer) {
       return new OptimizedSegmentBuilder2(base, optimizer);
     }
 
-    @NotNull
     public static OptimizedSegmentBuilder2 emptyBuilder(
         CharSequence base, CharRecoveryOptimizer optimizer, int options) {
       return new OptimizedSegmentBuilder2(base, optimizer, options);
@@ -989,7 +986,7 @@ public class PlainSegmentBuilderTest {
     OptimizedSegmentBuilder2 segments =
         OptimizedSegmentBuilder2.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) segments.append("    ");
@@ -1016,7 +1013,7 @@ public class PlainSegmentBuilderTest {
     OptimizedSegmentBuilder2 segments =
         OptimizedSegmentBuilder2.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) segments.append("  ");
@@ -1044,7 +1041,7 @@ public class PlainSegmentBuilderTest {
     OptimizedSegmentBuilder2 segments =
         OptimizedSegmentBuilder2.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       segments.append(trim.getSourceRange());
@@ -1071,7 +1068,7 @@ public class PlainSegmentBuilderTest {
         OptimizedSegmentBuilder2.emptyBuilder(
             sequence, optimizer, F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) segments.append("    ");
@@ -1099,7 +1096,7 @@ public class PlainSegmentBuilderTest {
         OptimizedSegmentBuilder2.emptyBuilder(
             sequence, optimizer, F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) segments.append("  ");
@@ -1128,7 +1125,7 @@ public class PlainSegmentBuilderTest {
         OptimizedSegmentBuilder2.emptyBuilder(
             sequence, optimizer, F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       segments.append(trim.getSourceRange());

@@ -19,8 +19,6 @@ import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class DefinitionNodeFormatter implements NodeFormatter {
   private final DefinitionFormatOptions options;
@@ -31,13 +29,11 @@ public class DefinitionNodeFormatter implements NodeFormatter {
     this.listOptions = ListOptions.get(options);
   }
 
-  @Nullable
   @Override
   public Set<Class<?>> getNodeClasses() {
     return null;
   }
 
-  @Nullable
   @Override
   public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
     return new HashSet<>(
@@ -97,9 +93,9 @@ public class DefinitionNodeFormatter implements NodeFormatter {
   }
 
   public static class Factory implements NodeFormatterFactory {
-    @NotNull
+
     @Override
-    public NodeFormatter create(@NotNull DataHolder options) {
+    public NodeFormatter create(DataHolder options) {
       return new DefinitionNodeFormatter(options);
     }
   }

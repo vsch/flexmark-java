@@ -10,11 +10,4 @@
 
   <artifactId>flexmark-util-visitor</artifactId>
   <description>flexmark-java visitor utility classes</description>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-    </dependency>
-  </dependencies>
 </project>

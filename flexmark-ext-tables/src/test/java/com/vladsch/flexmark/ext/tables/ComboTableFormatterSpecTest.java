@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboTableFormatterSpecTest extends FormatterSpecTest {
@@ -134,7 +133,7 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
         new MutableDataSet().set(TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER, WIDTH_PROVIDER));
   }
 
-  public ComboTableFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboTableFormatterSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

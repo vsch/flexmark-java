@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboGfmTaskListSpecTest extends RendererSpecTest {
@@ -65,7 +64,7 @@ public class ComboGfmTaskListSpecTest extends RendererSpecTest {
             .set(Parser.EXTENSIONS, Collections.singleton(new TaskListExtension())));
   }
 
-  public ComboGfmTaskListSpecTest(@NotNull SpecExample example) {
+  public ComboGfmTaskListSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

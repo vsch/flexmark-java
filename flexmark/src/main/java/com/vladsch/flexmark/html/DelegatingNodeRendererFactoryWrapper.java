@@ -8,8 +8,6 @@ import com.vladsch.flexmark.util.dependency.Dependent;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** Factory for instantiating new node renderers with dependencies */
 class DelegatingNodeRendererFactoryWrapper implements Dependent, DelegatingNodeRendererFactory {
@@ -25,28 +23,28 @@ class DelegatingNodeRendererFactoryWrapper implements Dependent, DelegatingNodeR
   }
 
   @Override
-  public @NotNull NodeRenderer apply(@NotNull DataHolder options) {
+  public NodeRenderer apply(DataHolder options) {
     return nodeRendererFactory.apply(options);
   }
 
-  public @NotNull NodeRendererFactory getFactory() {
+  public NodeRendererFactory getFactory() {
     return nodeRendererFactory;
   }
 
   @Override
-  public @Nullable Set<Class<?>> getDelegates() {
+  public Set<Class<?>> getDelegates() {
     return nodeRendererFactory instanceof DelegatingNodeRendererFactory
         ? ((DelegatingNodeRendererFactory) nodeRendererFactory).getDelegates()
         : null;
   }
 
   @Override
-  public final @Nullable Set<Class<?>> getAfterDependents() {
+  public final Set<Class<?>> getAfterDependents() {
     return null;
   }
 
   @Override
-  public @Nullable Set<Class<?>> getBeforeDependents() {
+  public Set<Class<?>> getBeforeDependents() {
     if (myDelegates == null && nodeRenderers != null) {
       Set<Class<?>> delegates = getDelegates();
       if (delegates != null) {

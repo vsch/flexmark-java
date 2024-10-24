@@ -6,14 +6,13 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 public interface InlineParserFactory {
   InlineParser inlineParser(
-      @NotNull DataHolder options,
-      @NotNull BitSet specialCharacters,
-      @NotNull BitSet delimiterCharacters,
-      @NotNull Map<Character, DelimiterProcessor> delimiterProcessors,
-      @NotNull LinkRefProcessorData linkRefProcessors,
-      @NotNull List<InlineParserExtensionFactory> inlineParserExtensions);
+      DataHolder options,
+      BitSet specialCharacters,
+      BitSet delimiterCharacters,
+      Map<Character, DelimiterProcessor> delimiterProcessors,
+      LinkRefProcessorData linkRefProcessors,
+      List<InlineParserExtensionFactory> inlineParserExtensions);
 }

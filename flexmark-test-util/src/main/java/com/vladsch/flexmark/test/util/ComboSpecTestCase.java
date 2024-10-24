@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -24,28 +22,28 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
   public static final DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION =
       TestUtils.CUSTOM_OPTION;
 
-  protected final @NotNull SpecExample example;
-  protected final @NotNull Map<String, DataHolder> optionsMap = new HashMap<>();
-  protected final @Nullable DataHolder myDefaultOptions;
+  protected final SpecExample example;
+  protected final Map<String, DataHolder> optionsMap = new HashMap<>();
+  protected final DataHolder myDefaultOptions;
 
   protected ComboSpecTestCase(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     this.example = example;
     myDefaultOptions = TestUtils.combineDefaultOptions(defaultOptions);
     if (optionMap != null) optionsMap.putAll(optionMap);
   }
 
-  public static @NotNull Map<String, DataHolder> placementAndSortOptions(
+  public static Map<String, DataHolder> placementAndSortOptions(
       DataKey<ElementPlacement> placementDataKey, DataKey<ElementPlacementSort> sortDataKey) {
     return placementAndSortOptions(null, placementDataKey, sortDataKey);
   }
 
-  public static @NotNull Map<String, DataHolder> placementAndSortOptions(
-      @Nullable DataKey<KeepType> keepTypeDataKey,
-      @Nullable DataKey<ElementPlacement> placementDataKey,
-      @Nullable DataKey<ElementPlacementSort> sortDataKey) {
+  public static Map<String, DataHolder> placementAndSortOptions(
+      DataKey<KeepType> keepTypeDataKey,
+      DataKey<ElementPlacement> placementDataKey,
+      DataKey<ElementPlacementSort> sortDataKey) {
     Map<String, DataHolder> optionsMap = new HashMap<>();
     if (keepTypeDataKey != null) {
       optionsMap.put(
@@ -96,32 +94,26 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     return true;
   }
 
-  @Nullable
   public static Map<String, ? extends DataHolder> optionsMaps(
-      @Nullable Map<String, ? extends DataHolder> other,
-      @Nullable Map<String, ? extends DataHolder> overrides) {
+      Map<String, ? extends DataHolder> other, Map<String, ? extends DataHolder> overrides) {
     return TestUtils.optionsMaps(other, overrides);
   }
 
-  @Nullable
-  public static DataHolder[] dataHolders(
-      @Nullable DataHolder other, @Nullable DataHolder[] overrides) {
+  public static DataHolder[] dataHolders(DataHolder other, DataHolder[] overrides) {
     return TestUtils.dataHolders(other, overrides);
   }
 
-  @NotNull
-  public static DataHolder aggregate(@Nullable DataHolder other, @Nullable DataHolder overrides) {
+  public static DataHolder aggregate(DataHolder other, DataHolder overrides) {
     return DataSet.aggregate(other, overrides);
   }
 
-  @Nullable
   @Override
-  public DataHolder options(@NotNull String option) {
+  public DataHolder options(String option) {
     return TestUtils.processOption(optionsMap, option);
   }
 
   @Override
-  protected final @NotNull ResourceLocation getSpecResourceLocation() {
+  protected final ResourceLocation getSpecResourceLocation() {
     return example.getResourceLocation();
   }
 
@@ -135,7 +127,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
   }
 
-  protected static @NotNull List<Object[]> getTestData(@NotNull ResourceLocation location) {
+  protected static List<Object[]> getTestData(ResourceLocation location) {
     return TestUtils.getTestData(location);
   }
 }

@@ -4,21 +4,18 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** Custom block parser factory to create parser instance specific block parser factory */
 public interface CustomBlockParserFactory
     extends Function<DataHolder, BlockParserFactory>, Dependent {
   @Override
-  @NotNull
-  BlockParserFactory apply(@NotNull DataHolder options);
+  BlockParserFactory apply(DataHolder options);
 
   /**
    * @param options options for this parser session
    * @return special lead in character handler for the block parser elements
    */
-  default @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+  default SpecialLeadInHandler getLeadInHandler(DataHolder options) {
     return null;
   }
 }

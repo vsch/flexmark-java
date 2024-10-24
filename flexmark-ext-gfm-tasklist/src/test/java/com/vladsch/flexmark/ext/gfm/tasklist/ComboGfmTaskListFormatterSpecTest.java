@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
@@ -99,7 +98,7 @@ public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
         new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.PLUS));
   }
 
-  public ComboGfmTaskListFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboGfmTaskListFormatterSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

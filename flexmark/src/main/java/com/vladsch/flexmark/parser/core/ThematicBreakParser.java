@@ -17,8 +17,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ThematicBreakParser extends AbstractBlockParser {
   private static final Pattern PATTERN =
@@ -47,7 +45,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
   }
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return new HashSet<>(
@@ -62,7 +60,6 @@ public class ThematicBreakParser extends AbstractBlockParser {
               ));
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return new HashSet<>(
@@ -80,9 +77,8 @@ public class ThematicBreakParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
   }

@@ -7,33 +7,31 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SpecExample {
   public static final SpecExample NULL =
       new SpecExample(ResourceLocation.NULL, 0, null, "", 0, "", "", null, null, true);
 
-  private final @NotNull ResourceLocation resourceLocation;
+  private final ResourceLocation resourceLocation;
   private final int lineNumber;
-  private final @Nullable String optionsSet;
-  private final @Nullable String section;
+  private final String optionsSet;
+  private final String section;
   private final int exampleNumber;
-  private final @NotNull String source;
-  private final @NotNull String html;
-  private final @Nullable String ast;
-  private final @Nullable String comment;
+  private final String source;
+  private final String html;
+  private final String ast;
+  private final String comment;
   private final boolean isNull;
 
   public SpecExample(
-      @NotNull ResourceLocation resourceLocation,
+      ResourceLocation resourceLocation,
       int lineNumber,
-      @Nullable String optionsSet,
-      @Nullable String section,
+      String optionsSet,
+      String section,
       int exampleNumber,
-      @NotNull String source,
-      @NotNull String html,
-      @Nullable String ast,
+      String source,
+      String html,
+      String ast,
       String comment) {
     this(
         resourceLocation,
@@ -49,14 +47,14 @@ public class SpecExample {
   }
 
   private SpecExample(
-      @NotNull ResourceLocation resourceLocation,
+      ResourceLocation resourceLocation,
       int lineNumber,
-      @Nullable String optionsSet,
-      @Nullable String section,
+      String optionsSet,
+      String section,
       int exampleNumber,
-      @NotNull String source,
-      @NotNull String html,
-      @Nullable String ast,
+      String source,
+      String html,
+      String ast,
       String comment,
       boolean isNull) {
     this.resourceLocation = resourceLocation;
@@ -77,7 +75,7 @@ public class SpecExample {
     }
   }
 
-  public SpecExample withResourceLocation(@NotNull ResourceLocation location) {
+  public SpecExample withResourceLocation(ResourceLocation location) {
     return new SpecExample(
         location,
         lineNumber,
@@ -91,7 +89,7 @@ public class SpecExample {
         isNull);
   }
 
-  public SpecExample withSource(@NotNull String source) {
+  public SpecExample withSource(String source) {
     return new SpecExample(
         resourceLocation,
         lineNumber,
@@ -105,7 +103,7 @@ public class SpecExample {
         isNull);
   }
 
-  public SpecExample withHtml(@NotNull String html) {
+  public SpecExample withHtml(String html) {
     return new SpecExample(
         resourceLocation,
         lineNumber,
@@ -119,7 +117,7 @@ public class SpecExample {
         isNull);
   }
 
-  public SpecExample withAst(@Nullable String ast) {
+  public SpecExample withAst(String ast) {
     return new SpecExample(
         resourceLocation,
         lineNumber,
@@ -146,42 +144,34 @@ public class SpecExample {
         && Objects.equals(this.comment, NULL.comment);
   }
 
-  @Nullable
   public String getOptionsSet() {
     return optionsSet;
   }
 
-  @NotNull
   public String getFileUrlWithLineNumber() {
     return getFileUrlWithLineNumber(0);
   }
 
-  @NotNull
   public String getFileUrlWithLineNumber(int lineOffset) {
     return resourceLocation.getFileUrl(Utils.minLimit(lineNumber + lineOffset, 0));
   }
 
-  @NotNull
   public ResourceLocation getResourceLocation() {
     return resourceLocation;
   }
 
-  @NotNull
   public String getSource() {
     return source;
   }
 
-  @NotNull
   public String getHtml() {
     return html;
   }
 
-  @Nullable
   public String getAst() {
     return ast;
   }
 
-  @Nullable
   public String getSection() {
     return section;
   }
@@ -203,12 +193,8 @@ public class SpecExample {
 
   private static final ConcurrentMap<String, String> classMap = new ConcurrentHashMap<>();
 
-  public static @NotNull SpecExample ofCaller(
-      int callNesting,
-      Class<?> resourceClass,
-      @NotNull String source,
-      @NotNull String html,
-      @Nullable String ast) {
+  public static SpecExample ofCaller(
+      int callNesting, Class<?> resourceClass, String source, String html, String ast) {
     StackTraceElement[] trace = Thread.currentThread().getStackTrace();
     StackTraceElement traceElement = trace[callNesting + 2];
     String javaClassFile = classMap.get(resourceClass.getName());

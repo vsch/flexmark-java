@@ -5,8 +5,6 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer
@@ -21,9 +19,7 @@ public interface NodeRendererContext extends LinkResolverContext {
    *     modified. To preserve originals pass a copy.
    * @return the extended attributes with added/updated/removed entries
    */
-  @NotNull
-  MutableAttributes extendRenderingNodeAttributes(
-      @NotNull AttributablePart part, @Nullable Attributes attributes);
+  MutableAttributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes);
 
   /**
    * Extend the attributes by extensions for the node being currently rendered.
@@ -34,14 +30,12 @@ public interface NodeRendererContext extends LinkResolverContext {
    *     modified. To preserve originals pass a copy.
    * @return the extended attributes with added/updated/removed entries
    */
-  @NotNull
   MutableAttributes extendRenderingNodeAttributes(
-      @NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes);
+      Node node, AttributablePart part, Attributes attributes);
 
   /**
    * @return the HTML writer to use
    */
-  @NotNull
   HtmlWriter getHtmlWriter();
 
   /**
@@ -53,7 +47,6 @@ public interface NodeRendererContext extends LinkResolverContext {
    *     context's indentation level or start with 0 indentation
    * @return a new rendering context with a given appendable for its output
    */
-  @NotNull
   NodeRendererContext getSubContext(boolean inheritIndent);
 
   /**
@@ -65,7 +58,6 @@ public interface NodeRendererContext extends LinkResolverContext {
    *     context's indentation level or start with 0 indentation
    * @return a new rendering context with a given appendable for its output
    */
-  @NotNull
   NodeRendererContext getDelegatedSubContext(boolean inheritIndent);
 
   /** pass node rendering to previously registered handler */
@@ -80,8 +72,7 @@ public interface NodeRendererContext extends LinkResolverContext {
    *     com.vladsch.flexmark.ast.AnchorRefTarget} interface.
    * @return id string or null
    */
-  @Nullable
-  String getNodeId(@NotNull Node node);
+  String getNodeId(Node node);
 
   /**
    * Whether the current rendering context has link rendering disabled. When true any renderer that
@@ -137,12 +128,10 @@ public interface NodeRendererContext extends LinkResolverContext {
   /**
    * @return current rendering phase
    */
-  @NotNull
   RenderingPhase getRenderingPhase();
 
   /**
    * @return the {@link HtmlRendererOptions} for the context.
    */
-  @NotNull
   HtmlRendererOptions getHtmlOptions();
 }

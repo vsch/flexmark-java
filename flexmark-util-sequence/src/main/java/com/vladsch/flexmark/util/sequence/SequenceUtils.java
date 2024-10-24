@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface SequenceUtils {
   String EOL = "\n";
@@ -62,103 +59,99 @@ public interface SequenceUtils {
    * @return sequence whose contents reflect the selected portion, if range.isNull() then this is
    *     returned
    */
-  @NotNull
-  static <T extends CharSequence> T subSequence(@NotNull T thizz, @NotNull Range range) {
+  static <T extends CharSequence> T subSequence(T thizz, Range range) {
     return range.isNull() ? (T) thizz : (T) thizz.subSequence(range.getStart(), range.getEnd());
   }
 
-  static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s) {
+  static int indexOf(CharSequence thizz, CharSequence s) {
     return indexOf(thizz, s, 0, Integer.MAX_VALUE);
   }
 
-  static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex) {
+  static int indexOf(CharSequence thizz, CharSequence s, int fromIndex) {
     return indexOf(thizz, s, fromIndex, Integer.MAX_VALUE);
   }
 
-  static int indexOf(@NotNull CharSequence thizz, char c) {
+  static int indexOf(CharSequence thizz, char c) {
     return indexOf(thizz, c, 0, Integer.MAX_VALUE);
   }
 
-  static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex) {
+  static int indexOf(CharSequence thizz, char c, int fromIndex) {
     return indexOf(thizz, c, fromIndex, Integer.MAX_VALUE);
   }
 
-  static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s) {
+  static int indexOfAny(CharSequence thizz, CharPredicate s) {
     return indexOfAny(thizz, s, 0, Integer.MAX_VALUE);
   }
 
-  static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
+  static int indexOfAny(CharSequence thizz, CharPredicate s, int index) {
     return indexOfAny(thizz, s, index, Integer.MAX_VALUE);
   }
 
-  static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s) {
+  static int indexOfAnyNot(CharSequence thizz, CharPredicate s) {
     return indexOfAny(thizz, s.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex) {
+  static int indexOfAnyNot(CharSequence thizz, CharPredicate s, int fromIndex) {
     return indexOfAny(thizz, s.negate(), fromIndex, Integer.MAX_VALUE);
   }
 
-  static int indexOfAnyNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
+  static int indexOfAnyNot(CharSequence thizz, CharPredicate s, int fromIndex, int endIndex) {
     return indexOfAny(thizz, s.negate(), fromIndex, endIndex);
   }
 
-  static int indexOfNot(@NotNull CharSequence thizz, char c) {
+  static int indexOfNot(CharSequence thizz, char c) {
     return indexOfNot(thizz, c, 0, Integer.MAX_VALUE);
   }
 
-  static int indexOfNot(@NotNull CharSequence thizz, char c, int fromIndex) {
+  static int indexOfNot(CharSequence thizz, char c, int fromIndex) {
     return indexOfNot(thizz, c, fromIndex, Integer.MAX_VALUE);
   }
 
-  static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s) {
+  static int lastIndexOf(CharSequence thizz, CharSequence s) {
     return lastIndexOf(thizz, s, 0, Integer.MAX_VALUE);
   }
 
-  static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex) {
+  static int lastIndexOf(CharSequence thizz, CharSequence s, int fromIndex) {
     return lastIndexOf(thizz, s, 0, fromIndex);
   }
 
-  static int lastIndexOf(@NotNull CharSequence thizz, char c) {
+  static int lastIndexOf(CharSequence thizz, char c) {
     return lastIndexOf(thizz, c, 0, Integer.MAX_VALUE);
   }
 
-  static int lastIndexOf(@NotNull CharSequence thizz, char c, int fromIndex) {
+  static int lastIndexOf(CharSequence thizz, char c, int fromIndex) {
     return lastIndexOf(thizz, c, 0, fromIndex);
   }
 
-  static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s) {
+  static int lastIndexOfAny(CharSequence thizz, CharPredicate s) {
     return lastIndexOfAny(thizz, s, 0, Integer.MAX_VALUE);
   }
 
-  static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex) {
+  static int lastIndexOfAny(CharSequence thizz, CharPredicate s, int fromIndex) {
     return lastIndexOfAny(thizz, s, 0, fromIndex);
   }
 
-  static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s) {
+  static int lastIndexOfAnyNot(CharSequence thizz, CharPredicate s) {
     return lastIndexOfAny(thizz, s.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int lastIndexOfAnyNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex) {
+  static int lastIndexOfAnyNot(CharSequence thizz, CharPredicate s, int fromIndex) {
     return lastIndexOfAny(thizz, s.negate(), 0, fromIndex);
   }
 
-  static int lastIndexOfAnyNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex) {
+  static int lastIndexOfAnyNot(CharSequence thizz, CharPredicate s, int startIndex, int fromIndex) {
     return lastIndexOfAny(thizz, s.negate(), startIndex, fromIndex);
   }
 
-  static int lastIndexOfNot(@NotNull CharSequence thizz, char c) {
+  static int lastIndexOfNot(CharSequence thizz, char c) {
     return lastIndexOfNot(thizz, c, 0, Integer.MAX_VALUE);
   }
 
-  static int lastIndexOfNot(@NotNull CharSequence thizz, char c, int fromIndex) {
+  static int lastIndexOfNot(CharSequence thizz, char c, int fromIndex) {
     return lastIndexOfNot(thizz, c, 0, fromIndex);
   }
 
-  static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
+  static int indexOf(CharSequence thizz, char c, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
     endIndex = Math.min(thizz.length(), endIndex);
 
@@ -170,8 +163,7 @@ public interface SequenceUtils {
     return -1;
   }
 
-  static int indexOf(
-      @NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex, int endIndex) {
+  static int indexOf(CharSequence thizz, CharSequence s, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
 
     int sMax = s.length();
@@ -199,7 +191,7 @@ public interface SequenceUtils {
     return -1;
   }
 
-  static int lastIndexOf(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
+  static int lastIndexOf(CharSequence thizz, char c, int startIndex, int fromIndex) {
     fromIndex = Math.min(fromIndex, thizz.length() - 1);
     fromIndex++;
 
@@ -213,7 +205,7 @@ public interface SequenceUtils {
     return -1;
   }
 
-  static int indexOfNot(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
+  static int indexOfNot(CharSequence thizz, char c, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
     endIndex = Math.min(endIndex, thizz.length());
 
@@ -225,8 +217,7 @@ public interface SequenceUtils {
     return -1;
   }
 
-  static int indexOfAny(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
+  static int indexOfAny(CharSequence thizz, CharPredicate s, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
     endIndex = Math.min(endIndex, thizz.length());
 
@@ -240,8 +231,7 @@ public interface SequenceUtils {
   }
 
   // TEST:
-  static int lastIndexOf(
-      @NotNull CharSequence thizz, @NotNull CharSequence s, int startIndex, int fromIndex) {
+  static int lastIndexOf(CharSequence thizz, CharSequence s, int startIndex, int fromIndex) {
     startIndex = Math.max(startIndex, 0);
 
     int sMax = s.length();
@@ -271,7 +261,7 @@ public interface SequenceUtils {
   }
 
   // TEST:
-  static int lastIndexOfNot(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
+  static int lastIndexOfNot(CharSequence thizz, char c, int startIndex, int fromIndex) {
     fromIndex = Math.min(fromIndex, thizz.length() - 1);
     fromIndex++;
 
@@ -286,8 +276,7 @@ public interface SequenceUtils {
   }
 
   // TEST:
-  static int lastIndexOfAny(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex) {
+  static int lastIndexOfAny(CharSequence thizz, CharPredicate s, int startIndex, int fromIndex) {
     fromIndex = Math.min(fromIndex, thizz.length() - 1);
     fromIndex++;
 
@@ -310,8 +299,7 @@ public interface SequenceUtils {
    * @param o any character sequence
    * @return true if character contents are equal
    */
-  @Contract(pure = true, value = "_, null -> false")
-  static boolean equals(@NotNull CharSequence thizz, Object o) {
+  static boolean equals(CharSequence thizz, Object o) {
     // do quick failure of equality
     if (o == thizz) {
       return true;
@@ -344,8 +332,7 @@ public interface SequenceUtils {
     return matchChars(thizz, chars, 0, false);
   }
 
-  @Contract(pure = true)
-  public static int hashCode(@NotNull CharSequence thizz) {
+  public static int hashCode(CharSequence thizz) {
     int h = 0;
     int length = thizz.length();
     if (length > 0) {
@@ -356,19 +343,16 @@ public interface SequenceUtils {
     return h;
   }
 
-  static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2) {
+  static int compare(CharSequence o1, CharSequence o2) {
     return compare(o1, o2, false);
   }
 
-  static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2, boolean ignoreCase) {
+  static int compare(CharSequence o1, CharSequence o2, boolean ignoreCase) {
     return compare(o1, o2, ignoreCase, null);
   }
 
   static int compare(
-      @Nullable CharSequence o1,
-      @Nullable CharSequence o2,
-      boolean ignoreCase,
-      @Nullable CharPredicate ignoreChars) {
+      CharSequence o1, CharSequence o2, boolean ignoreCase, CharPredicate ignoreChars) {
     if (o1 == null || o2 == null) {
       return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
     }
@@ -420,8 +404,7 @@ public interface SequenceUtils {
     return 4 - (column % 4);
   }
 
-  @NotNull
-  static int[] expandTo(@NotNull int[] indices, int length, int step) {
+  static int[] expandTo(int[] indices, int length, int step) {
     int remainder = length & step;
     int next = length + (remainder != 0 ? step : 0);
     if (indices.length < next) {
@@ -432,8 +415,7 @@ public interface SequenceUtils {
     return indices;
   }
 
-  @NotNull
-  static int[] truncateTo(@NotNull int[] indices, int length) {
+  static int[] truncateTo(int[] indices, int length) {
     if (indices.length > length) {
       int[] replace = new int[length];
       System.arraycopy(indices, 0, replace, 0, length);
@@ -442,8 +424,7 @@ public interface SequenceUtils {
     return indices;
   }
 
-  @NotNull
-  static int[] indexOfAll(@NotNull CharSequence thizz, @NotNull CharSequence s) {
+  static int[] indexOfAll(CharSequence thizz, CharSequence s) {
     int length = s.length();
     if (length == 0) {
       return SequenceUtils.EMPTY_INDICES;
@@ -470,134 +451,116 @@ public interface SequenceUtils {
     return truncateTo(indices, iMax);
   }
 
-  static boolean matches(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {
+  static boolean matches(CharSequence thizz, CharSequence chars, boolean ignoreCase) {
     return chars.length() == thizz.length() && matchChars(thizz, chars, 0, ignoreCase);
   }
 
-  static boolean matches(@NotNull CharSequence thizz, @NotNull CharSequence chars) {
+  static boolean matches(CharSequence thizz, CharSequence chars) {
     return chars.length() == thizz.length() && matchChars(thizz, chars, 0, false);
   }
 
-  static boolean matchesIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars) {
+  static boolean matchesIgnoreCase(CharSequence thizz, CharSequence chars) {
     return chars.length() == thizz.length() && matchChars(thizz, chars, 0, true);
   }
 
   static boolean matchChars(
-      @NotNull CharSequence thizz,
-      @NotNull CharSequence chars,
-      int startIndex,
-      boolean ignoreCase) {
+      CharSequence thizz, CharSequence chars, int startIndex, boolean ignoreCase) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, true, ignoreCase)
         == chars.length();
   }
 
-  static boolean matchChars(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {
+  static boolean matchChars(CharSequence thizz, CharSequence chars, int startIndex) {
     return matchChars(thizz, chars, startIndex, false);
   }
 
-  static boolean matchCharsIgnoreCase(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {
+  static boolean matchCharsIgnoreCase(CharSequence thizz, CharSequence chars, int startIndex) {
     return matchChars(thizz, chars, startIndex, true);
   }
 
-  static boolean matchChars(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {
+  static boolean matchChars(CharSequence thizz, CharSequence chars, boolean ignoreCase) {
     return matchChars(thizz, chars, 0, ignoreCase);
   }
 
-  static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars) {
+  static boolean matchChars(CharSequence thizz, CharSequence chars) {
     return matchChars(thizz, chars, 0, false);
   }
 
-  static boolean matchCharsIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars) {
+  static boolean matchCharsIgnoreCase(CharSequence thizz, CharSequence chars) {
     return matchChars(thizz, chars, 0, true);
   }
 
   static boolean matchCharsReversed(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex, boolean ignoreCase) {
+      CharSequence thizz, CharSequence chars, int endIndex, boolean ignoreCase) {
     return endIndex + 1 >= chars.length()
         && matchChars(thizz, chars, endIndex + 1 - chars.length(), ignoreCase);
   }
 
-  static boolean matchCharsReversed(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex) {
+  static boolean matchCharsReversed(CharSequence thizz, CharSequence chars, int endIndex) {
     return endIndex + 1 >= chars.length()
         && matchChars(thizz, chars, endIndex + 1 - chars.length(), false);
   }
 
   static boolean matchCharsReversedIgnoreCase(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex) {
+      CharSequence thizz, CharSequence chars, int endIndex) {
     return endIndex + 1 >= chars.length()
         && matchChars(thizz, chars, endIndex + 1 - chars.length(), true);
   }
 
   static int matchedCharCount(
-      @NotNull CharSequence thizz,
-      @NotNull CharSequence chars,
-      int startIndex,
-      int endIndex,
-      boolean ignoreCase) {
+      CharSequence thizz, CharSequence chars, int startIndex, int endIndex, boolean ignoreCase) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, false, ignoreCase);
   }
 
   static int matchedCharCount(
-      @NotNull CharSequence thizz,
-      @NotNull CharSequence chars,
-      int startIndex,
-      boolean ignoreCase) {
+      CharSequence thizz, CharSequence chars, int startIndex, boolean ignoreCase) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, false, ignoreCase);
   }
 
   static int matchedCharCount(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex) {
+      CharSequence thizz, CharSequence chars, int startIndex, int endIndex) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, false, false);
   }
 
-  static int matchedCharCount(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {
+  static int matchedCharCount(CharSequence thizz, CharSequence chars, int startIndex) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, false, false);
   }
 
   static int matchedCharCountIgnoreCase(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex) {
+      CharSequence thizz, CharSequence chars, int startIndex, int endIndex) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, false, true);
   }
 
-  static int matchedCharCountIgnoreCase(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {
+  static int matchedCharCountIgnoreCase(CharSequence thizz, CharSequence chars, int startIndex) {
     return matchedCharCount(thizz, chars, startIndex, Integer.MAX_VALUE, false, true);
   }
 
   static int matchedCharCountReversed(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex) {
+      CharSequence thizz, CharSequence chars, int startIndex, int fromIndex) {
     return matchedCharCountReversed(thizz, chars, startIndex, fromIndex, false);
   }
 
   static int matchedCharCountReversedIgnoreCase(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex) {
+      CharSequence thizz, CharSequence chars, int startIndex, int fromIndex) {
     return matchedCharCountReversed(thizz, chars, startIndex, fromIndex, true);
   }
 
   static int matchedCharCountReversed(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex, boolean ignoreCase) {
+      CharSequence thizz, CharSequence chars, int fromIndex, boolean ignoreCase) {
     return matchedCharCountReversed(thizz, chars, 0, fromIndex, ignoreCase);
   }
 
-  static int matchedCharCountReversed(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex) {
+  static int matchedCharCountReversed(CharSequence thizz, CharSequence chars, int fromIndex) {
     return matchedCharCountReversed(thizz, chars, 0, fromIndex, false);
   }
 
   static int matchedCharCountReversedIgnoreCase(
-      @NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex) {
+      CharSequence thizz, CharSequence chars, int fromIndex) {
     return matchedCharCountReversed(thizz, chars, 0, fromIndex, true);
   }
 
   static int matchedCharCount(
-      @NotNull CharSequence thizz,
-      @NotNull CharSequence chars,
+      CharSequence thizz,
+      CharSequence chars,
       int startIndex,
       int endIndex,
       boolean fullMatchOnly,
@@ -640,11 +603,7 @@ public interface SequenceUtils {
   }
 
   static int matchedCharCountReversed(
-      @NotNull CharSequence thizz,
-      @NotNull CharSequence chars,
-      int startIndex,
-      int fromIndex,
-      boolean ignoreCase) {
+      CharSequence thizz, CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase) {
     startIndex = Math.max(0, startIndex);
     fromIndex = Math.max(0, Math.min(thizz.length(), fromIndex));
 
@@ -682,46 +641,43 @@ public interface SequenceUtils {
     return iMax;
   }
 
-  static int countOfSpaceTab(@NotNull CharSequence thizz) {
+  static int countOfSpaceTab(CharSequence thizz) {
     return countOfAny(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE);
   }
 
-  static int countOfNotSpaceTab(@NotNull CharSequence thizz) {
+  static int countOfNotSpaceTab(CharSequence thizz) {
     return countOfAny(thizz, CharPredicate.SPACE_TAB.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countOfWhitespace(@NotNull CharSequence thizz) {
+  static int countOfWhitespace(CharSequence thizz) {
     return countOfAny(thizz, CharPredicate.WHITESPACE, Integer.MAX_VALUE);
   }
 
-  static int countOfNotWhitespace(@NotNull CharSequence thizz) {
+  static int countOfNotWhitespace(CharSequence thizz) {
     return countOfAny(thizz, CharPredicate.WHITESPACE.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex) {
+  static int countOfAny(CharSequence thizz, CharPredicate chars, int fromIndex) {
     return countOfAny(thizz, chars, fromIndex, Integer.MAX_VALUE);
   }
 
-  static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static int countOfAny(CharSequence thizz, CharPredicate chars) {
     return countOfAny(thizz, chars, 0, Integer.MAX_VALUE);
   }
 
-  static int countOfAnyNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex, int endIndex) {
+  static int countOfAnyNot(CharSequence thizz, CharPredicate chars, int fromIndex, int endIndex) {
     return countOfAny(thizz, chars.negate(), fromIndex, endIndex);
   }
 
-  static int countOfAnyNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex) {
+  static int countOfAnyNot(CharSequence thizz, CharPredicate chars, int fromIndex) {
     return countOfAny(thizz, chars.negate(), fromIndex, Integer.MAX_VALUE);
   }
 
-  static int countOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static int countOfAnyNot(CharSequence thizz, CharPredicate chars) {
     return countOfAny(thizz, chars.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countOfAny(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
+  static int countOfAny(CharSequence thizz, CharPredicate s, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
     endIndex = Math.min(endIndex, thizz.length());
 
@@ -733,199 +689,193 @@ public interface SequenceUtils {
     return count;
   }
 
-  static int countLeadingSpace(@NotNull CharSequence thizz) {
+  static int countLeadingSpace(CharSequence thizz) {
     return countLeading(thizz, CharPredicate.SPACE, 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex) {
+  static int countLeadingSpace(CharSequence thizz, int startIndex) {
     return countLeading(thizz, CharPredicate.SPACE, startIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex, int endIndex) {
+  static int countLeadingSpace(CharSequence thizz, int startIndex, int endIndex) {
     return countLeading(thizz, CharPredicate.SPACE, startIndex, endIndex);
   }
 
-  static int countLeadingNotSpace(@NotNull CharSequence thizz) {
+  static int countLeadingNotSpace(CharSequence thizz) {
     return countLeading(thizz, CharPredicate.SPACE.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex) {
+  static int countLeadingNotSpace(CharSequence thizz, int startIndex) {
     return countLeading(thizz, CharPredicate.SPACE.negate(), startIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex, int endIndex) {
+  static int countLeadingNotSpace(CharSequence thizz, int startIndex, int endIndex) {
     return countLeading(thizz, CharPredicate.SPACE.negate(), startIndex, endIndex);
   }
 
-  static int countTrailingSpace(@NotNull CharSequence thizz) {
+  static int countTrailingSpace(CharSequence thizz) {
     return countTrailing(thizz, CharPredicate.SPACE, 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingSpace(@NotNull CharSequence thizz, int fromIndex) {
+  static int countTrailingSpace(CharSequence thizz, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE, 0, fromIndex);
   }
 
-  static int countTrailingSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static int countTrailingSpace(CharSequence thizz, int startIndex, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE, startIndex, fromIndex);
   }
 
-  static int countTrailingNotSpace(@NotNull CharSequence thizz) {
+  static int countTrailingNotSpace(CharSequence thizz) {
     return countTrailing(thizz, CharPredicate.SPACE.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingNotSpace(@NotNull CharSequence thizz, int fromIndex) {
+  static int countTrailingNotSpace(CharSequence thizz, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE.negate(), 0, fromIndex);
   }
 
-  static int countTrailingNotSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static int countTrailingNotSpace(CharSequence thizz, int startIndex, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE.negate(), startIndex, fromIndex);
   }
 
-  static int countLeadingSpaceTab(@NotNull CharSequence thizz) {
+  static int countLeadingSpaceTab(CharSequence thizz) {
     return countLeading(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex) {
+  static int countLeadingSpaceTab(CharSequence thizz, int startIndex) {
     return countLeading(thizz, CharPredicate.SPACE_TAB, startIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex) {
+  static int countLeadingSpaceTab(CharSequence thizz, int startIndex, int endIndex) {
     return countLeading(thizz, CharPredicate.SPACE_TAB, startIndex, endIndex);
   }
 
-  static int countLeadingNotSpaceTab(@NotNull CharSequence thizz) {
+  static int countLeadingNotSpaceTab(CharSequence thizz) {
     return countLeading(thizz, CharPredicate.SPACE_TAB.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex) {
+  static int countLeadingNotSpaceTab(CharSequence thizz, int startIndex) {
     return countLeading(thizz, CharPredicate.SPACE_TAB.negate(), startIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex) {
+  static int countLeadingNotSpaceTab(CharSequence thizz, int startIndex, int endIndex) {
     return countLeading(thizz, CharPredicate.SPACE_TAB.negate(), startIndex, endIndex);
   }
 
-  static int countTrailingSpaceTab(@NotNull CharSequence thizz) {
+  static int countTrailingSpaceTab(CharSequence thizz) {
     return countTrailing(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingSpaceTab(@NotNull CharSequence thizz, int fromIndex) {
+  static int countTrailingSpaceTab(CharSequence thizz, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE_TAB, 0, fromIndex);
   }
 
-  static int countTrailingSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static int countTrailingSpaceTab(CharSequence thizz, int startIndex, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE_TAB, startIndex, fromIndex);
   }
 
-  static int countTrailingNotSpaceTab(@NotNull CharSequence thizz) {
+  static int countTrailingNotSpaceTab(CharSequence thizz) {
     return countTrailing(thizz, CharPredicate.SPACE_TAB.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int fromIndex) {
+  static int countTrailingNotSpaceTab(CharSequence thizz, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE_TAB.negate(), 0, fromIndex);
   }
 
-  static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static int countTrailingNotSpaceTab(CharSequence thizz, int startIndex, int fromIndex) {
     return countTrailing(thizz, CharPredicate.SPACE_TAB.negate(), startIndex, fromIndex);
   }
 
-  static int countLeadingWhitespace(@NotNull CharSequence thizz) {
+  static int countLeadingWhitespace(CharSequence thizz) {
     return countLeading(thizz, CharPredicate.WHITESPACE, 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex) {
+  static int countLeadingWhitespace(CharSequence thizz, int startIndex) {
     return countLeading(thizz, CharPredicate.WHITESPACE, startIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex) {
+  static int countLeadingWhitespace(CharSequence thizz, int startIndex, int endIndex) {
     return countLeading(thizz, CharPredicate.WHITESPACE, startIndex, endIndex);
   }
 
-  static int countLeadingNotWhitespace(@NotNull CharSequence thizz) {
+  static int countLeadingNotWhitespace(CharSequence thizz) {
     return countLeading(thizz, CharPredicate.WHITESPACE.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex) {
+  static int countLeadingNotWhitespace(CharSequence thizz, int startIndex) {
     return countLeading(thizz, CharPredicate.WHITESPACE.negate(), startIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex) {
+  static int countLeadingNotWhitespace(CharSequence thizz, int startIndex, int endIndex) {
     return countLeading(thizz, CharPredicate.WHITESPACE.negate(), startIndex, endIndex);
   }
 
-  static int countTrailingWhitespace(@NotNull CharSequence thizz) {
+  static int countTrailingWhitespace(CharSequence thizz) {
     return countTrailing(thizz, CharPredicate.WHITESPACE, 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingWhitespace(@NotNull CharSequence thizz, int fromIndex) {
+  static int countTrailingWhitespace(CharSequence thizz, int fromIndex) {
     return countTrailing(thizz, CharPredicate.WHITESPACE, 0, fromIndex);
   }
 
-  static int countTrailingWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static int countTrailingWhitespace(CharSequence thizz, int startIndex, int fromIndex) {
     return countTrailing(thizz, CharPredicate.WHITESPACE, startIndex, fromIndex);
   }
 
-  static int countTrailingNotWhitespace(@NotNull CharSequence thizz) {
+  static int countTrailingNotWhitespace(CharSequence thizz) {
     return countTrailing(thizz, CharPredicate.WHITESPACE.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int fromIndex) {
+  static int countTrailingNotWhitespace(CharSequence thizz, int fromIndex) {
     return countTrailing(thizz, CharPredicate.WHITESPACE.negate(), 0, fromIndex);
   }
 
-  static int countTrailingNotWhitespace(
-      @NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static int countTrailingNotWhitespace(CharSequence thizz, int startIndex, int fromIndex) {
     return countTrailing(thizz, CharPredicate.WHITESPACE.negate(), startIndex, fromIndex);
   }
 
-  static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static int countLeading(CharSequence thizz, CharPredicate chars) {
     return countLeading(thizz, chars, 0, Integer.MAX_VALUE);
   }
 
-  static int countLeading(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex) {
+  static int countLeading(CharSequence thizz, CharPredicate chars, int fromIndex) {
     return countLeading(thizz, chars, fromIndex, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static int countLeadingNot(CharSequence thizz, CharPredicate chars) {
     return countLeading(thizz, chars.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countLeadingNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex) {
+  static int countLeadingNot(CharSequence thizz, CharPredicate chars, int fromIndex) {
     return countLeading(thizz, chars.negate(), fromIndex, Integer.MAX_VALUE);
   }
 
-  static int countTrailing(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static int countTrailing(CharSequence thizz, CharPredicate chars) {
     return countTrailing(thizz, chars, 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailing(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex) {
+  static int countTrailing(CharSequence thizz, CharPredicate chars, int fromIndex) {
     return countTrailing(thizz, chars, 0, fromIndex);
   }
 
-  static int countTrailingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static int countTrailingNot(CharSequence thizz, CharPredicate chars) {
     return countTrailing(thizz, chars.negate(), 0, Integer.MAX_VALUE);
   }
 
-  static int countTrailingNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex) {
+  static int countTrailingNot(CharSequence thizz, CharPredicate chars, int fromIndex) {
     return countTrailing(thizz, chars.negate(), 0, fromIndex);
   }
 
   static int countLeadingNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int startIndex, int endIndex) {
+      CharSequence thizz, CharPredicate chars, int startIndex, int endIndex) {
     return countLeading(thizz, chars.negate(), startIndex, endIndex);
   }
 
   static int countTrailingNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int startIndex, int endIndex) {
+      CharSequence thizz, CharPredicate chars, int startIndex, int endIndex) {
     return countTrailing(thizz, chars.negate(), startIndex, endIndex);
   }
 
-  static int countLeading(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex, int endIndex) {
+  static int countLeading(CharSequence thizz, CharPredicate chars, int fromIndex, int endIndex) {
     endIndex = Math.min(endIndex, thizz.length());
     fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -933,8 +883,7 @@ public interface SequenceUtils {
     return index == -1 ? endIndex - fromIndex : index - fromIndex;
   }
 
-  static int countLeadingColumns(
-      @NotNull CharSequence thizz, int startColumn, @NotNull CharPredicate chars) {
+  static int countLeadingColumns(CharSequence thizz, int startColumn, CharPredicate chars) {
     int fromIndex = 0;
     int endIndex = thizz.length();
     int index = indexOfAnyNot(thizz, chars, fromIndex, endIndex);
@@ -954,8 +903,7 @@ public interface SequenceUtils {
     return columns;
   }
 
-  static int countTrailing(
-      @NotNull CharSequence thizz, @NotNull CharPredicate chars, int startIndex, int fromIndex) {
+  static int countTrailing(CharSequence thizz, CharPredicate chars, int startIndex, int fromIndex) {
     fromIndex = Math.min(fromIndex, thizz.length());
     startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -963,84 +911,75 @@ public interface SequenceUtils {
     return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
   }
 
-  @NotNull
-  static <T extends CharSequence> T trim(@NotNull T thizz, @NotNull CharPredicate chars) {
+  static <T extends CharSequence> T trim(T thizz, CharPredicate chars) {
     return trim(thizz, 0, chars);
   }
 
-  @NotNull
-  static <T extends CharSequence> T trimEnd(@NotNull T thizz) {
+  static <T extends CharSequence> T trimEnd(T thizz) {
     return trimEnd(thizz, 0, CharPredicate.WHITESPACE);
   }
 
-  @NotNull
-  static <T extends CharSequence> T trim(@NotNull T thizz) {
+  static <T extends CharSequence> T trim(T thizz) {
     return trim(thizz, 0, CharPredicate.WHITESPACE);
   }
 
-  @NotNull
-  static <T extends CharSequence> T trimEnd(
-      @NotNull T thizz, int keep, @NotNull CharPredicate chars) {
+  static <T extends CharSequence> T trimEnd(T thizz, int keep, CharPredicate chars) {
     return subSequence(thizz, trimEndRange(thizz, keep, chars));
   }
 
-  @NotNull
-  static <T extends CharSequence> T trim(@NotNull T thizz, int keep, @NotNull CharPredicate chars) {
+  static <T extends CharSequence> T trim(T thizz, int keep, CharPredicate chars) {
     return subSequence(thizz, trimRange(thizz, keep, chars));
   }
 
-  static Range trimStartRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static Range trimStartRange(CharSequence thizz, CharPredicate chars) {
     return trimStartRange(thizz, 0, chars);
   }
 
-  static Range trimEndRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static Range trimEndRange(CharSequence thizz, CharPredicate chars) {
     return trimEndRange(thizz, 0, chars);
   }
 
-  static Range trimRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static Range trimRange(CharSequence thizz, CharPredicate chars) {
     return trimRange(thizz, 0, chars);
   }
 
-  static Range trimStartRange(@NotNull CharSequence thizz, int keep) {
+  static Range trimStartRange(CharSequence thizz, int keep) {
     return trimStartRange(thizz, keep, CharPredicate.WHITESPACE);
   }
 
-  static Range trimEndRange(@NotNull CharSequence thizz, int keep) {
+  static Range trimEndRange(CharSequence thizz, int keep) {
     return trimEndRange(thizz, keep, CharPredicate.WHITESPACE);
   }
 
-  static Range trimRange(@NotNull CharSequence thizz, int keep) {
+  static Range trimRange(CharSequence thizz, int keep) {
     return trimRange(thizz, keep, CharPredicate.WHITESPACE);
   }
 
-  static Range trimStartRange(@NotNull CharSequence thizz) {
+  static Range trimStartRange(CharSequence thizz) {
     return trimStartRange(thizz, 0, CharPredicate.WHITESPACE);
   }
 
-  static Range trimEndRange(@NotNull CharSequence thizz) {
+  static Range trimEndRange(CharSequence thizz) {
     return trimEndRange(thizz, 0, CharPredicate.WHITESPACE);
   }
 
-  static Range trimRange(@NotNull CharSequence thizz) {
+  static Range trimRange(CharSequence thizz) {
     return trimRange(thizz, 0, CharPredicate.WHITESPACE);
   }
 
-  @NotNull
-  static Range trimStartRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
+  static Range trimStartRange(CharSequence thizz, int keep, CharPredicate chars) {
     int length = thizz.length();
     int trim = countLeading(thizz, chars, 0, length);
     return trim > keep ? Range.of(trim - keep, length) : Range.NULL;
   }
 
-  @NotNull
-  static Range trimEndRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
+  static Range trimEndRange(CharSequence thizz, int keep, CharPredicate chars) {
     int length = thizz.length();
     int trim = countTrailing(thizz, chars, 0, length);
     return trim > keep ? Range.of(0, length - trim + keep) : Range.NULL;
   }
 
-  @NotNull
-  static Range trimRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
+  static Range trimRange(CharSequence thizz, int keep, CharPredicate chars) {
     int length = thizz.length();
     if (keep >= length) {
       return Range.NULL;
@@ -1058,8 +997,7 @@ public interface SequenceUtils {
     return trimEnd > keep ? Range.of(0, length - trimEnd + keep) : Range.NULL;
   }
 
-  @NotNull
-  static String toVisibleWhitespaceString(@NotNull CharSequence thizz) {
+  static String toVisibleWhitespaceString(CharSequence thizz) {
     StringBuilder sb = new StringBuilder();
     int iMax = thizz.length();
     for (int i = 0; i < iMax; i++) {
@@ -1079,15 +1017,15 @@ public interface SequenceUtils {
   // EOL Helpers
   // *****************************************************************
 
-  static char safeCharAt(@NotNull CharSequence thizz, int index) {
+  static char safeCharAt(CharSequence thizz, int index) {
     return index < 0 || index >= thizz.length() ? SequenceUtils.NUL : thizz.charAt(index);
   }
 
-  static int eolEndLength(@NotNull CharSequence thizz) {
+  static int eolEndLength(CharSequence thizz) {
     return eolEndLength(thizz, thizz.length());
   }
 
-  static int eolEndLength(@NotNull CharSequence thizz, int eolEnd) {
+  static int eolEndLength(CharSequence thizz, int eolEnd) {
     int pos = Math.min(eolEnd - 1, thizz.length() - 1);
     if (pos < 0) {
       return 0;
@@ -1109,7 +1047,7 @@ public interface SequenceUtils {
     return len;
   }
 
-  static int eolStartLength(@NotNull CharSequence thizz, int eolStart) {
+  static int eolStartLength(CharSequence thizz, int eolStart) {
     int length = thizz.length();
     int pos = Math.min(eolStart, length);
 
@@ -1133,110 +1071,97 @@ public interface SequenceUtils {
     return len;
   }
 
-  static int endOfLine(@NotNull CharSequence thizz, int index) {
+  static int endOfLine(CharSequence thizz, int index) {
     return endOfDelimitedBy(thizz, SequenceUtils.EOL, index);
   }
 
-  static int endOfLineAnyEOL(@NotNull CharSequence thizz, int index) {
+  static int endOfLineAnyEOL(CharSequence thizz, int index) {
     return endOfDelimitedByAny(thizz, CharPredicate.ANY_EOL, index);
   }
 
-  static int startOfLine(@NotNull CharSequence thizz, int index) {
+  static int startOfLine(CharSequence thizz, int index) {
     return startOfDelimitedBy(thizz, SequenceUtils.EOL, index);
   }
 
-  static int startOfLineAnyEOL(@NotNull CharSequence thizz, int index) {
+  static int startOfLineAnyEOL(CharSequence thizz, int index) {
     return startOfDelimitedByAny(thizz, CharPredicate.ANY_EOL, index);
   }
 
-  static int startOfDelimitedBy(@NotNull CharSequence thizz, @NotNull CharSequence s, int index) {
+  static int startOfDelimitedBy(CharSequence thizz, CharSequence s, int index) {
     index = rangeLimit(index, 0, thizz.length());
     int offset = lastIndexOf(thizz, s, index - 1);
     return offset == -1 ? 0 : offset + 1;
   }
 
-  static int startOfDelimitedByAny(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
+  static int startOfDelimitedByAny(CharSequence thizz, CharPredicate s, int index) {
     index = rangeLimit(index, 0, thizz.length());
     int offset = lastIndexOfAny(thizz, s, index - 1);
     return offset == -1 ? 0 : offset + 1;
   }
 
-  static int endOfDelimitedBy(@NotNull CharSequence thizz, @NotNull CharSequence s, int index) {
+  static int endOfDelimitedBy(CharSequence thizz, CharSequence s, int index) {
     int length = thizz.length();
     index = rangeLimit(index, 0, length);
     int offset = indexOf(thizz, s, index);
     return offset == -1 ? length : offset;
   }
 
-  static int endOfDelimitedByAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
+  static int endOfDelimitedByAny(CharSequence thizz, CharPredicate s, int index) {
     int length = thizz.length();
     index = rangeLimit(index, 0, length);
     int offset = indexOfAny(thizz, s, index);
     return offset == -1 ? length : offset;
   }
 
-  @NotNull
-  static Range lineRangeAt(@NotNull CharSequence thizz, int index) {
+  static Range lineRangeAt(CharSequence thizz, int index) {
     return Range.of(startOfLine(thizz, index), endOfLine(thizz, index));
   }
 
-  @NotNull
-  static Range lineRangeAtAnyEOL(@NotNull CharSequence thizz, int index) {
+  static Range lineRangeAtAnyEOL(CharSequence thizz, int index) {
     return Range.of(startOfLineAnyEOL(thizz, index), endOfLineAnyEOL(thizz, index));
   }
 
-  @NotNull
-  static Range eolEndRange(@NotNull CharSequence thizz, int eolEnd) {
+  static Range eolEndRange(CharSequence thizz, int eolEnd) {
     int eolLength = eolEndLength(thizz, eolEnd);
     return eolLength == 0 ? Range.NULL : Range.of(eolEnd - eolLength, eolEnd);
   }
 
-  @NotNull
-  static Range eolStartRange(@NotNull CharSequence thizz, int eolStart) {
+  static Range eolStartRange(CharSequence thizz, int eolStart) {
     int eolLength = eolStartLength(thizz, eolStart);
     return eolLength == 0 ? Range.NULL : Range.of(eolStart, eolStart + eolLength);
   }
 
-  @Nullable
-  static <T extends CharSequence> T trimmedEOL(@NotNull T thizz) {
+  static <T extends CharSequence> T trimmedEOL(T thizz) {
     int eolLength = eolEndLength(thizz);
     return eolLength > 0 ? (T) thizz.subSequence(thizz.length() - eolLength, thizz.length()) : null;
   }
 
-  @NotNull
-  static Range leadingBlankLinesRange(@NotNull CharSequence thizz) {
+  static Range leadingBlankLinesRange(CharSequence thizz) {
     return leadingBlankLinesRange(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE);
   }
 
-  @NotNull
-  static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int startIndex) {
+  static Range leadingBlankLinesRange(CharSequence thizz, int startIndex) {
     return leadingBlankLinesRange(thizz, CharPredicate.EOL, startIndex, Integer.MAX_VALUE);
   }
 
-  @NotNull
-  static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex, int endIndex) {
+  static Range leadingBlankLinesRange(CharSequence thizz, int fromIndex, int endIndex) {
     return leadingBlankLinesRange(thizz, CharPredicate.EOL, fromIndex, endIndex);
   }
 
-  @NotNull
-  static Range trailingBlankLinesRange(@NotNull CharSequence thizz) {
+  static Range trailingBlankLinesRange(CharSequence thizz) {
     return trailingBlankLinesRange(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE);
   }
 
-  @NotNull
-  static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex) {
+  static Range trailingBlankLinesRange(CharSequence thizz, int fromIndex) {
     return trailingBlankLinesRange(thizz, CharPredicate.EOL, fromIndex, Integer.MAX_VALUE);
   }
 
-  @NotNull
-  static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
+  static Range trailingBlankLinesRange(CharSequence thizz, int startIndex, int fromIndex) {
     return trailingBlankLinesRange(thizz, CharPredicate.EOL, startIndex, fromIndex);
   }
 
-  @NotNull
   static Range trailingBlankLinesRange(
-      @NotNull CharSequence thizz, @NotNull CharPredicate eolChars, int startIndex, int fromIndex) {
+      CharSequence thizz, CharPredicate eolChars, int startIndex, int fromIndex) {
     fromIndex = Math.min(fromIndex, thizz.length());
     startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -1262,9 +1187,8 @@ public interface SequenceUtils {
     }
   }
 
-  @NotNull
   static Range leadingBlankLinesRange(
-      @NotNull CharSequence thizz, @NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
+      CharSequence thizz, CharPredicate eolChars, int fromIndex, int endIndex) {
     endIndex = Math.min(endIndex, thizz.length());
     fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -1291,25 +1215,20 @@ public interface SequenceUtils {
     }
   }
 
-  @NotNull
-  static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz) {
+  static List<Range> blankLinesRemovedRanges(CharSequence thizz) {
     return blankLinesRemovedRanges(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE);
   }
 
-  @NotNull
-  static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex) {
+  static List<Range> blankLinesRemovedRanges(CharSequence thizz, int fromIndex) {
     return blankLinesRemovedRanges(thizz, CharPredicate.EOL, fromIndex, Integer.MAX_VALUE);
   }
 
-  @NotNull
-  static List<Range> blankLinesRemovedRanges(
-      @NotNull CharSequence thizz, int fromIndex, int endIndex) {
+  static List<Range> blankLinesRemovedRanges(CharSequence thizz, int fromIndex, int endIndex) {
     return blankLinesRemovedRanges(thizz, CharPredicate.EOL, fromIndex, endIndex);
   }
 
-  @NotNull
   static List<Range> blankLinesRemovedRanges(
-      @NotNull CharSequence thizz, @NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
+      CharSequence thizz, CharPredicate eolChars, int fromIndex, int endIndex) {
     endIndex = Math.min(endIndex, thizz.length());
     fromIndex = rangeLimit(fromIndex, 0, endIndex);
     int lastPos = fromIndex;
@@ -1329,96 +1248,89 @@ public interface SequenceUtils {
     return ranges;
   }
 
-  static boolean isEmpty(@NotNull CharSequence thizz) {
+  static boolean isEmpty(CharSequence thizz) {
     return thizz.length() == 0;
   }
 
-  static boolean isBlank(@NotNull CharSequence thizz) {
+  static boolean isBlank(CharSequence thizz) {
     return isEmpty(thizz)
         || countLeading(thizz, CharPredicate.WHITESPACE, 0, Integer.MAX_VALUE) == thizz.length();
   }
 
-  static boolean isNotEmpty(@NotNull CharSequence thizz) {
+  static boolean isNotEmpty(CharSequence thizz) {
     return thizz.length() != 0;
   }
 
-  static boolean isNotBlank(@NotNull CharSequence thizz) {
+  static boolean isNotBlank(CharSequence thizz) {
     return !isBlank(thizz);
   }
 
-  static boolean endsWith(@NotNull CharSequence thizz, @NotNull CharSequence suffix) {
+  static boolean endsWith(CharSequence thizz, CharSequence suffix) {
     return thizz.length() > 0 && matchCharsReversed(thizz, suffix, thizz.length() - 1, false);
   }
 
-  static boolean endsWith(
-      @NotNull CharSequence thizz, @NotNull CharSequence suffix, boolean ignoreCase) {
+  static boolean endsWith(CharSequence thizz, CharSequence suffix, boolean ignoreCase) {
     return thizz.length() > 0 && matchCharsReversed(thizz, suffix, thizz.length() - 1, ignoreCase);
   }
 
-  static boolean startsWith(@NotNull CharSequence thizz, @NotNull CharSequence prefix) {
+  static boolean startsWith(CharSequence thizz, CharSequence prefix) {
     return thizz.length() > 0 && matchChars(thizz, prefix, 0, false);
   }
 
-  static boolean startsWith(
-      @NotNull CharSequence thizz, @NotNull CharSequence prefix, boolean ignoreCase) {
+  static boolean startsWith(CharSequence thizz, CharSequence prefix, boolean ignoreCase) {
     return thizz.length() > 0 && matchChars(thizz, prefix, 0, ignoreCase);
   }
 
-  static boolean endsWith(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static boolean endsWith(CharSequence thizz, CharPredicate chars) {
     return countTrailing(thizz, chars) > 0;
   }
 
-  static boolean startsWith(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
+  static boolean startsWith(CharSequence thizz, CharPredicate chars) {
     return countLeading(thizz, chars) > 0;
   }
 
-  static boolean endsWithEOL(@NotNull CharSequence thizz) {
+  static boolean endsWithEOL(CharSequence thizz) {
     return endsWith(thizz, CharPredicate.EOL);
   }
 
-  static boolean endsWithAnyEOL(@NotNull CharSequence thizz) {
+  static boolean endsWithAnyEOL(CharSequence thizz) {
     return endsWith(thizz, CharPredicate.ANY_EOL);
   }
 
-  static boolean endsWithSpace(@NotNull CharSequence thizz) {
+  static boolean endsWithSpace(CharSequence thizz) {
     return endsWith(thizz, CharPredicate.SPACE);
   }
 
-  static boolean endsWithSpaceTab(@NotNull CharSequence thizz) {
+  static boolean endsWithSpaceTab(CharSequence thizz) {
     return endsWith(thizz, CharPredicate.SPACE_TAB);
   }
 
-  static boolean endsWithWhitespace(@NotNull CharSequence thizz) {
+  static boolean endsWithWhitespace(CharSequence thizz) {
     return endsWith(thizz, CharPredicate.WHITESPACE);
   }
 
-  static boolean startsWithEOL(@NotNull CharSequence thizz) {
+  static boolean startsWithEOL(CharSequence thizz) {
     return startsWith(thizz, CharPredicate.EOL);
   }
 
-  static boolean startsWithAnyEOL(@NotNull CharSequence thizz) {
+  static boolean startsWithAnyEOL(CharSequence thizz) {
     return startsWith(thizz, CharPredicate.ANY_EOL);
   }
 
-  static boolean startsWithSpace(@NotNull CharSequence thizz) {
+  static boolean startsWithSpace(CharSequence thizz) {
     return startsWith(thizz, CharPredicate.SPACE);
   }
 
-  static boolean startsWithSpaceTab(@NotNull CharSequence thizz) {
+  static boolean startsWithSpaceTab(CharSequence thizz) {
     return startsWith(thizz, CharPredicate.SPACE_TAB);
   }
 
-  static boolean startsWithWhitespace(@NotNull CharSequence thizz) {
+  static boolean startsWithWhitespace(CharSequence thizz) {
     return startsWith(thizz, CharPredicate.WHITESPACE);
   }
 
-  @NotNull
   static <T extends CharSequence> List<T> splitList(
-      @NotNull T thizz,
-      @NotNull CharSequence delimiter,
-      int limit,
-      int flags,
-      @Nullable CharPredicate trimChars) {
+      T thizz, CharSequence delimiter, int limit, int flags, CharPredicate trimChars) {
     if (trimChars == null) {
       trimChars = CharPredicate.WHITESPACE;
     } else {
@@ -1473,13 +1385,12 @@ public interface SequenceUtils {
     return items;
   }
 
-  static int columnAtIndex(@NotNull CharSequence thizz, int index) {
+  static int columnAtIndex(CharSequence thizz, int index) {
     int lineStart = lastIndexOfAny(thizz, CharPredicate.ANY_EOL, index);
     return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(thizz, lineStart));
   }
 
-  @NotNull
-  static Pair<Integer, Integer> lineColumnAtIndex(@NotNull CharSequence thizz, int index) {
+  static Pair<Integer, Integer> lineColumnAtIndex(CharSequence thizz, int index) {
     int iMax = thizz.length();
     if (index < 0 || index > iMax) {
       throw new IllegalArgumentException("Index: " + index + " out of range [0, " + iMax + "]");
@@ -1552,9 +1463,7 @@ public interface SequenceUtils {
    *     sequence will be accepted as valid
    * @return null or parsed number with unparsed suffix
    */
-  @Nullable
-  static Pair<Number, String> parseNumberPrefixOrNull(
-      @Nullable String text, @Nullable Predicate<String> suffixTester) {
+  static Pair<Number, String> parseNumberPrefixOrNull(String text, Predicate<String> suffixTester) {
     if (text == null) {
       return null;
     }
@@ -1594,8 +1503,7 @@ public interface SequenceUtils {
     return null;
   }
 
-  static <T extends CharSequence> boolean containedBy(
-      @NotNull T[] items, @NotNull CharSequence element) {
+  static <T extends CharSequence> boolean containedBy(T[] items, CharSequence element) {
     for (T item : items) {
       if (equals(element, item)) {
         return true;
@@ -1604,8 +1512,7 @@ public interface SequenceUtils {
     return false;
   }
 
-  static boolean containedBy(
-      @NotNull Collection<? extends CharSequence> items, @NotNull CharSequence element) {
+  static boolean containedBy(Collection<? extends CharSequence> items, CharSequence element) {
     for (CharSequence item : items) {
       if (equals(element, item)) {
         return true;

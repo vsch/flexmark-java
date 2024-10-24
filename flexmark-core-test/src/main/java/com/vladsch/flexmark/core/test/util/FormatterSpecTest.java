@@ -18,20 +18,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
   protected FormatterSpecTest(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     super(example, optionMap, defaultOptions);
   }
 
   @Override
-  public @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
 
     return new FlexmarkSpecExampleRenderer(
@@ -40,7 +38,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
         Parser.builder(combinedOptions).build(),
         Formatter.builder(combinedOptions).build(),
         true) {
-      @NotNull List<TrackedOffset> trackedOffsets = Collections.emptyList();
+      List<TrackedOffset> trackedOffsets = Collections.emptyList();
       BasedSequence trackedSequence;
       BasedSequence originalSequence;
 
@@ -81,7 +79,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
       }
 
       @Override
-      protected @NotNull String renderHtml() {
+      protected String renderHtml() {
         if (trackedOffsets.isEmpty() && !SHOW_LINE_RANGES.get(myOptions)) {
           return getRenderer().render(getDocument());
         }

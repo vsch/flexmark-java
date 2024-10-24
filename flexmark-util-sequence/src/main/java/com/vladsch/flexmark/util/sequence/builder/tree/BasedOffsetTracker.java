@@ -1,23 +1,20 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BasedOffsetTracker {
-  private final @NotNull BasedSequence
+  private final BasedSequence
       sequence; // sequence on which this tracker is based, not the base sequence of original
   // sequence
-  private final @NotNull SegmentOffsetTree segmentOffsetTree;
-  private @Nullable Segment lastSegment;
+  private final SegmentOffsetTree segmentOffsetTree;
+  private Segment lastSegment;
 
-  private BasedOffsetTracker(@NotNull BasedSequence sequence, @NotNull SegmentTree segmentTree) {
+  private BasedOffsetTracker(BasedSequence sequence, SegmentTree segmentTree) {
     this.sequence = sequence;
     this.segmentOffsetTree = segmentTree.getSegmentOffsetTree(sequence.getBaseSequence());
   }
 
-  private BasedOffsetTracker(
-      @NotNull BasedSequence sequence, @NotNull SegmentOffsetTree segmentOffsetTree) {
+  private BasedOffsetTracker(BasedSequence sequence, SegmentOffsetTree segmentOffsetTree) {
     this.sequence = sequence;
     this.segmentOffsetTree = segmentOffsetTree;
   }
@@ -39,7 +36,6 @@ public class BasedOffsetTracker {
    *     character at offset and the range [offset, offset+1)
    * @return information about the offset in this sequence
    */
-  @NotNull
   public OffsetInfo getOffsetInfo(int offset, boolean isEndOffset) {
     // if is end offset then will not
     int offsetEnd = isEndOffset ? offset : offset + 1;
@@ -128,12 +124,10 @@ public class BasedOffsetTracker {
     return lastResult;
   }
 
-  @NotNull
   public BasedSequence getSequence() {
     return sequence;
   }
 
-  @NotNull
   public SegmentOffsetTree getSegmentOffsetTree() {
     return segmentOffsetTree;
   }
@@ -149,8 +143,7 @@ public class BasedOffsetTracker {
    * @param sequence sequence which to create offset tracker
    * @return based offset tracker
    */
-  @NotNull
-  public static BasedOffsetTracker create(@NotNull BasedSequence sequence) {
+  public static BasedOffsetTracker create(BasedSequence sequence) {
     SegmentTree segmentTree = sequence.getSegmentTree();
     return new BasedOffsetTracker(sequence, segmentTree);
   }
@@ -162,9 +155,8 @@ public class BasedOffsetTracker {
    * @param segmentOffsetTree segment offset tree for the sequence
    * @return based offset tracker
    */
-  @NotNull
   public static BasedOffsetTracker create(
-      @NotNull BasedSequence sequence, @NotNull SegmentOffsetTree segmentOffsetTree) {
+      BasedSequence sequence, SegmentOffsetTree segmentOffsetTree) {
     return new BasedOffsetTracker(sequence, segmentOffsetTree);
   }
 }

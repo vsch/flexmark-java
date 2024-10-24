@@ -3,12 +3,10 @@ package com.vladsch.flexmark.html.renderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.ast.Document;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** A renderer for a document node for a specific rendering phase */
 public interface PhasedNodeRenderer extends NodeRenderer {
-  @Nullable
+
   Set<RenderingPhase> getRenderingPhases();
 
   /**
@@ -24,8 +22,5 @@ public interface PhasedNodeRenderer extends NodeRenderer {
    *     for start of each phase.
    */
   void renderDocument(
-      @NotNull NodeRendererContext context,
-      @NotNull HtmlWriter html,
-      @NotNull Document document,
-      @NotNull RenderingPhase phase);
+      NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase);
 }

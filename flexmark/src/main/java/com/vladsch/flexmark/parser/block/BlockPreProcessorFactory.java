@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.dependency.Dependent;
 import java.util.Set;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
 
 public interface BlockPreProcessorFactory
     extends Function<ParserState, BlockPreProcessor>, Dependent {
@@ -13,7 +12,6 @@ public interface BlockPreProcessorFactory
    *
    * @return set of block node types
    */
-  @NotNull
   Set<Class<? extends Block>> getBlockTypes();
 
   /**
@@ -23,6 +21,5 @@ public interface BlockPreProcessorFactory
    * @return block pre-processor
    */
   @Override
-  @NotNull
-  BlockPreProcessor apply(@NotNull ParserState state);
+  BlockPreProcessor apply(ParserState state);
 }

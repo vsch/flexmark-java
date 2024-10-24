@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Parsing {
   private static final String XML_NAMESPACE_START =
@@ -267,16 +265,16 @@ public class Parsing {
   private final boolean allowNameSpace;
 
   private static class PatternTypeFlags {
-    final @Nullable Boolean intellijDummyIdentifier;
-    final @Nullable Boolean htmlForTranslator;
-    final @Nullable String translationHtmlInlineTagPattern;
-    final @Nullable String translationAutolinkTagPattern;
-    final @Nullable Boolean spaceInLinkUrl;
-    final @Nullable Boolean parseJekyllMacroInLinkUrl;
-    final @Nullable String itemPrefixChars;
-    final @Nullable Boolean listsItemMarkerSpace;
-    final @Nullable Boolean listsOrderedItemDotOnly;
-    final @Nullable Boolean allowNameSpace;
+    final Boolean intellijDummyIdentifier;
+    final Boolean htmlForTranslator;
+    final String translationHtmlInlineTagPattern;
+    final String translationAutolinkTagPattern;
+    final Boolean spaceInLinkUrl;
+    final Boolean parseJekyllMacroInLinkUrl;
+    final String itemPrefixChars;
+    final Boolean listsItemMarkerSpace;
+    final Boolean listsOrderedItemDotOnly;
+    final Boolean allowNameSpace;
 
     PatternTypeFlags(DataHolder options) {
       this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
@@ -293,16 +291,16 @@ public class Parsing {
     }
 
     public PatternTypeFlags(
-        @Nullable Boolean intellijDummyIdentifier,
-        @Nullable Boolean htmlForTranslator,
-        @Nullable String translationHtmlInlineTagPattern,
-        @Nullable String translationAutolinkTagPattern,
-        @Nullable Boolean spaceInLinkUrl,
-        @Nullable Boolean parseJekyllMacroInLinkUrl,
-        @Nullable String itemPrefixChars,
-        @Nullable Boolean listsItemMarkerSpace,
-        @Nullable Boolean listsOrderedItemDotOnly,
-        @Nullable Boolean allowNameSpace) {
+        Boolean intellijDummyIdentifier,
+        Boolean htmlForTranslator,
+        String translationHtmlInlineTagPattern,
+        String translationAutolinkTagPattern,
+        Boolean spaceInLinkUrl,
+        Boolean parseJekyllMacroInLinkUrl,
+        String itemPrefixChars,
+        Boolean listsItemMarkerSpace,
+        Boolean listsOrderedItemDotOnly,
+        Boolean allowNameSpace) {
       this.intellijDummyIdentifier = intellijDummyIdentifier;
       this.htmlForTranslator = htmlForTranslator;
       this.translationHtmlInlineTagPattern = translationHtmlInlineTagPattern;
@@ -441,9 +439,9 @@ public class Parsing {
       new HashMap<>();
 
   private static Pattern getCachedPattern(
-      @NotNull String patternName,
-      @NotNull PatternTypeFlags cachedTypeFlags,
-      @NotNull Function<PatternTypeFlags, Pattern> factory) {
+      String patternName,
+      PatternTypeFlags cachedTypeFlags,
+      Function<PatternTypeFlags, Pattern> factory) {
     Map<PatternTypeFlags, Pattern> patternMap =
         cachedPatterns.computeIfAbsent(patternName, key -> new HashMap<>());
     return patternMap.computeIfAbsent(cachedTypeFlags, factory);

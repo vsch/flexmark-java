@@ -56,7 +56,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class DocumentParser implements ParserState {
   public static final InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;
@@ -159,32 +158,32 @@ public class DocumentParser implements ParserState {
   }
 
   @Override
-  public void blockAdded(@NotNull Block node) {
+  public void blockAdded(Block node) {
     blockTracker.blockAdded(node);
   }
 
   @Override
-  public void blockAddedWithChildren(@NotNull Block node) {
+  public void blockAddedWithChildren(Block node) {
     blockTracker.blockAddedWithChildren(node);
   }
 
   @Override
-  public void blockAddedWithDescendants(@NotNull Block node) {
+  public void blockAddedWithDescendants(Block node) {
     blockTracker.blockAddedWithDescendants(node);
   }
 
   @Override
-  public void blockRemoved(@NotNull Block node) {
+  public void blockRemoved(Block node) {
     blockTracker.blockRemoved(node);
   }
 
   @Override
-  public void blockRemovedWithChildren(@NotNull Block node) {
+  public void blockRemovedWithChildren(Block node) {
     blockTracker.blockRemovedWithChildren(node);
   }
 
   @Override
-  public void blockRemovedWithDescendants(@NotNull Block node) {
+  public void blockRemovedWithDescendants(Block node) {
     blockTracker.blockRemovedWithDescendants(node);
   }
 

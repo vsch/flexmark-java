@@ -1,12 +1,9 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.Nullable;
-
 public interface CollectionHost<K> {
-  void adding(int index, @Nullable K k, @Nullable Object v);
+  void adding(int index, K k, Object v);
 
-  @Nullable
-  Object removing(int index, @Nullable K k);
+  Object removing(int index, K k);
 
   void clearing();
 

@@ -2,35 +2,33 @@ package com.vladsch.flexmark.util.collection;
 
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 final class MapEntry<K, V> implements Map.Entry<K, V> {
-  private final @NotNull K key;
-  private final @Nullable V value;
+  private final K key;
+  private final V value;
 
-  MapEntry(@NotNull K key, @Nullable V value) {
+  MapEntry(K key, V value) {
     this.key = key;
     this.value = value;
   }
 
   @Override
-  public @NotNull K getKey() {
+  public K getKey() {
     return key;
   }
 
   @Override
-  public @Nullable V getValue() {
+  public V getValue() {
     return value;
   }
 
   @Override
-  public @Nullable V setValue(V v) {
+  public V setValue(V v) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public boolean equals(@Nullable Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }

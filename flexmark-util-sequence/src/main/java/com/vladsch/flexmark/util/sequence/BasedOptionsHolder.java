@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Implemented by BasedOptionsSequence, use instance of it to pass to {@link
@@ -92,7 +91,6 @@ public interface BasedOptionsHolder {
    * @param dataKey in options
    * @return true if data key is available
    */
-  @Nullable
   <T> T getOption(DataKeyBase<T> dataKey);
 
   /**
@@ -100,6 +98,5 @@ public interface BasedOptionsHolder {
    *
    * @return data holder with options or null if none for this sequence
    */
-  @Nullable
   DataHolder getOptions();
 }

@@ -6,31 +6,28 @@ import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ClassificationBag<K, V> {
-  private final @NotNull OrderedSet<V> items;
-  private final @NotNull IndexedItemBitSetMap<K, V> bag;
-  private final @Nullable CollectionHost<V> host;
+  private final OrderedSet<V> items;
+  private final IndexedItemBitSetMap<K, V> bag;
+  private final CollectionHost<V> host;
 
   public ClassificationBag(Function<V, K> mapper) {
     this(0, mapper);
   }
 
-  private ClassificationBag(int capacity, @NotNull Function<V, K> mapper) {
+  private ClassificationBag(int capacity, Function<V, K> mapper) {
     this(capacity, mapper, null);
   }
 
-  private ClassificationBag(
-      int capacity, @NotNull Function<V, K> mapper, @Nullable CollectionHost<V> host) {
+  private ClassificationBag(int capacity, Function<V, K> mapper, CollectionHost<V> host) {
     this.host = host;
     this.items =
         new OrderedSet<>(
             capacity,
             new CollectionHost<V>() {
               @Override
-              public void adding(int index, @Nullable V v, @Nullable Object v2) {
+              public void adding(int index, V v, Object v2) {
                 if (ClassificationBag.this.host != null
                     && !ClassificationBag.this.host.skipHostUpdate())
                   ClassificationBag.this.host.adding(index, v, v2);
@@ -38,7 +35,7 @@ public class ClassificationBag<K, V> {
               }
 
               @Override
-              public Object removing(int index, @Nullable V v) {
+              public Object removing(int index, V v) {
                 if (ClassificationBag.this.host != null
                     && !ClassificationBag.this.host.skipHostUpdate())
                   ClassificationBag.this.host.removing(index, v);
@@ -76,7 +73,6 @@ public class ClassificationBag<K, V> {
     this.bag = new IndexedItemBitSetMap<>(mapper);
   }
 
-  @NotNull
   public OrderedSet<V> getItems() {
     return items;
   }
@@ -85,20 +81,20 @@ public class ClassificationBag<K, V> {
     return items.getModificationCount();
   }
 
-  public boolean add(@Nullable V item) {
+  public boolean add(V item) {
     return items.add(item);
   }
 
-  public boolean remove(@Nullable V item) {
+  public boolean remove(V item) {
     return items.remove(item);
   }
 
-  public boolean containsCategory(@Nullable K category) {
+  public boolean containsCategory(K category) {
     BitSet bitSet = bag.get(category);
     return bitSet != null && !bitSet.isEmpty();
   }
 
-  int getCategoryCount(@Nullable K category) {
+  int getCategoryCount(K category) {
     BitSet bitSet = bag.get(category);
     return bitSet == null ? 0 : bitSet.cardinality();
   }
@@ -108,31 +104,30 @@ public class ClassificationBag<K, V> {
   }
 
   @SafeVarargs
-  public final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull K... categories) {
+  public final <X> ReversibleIterable<X> getCategoryItems(K... categories) {
     return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(),
         new BitSetIterable(categoriesBitSet(categories), false));
   }
 
-  public final <X> @NotNull ReversibleIterable<X> getCategoryItems(
-      @NotNull Collection<? extends K> categories) {
+  public final <X> ReversibleIterable<X> getCategoryItems(Collection<? extends K> categories) {
     return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(),
         new BitSetIterable(categoriesBitSet(categories), false));
   }
 
-  final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull BitSet bitSet) {
+  final <X> ReversibleIterable<X> getCategoryItems(BitSet bitSet) {
     return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
   }
 
-  final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull BitSet bitSet) {
+  final <X> ReversibleIterable<X> getCategoryItemsReversed(BitSet bitSet) {
     return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, true));
   }
 
   @SafeVarargs
-  private final @NotNull BitSet categoriesBitSet(@NotNull K... categories) {
+  private final BitSet categoriesBitSet(K... categories) {
     BitSet bitSet = new BitSet();
     for (K category : categories) {
       BitSet bitSet1 = bag.get(category);
@@ -143,7 +138,7 @@ public class ClassificationBag<K, V> {
     return bitSet;
   }
 
-  public final @NotNull BitSet categoriesBitSet(@NotNull Collection<? extends K> categories) {
+  public final BitSet categoriesBitSet(Collection<? extends K> categories) {
     BitSet bitSet = new BitSet();
     for (K category : categories) {
       BitSet bitSet1 = bag.get(category);

@@ -3,33 +3,29 @@ package com.vladsch.flexmark.html.renderer;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ResolvedLink {
-  private final @NotNull LinkType myLinkType;
-  private final @NotNull String myUrl;
-  private final @NotNull LinkStatus myStatus;
-  private @Nullable MutableAttributes myAttributes;
+  private final LinkType myLinkType;
+  private final String myUrl;
+  private final LinkStatus myStatus;
+  private MutableAttributes myAttributes;
 
-  public ResolvedLink(
-      @NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Attributes attributes) {
+  public ResolvedLink(LinkType linkType, CharSequence url, Attributes attributes) {
     this(linkType, url, attributes, LinkStatus.UNKNOWN);
   }
 
-  @Nullable
   public Attributes getAttributes() {
     return myAttributes == null ? null : myAttributes.toImmutable();
   }
 
-  public @NotNull Attributes getNonNullAttributes() {
+  public Attributes getNonNullAttributes() {
     if (myAttributes == null) {
       myAttributes = new MutableAttributes();
     }
     return myAttributes.toImmutable();
   }
 
-  public @NotNull MutableAttributes getMutableAttributes() {
+  public MutableAttributes getMutableAttributes() {
     if (myAttributes == null) {
       myAttributes = new MutableAttributes();
     }
@@ -37,10 +33,7 @@ public class ResolvedLink {
   }
 
   private ResolvedLink(
-      @NotNull LinkType linkType,
-      CharSequence url,
-      @Nullable Attributes attributes,
-      @NotNull LinkStatus status) {
+      LinkType linkType, CharSequence url, Attributes attributes, LinkStatus status) {
     myLinkType = linkType;
     myUrl = String.valueOf(url);
     myStatus = status;
@@ -49,35 +42,32 @@ public class ResolvedLink {
     }
   }
 
-  public ResolvedLink withStatus(@NotNull LinkStatus status) {
+  public ResolvedLink withStatus(LinkStatus status) {
     return status == this.myStatus
         ? this
         : new ResolvedLink(myLinkType, myUrl, myAttributes, status);
   }
 
-  @NotNull
   public LinkType getLinkType() {
     return myLinkType;
   }
 
-  @NotNull
   public LinkStatus getStatus() {
     return myStatus;
   }
 
-  public @NotNull ResolvedLink withUrl(@NotNull CharSequence url) {
+  public ResolvedLink withUrl(CharSequence url) {
     String useUrl = String.valueOf(url);
     return this.myUrl.equals(useUrl)
         ? this
         : new ResolvedLink(myLinkType, useUrl, myAttributes, myStatus);
   }
 
-  @NotNull
   public String getUrl() {
     return myUrl;
   }
 
-  public @NotNull String getPageRef() {
+  public String getPageRef() {
     // parse out the anchor marker and ref
     int pos = myUrl.indexOf('#');
     if (pos < 0) {
@@ -87,7 +77,7 @@ public class ResolvedLink {
     return myUrl.substring(0, pos);
   }
 
-  public @Nullable String getAnchorRef() {
+  public String getAnchorRef() {
     // parse out the anchor marker and ref
     int pos = myUrl.indexOf('#');
     if (pos < 0) {
@@ -97,8 +87,7 @@ public class ResolvedLink {
     return myUrl.substring(pos + 1);
   }
 
-  @NotNull
-  ResolvedLink withTitle(@Nullable CharSequence title) {
+  ResolvedLink withTitle(CharSequence title) {
     String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
     if (title == haveTitle || haveTitle != null && title != null && haveTitle.contentEquals(title))
       return this;
@@ -113,7 +102,7 @@ public class ResolvedLink {
     return new ResolvedLink(myLinkType, myUrl, attributes, myStatus);
   }
 
-  public @Nullable String getTitle() {
+  public String getTitle() {
     return myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
   }
 

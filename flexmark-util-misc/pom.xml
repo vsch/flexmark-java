@@ -10,11 +10,4 @@
 
   <artifactId>flexmark-util-misc</artifactId>
   <description>flexmark-java misc utility classes</description>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-    </dependency>
-  </dependencies>
 </project>

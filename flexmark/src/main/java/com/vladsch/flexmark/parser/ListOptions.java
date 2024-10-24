@@ -10,12 +10,10 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import java.util.Arrays;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ListOptions implements MutableDataSetter {
-  protected @NotNull ParserEmulationProfile myParserEmulationProfile;
-  protected @NotNull ItemInterrupt itemInterrupt;
+  protected ParserEmulationProfile myParserEmulationProfile;
+  protected ItemInterrupt itemInterrupt;
   protected boolean autoLoose;
   protected boolean autoLooseOneLevelLists;
   protected boolean delimiterMismatchToNewList;
@@ -34,17 +32,17 @@ public class ListOptions implements MutableDataSetter {
   protected boolean orderedItemDotOnly;
   protected boolean orderedListManualStart;
   private boolean itemContentAfterSuffix;
-  private @NotNull String itemPrefixChars;
+  private String itemPrefixChars;
   protected int codeIndent;
   protected int itemIndent;
   protected int newItemCodeIndent;
-  private @NotNull String[] itemMarkerSuffixes;
+  private String[] itemMarkerSuffixes;
 
   public ListOptions() {
     this((DataHolder) null);
   }
 
-  private ListOptions(@Nullable DataHolder options) {
+  private ListOptions(DataHolder options) {
     myParserEmulationProfile = Parser.PARSER_EMULATION_PROFILE.get(options);
     itemInterrupt = new ItemInterrupt(options);
 
@@ -77,7 +75,7 @@ public class ListOptions implements MutableDataSetter {
     itemMarkerSuffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.get(options);
   }
 
-  ListOptions(@NotNull ListOptions other) {
+  ListOptions(ListOptions other) {
     myParserEmulationProfile = other.getParserEmulationProfile();
     itemInterrupt = new ItemInterrupt(other.getItemInterrupt());
 
@@ -107,11 +105,11 @@ public class ListOptions implements MutableDataSetter {
     itemMarkerSuffixes = other.getItemMarkerSuffixes();
   }
 
-  public static @NotNull ListOptions get(DataHolder options) {
+  public static ListOptions get(DataHolder options) {
     return new ListOptions(options);
   }
 
-  public boolean isTightListItem(@NotNull ListItem node) {
+  public boolean isTightListItem(ListItem node) {
     if (node.isLoose()) {
       return false;
     }
@@ -132,7 +130,7 @@ public class ListOptions implements MutableDataSetter {
         || autoLoose && node.isInTightList();
   }
 
-  public boolean isInTightListItem(@NotNull Paragraph node) {
+  public boolean isInTightListItem(Paragraph node) {
     Block parent = node.getParent();
     if (!(parent instanceof ListItem)) {
       return false;
@@ -151,7 +149,7 @@ public class ListOptions implements MutableDataSetter {
         || autoLoose && listItem.isInTightList();
   }
 
-  public boolean canInterrupt(@NotNull ListBlock a, boolean isEmptyItem, boolean isItemParagraph) {
+  public boolean canInterrupt(ListBlock a, boolean isEmptyItem, boolean isItemParagraph) {
     boolean isNumberedItem = a instanceof OrderedList;
     boolean isOneItem =
         isNumberedItem && (!isOrderedListManualStart() || ((OrderedList) a).getStartNumber() == 1);
@@ -159,7 +157,7 @@ public class ListOptions implements MutableDataSetter {
     return getItemInterrupt().canInterrupt(isNumberedItem, isOneItem, isEmptyItem, isItemParagraph);
   }
 
-  public boolean canStartSubList(@NotNull ListBlock a, boolean isEmptyItem) {
+  public boolean canStartSubList(ListBlock a, boolean isEmptyItem) {
     boolean isNumberedItem = a instanceof OrderedList;
     boolean isOneItem =
         isNumberedItem && (!isOrderedListManualStart() || ((OrderedList) a).getStartNumber() == 1);
@@ -167,7 +165,7 @@ public class ListOptions implements MutableDataSetter {
     return getItemInterrupt().canStartSubList(isNumberedItem, isOneItem, isEmptyItem);
   }
 
-  public boolean startNewList(@NotNull ListBlock a, @NotNull ListBlock b) {
+  public boolean startNewList(ListBlock a, ListBlock b) {
     boolean isNumberedList = a instanceof OrderedList;
     boolean isNumberedItem = b instanceof OrderedList;
 
@@ -182,7 +180,7 @@ public class ListOptions implements MutableDataSetter {
     return isItemTypeMismatchToNewList();
   }
 
-  public boolean startSubList(@NotNull ListBlock a, @NotNull ListBlock b) {
+  public boolean startSubList(ListBlock a, ListBlock b) {
     boolean isNumberedList = a instanceof OrderedList;
     boolean isNumberedItem = b instanceof OrderedList;
 
@@ -194,8 +192,7 @@ public class ListOptions implements MutableDataSetter {
   }
 
   @Override
-  @NotNull
-  public MutableDataHolder setIn(@NotNull MutableDataHolder options) {
+  public MutableDataHolder setIn(MutableDataHolder options) {
     options.set(Parser.PARSER_EMULATION_PROFILE, getParserEmulationProfile());
     getItemInterrupt().setIn(options);
 
@@ -233,7 +230,7 @@ public class ListOptions implements MutableDataSetter {
   }
 
   public static void addItemMarkerSuffixes(
-      @NotNull MutableDataHolder options, String... itemMarkerSuffixes) {
+      MutableDataHolder options, String... itemMarkerSuffixes) {
     String[] suffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.get(options);
     int addSuffixCount = itemMarkerSuffixes.length;
 
@@ -267,11 +264,11 @@ public class ListOptions implements MutableDataSetter {
     }
   }
 
-  public @NotNull ParserEmulationProfile getParserEmulationProfile() {
+  public ParserEmulationProfile getParserEmulationProfile() {
     return myParserEmulationProfile;
   }
 
-  public @NotNull ItemInterrupt getItemInterrupt() {
+  public ItemInterrupt getItemInterrupt() {
     return itemInterrupt;
   }
 
@@ -303,7 +300,6 @@ public class ListOptions implements MutableDataSetter {
     return itemContentAfterSuffix;
   }
 
-  @NotNull
   public String getItemPrefixChars() {
     return itemPrefixChars;
   }
@@ -364,7 +360,7 @@ public class ListOptions implements MutableDataSetter {
     return newItemCodeIndent;
   }
 
-  public @NotNull String[] getItemMarkerSuffixes() {
+  public String[] getItemMarkerSuffixes() {
     return itemMarkerSuffixes;
   }
 
@@ -411,7 +407,7 @@ public class ListOptions implements MutableDataSetter {
       emptyOrderedNonOneSubItemInterruptsItemParagraph = false;
     }
 
-    public ItemInterrupt(@Nullable DataHolder options) {
+    public ItemInterrupt(DataHolder options) {
       bulletItemInterruptsParagraph = Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH.get(options);
       orderedItemInterruptsParagraph = Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH.get(options);
       orderedNonOneItemInterruptsParagraph =
@@ -446,7 +442,7 @@ public class ListOptions implements MutableDataSetter {
           Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH.get(options);
     }
 
-    public void setIn(@NotNull MutableDataHolder options) {
+    public void setIn(MutableDataHolder options) {
       options.set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH, bulletItemInterruptsParagraph);
       options.set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH, orderedItemInterruptsParagraph);
       options.set(
@@ -491,7 +487,7 @@ public class ListOptions implements MutableDataSetter {
           emptyOrderedNonOneSubItemInterruptsItemParagraph);
     }
 
-    public ItemInterrupt(@NotNull ItemInterrupt other) {
+    public ItemInterrupt(ItemInterrupt other) {
       bulletItemInterruptsParagraph = other.bulletItemInterruptsParagraph;
       orderedItemInterruptsParagraph = other.orderedItemInterruptsParagraph;
       orderedNonOneItemInterruptsParagraph = other.orderedNonOneItemInterruptsParagraph;
@@ -652,7 +648,7 @@ public class ListOptions implements MutableDataSetter {
   static class MutableItemInterrupt extends ItemInterrupt {
     MutableItemInterrupt() {}
 
-    MutableItemInterrupt(@NotNull ItemInterrupt other) {
+    MutableItemInterrupt(ItemInterrupt other) {
       super(other);
     }
 

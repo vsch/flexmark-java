@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboSubscriptSpecTest extends RendererSpecTest {
@@ -32,7 +31,7 @@ public class ComboSubscriptSpecTest extends RendererSpecTest {
             .set(SubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE, "</span>"));
   }
 
-  public ComboSubscriptSpecTest(@NotNull SpecExample example) {
+  public ComboSubscriptSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

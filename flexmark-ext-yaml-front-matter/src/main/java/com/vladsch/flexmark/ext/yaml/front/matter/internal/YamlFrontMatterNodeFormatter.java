@@ -14,19 +14,15 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
   public YamlFrontMatterNodeFormatter() {}
 
-  @Nullable
   @Override
   public Set<FormattingPhase> getFormattingPhases() {
     return new HashSet<>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
   }
 
-  @Nullable
   @Override
   public Set<Class<?>> getNodeClasses() {
     return null;
@@ -34,10 +30,10 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
 
   @Override
   public void renderDocument(
-      @NotNull NodeFormatterContext context,
-      @NotNull MarkdownWriter markdown,
-      @NotNull Document document,
-      @NotNull FormattingPhase phase) {
+      NodeFormatterContext context,
+      MarkdownWriter markdown,
+      Document document,
+      FormattingPhase phase) {
     if (phase == FormattingPhase.DOCUMENT_FIRST) {
       Node node = document.getFirstChild();
       if (node instanceof YamlFrontMatterBlock) {
@@ -48,7 +44,6 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     }
   }
 
-  @Nullable
   @Override
   public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
     return new HashSet<>(
@@ -61,9 +56,9 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
       YamlFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {}
 
   public static class Factory implements NodeFormatterFactory {
-    @NotNull
+
     @Override
-    public NodeFormatter create(@NotNull DataHolder options) {
+    public NodeFormatter create(DataHolder options) {
       return new YamlFrontMatterNodeFormatter();
     }
   }

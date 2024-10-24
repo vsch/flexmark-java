@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Inline HTML element.
@@ -10,14 +9,14 @@ import org.jetbrains.annotations.NotNull;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public abstract class HtmlInlineBase extends Node {
-  @NotNull
+
   @Override
   public BasedSequence[] getSegments() {
     return EMPTY_SEGMENTS;
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     astExtraChars(out);
   }
 

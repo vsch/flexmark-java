@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.jetbrains.annotations.Nullable;
 
 public class TaskListNodeFormatter implements NodeFormatter {
   private final TaskListFormatOptions taskListFormatOptions;
@@ -34,7 +33,6 @@ public class TaskListNodeFormatter implements NodeFormatter {
     listOptions = ListOptions.get(options);
   }
 
-  @Nullable
   @Override
   public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
     return new HashSet<>(
@@ -44,7 +42,6 @@ public class TaskListNodeFormatter implements NodeFormatter {
             new NodeFormattingHandler<>(OrderedList.class, TaskListNodeFormatter.this::render)));
   }
 
-  @Nullable
   @Override
   public Set<Class<?>> getNodeClasses() {
     return null;

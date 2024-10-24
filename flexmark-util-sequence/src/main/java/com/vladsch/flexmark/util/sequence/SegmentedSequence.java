@@ -5,8 +5,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** A BasedSequence which consists of segments of other BasedSequences */
 public abstract class SegmentedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
@@ -30,13 +28,11 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     this.length = length;
   }
 
-  @NotNull
   @Override
   public final Object getBase() {
     return baseSeq.getBase();
   }
 
-  @NotNull
   @Override
   public final BasedSequence getBaseSequence() {
     return baseSeq;
@@ -89,7 +85,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
   }
 
   @Override
-  public final @Nullable DataHolder getOptions() {
+  public final DataHolder getOptions() {
     return getBaseSequence().getOptions();
   }
 
@@ -98,13 +94,11 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     return length;
   }
 
-  @NotNull
   @Override
   public final Range getSourceRange() {
     return Range.of(getStartOffset(), getEndOffset());
   }
 
-  @NotNull
   @Override
   public final BasedSequence baseSubSequence(int startIndex, int endIndex) {
     SequenceUtils.validateStartEnd(startIndex, endIndex, baseSeq.length());
@@ -129,7 +123,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
    *     {@link #getIndexOffset(int)}(int index)
    */
   public static BasedSequence create(
-      BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+      BasedSequence basedSequence, Iterable<? extends BasedSequence> segments) {
     return create(basedSequence.getBuilder().addAll(segments));
   }
 

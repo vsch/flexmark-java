@@ -1,11 +1,8 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 public interface MutableDataHolder extends DataHolder {
   @Override
-  Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory);
+  Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory);
 
   /**
    * Store the given value for the key
@@ -15,8 +12,7 @@ public interface MutableDataHolder extends DataHolder {
    * @param value value to store
    * @return mutable data holder for chained calls
    */
-  @NotNull
-  <T> MutableDataHolder set(@NotNull DataKey<T> key, @NotNull T value);
+  <T> MutableDataHolder set(DataKey<T> key, T value);
 
   /**
    * Store the given value for the key
@@ -26,8 +22,7 @@ public interface MutableDataHolder extends DataHolder {
    * @param value value to store
    * @return mutable data holder for chained calls
    */
-  @NotNull
-  <T> MutableDataHolder set(@NotNull NullableDataKey<T> key, @Nullable T value);
+  <T> MutableDataHolder set(NullableDataKey<T> key, T value);
 
   /**
    * Remove the stored value for the key, used to force to default or to force recompute
@@ -35,8 +30,7 @@ public interface MutableDataHolder extends DataHolder {
    * @param key data key to remove
    * @return mutable data holder for chained calls
    */
-  @NotNull
-  MutableDataHolder remove(@NotNull DataKeyBase<?> key);
+  MutableDataHolder remove(DataKeyBase<?> key);
 
   /**
    * Store the given value for the key
@@ -44,8 +38,7 @@ public interface MutableDataHolder extends DataHolder {
    * @param dataSetter data setter which will set values
    * @return mutable data holder for chained calls
    */
-  @NotNull
-  MutableDataHolder setFrom(@NotNull MutableDataSetter dataSetter);
+  MutableDataHolder setFrom(MutableDataSetter dataSetter);
 
   /**
    * Copy all values from one data holder to this data holder
@@ -53,8 +46,7 @@ public interface MutableDataHolder extends DataHolder {
    * @param other data holder from which to copy all values
    * @return mutable data holder for chained calls
    */
-  @NotNull
-  MutableDataHolder setAll(@NotNull DataHolder other);
+  MutableDataHolder setAll(DataHolder other);
 
   /**
    * Set options in given mutable data holder
@@ -62,15 +54,13 @@ public interface MutableDataHolder extends DataHolder {
    * @param dataHolder data holder where to copy options from this data holder
    * @return dataHolder
    */
-  @NotNull
   @Override
-  MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder);
+  MutableDataHolder setIn(MutableDataHolder dataHolder);
 
   /**
    * clear all options out of the data set
    *
    * @return mutable data holder for chained calls
    */
-  @NotNull
   MutableDataHolder clear();
 }

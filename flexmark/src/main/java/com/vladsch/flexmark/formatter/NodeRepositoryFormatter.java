@@ -21,8 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeRepositoryFormatter<
         R extends NodeRepository<B>,
@@ -99,7 +97,6 @@ public abstract class NodeRepositoryFormatter<
     myComparator = Comparable::compareTo;
   }
 
-  @Nullable
   @Override
   public Set<FormattingPhase> getFormattingPhases() {
     return FORMATTING_PHASES;
@@ -107,10 +104,10 @@ public abstract class NodeRepositoryFormatter<
 
   @Override
   public void renderDocument(
-      @NotNull NodeFormatterContext context,
-      @NotNull MarkdownWriter markdown,
-      @NotNull Document document,
-      @NotNull FormattingPhase phase) {
+      NodeFormatterContext context,
+      MarkdownWriter markdown,
+      Document document,
+      FormattingPhase phase) {
     // here non-rendered elements can be collected so that they are rendered in another part of the
     // document
     if (context.isTransformingText() && myReferenceMapKey != null) {

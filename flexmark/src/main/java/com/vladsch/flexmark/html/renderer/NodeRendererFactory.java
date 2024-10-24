@@ -2,7 +2,6 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
 
 /** Factory for instantiating new node renderers when rendering is done. */
 public interface NodeRendererFactory extends Function<DataHolder, NodeRenderer> {
@@ -13,6 +12,5 @@ public interface NodeRendererFactory extends Function<DataHolder, NodeRenderer> 
    * @return a node renderer
    */
   @Override
-  @NotNull
-  NodeRenderer apply(@NotNull DataHolder options);
+  NodeRenderer apply(DataHolder options);
 }

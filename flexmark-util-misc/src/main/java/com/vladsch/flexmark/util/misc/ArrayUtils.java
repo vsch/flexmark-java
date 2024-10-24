@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.misc;
 
 import java.util.function.Predicate;
-import org.jetbrains.annotations.Nullable;
 
 public class ArrayUtils {
   public static boolean contained(int value, int[] array) {
@@ -13,7 +12,6 @@ public class ArrayUtils {
     return false;
   }
 
-  @Nullable
   private static <T> T firstOf(
       T[] ts, int fromIndex, int endIndex, Predicate<? super T> predicate) {
     int i = indexOf(ts, fromIndex, endIndex, predicate);

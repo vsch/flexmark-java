@@ -42,8 +42,6 @@ import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 public class ParserTest {
@@ -746,7 +744,6 @@ public class ParserTest {
   private static class DashBlock extends Block {
     private DashBlock() {}
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
       return EMPTY_SEGMENTS;
@@ -778,13 +775,12 @@ public class ParserTest {
   }
 
   public static class DashBlockParserFactory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return null;
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return null;
@@ -795,9 +791,8 @@ public class ParserTest {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory();
     }
   }

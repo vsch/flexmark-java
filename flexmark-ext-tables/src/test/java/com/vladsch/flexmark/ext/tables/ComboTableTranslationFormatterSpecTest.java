@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboTableTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
@@ -75,7 +74,7 @@ public class ComboTableTranslationFormatterSpecTest extends TranslationFormatter
             .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
   }
 
-  public ComboTableTranslationFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboTableTranslationFormatterSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

@@ -35,7 +35,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Parses input text to a tree of nodes.
@@ -409,7 +408,7 @@ public class Parser implements IParse {
   private final LinkRefProcessorData linkRefProcessors;
   private final List<InlineParserExtensionFactory> inlineParserExtensionFactories;
   private final InlineParserFactory inlineParserFactory;
-  private final @NotNull DataHolder options;
+  private final DataHolder options;
 
   private Parser(Builder builder) {
     DataSet options = builder.toImmutable();
@@ -473,7 +472,7 @@ public class Parser implements IParse {
    * @return the root node
    */
   @Override
-  public @NotNull Document parse(@NotNull BasedSequence input) {
+  public Document parse(BasedSequence input) {
     // NOTE: parser can only handle contiguous sequences with no out of base characters
     if (input instanceof ReplacedBasedSequence) {
       throw new IllegalArgumentException(
@@ -509,7 +508,7 @@ public class Parser implements IParse {
    * @return the root node
    */
   @Override
-  public @NotNull Document parse(@NotNull String input) {
+  public Document parse(String input) {
     DocumentParser documentParser =
         new DocumentParser(
             options,
@@ -538,7 +537,7 @@ public class Parser implements IParse {
    * @throws IOException when reading throws an exception
    */
   @Override
-  public @NotNull Document parseReader(@NotNull Reader input) throws IOException {
+  public Document parseReader(Reader input) throws IOException {
     DocumentParser documentParser =
         new DocumentParser(
             options,
@@ -562,13 +561,12 @@ public class Parser implements IParse {
   }
 
   @Override
-  public @NotNull DataHolder getOptions() {
+  public DataHolder getOptions() {
     return options;
   }
 
   @Override
-  public boolean transferReferences(
-      @NotNull Document document, @NotNull Document included, Boolean onlyIfUndefined) {
+  public boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined) {
     // transfer references from included to document
     boolean transferred = false;
 
@@ -631,13 +629,12 @@ public class Parser implements IParse {
      * @return the configured {@link Parser}
      */
     @Override
-    @NotNull
     public Parser build() {
       return new Parser(this);
     }
 
     @Override
-    protected void removeApiPoint(@NotNull Object apiPoint) {
+    protected void removeApiPoint(Object apiPoint) {
       if (apiPoint instanceof CustomBlockParserFactory) {
         this.blockParserFactories.remove(apiPoint);
       } else if (apiPoint instanceof DelimiterProcessor) {
@@ -663,7 +660,7 @@ public class Parser implements IParse {
     }
 
     @Override
-    protected void preloadExtension(@NotNull Extension extension) {
+    protected void preloadExtension(Extension extension) {
       if (extension instanceof ParserExtension) {
         ParserExtension parserExtension = (ParserExtension) extension;
         parserExtension.parserOptions(this);
@@ -671,7 +668,7 @@ public class Parser implements IParse {
     }
 
     @Override
-    protected boolean loadExtension(@NotNull Extension extension) {
+    protected boolean loadExtension(Extension extension) {
       if (extension instanceof ParserExtension) {
         ParserExtension parserExtension = (ParserExtension) extension;
         parserExtension.extend(this);

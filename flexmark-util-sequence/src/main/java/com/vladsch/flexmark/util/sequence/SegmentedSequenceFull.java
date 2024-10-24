@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A BasedSequence which consists of segments of other BasedSequences NOTE: very efficient for
@@ -43,7 +42,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
   }
 
   @Override
-  public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+  public void addSegments(IBasedSegmentBuilder<?> builder) {
     // FIX: clean up and optimize the structure. it is error prone and inefficient
     BasedUtils.generateSegments(builder, this);
   }
@@ -65,7 +64,6 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
     return baseSeq.charAt(offset);
   }
 
-  @NotNull
   @Override
   public BasedSequence subSequence(int startIndex, int endIndex) {
     SequenceUtils.validateStartEnd(startIndex, endIndex, length());
@@ -85,7 +83,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
    * @return segmented sequence
    */
   public static SegmentedSequenceFull create(
-      @NotNull BasedSequence baseSequence, ISegmentBuilder<?> builder) {
+      BasedSequence baseSequence, ISegmentBuilder<?> builder) {
     BasedSequence baseSeq = baseSequence.getBaseSequence();
     int length = builder.length();
     int baseStartOffset = 0;

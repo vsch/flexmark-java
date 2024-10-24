@@ -6,15 +6,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 public class SubClassingBag<T> {
-  private final @NotNull ClassificationBag<Class<?>, T> items;
-  private final @NotNull HashMap<Class<?>, BitSet> subClassMap;
+  private final ClassificationBag<Class<?>, T> items;
+  private final HashMap<Class<?>, BitSet> subClassMap;
 
   public SubClassingBag(
-      @NotNull ClassificationBag<Class<?>, T> items,
-      Map<Class<?>, @NotNull List<Class<?>>> subClassMap) {
+      ClassificationBag<Class<?>, T> items, Map<Class<?>, List<Class<?>>> subClassMap) {
     this.items = items;
     this.subClassMap = new HashMap<>();
 
@@ -27,28 +25,26 @@ public class SubClassingBag<T> {
     }
   }
 
-  public final <X> @NotNull ReversibleIterable<X> itemsOfType(
-      @NotNull Class<X> xClass, @NotNull Class<?>... categories) {
+  public final <X> ReversibleIterable<X> itemsOfType(Class<X> xClass, Class<?>... categories) {
     return items.getCategoryItems(typeBitSet(xClass, categories));
   }
 
-  public final <X> @NotNull ReversibleIterable<X> itemsOfType(
-      @NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
+  public final <X> ReversibleIterable<X> itemsOfType(
+      Class<X> xClass, Collection<Class<?>> categories) {
     return items.getCategoryItems(typeBitSet(xClass, categories));
   }
 
-  public final <X> @NotNull ReversibleIterable<X> reversedItemsOfType(
-      @NotNull Class<X> xClass, @NotNull Class<?>... categories) {
+  public final <X> ReversibleIterable<X> reversedItemsOfType(
+      Class<X> xClass, Class<?>... categories) {
     return items.getCategoryItemsReversed(typeBitSet(xClass, categories));
   }
 
-  public final <X> @NotNull ReversibleIterable<X> reversedItemsOfType(
-      @NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
+  public final <X> ReversibleIterable<X> reversedItemsOfType(
+      Class<X> xClass, Collection<Class<?>> categories) {
     return items.getCategoryItemsReversed(typeBitSet(xClass, categories));
   }
 
-  private final @NotNull BitSet typeBitSet(
-      @NotNull Class<?> xClass, @NotNull Class<?>... categories) {
+  private final BitSet typeBitSet(Class<?> xClass, Class<?>... categories) {
     BitSet bitSet = new BitSet();
     for (Class<?> category : categories) {
       if (xClass.isAssignableFrom(category) && subClassMap.containsKey(category)) {
@@ -58,8 +54,7 @@ public class SubClassingBag<T> {
     return bitSet;
   }
 
-  private final @NotNull BitSet typeBitSet(
-      @NotNull Class<?> xClass, @NotNull Collection<Class<?>> categories) {
+  private final BitSet typeBitSet(Class<?> xClass, Collection<Class<?>> categories) {
     BitSet bitSet = new BitSet();
     for (Class<?> category : categories) {
       if (xClass.isAssignableFrom(category) && subClassMap.containsKey(category)) {

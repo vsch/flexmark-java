@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
 
 public class ResourceResolverManager {
   /**
@@ -17,12 +16,11 @@ public class ResourceResolverManager {
    */
   private static final List<Function<String, String>> urlResolvers = new ArrayList<>();
 
-  public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
+  public static void registerUrlResolver(Function<String, String> resolver) {
     ResourceResolverManager.urlResolvers.add(resolver);
   }
 
-  @NotNull
-  public static String adjustedFileUrl(@NotNull URL url) {
+  public static String adjustedFileUrl(URL url) {
     String externalForm = url.toExternalForm();
     String bestProtocolMatch = null;
 

@@ -32,8 +32,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class TableNodeFormatter implements NodeFormatter {
   private final TableFormatOptions options;
@@ -46,13 +44,11 @@ public class TableNodeFormatter implements NodeFormatter {
     parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.get(options);
   }
 
-  @Nullable
   @Override
   public Set<Class<?>> getNodeClasses() {
     return null;
   }
 
-  @Nullable
   @Override
   public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
     return new HashSet<>(
@@ -279,9 +275,9 @@ public class TableNodeFormatter implements NodeFormatter {
   }
 
   public static class Factory implements NodeFormatterFactory {
-    @NotNull
+
     @Override
-    public NodeFormatter create(@NotNull DataHolder options) {
+    public NodeFormatter create(DataHolder options) {
       return new TableNodeFormatter(options);
     }
   }

@@ -10,13 +10,11 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public final class ComboGitHubCompatibilitySpecTest extends CoreRendererSpecTest {
   private static final String SPEC_RESOURCE = "/core_gfm_doc_compatibility_spec.md";
-  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .setFrom(ParserEmulationProfile.GITHUB_DOC)
@@ -37,7 +35,7 @@ public final class ComboGitHubCompatibilitySpecTest extends CoreRendererSpecTest
             .set(Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH, false));
   }
 
-  public ComboGitHubCompatibilitySpecTest(@NotNull SpecExample example) {
+  public ComboGitHubCompatibilitySpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

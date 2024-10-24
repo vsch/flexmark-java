@@ -7,7 +7,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboCoreFormatterSpecTestBase {
@@ -15,7 +14,7 @@ public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboCoreFormatterSp
   private static final DataHolder OPTIONS =
       new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false).toImmutable();
 
-  public ComboCoreFormatterNoBlankLinesSpecTest(@NotNull SpecExample example) {
+  public ComboCoreFormatterNoBlankLinesSpecTest(SpecExample example) {
     super(example, null, OPTIONS);
   }
 

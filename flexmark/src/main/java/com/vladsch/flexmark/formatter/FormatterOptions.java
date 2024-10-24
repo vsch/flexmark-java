@@ -16,7 +16,6 @@ import com.vladsch.flexmark.util.format.options.ListBulletMarker;
 import com.vladsch.flexmark.util.format.options.ListNumberedMarker;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.Nullable;
 
 public class FormatterOptions {
   public final boolean itemContentIndent;
@@ -67,7 +66,7 @@ public class FormatterOptions {
   public final boolean formatterTagsEnabled;
   public final boolean formatterTagsAcceptRegexp;
   public final boolean blankLinesInAst;
-  public final @Nullable Pattern linkMarkerCommentPattern;
+  public final Pattern linkMarkerCommentPattern;
 
   public FormatterOptions(DataHolder options) {
     emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.get(options);

@@ -1,24 +1,22 @@
 package com.vladsch.flexmark.util.collection;
 
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 interface IndexedItemSetMap<M, S, K> extends Map<M, S> {
-  @NotNull
-  M mapKey(@NotNull K key);
 
-  @NotNull
+  M mapKey(K key);
+
   S newSet();
 
-  boolean addSetItem(@NotNull S s, int item);
+  boolean addSetItem(S s, int item);
 
-  boolean removeSetItem(@NotNull S s, int item);
+  boolean removeSetItem(S s, int item);
 
-  boolean containsSetItem(@NotNull S s, int item);
+  boolean containsSetItem(S s, int item);
 
-  boolean addItem(@NotNull K key, int item);
+  boolean addItem(K key, int item);
 
-  boolean removeItem(@NotNull K key, int item);
+  boolean removeItem(K key, int item);
 
-  boolean containsItem(@NotNull K key, int item);
+  boolean containsItem(K key, int item);
 }

@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
 
@@ -52,7 +51,7 @@ public class ComboTableSpecTest extends RendererSpecTest {
     optionsMap.put("sub-parse2", new MutableDataSet().set(TestUtils.SOURCE_SUFFIX, "" + "\n" + ""));
   }
 
-  public ComboTableSpecTest(@NotNull SpecExample example) {
+  public ComboTableSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

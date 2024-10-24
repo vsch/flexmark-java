@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
-import org.jetbrains.annotations.NotNull;
 
 public enum ParserEmulationProfile implements MutableDataSetter {
   COMMONMARK(null),
@@ -283,9 +282,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     return new MutableListOptions((DataHolder) null);
   }
 
-  @NotNull
   @Override
-  public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+  public MutableDataHolder setIn(MutableDataHolder dataHolder) {
     if (this == FIXED_INDENT) {
       getOptions(dataHolder)
           .setIn(dataHolder)

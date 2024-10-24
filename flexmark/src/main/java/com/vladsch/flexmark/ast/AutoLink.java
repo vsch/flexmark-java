@@ -1,25 +1,22 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class AutoLink extends DelimitedLinkNode {
   public AutoLink() {}
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {openingMarker, pageRef, anchorMarker, anchorRef, closingMarker};
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegmentsForChars() {
     return new BasedSequence[] {openingMarker, pageRef, anchorMarker, anchorRef, closingMarker};
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     segmentSpanChars(out, openingMarker, "open");
     segmentSpanChars(out, text, "text");
     if (pageRef.isNotNull()) segmentSpanChars(out, pageRef, "pageRef");

@@ -29,14 +29,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
   private static final String SPEC_RESOURCE = "/core_paragraph_formatter_spec.md";
-  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
   private static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
 
@@ -60,11 +57,11 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
                         option, params, ComboParagraphFormatterSpecTest::firstWidthDeltaOption)));
   }
 
-  public ComboParagraphFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboParagraphFormatterSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 
-  private static DataHolder firstWidthDeltaOption(@Nullable Integer params) {
+  private static DataHolder firstWidthDeltaOption(Integer params) {
     int value = params != null ? params : -1;
     return new MutableDataSet().set(FIRST_WIDTH_DELTA, value);
   }
@@ -75,11 +72,10 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   }
 
   static class ParagraphTextNode extends Node {
-    ParagraphTextNode(@NotNull BasedSequence chars) {
+    ParagraphTextNode(BasedSequence chars) {
       super(chars);
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
       return EMPTY_SEGMENTS;
@@ -92,12 +88,12 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     }
 
     @Override
-    public @NotNull Node parse(@NotNull BasedSequence input) {
+    public Node parse(BasedSequence input) {
       return new ParagraphTextNode(input);
     }
 
     @Override
-    public @Nullable DataHolder getOptions() {
+    public DataHolder getOptions() {
       return null;
     }
   }
@@ -112,7 +108,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     }
 
     @Override
-    public void render(@NotNull Node document, @NotNull Appendable output) {
+    public void render(Node document, Appendable output) {
       BasedSequence input = document.getChars();
       StringBuilder out = new StringBuilder();
 
@@ -190,8 +186,8 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   }
 
   @Override
-  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public final SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
     return new FlexmarkSpecExampleRenderer(
         example,
@@ -200,12 +196,12 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
         new ParagraphFormatter(combinedOptions),
         true) {
       @Override
-      protected @NotNull String renderHtml() {
+      protected String renderHtml() {
         return super.renderHtml();
       }
 
       @Override
-      protected @NotNull String renderAst() {
+      protected String renderAst() {
         return TestUtils.ast(getDocument());
       }
     };

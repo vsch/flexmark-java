@@ -3,8 +3,6 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A BasedSequence with an out of scope of original char sequence prefix
@@ -24,13 +22,11 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     this.base = baseSeq.subSequence(startIndex, endIndex);
   }
 
-  @NotNull
   @Override
   public Object getBase() {
     return base.getBase();
   }
 
-  @NotNull
   @Override
   public BasedSequence getBaseSequence() {
     return base.getBaseSequence();
@@ -46,13 +42,11 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     return base.getEndOffset();
   }
 
-  @NotNull
   @Override
   public Range getSourceRange() {
     return base.getSourceRange();
   }
 
-  @NotNull
   @Override
   public BasedSequence baseSubSequence(int startIndex, int endIndex) {
     return base.baseSubSequence(startIndex, endIndex);
@@ -79,7 +73,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
   }
 
   @Override
-  public @Nullable DataHolder getOptions() {
+  public DataHolder getOptions() {
     return getBaseSequence().getOptions();
   }
 
@@ -101,7 +95,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
   }
 
   @Override
-  public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+  public void addSegments(IBasedSegmentBuilder<?> builder) {
     if (prefix.length() != 0) {
       builder.append(base.getStartOffset(), base.getStartOffset());
       builder.append(prefix.toString());
@@ -121,7 +115,6 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     return base.charAt(index - prefixLength);
   }
 
-  @NotNull
   @Override
   public BasedSequence subSequence(int startIndex, int endIndex) {
     SequenceUtils.validateStartEnd(startIndex, endIndex, length());
@@ -143,7 +136,6 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     return base.subSequence(startIndex - prefixLength, endIndex - prefixLength);
   }
 
-  @NotNull
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();

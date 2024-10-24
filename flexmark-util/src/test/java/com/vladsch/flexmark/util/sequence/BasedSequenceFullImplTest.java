@@ -11,11 +11,10 @@ import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class BasedSequenceFullImplTest {
-  private static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
+  private static BasedSequence basedSequenceOf(CharSequence chars) {
     return BasedSequence.of(
         BasedOptionsSequence.of(chars, BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES));
   }

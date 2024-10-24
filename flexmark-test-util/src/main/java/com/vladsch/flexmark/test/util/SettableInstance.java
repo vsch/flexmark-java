@@ -4,8 +4,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import java.util.Collection;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Instance based on aggregated options used for spec test settings which may contain other such
@@ -20,24 +18,23 @@ import org.jetbrains.annotations.Nullable;
  * @param <T> type for the setting
  */
 public final class SettableInstance<T> {
-  private final @NotNull DataKey<Consumer<T>> myConsumerKey;
-  private final @Nullable Collection<SettableExtractedInstance<T, ?>> myExtractedInstanceSetters;
+  private final DataKey<Consumer<T>> myConsumerKey;
+  private final Collection<SettableExtractedInstance<T, ?>> myExtractedInstanceSetters;
 
   public SettableInstance(
-      @NotNull DataKey<Consumer<T>> consumerKey,
-      @NotNull Collection<SettableExtractedInstance<T, ?>> extractedInstanceSetters) {
+      DataKey<Consumer<T>> consumerKey,
+      Collection<SettableExtractedInstance<T, ?>> extractedInstanceSetters) {
     myConsumerKey = consumerKey;
     myExtractedInstanceSetters =
         extractedInstanceSetters.isEmpty() ? null : extractedInstanceSetters;
   }
 
-  public SettableInstance(@NotNull DataKey<Consumer<T>> consumerKey) {
+  public SettableInstance(DataKey<Consumer<T>> consumerKey) {
     myConsumerKey = consumerKey;
     myExtractedInstanceSetters = null;
   }
 
-  @NotNull
-  public T setInstanceData(@NotNull T instance, @Nullable DataHolder dataHolder) {
+  public T setInstanceData(T instance, DataHolder dataHolder) {
     if (dataHolder != null) {
       if (dataHolder.contains(myConsumerKey)) {
         myConsumerKey.get(dataHolder).accept(instance);
@@ -54,7 +51,7 @@ public final class SettableInstance<T> {
   }
 
   public DataHolder aggregateActions(
-      @NotNull DataHolder dataHolder, @Nullable DataHolder other, @Nullable DataHolder overrides) {
+      DataHolder dataHolder, DataHolder other, DataHolder overrides) {
     DataHolder results = dataHolder;
 
     if (other != null

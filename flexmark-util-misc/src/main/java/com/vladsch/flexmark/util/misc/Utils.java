@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Collection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Utils {
   // TODO: rewrite these to use BasedSequence implementation
@@ -226,7 +224,7 @@ public class Utils {
     return Math.min(Math.max(receiver, minBound), maxBound);
   }
 
-  public static int compare(@Nullable Number n1, @Nullable Number n2) {
+  public static int compare(Number n1, Number n2) {
     if (n1 == null && n2 == null) {
       return 0;
     } else if (n1 == null) {
@@ -265,8 +263,7 @@ public class Utils {
     return sb.toString();
   }
 
-  @NotNull
-  public static String escapeJavaString(@Nullable CharSequence param) {
+  public static String escapeJavaString(CharSequence param) {
     if (param == null) {
       return "null";
     }
@@ -275,7 +272,7 @@ public class Utils {
     return out.toString();
   }
 
-  public static void escapeJavaString(@NotNull StringBuilder out, @NotNull CharSequence chars) {
+  public static void escapeJavaString(StringBuilder out, CharSequence chars) {
     int iMax = chars.length();
     for (int i = 0; i < iMax; i++) {
       char c = chars.charAt(i);

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.io.InputStream;
-import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
 
 public class DumpSpecReader extends SpecReader {
@@ -14,9 +13,9 @@ public class DumpSpecReader extends SpecReader {
   private final SpecExampleProcessor testCase;
 
   public DumpSpecReader(
-      @NotNull InputStream stream,
-      @NotNull SpecExampleProcessor testCase,
-      @NotNull ResourceLocation location,
+      InputStream stream,
+      SpecExampleProcessor testCase,
+      ResourceLocation location,
       boolean compoundSections) {
     super(stream, location, compoundSections);
     this.testCase = testCase;
@@ -37,7 +36,7 @@ public class DumpSpecReader extends SpecReader {
   }
 
   @Override
-  protected void addSpecExample(@NotNull SpecExample specExample) {
+  protected void addSpecExample(SpecExample specExample) {
     // not needed but to keep it consistent with SpecReader
     super.addSpecExample(specExample);
 

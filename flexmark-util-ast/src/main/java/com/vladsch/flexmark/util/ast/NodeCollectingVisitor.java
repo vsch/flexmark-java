@@ -8,19 +8,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
 
 public class NodeCollectingVisitor {
   private static final Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
   private static final Class<?>[] EMPTY_CLASSES = new Class<?>[0];
 
-  private final @NotNull HashMap<Class<?>, List<Class<?>>> subClassMap;
-  private final @NotNull HashSet<Class<?>> included;
-  private final @NotNull HashSet<Class<?>> excluded;
-  private final @NotNull ClassificationBag<Class<?>, Node> nodes;
-  private final @NotNull Class<?>[] classes;
+  private final HashMap<Class<?>, List<Class<?>>> subClassMap;
+  private final HashSet<Class<?>> included;
+  private final HashSet<Class<?>> excluded;
+  private final ClassificationBag<Class<?>, Node> nodes;
+  private final Class<?>[] classes;
 
-  public NodeCollectingVisitor(@NotNull Set<Class<?>> classes) {
+  public NodeCollectingVisitor(Set<Class<?>> classes) {
     this.classes = classes.toArray(EMPTY_CLASSES);
 
     subClassMap = new HashMap<>();
@@ -37,7 +36,7 @@ public class NodeCollectingVisitor {
     nodes = new ClassificationBag<>(NODE_CLASSIFIER);
   }
 
-  public void collect(@NotNull Node node) {
+  public void collect(Node node) {
     visit(node);
   }
 
@@ -45,7 +44,7 @@ public class NodeCollectingVisitor {
     return new SubClassingBag<>(nodes, subClassMap);
   }
 
-  private void visit(@NotNull Node node) {
+  private void visit(Node node) {
     Class<?> nodeClass = node.getClass();
     if (included.contains(nodeClass)) {
       nodes.add(node);
@@ -77,7 +76,7 @@ public class NodeCollectingVisitor {
     visitChildren(node);
   }
 
-  private void visitChildren(@NotNull Node parent) {
+  private void visitChildren(Node parent) {
     Node node = parent.getFirstChild();
     while (node != null) {
       // A subclass of this visitor might modify the node, resulting in getNext returning a

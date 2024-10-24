@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitorBase;
-import org.jetbrains.annotations.NotNull;
 
 public class AstCollectingVisitor extends NodeVisitorBase {
   public static final String EOL = "\n";
@@ -46,7 +45,7 @@ public class AstCollectingVisitor extends NodeVisitorBase {
   }
 
   @Override
-  protected void visit(@NotNull Node node) {
+  protected void visit(Node node) {
     appendIndent();
     node.astString(output, true);
     output.append(EOL);

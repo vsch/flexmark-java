@@ -3,8 +3,6 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.RichSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** A CharSequence that maps characters according to CharMapper */
 class MappedRichSequence extends IRichSequenceBase<RichSequence>
@@ -19,13 +17,11 @@ class MappedRichSequence extends IRichSequenceBase<RichSequence>
     this.mapper = mapper;
   }
 
-  @NotNull
   @Override
   public CharMapper getCharMapper() {
     return mapper;
   }
 
-  @NotNull
   @Override
   public RichSequence getCharSequence() {
     return base;
@@ -45,21 +41,18 @@ class MappedRichSequence extends IRichSequenceBase<RichSequence>
     return base.length();
   }
 
-  @NotNull
   @Override
   public RichSequence[] emptyArray() {
     return base.emptyArray();
   }
 
-  @NotNull
   @Override
   public RichSequence nullSequence() {
     return base.nullSequence();
   }
 
-  @NotNull
   @Override
-  public RichSequence sequenceOf(@Nullable CharSequence baseSeq, int startIndex, int endIndex) {
+  public RichSequence sequenceOf(CharSequence baseSeq, int startIndex, int endIndex) {
     if (baseSeq instanceof MappedRichSequence) {
       return startIndex == 0 && endIndex == baseSeq.length()
           ? (RichSequence) baseSeq
@@ -70,11 +63,10 @@ class MappedRichSequence extends IRichSequenceBase<RichSequence>
   }
 
   @Override
-  public <B extends ISequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
+  public <B extends ISequenceBuilder<B, RichSequence>> B getBuilder() {
     return (B) RichSequenceBuilder.emptyBuilder();
   }
 
-  @NotNull
   @Override
   public RichSequence toMapped(CharMapper mapper) {
     return mapper == CharMapper.IDENTITY
@@ -82,7 +74,6 @@ class MappedRichSequence extends IRichSequenceBase<RichSequence>
         : new MappedRichSequence(this.mapper.andThen(mapper), base);
   }
 
-  @NotNull
   @Override
   public RichSequence subSequence(int startIndex, int endIndex) {
     RichSequence baseSequence = base.subSequence(startIndex, endIndex);

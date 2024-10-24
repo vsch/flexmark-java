@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboStrikethroughSubscriptSpecTest extends RendererSpecTest {
@@ -40,7 +39,7 @@ public class ComboStrikethroughSubscriptSpecTest extends RendererSpecTest {
             .set(StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE, "</span>"));
   }
 
-  public ComboStrikethroughSubscriptSpecTest(@NotNull SpecExample example) {
+  public ComboStrikethroughSubscriptSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

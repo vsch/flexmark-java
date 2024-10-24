@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import java.util.Collections;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,9 +64,8 @@ public class HtmlEmbeddedAttributeTest {
         addNodes(Paragraph.class);
       }
 
-      @NotNull
       @Override
-      public NodePostProcessor apply(@NotNull Document document) {
+      public NodePostProcessor apply(Document document) {
         return new TestNodePostProcessor();
       }
     }
@@ -77,7 +75,7 @@ public class HtmlEmbeddedAttributeTest {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
       if (node instanceof Paragraph) { // [foo](http://example.com)
         MutableAttributes attributes = new MutableAttributes();
         attributes.addValue("class", "caption");
@@ -96,13 +94,12 @@ public class HtmlEmbeddedAttributeTest {
     TestNodePostProcessorExtension() {}
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
       // add any configuration settings to options you want to apply to everything, here
     }
 
     @Override
-    public void extend(
-        @NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
       htmlRendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
     }
 

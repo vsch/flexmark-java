@@ -90,15 +90,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class CoreNodeFormatter
     extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
   public static class Factory implements NodeFormatterFactory {
-    @NotNull
+
     @Override
-    public NodeFormatter create(@NotNull DataHolder options) {
+    public NodeFormatter create(DataHolder options) {
       return new CoreNodeFormatter(options);
     }
   }
@@ -127,7 +125,6 @@ public class CoreNodeFormatter
     return '>';
   }
 
-  @Nullable
   @Override
   public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
     return new HashSet<>(
@@ -172,7 +169,6 @@ public class CoreNodeFormatter
             new NodeFormattingHandler<>(ThematicBreak.class, CoreNodeFormatter.this::render)));
   }
 
-  @Nullable
   @Override
   public Set<Class<?>> getNodeClasses() {
     if (formatterOptions.referencePlacement.isNoChange()
@@ -280,10 +276,10 @@ public class CoreNodeFormatter
 
   @Override
   public void renderDocument(
-      @NotNull NodeFormatterContext context,
-      @NotNull MarkdownWriter markdown,
-      @NotNull Document document,
-      @NotNull FormattingPhase phase) {
+      NodeFormatterContext context,
+      MarkdownWriter markdown,
+      Document document,
+      FormattingPhase phase) {
     super.renderDocument(context, markdown, document, phase);
 
     attributeUniquificationIdMap =

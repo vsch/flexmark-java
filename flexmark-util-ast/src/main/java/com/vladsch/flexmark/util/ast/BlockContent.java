@@ -4,14 +4,13 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 public class BlockContent {
   // list of line text
   private final List<BasedSequence> lines = new ArrayList<>();
   private final List<Integer> lineIndents = new ArrayList<>();
 
-  public @NotNull BasedSequence getSpanningChars() {
+  public BasedSequence getSpanningChars() {
     return !lines.isEmpty()
         ? lines
             .get(0)
@@ -20,11 +19,11 @@ public class BlockContent {
         : BasedSequence.NULL;
   }
 
-  public @NotNull List<BasedSequence> getLines() {
+  public List<BasedSequence> getLines() {
     return lines;
   }
 
-  public @NotNull List<Integer> getLineIndents() {
+  public List<Integer> getLineIndents() {
     return lineIndents;
   }
 
@@ -52,24 +51,24 @@ public class BlockContent {
         : -1;
   }
 
-  public void add(@NotNull BasedSequence lineWithEOL, int lineIndent) {
+  public void add(BasedSequence lineWithEOL, int lineIndent) {
     lines.add(lineWithEOL);
     lineIndents.add(lineIndent);
   }
 
-  public void addAll(@NotNull List<BasedSequence> lines, List<Integer> lineIndents) {
+  public void addAll(List<BasedSequence> lines, List<Integer> lineIndents) {
     this.lines.addAll(lines);
     this.lineIndents.addAll(lineIndents);
   }
 
-  public @NotNull BasedSequence getContents() {
+  public BasedSequence getContents() {
     if (lines.isEmpty()) {
       return BasedSequence.NULL;
     }
     return getContents(0, lines.size());
   }
 
-  private @NotNull BasedSequence getContents(int startLine, int endLine) {
+  private BasedSequence getContents(int startLine, int endLine) {
     if (lines.isEmpty()) {
       return BasedSequence.NULL;
     }
@@ -90,7 +89,7 @@ public class BlockContent {
     return SegmentedSequence.create(lines.get(0), lines.subList(startLine, endLine));
   }
 
-  public @NotNull String getString() {
+  public String getString() {
     if (lines.isEmpty()) {
       return "";
     }

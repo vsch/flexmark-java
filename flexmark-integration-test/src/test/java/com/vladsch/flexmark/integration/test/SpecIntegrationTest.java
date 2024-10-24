@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -38,13 +37,12 @@ public class SpecIntegrationTest extends RendererSpecTest {
 
   private static final Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
 
-  public SpecIntegrationTest(@NotNull SpecExample example) {
+  public SpecIntegrationTest(SpecExample example) {
     super(example, null, OPTIONS);
   }
 
   @Override
-  @NotNull
-  public SpecExample checkExample(@NotNull SpecExample example) {
+  public SpecExample checkExample(SpecExample example) {
     String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());
     if (expectedHtml != null) {
       return example.withHtml(expectedHtml);

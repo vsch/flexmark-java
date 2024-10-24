@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class CoreRendererSpecTest extends RendererSpecTest {
   private static final DataHolder OPTIONS =
@@ -288,9 +286,9 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
   }
 
   public CoreRendererSpecTest(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     super(
         example,
         ComboSpecTestCase.optionsMaps(optionsMap, optionMap),

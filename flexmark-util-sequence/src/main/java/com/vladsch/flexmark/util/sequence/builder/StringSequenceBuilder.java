@@ -1,14 +1,11 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 /**
  * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface
  */
 public final class StringSequenceBuilder
     implements ISequenceBuilder<StringSequenceBuilder, CharSequence> {
-  @NotNull
+
   public static StringSequenceBuilder emptyBuilder() {
     return new StringSequenceBuilder();
   }
@@ -20,7 +17,6 @@ public final class StringSequenceBuilder
   }
 
   @Override
-  @NotNull
   public StringSequenceBuilder getBuilder() {
     return new StringSequenceBuilder();
   }
@@ -30,36 +26,31 @@ public final class StringSequenceBuilder
     return segments.charAt(index);
   }
 
-  @NotNull
   @Override
-  public StringSequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
+  public StringSequenceBuilder append(CharSequence chars, int startIndex, int endIndex) {
     if (chars != null && chars.length() > 0 && startIndex < endIndex) {
       segments.append(chars, startIndex, endIndex);
     }
     return this;
   }
 
-  @NotNull
   @Override
   public StringSequenceBuilder append(char c) {
     segments.append(c);
     return this;
   }
 
-  @NotNull
   @Override
   public StringSequenceBuilder append(char c, int count) {
     while (count-- > 0) segments.append(c);
     return this;
   }
 
-  @NotNull
   @Override
   public CharSequence getSingleBasedSequence() {
     return toSequence();
   }
 
-  @NotNull
   @Override
   public CharSequence toSequence() {
     return segments;

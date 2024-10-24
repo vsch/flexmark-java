@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Paired;
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 
 class CollectionHostValidator<T> {
@@ -129,13 +128,13 @@ class CollectionHostValidator<T> {
   private CollectionHost<T> getHost(String host) {
     return new CollectionHost<>() {
       @Override
-      public void adding(int index, @Nullable T s, @Nullable Object v) {
+      public void adding(int index, T s, Object v) {
         validate(hostName(host) + "adding", index, s, v);
         modificationCount++;
       }
 
       @Override
-      public Object removing(int index, @Nullable T s) {
+      public Object removing(int index, T s) {
         validate(hostName(host) + "removing", index, s);
         modificationCount++;
         return null;

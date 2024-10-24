@@ -13,13 +13,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public final class ComboIssuesSpecTest extends CoreRendererSpecTest {
   private static final String SPEC_RESOURCE = "/core_issues_ast_spec.md";
-  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
   private static final DataHolder OPTIONS =
       new MutableDataSet()
@@ -72,7 +70,7 @@ public final class ComboIssuesSpecTest extends CoreRendererSpecTest {
             .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false));
   }
 
-  public ComboIssuesSpecTest(@NotNull SpecExample example) {
+  public ComboIssuesSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

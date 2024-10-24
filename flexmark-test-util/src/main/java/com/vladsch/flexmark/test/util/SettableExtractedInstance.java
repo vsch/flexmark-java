@@ -4,8 +4,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Instance based on aggregated options used for spec test settings which itself is part of a
@@ -21,24 +19,22 @@ import org.jetbrains.annotations.Nullable;
  * @param <S> type for the setting
  */
 public final class SettableExtractedInstance<T, S> {
-  private final @NotNull DataKey<Consumer<S>> myConsumerKey;
-  private final @NotNull Function<T, S> myDataExtractor;
+  private final DataKey<Consumer<S>> myConsumerKey;
+  private final Function<T, S> myDataExtractor;
 
-  public SettableExtractedInstance(
-      @NotNull DataKey<Consumer<S>> consumerKey, @NotNull Function<T, S> dataExtractor) {
+  public SettableExtractedInstance(DataKey<Consumer<S>> consumerKey, Function<T, S> dataExtractor) {
     myConsumerKey = consumerKey;
     myDataExtractor = dataExtractor;
   }
 
-  public void aggregate(@NotNull T instance, @NotNull DataHolder dataHolder) {
+  public void aggregate(T instance, DataHolder dataHolder) {
     if (dataHolder.contains(myConsumerKey)) {
       myConsumerKey.get(dataHolder).accept(myDataExtractor.apply(instance));
     }
   }
 
-  @NotNull
   public DataHolder aggregateActions(
-      @NotNull DataHolder dataHolder, @Nullable DataHolder other, @Nullable DataHolder overrides) {
+      DataHolder dataHolder, DataHolder other, DataHolder overrides) {
     if (other != null
         && other.contains(myConsumerKey)
         && overrides != null

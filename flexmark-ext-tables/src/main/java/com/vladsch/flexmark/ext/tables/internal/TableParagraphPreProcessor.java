@@ -32,7 +32,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.Nullable;
 
 public class TableParagraphPreProcessor implements ParagraphPreProcessor {
   private static BitSet pipeCharacters = new BitSet();
@@ -109,7 +108,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return false;
       }
 
-      @Nullable
       @Override
       public Set<Class<?>> getAfterDependents() {
         Set<Class<?>> set = new HashSet<>();
@@ -117,7 +115,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return set;
       }
 
-      @Nullable
       @Override
       public Set<Class<?>> getBeforeDependents() {
         return null;

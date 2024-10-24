@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.collection.iteration;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
 
 public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
   private final Indexed<R> items;
@@ -12,11 +11,11 @@ public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
   private int last;
   private int modificationCount;
 
-  public IndexedItemIterator(@NotNull Indexed<R> items) {
+  public IndexedItemIterator(Indexed<R> items) {
     this(items, false);
   }
 
-  IndexedItemIterator(@NotNull Indexed<R> items, boolean isReversed) {
+  IndexedItemIterator(Indexed<R> items, boolean isReversed) {
     this.items = items;
     reversed = isReversed;
     next = reversed ? items.size() - 1 : 0;
@@ -39,7 +38,7 @@ public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
   }
 
   @Override
-  public @NotNull R next() {
+  public R next() {
     if (modificationCount != items.modificationCount()) {
       throw new ConcurrentModificationException();
     }
@@ -77,7 +76,7 @@ public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
   }
 
   @Override
-  public void forEachRemaining(@NotNull Consumer<? super R> consumer) {
+  public void forEachRemaining(Consumer<? super R> consumer) {
     while (hasNext()) {
       consumer.accept(next());
     }

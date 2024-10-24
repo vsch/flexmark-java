@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
@@ -18,7 +17,7 @@ public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
               false) // Set to true to get stdout printout of intermediate wrapping information
           .toImmutable();
 
-  public ComboCoreWrappingSpecTest(@NotNull SpecExample example) {
+  public ComboCoreWrappingSpecTest(SpecExample example) {
     super(example, null, OPTIONS);
   }
 

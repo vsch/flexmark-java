@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class MarkdownParagraph {
   private static final char MARKDOWN_START_LINE_CHAR =
@@ -32,9 +30,9 @@ public class MarkdownParagraph {
   private static final List<SpecialLeadInHandler> EMPTY_LEAD_IN_HANDLERS = Collections.emptyList();
   private static final List<TrackedOffset> EMPTY_OFFSET_LIST = Collections.emptyList();
 
-  private final @NotNull BasedSequence baseSeq;
-  private final @NotNull BasedSequence altSeq;
-  private final @NotNull CharWidthProvider charWidthProvider;
+  private final BasedSequence baseSeq;
+  private final BasedSequence altSeq;
+  private final CharWidthProvider charWidthProvider;
 
   private BasedSequence firstIndent = BasedSequence.NULL;
   private BasedSequence indent = BasedSequence.NULL;
@@ -45,21 +43,18 @@ public class MarkdownParagraph {
   private boolean unEscapeSpecialLeadInChars = true;
   private boolean escapeSpecialLeadInChars = true;
   private boolean restoreTrackedSpaces = false;
-  @Nullable private DataHolder options = null;
+  private DataHolder options = null;
 
-  @NotNull private List<? extends SpecialLeadInHandler> leadInHandlers = EMPTY_LEAD_IN_HANDLERS;
+  private List<? extends SpecialLeadInHandler> leadInHandlers = EMPTY_LEAD_IN_HANDLERS;
   private List<TrackedOffset> trackedOffsets = EMPTY_OFFSET_LIST;
   private boolean trackedOffsetsSorted = true;
 
-  public MarkdownParagraph(
-      @NotNull BasedSequence chars, @NotNull CharWidthProvider charWidthProvider) {
+  public MarkdownParagraph(BasedSequence chars, CharWidthProvider charWidthProvider) {
     this(chars, chars, charWidthProvider);
   }
 
   public MarkdownParagraph(
-      @NotNull BasedSequence chars,
-      @NotNull BasedSequence altChars,
-      @NotNull CharWidthProvider charWidthProvider) {
+      BasedSequence chars, BasedSequence altChars, CharWidthProvider charWidthProvider) {
     baseSeq = chars;
     this.altSeq = altChars;
     this.charWidthProvider = charWidthProvider;
@@ -74,7 +69,6 @@ public class MarkdownParagraph {
     return wrapping.wrapText();
   }
 
-  @NotNull
   private Range getContinuationStartSplice(int offset, boolean afterSpace, boolean afterDelete) {
     BasedSequence baseSequence = altSeq.getBaseSequence();
     if (afterSpace && afterDelete) {
@@ -85,7 +79,7 @@ public class MarkdownParagraph {
         int previousNonBlank = baseSequence.lastIndexOfAnyNot(SPACE_TAB_NBSP_EOL, offset - 1);
         if (previousNonBlank < startOfLine) {
           // delete range between last non-blank and offset index
-          @NotNull OffsetInfo offsetInfo = preFormatTracker.getOffsetInfo(offset, true);
+          OffsetInfo offsetInfo = preFormatTracker.getOffsetInfo(offset, true);
           int offsetIndex = offsetInfo.endIndex;
           int previousNonBlankIndex = altSeq.lastIndexOfAnyNot(SPACE_TAB_NBSP_EOL, offsetIndex - 1);
           return Range.of(previousNonBlankIndex + 1, offsetIndex);
@@ -95,9 +89,7 @@ public class MarkdownParagraph {
     return Range.NULL;
   }
 
-  @NotNull
-  private BasedSequence resolveTrackedOffsets(
-      @NotNull BasedSequence unwrapped, @NotNull BasedSequence wrapped) {
+  private BasedSequence resolveTrackedOffsets(BasedSequence unwrapped, BasedSequence wrapped) {
     // Now we map the tracked offsets to indexes in the resulting text
     BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
     int iMax = trackedOffsets.size();
@@ -347,7 +339,7 @@ public class MarkdownParagraph {
     return wrapped;
   }
 
-  public void addTrackedOffset(@NotNull TrackedOffset trackedOffset) {
+  public void addTrackedOffset(TrackedOffset trackedOffset) {
     if (trackedOffsets == EMPTY_OFFSET_LIST) trackedOffsets = new ArrayList<>();
     trackedOffsets.removeIf(it -> it.getOffset() == trackedOffset.getOffset());
     trackedOffsets.add(trackedOffset);
@@ -366,21 +358,19 @@ public class MarkdownParagraph {
     return trackedOffsets;
   }
 
-  @NotNull
   public List<? extends SpecialLeadInHandler> getLeadInHandlers() {
     return leadInHandlers;
   }
 
-  public void setLeadInHandlers(@NotNull List<? extends SpecialLeadInHandler> leadInHandlers) {
+  public void setLeadInHandlers(List<? extends SpecialLeadInHandler> leadInHandlers) {
     this.leadInHandlers = leadInHandlers;
   }
 
-  @Nullable
   public DataHolder getOptions() {
     return options;
   }
 
-  public void setOptions(@Nullable DataHolder options) {
+  public void setOptions(DataHolder options) {
     this.options = options;
   }
 
@@ -392,7 +382,6 @@ public class MarkdownParagraph {
     this.restoreTrackedSpaces = restoreTrackedSpaces;
   }
 
-  @NotNull
   public BasedSequence getChars() {
     return baseSeq;
   }
@@ -466,7 +455,6 @@ public class MarkdownParagraph {
     this.keepSoftLineBreaks = keepLineBreaks;
   }
 
-  @NotNull
   public CharWidthProvider getCharWidthProvider() {
     return charWidthProvider;
   }
@@ -480,11 +468,11 @@ public class MarkdownParagraph {
   }
 
   private static class Token {
-    private final @NotNull TextType type;
-    private final @NotNull Range range;
+    private final TextType type;
+    private final Range range;
     private final boolean isFirstWord;
 
-    private Token(@NotNull TextType type, @NotNull Range range, boolean isFirstWord) {
+    private Token(TextType type, Range range, boolean isFirstWord) {
       this.type = type;
       this.range = range;
       this.isFirstWord = isFirstWord;
@@ -499,24 +487,21 @@ public class MarkdownParagraph {
       return range.basedSubSequence(charSequence);
     }
 
-    @NotNull
-    public static Token of(@NotNull TextType type, int start, int end) {
+    public static Token of(TextType type, int start, int end) {
       return new Token(type, Range.of(start, end), false);
     }
 
-    @NotNull
-    public static Token of(@NotNull TextType type, @NotNull Range range, boolean isFirstWord) {
+    public static Token of(TextType type, Range range, boolean isFirstWord) {
       return new Token(type, range, isFirstWord);
     }
 
-    @NotNull
-    public static Token of(@NotNull TextType type, int start, int end, boolean isFirstWord) {
+    public static Token of(TextType type, int start, int end, boolean isFirstWord) {
       return new Token(type, Range.of(start, end), isFirstWord);
     }
   }
 
   private class LeftAlignedWrapping {
-    private final @NotNull BasedSequence baseSeq;
+    private final BasedSequence baseSeq;
     private final SequenceBuilder result;
     private final TextTokenizer tokenizer;
     private int col = 0;
@@ -527,13 +512,12 @@ public class MarkdownParagraph {
     private final int nextWidth = width <= 0 ? Integer.MAX_VALUE : spaceWidth * width;
     private BasedSequence lastSpace = null;
 
-    @NotNull
     List<? extends SpecialLeadInHandler> leadInHandlers = MarkdownParagraph.this.leadInHandlers;
 
     boolean unEscapeSpecialLeadInChars = MarkdownParagraph.this.unEscapeSpecialLeadInChars;
     boolean escapeSpecialLeadInChars = MarkdownParagraph.this.escapeSpecialLeadInChars;
 
-    private LeftAlignedWrapping(@NotNull BasedSequence baseSeq) {
+    private LeftAlignedWrapping(BasedSequence baseSeq) {
       this.baseSeq = baseSeq;
       result = SequenceBuilder.emptyBuilder(baseSeq);
       tokenizer = new TextTokenizer(baseSeq);
@@ -615,7 +599,6 @@ public class MarkdownParagraph {
       addChars(sequence);
     }
 
-    @NotNull
     BasedSequence wrapText() {
       while (true) {
         final Token token = tokenizer.getToken();
@@ -716,9 +699,9 @@ public class MarkdownParagraph {
     private boolean isInWord = false;
     private boolean isFirstNonBlank = true;
     private int lastConsecutiveSpaces = 0;
-    private @Nullable Token token = null;
+    private Token token = null;
 
-    TextTokenizer(@NotNull CharSequence chars) {
+    TextTokenizer(CharSequence chars) {
       this.chars = chars;
       maxIndex = this.chars.length();
       reset();
@@ -734,7 +717,6 @@ public class MarkdownParagraph {
       next();
     }
 
-    @Nullable
     private Token getToken() {
       return token;
     }

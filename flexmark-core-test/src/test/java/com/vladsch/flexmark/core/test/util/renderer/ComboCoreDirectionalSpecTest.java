@@ -8,13 +8,11 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public final class ComboCoreDirectionalSpecTest extends CoreRendererSpecTest {
   private static final String SPEC_RESOURCE = "/ast_spec.md";
-  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(HtmlRenderer.INDENT_SIZE, 0)
@@ -23,7 +21,7 @@ public final class ComboCoreDirectionalSpecTest extends CoreRendererSpecTest {
           .set(TestUtils.NO_FILE_EOL, false)
           .toImmutable();
 
-  public ComboCoreDirectionalSpecTest(@NotNull SpecExample example) {
+  public ComboCoreDirectionalSpecTest(SpecExample example) {
     super(example, null, OPTIONS);
   }
 

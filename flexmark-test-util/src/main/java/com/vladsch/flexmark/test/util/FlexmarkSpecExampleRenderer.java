@@ -7,28 +7,23 @@ import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
-  private @Nullable Node myIncludedDocument = null;
-  private @Nullable Node myDocument = null;
-  private @NotNull IParse myParser;
-  private @NotNull IRender myRender;
+  private Node myIncludedDocument = null;
+  private Node myDocument = null;
+  private IParse myParser;
+  private IRender myRender;
 
   public FlexmarkSpecExampleRenderer(
-      @NotNull SpecExample example,
-      @Nullable DataHolder options,
-      @NotNull IParse parser,
-      @NotNull IRender render) {
+      SpecExample example, DataHolder options, IParse parser, IRender render) {
     this(example, options, parser, render, true);
   }
 
   public FlexmarkSpecExampleRenderer(
-      @NotNull SpecExample example,
-      @Nullable DataHolder options,
-      @NotNull IParse parser,
-      @NotNull IRender render,
+      SpecExample example,
+      DataHolder options,
+      IParse parser,
+      IRender render,
       boolean includeExampleCoord) {
     super(example, options, includeExampleCoord);
     myParser = parser;
@@ -36,7 +31,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
   }
 
   @Override
-  public void includeDocument(@NotNull String includedText) {
+  public void includeDocument(String includedText) {
     // flexmark parser specific
     myIncludedDocument = null;
 
@@ -47,7 +42,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     }
   }
 
-  @NotNull
   protected Node getIncludedDocument() {
     return myIncludedDocument;
   }
@@ -70,7 +64,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     }
   }
 
-  public @NotNull Node getDocument() {
+  public Node getDocument() {
     return myDocument;
   }
 
@@ -80,7 +74,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
    * @return HTML string, will be cached after document is finalized to allow for timing collection
    *     iterations,
    */
-  @NotNull
   @Override
   protected String renderHtml() {
     return getRenderer().render(myDocument);
@@ -92,26 +85,23 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
    * @return HTML string, will be cached after document is finalized to allow for timing collection
    *     iterations,
    */
-  @NotNull
   @Override
   protected String renderAst() {
     return TestUtils.ast(myDocument);
   }
 
-  @NotNull
   public final IParse getParser() {
     return myParser;
   }
 
-  public void setParser(@NotNull IParse parser) {
+  public void setParser(IParse parser) {
     myParser = parser;
   }
 
-  public void setRender(@NotNull IRender render) {
+  public void setRender(IRender render) {
     myRender = render;
   }
 
-  @NotNull
   public final IRender getRenderer() {
     return myRender;
   }

@@ -17,16 +17,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class OrderedSet<E> implements Set<E> {
-  private final @NotNull HashMap<E, Integer> keyMap;
-  @NotNull private final ArrayList<E> valueList;
-  @Nullable private final CollectionHost<E> host;
-  private @Nullable Indexed<E> indexedProxy;
-  private @Nullable Indexed<E> allowConcurrentModsIndexedProxy;
-  private final @NotNull BitSet validIndices;
+  private final HashMap<E, Integer> keyMap;
+  private final ArrayList<E> valueList;
+  private final CollectionHost<E> host;
+  private Indexed<E> indexedProxy;
+  private Indexed<E> allowConcurrentModsIndexedProxy;
+  private final BitSet validIndices;
   private int modificationCount;
 
   public OrderedSet() {
@@ -37,7 +35,7 @@ public class OrderedSet<E> implements Set<E> {
     this(capacity, null);
   }
 
-  OrderedSet(int capacity, @Nullable CollectionHost<E> host) {
+  OrderedSet(int capacity, CollectionHost<E> host) {
     this.keyMap = new HashMap<>(capacity);
     this.valueList = new ArrayList<>(capacity);
     this.validIndices = new BitSet();
@@ -47,7 +45,7 @@ public class OrderedSet<E> implements Set<E> {
     this.allowConcurrentModsIndexedProxy = null;
   }
 
-  public @NotNull BitSet indexBitSet(@NotNull Iterable<? extends E> items) {
+  public BitSet indexBitSet(Iterable<? extends E> items) {
     BitSet bitSet = new BitSet();
     for (E element : items) {
       int i = indexOf(element);
@@ -58,13 +56,11 @@ public class OrderedSet<E> implements Set<E> {
     return bitSet;
   }
 
-  public @NotNull BitSet keyDifferenceBitSet(
-      @NotNull Iterable<? extends Map.Entry<? extends E, ?>> items) {
+  public BitSet keyDifferenceBitSet(Iterable<? extends Map.Entry<? extends E, ?>> items) {
     return keyDifferenceBitSet(items.iterator());
   }
 
-  private @NotNull BitSet keyDifferenceBitSet(
-      @NotNull Iterator<? extends Map.Entry<? extends E, ?>> items) {
+  private BitSet keyDifferenceBitSet(Iterator<? extends Map.Entry<? extends E, ?>> items) {
     BitSet bitSet = new BitSet();
     int j = 0;
     while (items.hasNext()) {
@@ -111,7 +107,7 @@ public class OrderedSet<E> implements Set<E> {
     }
   }
 
-  public @NotNull Indexed<E> getIndexedProxy() {
+  public Indexed<E> getIndexedProxy() {
     if (indexedProxy != null) {
       return indexedProxy;
     }
@@ -119,7 +115,7 @@ public class OrderedSet<E> implements Set<E> {
     return indexedProxy;
   }
 
-  public @NotNull Indexed<E> getConcurrentModsIndexedProxy() {
+  public Indexed<E> getConcurrentModsIndexedProxy() {
     if (allowConcurrentModsIndexedProxy != null) {
       return allowConcurrentModsIndexedProxy;
     }
@@ -139,7 +135,7 @@ public class OrderedSet<E> implements Set<E> {
     return o == null ? nullValue : o;
   }
 
-  public int indexOf(@Nullable Object element) {
+  public int indexOf(Object element) {
     return ifNull(keyMap.get(element), -1);
   }
 
@@ -161,13 +157,11 @@ public class OrderedSet<E> implements Set<E> {
     }
   }
 
-  @Nullable
   E getValue(int index) {
     validateIndex(index);
     return valueList.get(index);
   }
 
-  @Nullable
   E getValueOrNull(int index) {
     return isValidIndex(index) ? valueList.get(index) : null;
   }
@@ -183,15 +177,15 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean contains(@Nullable Object o) {
+  public boolean contains(Object o) {
     return keyMap.containsKey(o);
   }
 
-  public @NotNull List<E> getValueList() {
+  public List<E> getValueList() {
     return valueList;
   }
 
-  boolean setValueAt(int index, @Nullable E value, @Nullable Object o) {
+  boolean setValueAt(int index, E value, Object o) {
     // if index is after end then we add nulls
     int indexOf = indexOf(value);
     if (indexOf != -1) {
@@ -249,46 +243,39 @@ public class OrderedSet<E> implements Set<E> {
     while (valueList.size() <= index) valueList.add(null);
   }
 
-  @NotNull
   ReversibleIterator<Integer> indexIterator() {
     return new BitSetIterator(validIndices);
   }
 
-  @NotNull
   ReversibleIterator<Integer> reversedIndexIterator() {
     return new BitSetIterator(validIndices, true);
   }
 
-  @NotNull
   ReversibleIterable<Integer> indexIterable() {
     return new BitSetIterable(validIndices);
   }
 
-  @NotNull
   ReversibleIterable<Integer> reversedIndexIterable() {
     return new BitSetIterable(validIndices, true);
   }
 
   @Override
-  public @NotNull ReversibleIndexedIterator<E> iterator() {
+  public ReversibleIndexedIterator<E> iterator() {
     return new IndexedIterator<>(getIndexedProxy(), indexIterator());
   }
 
-  @NotNull
   ReversibleIndexedIterator<E> reversedIterator() {
     return new IndexedIterator<>(getIndexedProxy(), reversedIndexIterator());
   }
 
-  private @NotNull ReversibleIterable<E> iterable() {
+  private ReversibleIterable<E> iterable() {
     return new IndexedIterable<>(getIndexedProxy(), indexIterable());
   }
 
-  @NotNull
   ReversibleIterable<E> reversedIterable() {
     return new IndexedIterable<>(getIndexedProxy(), reversedIndexIterable());
   }
 
-  @NotNull
   @Override
   public Object[] toArray() {
     Object[] objects = new Object[keyMap.size()];
@@ -303,9 +290,8 @@ public class OrderedSet<E> implements Set<E> {
     return objects;
   }
 
-  @NotNull
   @Override
-  public <T> T[] toArray(@NotNull T[] array) {
+  public <T> T[] toArray(T[] array) {
     Object[] objects = array;
 
     if (array.length < keyMap.size()) {
@@ -331,11 +317,11 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean add(@Nullable E e) {
+  public boolean add(E e) {
     return add(e, null);
   }
 
-  boolean add(@Nullable E e, @Nullable Object o) {
+  boolean add(E e, Object o) {
     if (keyMap.containsKey(e)) {
       return false;
     }
@@ -388,12 +374,11 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean remove(@Nullable Object o) {
+  public boolean remove(Object o) {
     return removeHosted(o) != null;
   }
 
-  @Nullable
-  Object removeHosted(@Nullable Object o) {
+  Object removeHosted(Object o) {
     Integer index = keyMap.get(o);
     if (index == null) {
       return null;
@@ -402,7 +387,7 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean containsAll(@NotNull Collection<?> collection) {
+  public boolean containsAll(Collection<?> collection) {
     for (Object o : collection) {
       if (!keyMap.containsKey(o)) {
         return false;
@@ -412,7 +397,7 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean addAll(@NotNull Collection<? extends E> collection) {
+  public boolean addAll(Collection<? extends E> collection) {
     boolean[] changed = {false};
     for (E e : collection) {
       if (add(e)) changed[0] = true;
@@ -421,7 +406,7 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean retainAll(@NotNull Collection<?> collection) {
+  public boolean retainAll(Collection<?> collection) {
     BitSet removeSet = new BitSet(valueList.size());
     removeSet.set(0, valueList.size());
     removeSet.and(validIndices);
@@ -452,7 +437,7 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean removeAll(@NotNull Collection<?> collection) {
+  public boolean removeAll(Collection<?> collection) {
     boolean changed = false;
     for (Object o : collection) {
       if (keyMap.containsKey(o)) {
@@ -506,7 +491,6 @@ public class OrderedSet<E> implements Set<E> {
     return result;
   }
 
-  @NotNull
   public BitSet getValidIndices() {
     return validIndices;
   }

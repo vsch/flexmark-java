@@ -10,12 +10,10 @@ import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
-  private @Nullable NodeRendererContext context;
-  private @Nullable AttributablePart useAttributes;
+  private NodeRendererContext context;
+  private AttributablePart useAttributes;
 
   public HtmlWriter(int indentSize, int formatOptions) {
     super(indentSize, formatOptions);
@@ -27,7 +25,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
   }
 
   HtmlWriter(
-      @Nullable Appendable appendable,
+      Appendable appendable,
       int indentSize,
       int formatOptions,
       boolean suppressOpenTagLine,
@@ -37,15 +35,15 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     setSuppressCloseTagLine(suppressCloseTagLine);
   }
 
-  void setContext(@NotNull NodeRendererContext context) {
+  void setContext(NodeRendererContext context) {
     this.context = context;
   }
 
-  public @NotNull NodeRendererContext getContext() {
+  public NodeRendererContext getContext() {
     return context;
   }
 
-  public @NotNull HtmlWriter srcPos(@NotNull BasedSequence sourceText) {
+  public HtmlWriter srcPos(BasedSequence sourceText) {
     if (sourceText.isNotNull()) {
       BasedSequence trimmed = sourceText.trimEOL();
       return srcPos(trimmed.getStartOffset(), trimmed.getEndOffset());
@@ -53,14 +51,14 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     return this;
   }
 
-  public @NotNull HtmlWriter srcPosWithEOL(@NotNull BasedSequence sourceText) {
+  public HtmlWriter srcPosWithEOL(BasedSequence sourceText) {
     if (sourceText.isNotNull()) {
       return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
     }
     return this;
   }
 
-  public @NotNull HtmlWriter srcPosWithTrailingEOL(@NotNull BasedSequence sourceText) {
+  public HtmlWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
     if (sourceText.isNotNull()) {
       int endOffset = sourceText.getEndOffset();
       BasedSequence base = sourceText.getBaseSequence();
@@ -85,7 +83,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     return this;
   }
 
-  public @NotNull HtmlWriter srcPos(int startOffset, int endOffset) {
+  public HtmlWriter srcPos(int startOffset, int endOffset) {
     if (startOffset <= endOffset
         && context != null
         && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
@@ -95,29 +93,27 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
   }
 
   @Override
-  @NotNull
   public HtmlWriter withAttr() {
     return withAttr(AttributablePart.NODE);
   }
 
-  public @NotNull HtmlWriter withAttr(@NotNull AttributablePart part) {
+  public HtmlWriter withAttr(AttributablePart part) {
     super.withAttr();
     useAttributes = part;
     return this;
   }
 
-  private @NotNull HtmlWriter withAttr(@NotNull LinkStatus status) {
+  private HtmlWriter withAttr(LinkStatus status) {
     attr(Attribute.LINK_STATUS_ATTR, status.getName());
     return withAttr(AttributablePart.LINK);
   }
 
-  public @NotNull HtmlWriter withAttr(@NotNull ResolvedLink resolvedLink) {
+  public HtmlWriter withAttr(ResolvedLink resolvedLink) {
     return withAttr(resolvedLink.getStatus());
   }
 
-  @NotNull
   @Override
-  public HtmlWriter tag(@NotNull CharSequence tagName, boolean voidElement) {
+  public HtmlWriter tag(CharSequence tagName, boolean voidElement) {
     if (useAttributes != null) {
       String attributeValue;
       final Attributes attributes;

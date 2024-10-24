@@ -1,12 +1,10 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class Image extends InlineLinkNode {
   private BasedSequence urlContent = BasedSequence.NULL;
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {
@@ -30,7 +28,7 @@ public class Image extends InlineLinkNode {
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
     segmentSpanChars(out, linkOpeningMarker, "linkOpen");
     delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");

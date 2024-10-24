@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 public final class Text extends Node implements TextContainer {
   public Text() {}
@@ -23,7 +22,6 @@ public final class Text extends Node implements TextContainer {
     super(BasedSequence.of(chars));
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return EMPTY_SEGMENTS;
@@ -45,14 +43,13 @@ public final class Text extends Node implements TextContainer {
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     astExtraChars(out);
     if (getChars() instanceof PrefixedSubSequence) {
       astChars(out, getChars(), "text");
     }
   }
 
-  @NotNull
   @Override
   protected String toStringAttributes() {
     return "text=" + getChars();

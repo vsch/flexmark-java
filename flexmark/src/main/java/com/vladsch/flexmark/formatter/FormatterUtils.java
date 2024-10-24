@@ -46,8 +46,6 @@ import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class FormatterUtils {
   private static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
@@ -68,7 +66,7 @@ public class FormatterUtils {
       BlockQuoteLike node,
       NodeFormatterContext context,
       BlockQuoteMarker blockQuoteMarkers,
-      @NotNull BasedSequence prefix) {
+      BasedSequence prefix) {
     String prefixChars = node.getOpeningMarker().toString();
     String usePrefix;
     boolean compactPrefix = false;
@@ -134,7 +132,6 @@ public class FormatterUtils {
     return chars;
   }
 
-  @NotNull
   public static String getActualAdditionalPrefix(
       BasedSequence contentChars, MarkdownWriter markdown) {
     String prefix;
@@ -145,7 +142,6 @@ public class FormatterUtils {
     return prefix;
   }
 
-  @NotNull
   private static String getAdditionalPrefix(BasedSequence fromChars, BasedSequence toChars) {
     String prefix;
     int parentPrefix = fromChars.getStartOffset();
@@ -297,7 +293,7 @@ public class FormatterUtils {
     renderLooseItemParagraph(node, context, markdown);
   }
 
-  private static boolean isFollowedByBlankLine(@Nullable Node node) {
+  private static boolean isFollowedByBlankLine(Node node) {
     while (node != null) {
       if (node.getNextAnyNot(
               HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class)
@@ -317,7 +313,7 @@ public class FormatterUtils {
     return false;
   }
 
-  private static boolean isNotLastItem(@Nullable Node node) {
+  private static boolean isNotLastItem(Node node) {
     while (node != null && !(node instanceof Document)) {
       if (node.getNextAnyNot(
               BlankLine.class,
@@ -332,7 +328,7 @@ public class FormatterUtils {
     return false;
   }
 
-  public static boolean isLastOfItem(@Nullable Node node) {
+  public static boolean isLastOfItem(Node node) {
     return node != null
         && node.getNextAnyNot(
                 BlankLine.class,
@@ -711,7 +707,7 @@ public class FormatterUtils {
           for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
             if (trackedOffset.isResolved()) {
               int offsetIndex = trackedOffset.getIndex();
-              @NotNull
+
               Pair<Integer, Integer> lineColumn = wrappedText.lineColumnAtIndex(offsetIndex);
               int trackedLine = lineColumn.getFirst();
               LineInfo lineInfo = markdown.getLineInfo(startLine + trackedLine);

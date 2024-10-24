@@ -7,21 +7,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 abstract class NodePostProcessorFactory implements PostProcessorFactory {
   private final Map<Class<?>, Set<Class<?>>> nodeMap = new HashMap<>();
 
   NodePostProcessorFactory() {}
 
-  @Nullable
   @Override
   public Set<Class<?>> getAfterDependents() {
     return null;
   }
 
-  @Nullable
   @Override
   public Set<Class<?>> getBeforeDependents() {
     return null;
@@ -43,7 +39,6 @@ abstract class NodePostProcessorFactory implements PostProcessorFactory {
     return nodeMap;
   }
 
-  @NotNull
   @Override
-  public abstract NodePostProcessor apply(@NotNull Document document);
+  public abstract NodePostProcessor apply(Document document);
 }

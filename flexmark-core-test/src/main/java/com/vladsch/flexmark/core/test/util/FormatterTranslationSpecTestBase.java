@@ -26,8 +26,6 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase {
   static final boolean SKIP_IGNORED_TESTS = true;
@@ -317,25 +315,25 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
                         params, FormatterTranslationSpecTestBase::indentOption)));
   }
 
-  static DataHolder firstIndentOption(@Nullable String params) {
+  static DataHolder firstIndentOption(String params) {
     String value = params != null ? params : "";
     return new MutableDataSet().set(Formatter.DOCUMENT_FIRST_PREFIX, value);
   }
 
-  static DataHolder indentOption(@Nullable String params) {
+  static DataHolder indentOption(String params) {
     String value = params != null ? params : "";
     return new MutableDataSet().set(Formatter.DOCUMENT_PREFIX, value);
   }
 
-  static DataHolder marginOption(@Nullable Integer params) {
+  static DataHolder marginOption(Integer params) {
     int value = params != null ? params : -1;
     return new MutableDataSet().set(Formatter.RIGHT_MARGIN, value);
   }
 
   protected FormatterTranslationSpecTestBase(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     super(
         example,
         ComboSpecTestCase.optionsMaps(optionsMap, optionMap),

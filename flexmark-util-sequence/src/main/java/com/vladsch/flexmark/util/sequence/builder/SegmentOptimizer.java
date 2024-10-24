@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
 import java.util.function.BiFunction;
-import org.jetbrains.annotations.NotNull;
 
 interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Object[]> {
   /**
@@ -16,5 +15,5 @@ interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Object[]> 
    *     Range with -ve start/end or -ve span are skipped CharSequence with 0 length skipped
    */
   @Override
-  Object[] apply(@NotNull CharSequence chars, Object[] objects);
+  Object[] apply(CharSequence chars, Object[] objects);
 }

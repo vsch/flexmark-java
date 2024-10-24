@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.sequence.builder;
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 
 import com.vladsch.flexmark.util.sequence.Range;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Representation of a segment part in a segment list for a sequence it is a Range, either in the
@@ -96,7 +95,6 @@ public class Seg {
     return !(isBase() || isText());
   }
 
-  @NotNull
   public Range getRange() {
     return Range.of(start, end);
   }
@@ -112,7 +110,7 @@ public class Seg {
         : isText() ? (start & MAX_TEXT_OFFSET) - (end & MAX_TEXT_OFFSET) : 0;
   }
 
-  public String toString(@NotNull CharSequence allText) {
+  public String toString(CharSequence allText) {
     if (this.isNull()) {
       return "NULL";
     } else if (isBase()) {
@@ -161,7 +159,6 @@ public class Seg {
     }
   }
 
-  @NotNull
   public static Seg segOf(int startOffset, int endOffset) {
     return startOffset == 0 && endOffset == 0 ? ANCHOR_0 : new Seg(startOffset, endOffset);
   }
@@ -174,7 +171,6 @@ public class Seg {
     return -(isRepeatedText ? startOffset | F_TEXT_OPTION : startOffset) - 1;
   }
 
-  @NotNull
   public static Seg textOf(
       int startOffset, int endOffset, boolean isFirst256, boolean isRepeatedText) {
     return new Seg(getTextStart(startOffset, isFirst256), getTextEnd(endOffset, isRepeatedText));

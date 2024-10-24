@@ -10,8 +10,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.concurrent.TimeUnit;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Stopwatch;
@@ -24,15 +22,14 @@ abstract class PathologicalRenderingTestCase extends RenderingTestCase {
     options = new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, spcInLinkUrls);
   }
 
-  @Nullable
   @Override
-  public final DataHolder options(@NotNull String option) {
+  public final DataHolder options(String option) {
     return null;
   }
 
   @Override
-  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public final SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combinedOptions = DataSet.aggregate(options, exampleOptions);
     return new FlexmarkSpecExampleRenderer(
         example,

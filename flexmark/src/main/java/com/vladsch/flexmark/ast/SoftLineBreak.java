@@ -7,11 +7,10 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 public class SoftLineBreak extends Node
     implements DoNotAttributeDecorate, DoNotTrim, TextContainer {
-  @NotNull
+
   @Override
   public BasedSequence[] getSegments() {
     return EMPTY_SEGMENTS;

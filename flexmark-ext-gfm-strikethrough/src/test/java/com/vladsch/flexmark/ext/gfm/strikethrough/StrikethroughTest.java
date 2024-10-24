@@ -14,8 +14,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.Collections;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 public class StrikethroughTest extends RenderingTestCase {
@@ -24,18 +22,18 @@ public class StrikethroughTest extends RenderingTestCase {
           .set(TestUtils.NO_FILE_EOL, false)
           .set(Parser.EXTENSIONS, Collections.singleton(StrikethroughExtension.create()))
           .toImmutable();
-  private static final @NotNull Parser PARSER = Parser.builder(OPTIONS).build();
-  private static final @NotNull HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+  private static final Parser PARSER = Parser.builder(OPTIONS).build();
+  private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
   @Override
-  public @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combinedOptions = DataSet.aggregate(OPTIONS, exampleOptions);
     return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
   }
 
   @Override
-  public @Nullable DataHolder options(@NotNull String option) {
+  public DataHolder options(String option) {
     return null;
   }
 

@@ -10,8 +10,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class FormatControlProcessor {
   private static final String OPEN_COMMENT = "<!--";
@@ -28,7 +26,7 @@ public class FormatControlProcessor {
   private Pattern formatterOffPattern;
   private Pattern formatterOnPattern;
 
-  public FormatControlProcessor(@Nullable DataHolder options) {
+  public FormatControlProcessor(DataHolder options) {
     FormatterOptions formatterOptions = new FormatterOptions(options);
     this.formatterOnTag = formatterOptions.formatterOnTag;
     this.formatterOffTag = formatterOptions.formatterOffTag;
@@ -40,7 +38,6 @@ public class FormatControlProcessor {
     return myFormatterOff;
   }
 
-  @Nullable
   public Pattern getFormatterOffPattern() {
     if (this.formatterOffPattern == null && formatterTagsEnabled && formatterTagsAcceptRegexp) {
       this.formatterOffPattern = this.getPatternOrDisableRegexp(formatterOffTag);
@@ -49,7 +46,6 @@ public class FormatControlProcessor {
     return this.formatterOffPattern;
   }
 
-  @Nullable
   public Pattern getFormatterOnPattern() {
     if (this.formatterOffPattern == null && formatterTagsEnabled && formatterTagsAcceptRegexp) {
       this.formatterOnPattern = this.getPatternOrDisableRegexp(formatterOnTag);
@@ -58,8 +54,7 @@ public class FormatControlProcessor {
     return this.formatterOnPattern;
   }
 
-  @Nullable
-  private Pattern getPatternOrDisableRegexp(@NotNull String markerText) {
+  private Pattern getPatternOrDisableRegexp(String markerText) {
     try {
       return Pattern.compile(markerText);
     } catch (PatternSyntaxException e) {
@@ -96,8 +91,7 @@ public class FormatControlProcessor {
     return justTurnedOnFormatting;
   }
 
-  @Nullable
-  private Boolean isFormatterOffTag(@Nullable CharSequence commentText) {
+  private Boolean isFormatterOffTag(CharSequence commentText) {
     if (commentText == null) {
       return null;
     }
@@ -121,11 +115,11 @@ public class FormatControlProcessor {
     return null;
   }
 
-  public void initializeFrom(@NotNull Node element) {
+  public void initializeFrom(Node element) {
     myFormatterOff = !isFormattingRegion(element.getStartOffset(), element, true);
   }
 
-  public void processFormatControl(@NotNull Node node) {
+  public void processFormatControl(Node node) {
     justTurnedOffFormatting = false;
     justTurnedOnFormatting = false;
 
@@ -145,7 +139,7 @@ public class FormatControlProcessor {
     }
   }
 
-  private boolean isFormattingRegion(int offset, @NotNull Node node, boolean checkParent) {
+  private boolean isFormattingRegion(int offset, Node node, boolean checkParent) {
     while (node != null) {
       if (node.getStartOffset() <= offset) {
         if (node instanceof Block && !(node instanceof Paragraph) && node.hasChildren()) {

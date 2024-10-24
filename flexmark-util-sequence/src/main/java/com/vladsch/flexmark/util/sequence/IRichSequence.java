@@ -8,8 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A CharSequence that provides a rich set of manipulation methods.
@@ -26,7 +24,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return true if character sequences are equal
    */
   @Override
-  boolean equals(@Nullable Object other);
+  boolean equals(Object other);
 
   /**
    * Should return hashCode of the underlying character sequence which is equal to the String value
@@ -37,10 +35,8 @@ interface IRichSequence<T extends IRichSequence<T>>
   @Override
   int hashCode();
 
-  @NotNull
   T[] emptyArray();
 
-  @NotNull
   T nullSequence();
 
   /**
@@ -73,7 +69,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return based sequence whose contents reflect the selected portion
    */
   @Override
-  @NotNull
   T subSequence(int startIndex, int endIndex);
 
   /**
@@ -87,7 +82,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param endIndex offset from startIndex of this sequence
    * @return based sequence whose contents reflect the selected portion
    */
-  @NotNull
   T safeSubSequence(int startIndex, int endIndex);
 
   /**
@@ -100,7 +94,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param startIndex offset from startIndex of this sequence
    * @return based sequence whose contents reflect the selected portion
    */
-  @NotNull
   T safeSubSequence(int startIndex);
 
   /**
@@ -110,8 +103,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return based sequence whose contents reflect the selected portion, if range.isNull() then
    *     {@link #nullSequence()}
    */
-  @NotNull
-  T subSequence(@NotNull Range range);
+  T subSequence(Range range);
 
   /**
    * Get a portion of this sequence before one selected by range
@@ -120,8 +112,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return based sequence whose contents reflect the selected portion, if range.isNull() then
    *     {@link #nullSequence()}
    */
-  @NotNull
-  T subSequenceBefore(@NotNull Range range);
+  T subSequenceBefore(Range range);
 
   /**
    * Get a portion of this sequence after one selected by range
@@ -130,8 +121,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return based sequence whose contents reflect the selected portion, if range.isNull() then
    *     {@link #nullSequence()}
    */
-  @NotNull
-  T subSequenceAfter(@NotNull Range range);
+  T subSequenceAfter(Range range);
 
   /**
    * Get a portion of this sequence starting from a given offset to endIndex of the sequence
@@ -139,7 +129,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param startIndex offset from startIndex of this sequence
    * @return based sequence whose contents reflect the selected portion
    */
-  @NotNull
   T subSequence(int startIndex);
 
   /**
@@ -150,7 +139,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param endIndex offset from endIndex of sequence [ 0..length() )
    * @return selected portion spanning length() - startIndex to length() - endIndex of this sequence
    */
-  @NotNull
   T endSequence(int startIndex, int endIndex);
 
   /**
@@ -160,7 +148,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param startIndex offset from endIndex of sequence [ 0..length() )
    * @return selected portion spanning length() - startIndex to length() of this sequence
    */
-  @NotNull
   T endSequence(int startIndex);
 
   // index from the end of the sequence
@@ -185,7 +172,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return selected portion spanning startIndex to endIndex of this sequence. If offset is &lt;0
    *     then it is taken as relative to length()
    */
-  @NotNull
   T midSequence(int startIndex, int endIndex);
 
   /**
@@ -198,7 +184,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return selected portion spanning startIndex to length() of this sequence. If offset is &lt;0
    *     then it is taken as relative to length()
    */
-  @NotNull
   T midSequence(int startIndex);
 
   /**
@@ -217,8 +202,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param charSequence char sequence from which to construct a rich char sequence
    * @return rich char sequence from given inputs
    */
-  @NotNull
-  T sequenceOf(@Nullable CharSequence charSequence);
+  T sequenceOf(CharSequence charSequence);
 
   /**
    * Factory function
@@ -227,8 +211,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param startIndex start index of the sequence to use
    * @return rich char sequence from given inputs
    */
-  @NotNull
-  T sequenceOf(@Nullable CharSequence charSequence, int startIndex);
+  T sequenceOf(CharSequence charSequence, int startIndex);
 
   /**
    * Factory function
@@ -238,8 +221,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param endIndex end index of the sequence to use
    * @return rich char sequence from given inputs
    */
-  @NotNull
-  T sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex);
+  T sequenceOf(CharSequence charSequence, int startIndex, int endIndex);
 
   /**
    * Get a sequence builder for this sequence type
@@ -247,7 +229,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param <B> type of builder
    * @return builder which can build this type of sequence
    */
-  @NotNull
   <B extends ISequenceBuilder<B, T>> B getBuilder();
 
   /**
@@ -267,11 +248,11 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param s character pre whose occurrence to find
    * @return index where found or -1
    */
-  int indexOf(@NotNull CharSequence s);
+  int indexOf(CharSequence s);
 
-  int indexOf(@NotNull CharSequence s, int fromIndex);
+  int indexOf(CharSequence s, int fromIndex);
 
-  int indexOf(@NotNull CharSequence s, int fromIndex, int endIndex);
+  int indexOf(CharSequence s, int fromIndex, int endIndex);
 
   int indexOf(char c, int fromIndex, int endIndex);
 
@@ -279,11 +260,11 @@ interface IRichSequence<T extends IRichSequence<T>>
 
   int indexOf(char c);
 
-  int indexOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex);
+  int indexOfAny(CharPredicate s, int fromIndex, int endIndex);
 
-  int indexOfAny(@NotNull CharPredicate s, int fromIndex);
+  int indexOfAny(CharPredicate s, int fromIndex);
 
-  int indexOfAny(@NotNull CharPredicate s);
+  int indexOfAny(CharPredicate s);
 
   int indexOfNot(char c, int fromIndex, int endIndex);
 
@@ -291,17 +272,17 @@ interface IRichSequence<T extends IRichSequence<T>>
 
   int indexOfNot(char c);
 
-  int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex, int endIndex);
+  int indexOfAnyNot(CharPredicate s, int fromIndex, int endIndex);
 
-  int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex);
+  int indexOfAnyNot(CharPredicate s, int fromIndex);
 
-  int indexOfAnyNot(@NotNull CharPredicate s);
+  int indexOfAnyNot(CharPredicate s);
 
-  int lastIndexOf(@NotNull CharSequence s);
+  int lastIndexOf(CharSequence s);
 
-  int lastIndexOf(@NotNull CharSequence s, int fromIndex);
+  int lastIndexOf(CharSequence s, int fromIndex);
 
-  int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex);
+  int lastIndexOf(CharSequence s, int startIndex, int fromIndex);
 
   int lastIndexOf(char c, int startIndex, int fromIndex);
 
@@ -309,11 +290,11 @@ interface IRichSequence<T extends IRichSequence<T>>
 
   int lastIndexOf(char c);
 
-  int lastIndexOfAny(@NotNull CharPredicate s, int startIndex, int fromIndex);
+  int lastIndexOfAny(CharPredicate s, int startIndex, int fromIndex);
 
-  int lastIndexOfAny(@NotNull CharPredicate s, int fromIndex);
+  int lastIndexOfAny(CharPredicate s, int fromIndex);
 
-  int lastIndexOfAny(@NotNull CharPredicate s);
+  int lastIndexOfAny(CharPredicate s);
 
   int lastIndexOfNot(char c);
 
@@ -321,11 +302,11 @@ interface IRichSequence<T extends IRichSequence<T>>
 
   int lastIndexOfNot(char c, int startIndex, int fromIndex);
 
-  int lastIndexOfAnyNot(@NotNull CharPredicate s, int startIndex, int fromIndex);
+  int lastIndexOfAnyNot(CharPredicate s, int startIndex, int fromIndex);
 
-  int lastIndexOfAnyNot(@NotNull CharPredicate s, int fromIndex);
+  int lastIndexOfAnyNot(CharPredicate s, int fromIndex);
 
-  int lastIndexOfAnyNot(@NotNull CharPredicate s);
+  int lastIndexOfAnyNot(CharPredicate s);
 
   /**
    * Count leading/trailing characters of this sequence
@@ -347,29 +328,29 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars predicate for set of contiguous characters which should be counted
    * @return number of chars in contiguous span at start of sequence
    */
-  int countLeading(@NotNull CharPredicate chars);
+  int countLeading(CharPredicate chars);
 
-  int countLeadingNot(@NotNull CharPredicate chars);
+  int countLeadingNot(CharPredicate chars);
 
-  int countLeading(@NotNull CharPredicate chars, int startIndex);
+  int countLeading(CharPredicate chars, int startIndex);
 
-  int countLeadingNot(@NotNull CharPredicate chars, int startIndex);
+  int countLeadingNot(CharPredicate chars, int startIndex);
 
-  int countLeading(@NotNull CharPredicate chars, int startIndex, int endIndex);
+  int countLeading(CharPredicate chars, int startIndex, int endIndex);
 
-  int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
+  int countLeadingNot(CharPredicate chars, int startIndex, int endIndex);
 
-  int countTrailing(@NotNull CharPredicate chars);
+  int countTrailing(CharPredicate chars);
 
-  int countTrailingNot(@NotNull CharPredicate chars);
+  int countTrailingNot(CharPredicate chars);
 
-  int countTrailing(@NotNull CharPredicate chars, int startIndex);
+  int countTrailing(CharPredicate chars, int startIndex);
 
-  int countTrailingNot(@NotNull CharPredicate chars, int startIndex);
+  int countTrailingNot(CharPredicate chars, int startIndex);
 
-  int countTrailing(@NotNull CharPredicate chars, int startIndex, int endIndex);
+  int countTrailing(CharPredicate chars, int startIndex, int endIndex);
 
-  int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
+  int countTrailingNot(CharPredicate chars, int startIndex, int endIndex);
 
   int countLeadingSpace();
 
@@ -451,17 +432,17 @@ interface IRichSequence<T extends IRichSequence<T>>
 
   int countOfNotWhitespace();
 
-  int countOfAny(@NotNull CharPredicate chars);
+  int countOfAny(CharPredicate chars);
 
-  int countOfAnyNot(@NotNull CharPredicate chars);
+  int countOfAnyNot(CharPredicate chars);
 
-  int countOfAny(@NotNull CharPredicate chars, int startIndex);
+  int countOfAny(CharPredicate chars, int startIndex);
 
-  int countOfAnyNot(@NotNull CharPredicate chars, int startIndex);
+  int countOfAnyNot(CharPredicate chars, int startIndex);
 
-  int countOfAny(@NotNull CharPredicate chars, int startIndex, int endIndex);
+  int countOfAny(CharPredicate chars, int startIndex, int endIndex);
 
-  int countOfAnyNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
+  int countOfAnyNot(CharPredicate chars, int startIndex, int endIndex);
 
   /**
    * Count column of indent given by chars in the set in this sequence, expanding tabs to 4th column
@@ -470,7 +451,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars whitespace characters
    * @return column of first non-whitespace as given by chars
    */
-  int countLeadingColumns(int startColumn, @NotNull CharPredicate chars);
+  int countLeadingColumns(int startColumn, CharPredicate chars);
 
   /**
    * Range of kept sequence when trim start/end of this sequence is performed, characters to trim
@@ -484,40 +465,28 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars set of characters to trim from start of line
    * @return range in this sequence to keep or Range.NULL if to keep all
    */
-  @NotNull
-  Range trimStartRange(int keep, @NotNull CharPredicate chars);
+  Range trimStartRange(int keep, CharPredicate chars);
 
-  @NotNull
-  Range trimEndRange(int keep, @NotNull CharPredicate chars);
+  Range trimEndRange(int keep, CharPredicate chars);
 
-  @NotNull
-  Range trimRange(int keep, @NotNull CharPredicate chars);
+  Range trimRange(int keep, CharPredicate chars);
 
-  @NotNull
-  Range trimStartRange(@NotNull CharPredicate chars);
+  Range trimStartRange(CharPredicate chars);
 
-  @NotNull
-  Range trimEndRange(@NotNull CharPredicate chars);
+  Range trimEndRange(CharPredicate chars);
 
-  @NotNull
-  Range trimRange(@NotNull CharPredicate chars);
+  Range trimRange(CharPredicate chars);
 
-  @NotNull
   Range trimStartRange(int keep);
 
-  @NotNull
   Range trimEndRange(int keep);
 
-  @NotNull
   Range trimRange(int keep);
 
-  @NotNull
   Range trimStartRange();
 
-  @NotNull
   Range trimEndRange();
 
-  @NotNull
   Range trimRange();
 
   /**
@@ -530,40 +499,28 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars set of characters to trim from start of line
    * @return sequence after it is trimmed
    */
-  @NotNull
-  T trimStart(int keep, @NotNull CharPredicate chars);
+  T trimStart(int keep, CharPredicate chars);
 
-  @NotNull
-  T trimEnd(int keep, @NotNull CharPredicate chars);
+  T trimEnd(int keep, CharPredicate chars);
 
-  @NotNull
-  T trim(int keep, @NotNull CharPredicate chars);
+  T trim(int keep, CharPredicate chars);
 
-  @NotNull
   T trimStart(int keep);
 
-  @NotNull
   T trimEnd(int keep);
 
-  @NotNull
   T trim(int keep);
 
-  @NotNull
-  T trimStart(@NotNull CharPredicate chars);
+  T trimStart(CharPredicate chars);
 
-  @NotNull
-  T trimEnd(@NotNull CharPredicate chars);
+  T trimEnd(CharPredicate chars);
 
-  @NotNull
-  T trim(@NotNull CharPredicate chars);
+  T trim(CharPredicate chars);
 
-  @NotNull
   T trimStart();
 
-  @NotNull
   T trimEnd();
 
-  @NotNull
   T trim();
 
   /**
@@ -579,40 +536,28 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars set of characters to trim from start of line
    * @return part of the sequence that was trimmed from the start
    */
-  @NotNull
-  T trimmedStart(int keep, @NotNull CharPredicate chars);
+  T trimmedStart(int keep, CharPredicate chars);
 
-  @NotNull
-  T trimmedEnd(int keep, @NotNull CharPredicate chars);
+  T trimmedEnd(int keep, CharPredicate chars);
 
-  @NotNull
-  Pair<T, T> trimmed(int keep, @NotNull CharPredicate chars);
+  Pair<T, T> trimmed(int keep, CharPredicate chars);
 
-  @NotNull
   T trimmedStart(int keep);
 
-  @NotNull
   T trimmedEnd(int keep);
 
-  @NotNull
   Pair<T, T> trimmed(int keep);
 
-  @NotNull
-  T trimmedStart(@NotNull CharPredicate chars);
+  T trimmedStart(CharPredicate chars);
 
-  @NotNull
-  T trimmedEnd(@NotNull CharPredicate chars);
+  T trimmedEnd(CharPredicate chars);
 
-  @NotNull
-  Pair<T, T> trimmed(@NotNull CharPredicate chars);
+  Pair<T, T> trimmed(CharPredicate chars);
 
-  @NotNull
   T trimmedStart();
 
-  @NotNull
   T trimmedEnd();
 
-  @NotNull
   Pair<T, T> trimmed();
 
   /**
@@ -622,10 +567,8 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param pad char to use for padding
    * @return padding chars
    */
-  @NotNull
   T padding(int length, char pad);
 
-  @NotNull
   T padding(int length);
 
   /**
@@ -635,10 +578,8 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param pad char to use for padding
    * @return sequence padded
    */
-  @NotNull
   T padStart(int length, char pad);
 
-  @NotNull
   T padEnd(int length, char pad);
 
   boolean isEmpty();
@@ -660,8 +601,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param other based sequence to return if this is nullSequence()
    * @return this or other
    */
-  @NotNull
-  T ifNull(@NotNull T other);
+  T ifNull(T other);
 
   /**
    * If this sequence is the nullSequence() instance then returns an empty subSequence from the end
@@ -670,8 +610,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param other based sequence from which to take the empty sequence
    * @return this or other.subSequence(other.length(), other.length())
    */
-  @NotNull
-  T ifNullEmptyAfter(@NotNull T other);
+  T ifNullEmptyAfter(T other);
 
   /**
    * If this sequence is the nullSequence() instance then returns an empty subSequence from the
@@ -680,15 +619,13 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param other based sequence from which to take the empty sequence
    * @return this or other.subSequence(0, 0)
    */
-  @NotNull
-  T ifNullEmptyBefore(@NotNull T other);
+  T ifNullEmptyBefore(T other);
 
   /**
    * If this sequence is empty return nullSequence() otherwise returns this sequence.
    *
    * @return this or nullSequence()
    */
-  @NotNull
   T nullIfEmpty();
 
   /**
@@ -696,7 +633,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return this or nullSequence()
    */
-  @NotNull
   T nullIfBlank();
 
   /**
@@ -705,7 +641,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param condition when true return NULL else this
    * @return this or nullSequence()
    */
-  @NotNull
   T nullIf(boolean condition);
 
   /**
@@ -717,13 +652,9 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param matches match sequence list
    * @return this or nullSequence()
    */
-  @NotNull
-  T nullIf(
-      @NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
+  T nullIf(BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
 
-  @NotNull
-  T nullIfNot(
-      @NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
+  T nullIfNot(BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches);
 
   /**
    * If predicate returns true for one of given sequences return nullSequence() otherwise returns
@@ -733,11 +664,9 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param matches match sequence list
    * @return this or nullSequence()
    */
-  @NotNull
-  T nullIf(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches);
+  T nullIf(Predicate<? super CharSequence> predicate, CharSequence... matches);
 
-  @NotNull
-  T nullIfNot(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches);
+  T nullIfNot(Predicate<? super CharSequence> predicate, CharSequence... matches);
 
   /**
    * If this sequence matches one of given sequences return nullSequence() otherwise returns this
@@ -746,46 +675,32 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param matches match sequence list
    * @return this or nullSequence()
    */
-  @NotNull
   T nullIf(CharSequence... matches);
 
-  @NotNull
   T nullIfNot(CharSequence... matches);
 
-  @NotNull
   T nullIfStartsWith(CharSequence... matches);
 
-  @NotNull
   T nullIfNotStartsWith(CharSequence... matches);
 
-  @NotNull
   T nullIfEndsWith(CharSequence... matches);
 
-  @NotNull
   T nullIfNotEndsWith(CharSequence... matches);
 
-  @NotNull
   T nullIfStartsWithIgnoreCase(CharSequence... matches);
 
-  @NotNull
   T nullIfNotStartsWithIgnoreCase(CharSequence... matches);
 
-  @NotNull
   T nullIfEndsWithIgnoreCase(CharSequence... matches);
 
-  @NotNull
   T nullIfNotEndsWithIgnoreCase(CharSequence... matches);
 
-  @NotNull
   T nullIfStartsWith(boolean ignoreCase, CharSequence... matches);
 
-  @NotNull
   T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches);
 
-  @NotNull
   T nullIfEndsWith(boolean ignoreCase, CharSequence... matches);
 
-  @NotNull
   T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches);
 
   /*
@@ -832,7 +747,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     is returned.
    * @return range of eol given by index of its end or Range.NULL if no eol ends at index
    */
-  @NotNull
   Range eolEndRange(int eolEnd);
 
   /**
@@ -842,7 +756,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     If &gt;= length of this sequence then 0 is returned if 0 or less then it is the same as 0
    * @return range of eol given by index of its end or Range.NULL if no eol starts at index
    */
-  @NotNull
   Range eolStartRange(int eolStart);
 
   /**
@@ -850,7 +763,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return sequence with one EOL trimmed off if it had one
    */
-  @NotNull
   T trimEOL();
 
   /**
@@ -858,7 +770,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return trimmed off EOL if sequence had one or {@link #nullSequence()}
    */
-  @NotNull
   T trimmedEOL();
 
   /**
@@ -872,17 +783,17 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param index from which to start looking for end of region
    * @return index of end of region delimited by s
    */
-  int endOfDelimitedBy(@NotNull CharSequence s, int index);
+  int endOfDelimitedBy(CharSequence s, int index);
 
-  int endOfDelimitedByAny(@NotNull CharPredicate s, int index);
+  int endOfDelimitedByAny(CharPredicate s, int index);
 
-  int endOfDelimitedByAnyNot(@NotNull CharPredicate s, int index);
+  int endOfDelimitedByAnyNot(CharPredicate s, int index);
 
-  int startOfDelimitedBy(@NotNull CharSequence s, int index);
+  int startOfDelimitedBy(CharSequence s, int index);
 
-  int startOfDelimitedByAny(@NotNull CharPredicate s, int index);
+  int startOfDelimitedByAny(CharPredicate s, int index);
 
-  int startOfDelimitedByAnyNot(@NotNull CharPredicate s, int index);
+  int startOfDelimitedByAnyNot(CharPredicate s, int index);
 
   /**
    * Get the offset of the end of line at given index, end of line delimited by \n
@@ -924,7 +835,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param index index at which to get the line
    * @return range in sequence for the line delimited by '\n', containing index
    */
-  @NotNull
   Range lineRangeAt(int index);
 
   /**
@@ -933,7 +843,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param index index at which to get the line
    * @return range in sequence for the line delimited by end of line, containing index
    */
-  @NotNull
   Range lineRangeAtAnyEOL(int index);
 
   /**
@@ -942,7 +851,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param index index at which to get the line
    * @return sub-sequence for the line containing index
    */
-  @NotNull
   T lineAt(int index);
 
   /**
@@ -951,7 +859,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param index index at which to get the line
    * @return sub-sequence for the line containing index
    */
-  @NotNull
   T lineAtAnyEOL(int index);
 
   /**
@@ -959,10 +866,8 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return return sequence with trailing blank lines trimmed off
    */
-  @NotNull
   T trimTailBlankLines();
 
-  @NotNull
   T trimLeadBlankLines();
 
   /**
@@ -980,8 +885,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     Range.NULL if none found if the range in sequence contains only whitespace characters then
    *     the whole range will be returned even if contains no EOL characters
    */
-  @NotNull
-  Range leadingBlankLinesRange(@NotNull CharPredicate eolChars, int fromIndex, int endIndex);
+  Range leadingBlankLinesRange(CharPredicate eolChars, int fromIndex, int endIndex);
 
   /**
    * Get Range of trailing blank lines at given index offsets in sequence
@@ -998,38 +902,27 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     range in sequence contains only whitespace characters then the whole range will be returned
    *     even if contains no EOL characters
    */
-  @NotNull
   Range trailingBlankLinesRange(CharPredicate eolChars, int startIndex, int fromIndex);
 
-  @NotNull
   Range leadingBlankLinesRange();
 
-  @NotNull
   Range leadingBlankLinesRange(int startIndex);
 
-  @NotNull
   Range leadingBlankLinesRange(int fromIndex, int endIndex);
 
-  @NotNull
   Range trailingBlankLinesRange();
 
-  @NotNull
   Range trailingBlankLinesRange(int fromIndex);
 
-  @NotNull
   Range trailingBlankLinesRange(int startIndex, int fromIndex);
 
-  @NotNull
   List<Range> blankLinesRemovedRanges();
 
-  @NotNull
   List<Range> blankLinesRemovedRanges(int fromIndex);
 
-  @NotNull
   List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex);
 
-  @NotNull
-  List<Range> blankLinesRemovedRanges(@NotNull CharPredicate eolChars, int fromIndex, int endIndex);
+  List<Range> blankLinesRemovedRanges(CharPredicate eolChars, int fromIndex, int endIndex);
 
   /**
    * Trim end to end of line containing index
@@ -1041,19 +934,14 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     same as 0, if greater than length() it is the same as length()
    * @return trimmed version of the sequence to given EOL or the original sequence
    */
-  @NotNull
-  T trimToEndOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index);
+  T trimToEndOfLine(CharPredicate eolChars, boolean includeEol, int index);
 
-  @NotNull
   T trimToEndOfLine(boolean includeEol, int index);
 
-  @NotNull
   T trimToEndOfLine(boolean includeEol);
 
-  @NotNull
   T trimToEndOfLine(int index);
 
-  @NotNull
   T trimToEndOfLine();
 
   /**
@@ -1066,19 +954,14 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     same as 0, if greater than length() it is the same as length()
    * @return trimmed version of the sequence to given EOL or the original sequence
    */
-  @NotNull
-  T trimToStartOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index);
+  T trimToStartOfLine(CharPredicate eolChars, boolean includeEol, int index);
 
-  @NotNull
   T trimToStartOfLine(boolean includeEol, int index);
 
-  @NotNull
   T trimToStartOfLine(boolean includeEol);
 
-  @NotNull
   T trimToStartOfLine(int index);
 
-  @NotNull
   T trimToStartOfLine();
 
   /**
@@ -1086,7 +969,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return string with only \n for line separators
    */
-  @NotNull
   String normalizeEOL();
 
   /**
@@ -1094,7 +976,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return string with only \n for line separators and terminated by \n
    */
-  @NotNull
   String normalizeEndWithEOL();
 
   /*
@@ -1107,11 +988,11 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars characters to match against
    * @return true if match
    */
-  boolean matches(@NotNull CharSequence chars);
+  boolean matches(CharSequence chars);
 
-  boolean matchesIgnoreCase(@NotNull CharSequence chars);
+  boolean matchesIgnoreCase(CharSequence chars);
 
-  boolean matches(@NotNull CharSequence chars, boolean ignoreCase);
+  boolean matches(CharSequence chars, boolean ignoreCase);
 
   /**
    * Test the sequence for a match to another CharSequence, ignoring case differences
@@ -1119,7 +1000,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param other characters to match against
    * @return true if match
    */
-  boolean equalsIgnoreCase(@Nullable Object other);
+  boolean equalsIgnoreCase(Object other);
 
   /**
    * Test the sequence for a match to another CharSequence
@@ -1128,7 +1009,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return true if match
    */
-  boolean equals(@Nullable Object other, boolean ignoreCase);
+  boolean equals(Object other, boolean ignoreCase);
 
   /**
    * Test the sequence portion for a match to another CharSequence
@@ -1136,11 +1017,11 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param chars characters to match against
    * @return true if characters at the start of this sequence match
    */
-  boolean matchChars(@NotNull CharSequence chars);
+  boolean matchChars(CharSequence chars);
 
-  boolean matchCharsIgnoreCase(@NotNull CharSequence chars);
+  boolean matchCharsIgnoreCase(CharSequence chars);
 
-  boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase);
+  boolean matchChars(CharSequence chars, boolean ignoreCase);
 
   /**
    * Test the sequence portion for a match to another CharSequence
@@ -1150,11 +1031,11 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase if true match ignoring case differences
    * @return true if characters at the start index of this sequence match
    */
-  boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase);
+  boolean matchChars(CharSequence chars, int startIndex, boolean ignoreCase);
 
-  boolean matchChars(@NotNull CharSequence chars, int startIndex);
+  boolean matchChars(CharSequence chars, int startIndex);
 
-  boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex);
+  boolean matchCharsIgnoreCase(CharSequence chars, int startIndex);
 
   /**
    * Test the sequence portion for a match to another CharSequence
@@ -1169,24 +1050,19 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     characters in chars
    */
   int matchedCharCount(
-      @NotNull CharSequence chars,
-      int startIndex,
-      int endIndex,
-      boolean fullMatchOnly,
-      boolean ignoreCase);
+      CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase);
 
-  int matchedCharCount(
-      @NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase);
+  int matchedCharCount(CharSequence chars, int startIndex, int endIndex, boolean ignoreCase);
 
-  int matchedCharCount(@NotNull CharSequence chars, int startIndex, boolean ignoreCase);
+  int matchedCharCount(CharSequence chars, int startIndex, boolean ignoreCase);
 
-  int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex);
+  int matchedCharCount(CharSequence chars, int startIndex, int endIndex);
 
-  int matchedCharCount(@NotNull CharSequence chars, int startIndex);
+  int matchedCharCount(CharSequence chars, int startIndex);
 
-  int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex, int endIndex);
+  int matchedCharCountIgnoreCase(CharSequence chars, int startIndex, int endIndex);
 
-  int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex);
+  int matchedCharCountIgnoreCase(CharSequence chars, int startIndex);
 
   /**
    * Test the sequence portion for a match to another CharSequence, reverse order
@@ -1196,11 +1072,11 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase if true match ignoring case differences
    * @return true if characters at the start index of this sequence match
    */
-  boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase);
+  boolean matchCharsReversed(CharSequence chars, int endIndex, boolean ignoreCase);
 
-  boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex);
+  boolean matchCharsReversed(CharSequence chars, int endIndex);
 
-  boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex);
+  boolean matchCharsReversedIgnoreCase(CharSequence chars, int endIndex);
 
   /**
    * Test the sequence portion for a match to another CharSequence, equivalent to taking
@@ -1216,18 +1092,17 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     characters in chars in reverse order
    */
   int matchedCharCountReversed(
-      @NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase);
+      CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase);
 
-  int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex);
+  int matchedCharCountReversed(CharSequence chars, int startIndex, int fromIndex);
 
-  int matchedCharCountReversedIgnoreCase(
-      @NotNull CharSequence chars, int startIndex, int fromIndex);
+  int matchedCharCountReversedIgnoreCase(CharSequence chars, int startIndex, int fromIndex);
 
-  int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex, boolean ignoreCase);
+  int matchedCharCountReversed(CharSequence chars, int fromIndex, boolean ignoreCase);
 
-  int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex);
+  int matchedCharCountReversed(CharSequence chars, int fromIndex);
 
-  int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int fromIndex);
+  int matchedCharCountReversedIgnoreCase(CharSequence chars, int fromIndex);
 
   /**
    * test if this sequence ends with given characters
@@ -1235,9 +1110,9 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix characters to test
    * @return true if ends with suffix
    */
-  boolean endsWith(@NotNull CharSequence suffix);
+  boolean endsWith(CharSequence suffix);
 
-  boolean endsWith(@NotNull CharPredicate chars);
+  boolean endsWith(CharPredicate chars);
 
   boolean endsWithEOL(); // EOL "\n"
 
@@ -1255,7 +1130,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix characters to test
    * @return true if ends with suffix
    */
-  boolean endsWithIgnoreCase(@NotNull CharSequence suffix);
+  boolean endsWithIgnoreCase(CharSequence suffix);
 
   /**
    * test if this sequence ends with given characters
@@ -1264,7 +1139,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return true if ends with suffix
    */
-  boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase);
+  boolean endsWith(CharSequence suffix, boolean ignoreCase);
 
   /**
    * test if this sequence starts with given characters
@@ -1272,9 +1147,9 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix characters to test
    * @return true if starts with prefix
    */
-  boolean startsWith(@NotNull CharSequence prefix);
+  boolean startsWith(CharSequence prefix);
 
-  boolean startsWith(@NotNull CharPredicate chars);
+  boolean startsWith(CharPredicate chars);
 
   boolean startsWithEOL(); // EOL "\n"
 
@@ -1292,7 +1167,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix characters to test
    * @return true if starts with prefix
    */
-  boolean startsWithIgnoreCase(@NotNull CharSequence prefix);
+  boolean startsWithIgnoreCase(CharSequence prefix);
 
   /**
    * test if this sequence starts with given characters
@@ -1301,7 +1176,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return true if starts with prefix
    */
-  boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase);
+  boolean startsWith(CharSequence prefix, boolean ignoreCase);
 
   /**
    * Remove suffix if present
@@ -1309,8 +1184,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix characters to remove
    * @return sequence with suffix removed, or same sequence if no suffix was present
    */
-  @NotNull
-  T removeSuffix(@NotNull CharSequence suffix);
+  T removeSuffix(CharSequence suffix);
 
   /**
    * Remove suffix if present, ignoring case differences
@@ -1318,8 +1192,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix characters to remove
    * @return sequence with suffix removed, or same sequence if no suffix was present
    */
-  @NotNull
-  T removeSuffixIgnoreCase(@NotNull CharSequence suffix);
+  T removeSuffixIgnoreCase(CharSequence suffix);
 
   /**
    * Remove suffix if present
@@ -1328,8 +1201,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return sequence with suffix removed, or same sequence if no suffix was present
    */
-  @NotNull
-  T removeSuffix(@NotNull CharSequence suffix, boolean ignoreCase);
+  T removeSuffix(CharSequence suffix, boolean ignoreCase);
 
   /**
    * Remove prefix if present
@@ -1337,8 +1209,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix characters to remove
    * @return sequence with prefix removed, or same sequence if no prefix was present
    */
-  @NotNull
-  T removePrefix(@NotNull CharSequence prefix);
+  T removePrefix(CharSequence prefix);
 
   /**
    * Remove prefix if present, ignoring case differences
@@ -1346,8 +1217,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix characters to remove
    * @return sequence with prefix removed, or same sequence if no prefix was present
    */
-  @NotNull
-  T removePrefixIgnoreCase(@NotNull CharSequence prefix);
+  T removePrefixIgnoreCase(CharSequence prefix);
 
   /**
    * Remove prefix if present
@@ -1356,8 +1226,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return sequence with prefix removed, or same sequence if no prefix was present
    */
-  @NotNull
-  T removePrefix(@NotNull CharSequence prefix, boolean ignoreCase);
+  T removePrefix(CharSequence prefix, boolean ignoreCase);
 
   /**
    * Remove suffix if present but only if this sequence is longer than the suffix
@@ -1365,8 +1234,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix characters to remove
    * @return sequence with suffix removed, or same sequence if no suffix was present
    */
-  @NotNull
-  T removeProperSuffix(@NotNull CharSequence suffix);
+  T removeProperSuffix(CharSequence suffix);
 
   /**
    * Remove suffix if present but only if this sequence is longer than the suffix, ignoring case
@@ -1375,8 +1243,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix characters to remove
    * @return sequence with suffix removed, or same sequence if no suffix was present
    */
-  @NotNull
-  T removeProperSuffixIgnoreCase(@NotNull CharSequence suffix);
+  T removeProperSuffixIgnoreCase(CharSequence suffix);
 
   /**
    * Remove suffix if present but only if this sequence is longer than the suffix
@@ -1385,8 +1252,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return sequence with suffix removed, or same sequence if no suffix was present
    */
-  @NotNull
-  T removeProperSuffix(@NotNull CharSequence suffix, boolean ignoreCase);
+  T removeProperSuffix(CharSequence suffix, boolean ignoreCase);
 
   /**
    * Remove prefix if present but only if this sequence is longer than the suffix
@@ -1394,8 +1260,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix characters to remove
    * @return sequence with prefix removed, or same sequence if no prefix was present
    */
-  @NotNull
-  T removeProperPrefix(@NotNull CharSequence prefix);
+  T removeProperPrefix(CharSequence prefix);
 
   /**
    * Remove prefix if present but only if this sequence is longer than the suffix, ignoring case
@@ -1404,8 +1269,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix characters to remove
    * @return sequence with prefix removed, or same sequence if no prefix was present
    */
-  @NotNull
-  T removeProperPrefixIgnoreCase(@NotNull CharSequence prefix);
+  T removeProperPrefixIgnoreCase(CharSequence prefix);
 
   /**
    * Remove prefix if present but only if this sequence is longer than the suffix
@@ -1414,8 +1278,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ignoreCase case ignored when true
    * @return sequence with prefix removed, or same sequence if no prefix was present
    */
-  @NotNull
-  T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase);
+  T removeProperPrefix(CharSequence prefix, boolean ignoreCase);
 
   /**
    * Insert char sequence at given index
@@ -1426,8 +1289,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return resulting sequence based sequence implementation may throw an IllegalArgumentException
    *     if inserting another based sequence out of order based on offsets
    */
-  @NotNull
-  T insert(int index, @NotNull CharSequence chars);
+  T insert(int index, CharSequence chars);
 
   /**
    * Delete range in sequence
@@ -1436,7 +1298,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param endIndex end index, not inclusive, of insertion
    * @return resulting sequence
    */
-  @NotNull
   T delete(int startIndex, int endIndex);
 
   /**
@@ -1447,8 +1308,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param replacement char sequence
    * @return resulting sequence
    */
-  @NotNull
-  T replace(int startIndex, int endIndex, @NotNull CharSequence replacement);
+  T replace(int startIndex, int endIndex, CharSequence replacement);
 
   /**
    * Replace all occurrences of one sequence with another
@@ -1457,21 +1317,17 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param replace replacement sequence
    * @return array of indices
    */
-  @NotNull
-  T replace(@NotNull CharSequence find, @NotNull CharSequence replace);
+  T replace(CharSequence find, CharSequence replace);
 
   /**
    * Map characters of this sequence to: Uppercase, Lowercase or use custom mapping
    *
    * @return lowercase version of sequence
    */
-  @NotNull
   T toLowerCase();
 
-  @NotNull
   T toUpperCase();
 
-  @NotNull
   T toMapped(CharMapper mapper);
 
   /**
@@ -1479,7 +1335,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return mapped sequence with spc changed to NbSp
    */
-  @NotNull
   T toNbSp();
 
   /**
@@ -1487,10 +1342,8 @@ interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return mapped sequence with NbSp changed to spc
    */
-  @NotNull
   T toSpc();
 
-  @NotNull
   String toVisibleWhitespaceString();
 
   /**
@@ -1506,25 +1359,17 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param trimChars set of characters that should be used for trimming individual split results
    * @return List of split results
    */
-  @NotNull
-  List<T> splitList(
-      @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars);
+  List<T> splitList(CharSequence delimiter, int limit, int flags, CharPredicate trimChars);
 
-  @NotNull
-  List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags);
+  List<T> splitList(CharSequence delimiter, int limit, int flags);
 
-  @NotNull
-  List<T> splitList(@NotNull CharSequence delimiter);
+  List<T> splitList(CharSequence delimiter);
 
-  @NotNull
-  T[] split(
-      @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars);
+  T[] split(CharSequence delimiter, int limit, int flags, CharPredicate trimChars);
 
-  @NotNull
-  T[] split(@NotNull CharSequence delimiter, int limit, int flags);
+  T[] split(CharSequence delimiter, int limit, int flags);
 
-  @NotNull
-  T[] split(@NotNull CharSequence delimiter);
+  T[] split(CharSequence delimiter);
 
   /**
    * Split helpers based on delimiter character sets contained in CharPredicate
@@ -1535,43 +1380,26 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param trimChars set of characters that should be used for trimming individual split results
    * @return List of split results
    */
-  @NotNull
   List<T> splitList(
-      @NotNull CharSequence delimiter,
-      int limit,
-      boolean includeDelims,
-      @Nullable CharPredicate trimChars);
+      CharSequence delimiter, int limit, boolean includeDelims, CharPredicate trimChars);
 
-  @NotNull
-  List<T> splitList(
-      @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars);
+  List<T> splitList(CharSequence delimiter, boolean includeDelims, CharPredicate trimChars);
 
-  @NotNull
-  T[] split(
-      @NotNull CharSequence delimiter,
-      int limit,
-      boolean includeDelims,
-      @Nullable CharPredicate trimChars);
+  T[] split(CharSequence delimiter, int limit, boolean includeDelims, CharPredicate trimChars);
 
-  @NotNull
-  T[] split(
-      @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars);
+  T[] split(CharSequence delimiter, boolean includeDelims, CharPredicate trimChars);
 
   // NOTE: these default to including delimiters as part of split item
-  @NotNull
+
   T[] splitEOL();
 
-  @NotNull
   T[] splitEOL(boolean includeDelims);
 
-  @NotNull
   List<T> splitListEOL();
 
-  @NotNull
   List<T> splitListEOL(boolean includeDelims);
 
-  @NotNull
-  List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars);
+  List<T> splitListEOL(boolean includeDelims, CharPredicate trimChars);
 
   /**
    * Get indices of all occurrences of a sequence
@@ -1579,8 +1407,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param s sequence whose indices to find
    * @return array of indices
    */
-  @NotNull
-  int[] indexOfAll(@NotNull CharSequence s);
+  int[] indexOfAll(CharSequence s);
 
   /**
    * Prefix this sequence with a char sequence
@@ -1588,8 +1415,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix char sequence
    * @return resulting sequence
    */
-  @NotNull
-  T prefixWith(@Nullable CharSequence prefix);
+  T prefixWith(CharSequence prefix);
 
   /**
    * Prefix this sequence with a char sequence
@@ -1597,8 +1423,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix char sequence
    * @return resulting sequence
    */
-  @NotNull
-  T suffixWith(@Nullable CharSequence suffix);
+  T suffixWith(CharSequence suffix);
 
   /**
    * Prefix this sequence with a char sequence if not already starting with prefix
@@ -1606,8 +1431,7 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param prefix char sequence
    * @return resulting sequence
    */
-  @NotNull
-  T prefixOnceWith(@Nullable CharSequence prefix);
+  T prefixOnceWith(CharSequence prefix);
 
   /**
    * Suffix this sequence with a char sequence if not already ending with suffix
@@ -1615,46 +1439,32 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param suffix char sequence
    * @return resulting sequence
    */
-  @NotNull
-  T suffixOnceWith(@Nullable CharSequence suffix);
+  T suffixOnceWith(CharSequence suffix);
 
-  @NotNull
   T appendEOL();
 
-  @NotNull
   T suffixWithEOL();
 
-  @NotNull
   T prefixWithEOL();
 
-  @NotNull
   T prefixOnceWithEOL();
 
-  @NotNull
   T suffixOnceWithEOL();
 
-  @NotNull
   T appendSpace();
 
-  @NotNull
   T suffixWithSpace();
 
-  @NotNull
   T prefixWithSpace();
 
-  @NotNull
   T appendSpaces(int count);
 
-  @NotNull
   T suffixWithSpaces(int count);
 
-  @NotNull
   T prefixWithSpaces(int count);
 
-  @NotNull
   T prefixOnceWithSpace();
 
-  @NotNull
   T suffixOnceWithSpace();
 
   /**
@@ -1666,24 +1476,17 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param charMapper mapping to use for output or null if none
    * @return this
    */
-  @NotNull
-  T appendTo(
-      @NotNull StringBuilder out, @Nullable CharMapper charMapper, int startIndex, int endIndex);
+  T appendTo(StringBuilder out, CharMapper charMapper, int startIndex, int endIndex);
 
-  @NotNull
-  T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper);
+  T appendTo(StringBuilder out, CharMapper charMapper);
 
-  @NotNull
-  T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, int startIndex);
+  T appendTo(StringBuilder out, CharMapper charMapper, int startIndex);
 
-  @NotNull
-  T appendTo(@NotNull StringBuilder out, int startIndex, int endIndex);
+  T appendTo(StringBuilder out, int startIndex, int endIndex);
 
-  @NotNull
-  T appendTo(@NotNull StringBuilder out);
+  T appendTo(StringBuilder out);
 
-  @NotNull
-  T appendTo(@NotNull StringBuilder out, int startIndex);
+  T appendTo(StringBuilder out, int startIndex);
 
   /**
    * Append given ranges of this sequence to string builder
@@ -1694,20 +1497,13 @@ interface IRichSequence<T extends IRichSequence<T>>
    *     skipped
    * @return this
    */
-  @NotNull
-  T appendRangesTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper, Range... ranges);
+  T appendRangesTo(StringBuilder out, CharMapper charMapper, Range... ranges);
 
-  @NotNull
-  T appendRangesTo(@NotNull StringBuilder out, Range... ranges);
+  T appendRangesTo(StringBuilder out, Range... ranges);
 
-  @NotNull
-  T appendRangesTo(
-      @NotNull StringBuilder out,
-      @Nullable CharMapper charMapper,
-      Iterable<? extends Range> ranges);
+  T appendRangesTo(StringBuilder out, CharMapper charMapper, Iterable<? extends Range> ranges);
 
-  @NotNull
-  T appendRangesTo(@NotNull StringBuilder out, Iterable<? extends Range> ranges);
+  T appendRangesTo(StringBuilder out, Iterable<? extends Range> ranges);
 
   /**
    * Build a sequence of ranges in this sequence
@@ -1718,10 +1514,8 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param ranges ranges to extract
    * @return resulting sequence
    */
-  @NotNull
   T extractRanges(Range... ranges);
 
-  @NotNull
   T extractRanges(Iterable<Range> ranges);
 
   /**
@@ -1730,10 +1524,8 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param sequences list of char sequences to append to this sequence, null sequences are skipped
    * @return appended sequence
    */
-  @NotNull
   T append(CharSequence... sequences);
 
-  @NotNull
   T append(Iterable<? extends CharSequence> sequences);
 
   /**
@@ -1743,7 +1535,6 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @return Pair(line, column) where line and column are 0 based, throws IllegalArgumentException
    *     if index &lt; 0 or &gt; length.
    */
-  @NotNull
   Pair<Integer, Integer> lineColumnAtIndex(int index);
 
   int columnAtIndex(int index);
@@ -1755,17 +1546,16 @@ interface IRichSequence<T extends IRichSequence<T>>
    * @param predicate character set predicate
    * @return true if character at index tests true
    */
-  boolean isCharAt(int index, @NotNull CharPredicate predicate);
+  boolean isCharAt(int index, CharPredicate predicate);
 
   /**
    * Return string or null if BaseSequence.NULL
    *
    * @return string or null if BaseSequence.NULL
    */
-  @Nullable
   String toStringOrNull();
 
-  boolean isIn(@NotNull String[] texts);
+  boolean isIn(String[] texts);
 
-  boolean isIn(@NotNull Collection<? extends CharSequence> texts);
+  boolean isIn(Collection<? extends CharSequence> texts);
 }

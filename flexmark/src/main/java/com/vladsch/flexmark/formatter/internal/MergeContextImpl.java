@@ -7,8 +7,6 @@ import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.util.ast.Document;
 import java.util.HashMap;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class MergeContextImpl implements MergeContext {
   private Document[] myDocuments;
@@ -45,15 +43,13 @@ public class MergeContextImpl implements MergeContext {
     return myTranslationHandlers;
   }
 
-  @NotNull
   @Override
-  public Document getDocument(@NotNull TranslationContext context) {
+  public Document getDocument(TranslationContext context) {
     return myTranslationHandlerDocumentMap.get(context);
   }
 
   @Override
-  public void forEachPrecedingDocument(
-      @Nullable Document document, @NotNull MergeContextConsumer consumer) {
+  public void forEachPrecedingDocument(Document document, MergeContextConsumer consumer) {
     int iMax = myDocuments.length;
     for (int i = 0; i < iMax; i++) {
       if (myDocuments[i] == document) {

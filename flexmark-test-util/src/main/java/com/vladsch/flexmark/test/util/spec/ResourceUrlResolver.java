@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.test.util.spec;
 
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
 
 /** Used to resolve test resource URL from copy in test location to URL of source file */
 public interface ResourceUrlResolver extends Function<String, String> {
@@ -10,18 +9,17 @@ public interface ResourceUrlResolver extends Function<String, String> {
 
   String FILE_PROTOCOL = "file://";
 
-  static boolean isFileProtocol(@NotNull String externalForm) {
+  static boolean isFileProtocol(String externalForm) {
     return externalForm.startsWith("file:/");
   }
 
-  static boolean hasProtocol(@NotNull String externalForm) {
+  static boolean hasProtocol(String externalForm) {
     int pos = externalForm.indexOf(":");
     // allow windows drive letter to not be treated as protocol
     return pos > 1;
   }
 
-  @NotNull
-  static String removeProtocol(@NotNull String externalForm) {
+  static String removeProtocol(String externalForm) {
     int pos = externalForm.indexOf(':');
     if (pos > 0) {
       return externalForm.substring(pos + 1);

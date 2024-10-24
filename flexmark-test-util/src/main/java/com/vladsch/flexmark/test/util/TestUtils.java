@@ -38,8 +38,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
 
 public class TestUtils {
@@ -50,9 +48,8 @@ public class TestUtils {
   public static final String MARKUP_SELECTION_START =
       Character.toString(MARKUP_SELECTION_START_CHAR);
   public static final String MARKUP_SELECTION_END = Character.toString(MARKUP_SELECTION_END_CHAR);
-  public static final @NotNull CharPredicate CARET_PREDICATE =
-      CharPredicate.anyOf(MARKUP_CARET_CHAR);
-  public static final @NotNull CharPredicate MARKUP_PREDICATE =
+  public static final CharPredicate CARET_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR);
+  public static final CharPredicate MARKUP_PREDICATE =
       CharPredicate.anyOf(
           MARKUP_CARET_CHAR, MARKUP_SELECTION_START_CHAR, MARKUP_SELECTION_END_CHAR);
   public static final int[] EMPTY_OFFSETS = new int[0];
@@ -101,7 +98,7 @@ public class TestUtils {
   public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
 
   public static DataHolder processOption(
-      @NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
+      Map<String, ? extends DataHolder> optionsMap, String option) {
     DataHolder dataHolder = null;
     if (!option.startsWith(DISABLED_OPTION_PREFIX)) {
       dataHolder = optionsMap.get(option);
@@ -140,11 +137,10 @@ public class TestUtils {
    * @param <T> type of value in the map
    * @return constructed hash map of option name
    */
-  @NotNull
   public static <T> Map<String, T> buildOptionsMap(
       boolean ensureAllBuiltInPresent,
-      @NotNull Object[][] options,
-      @NotNull BiFunction<ExampleOption, Object[], T> factory) {
+      Object[][] options,
+      BiFunction<ExampleOption, Object[], T> factory) {
     Map<String, T> hashMap = new HashMap<>();
     Set<String> builtInSet = new HashSet<>(ExampleOption.getBuiltInOptions().keySet());
 
@@ -173,9 +169,8 @@ public class TestUtils {
     return hashMap;
   }
 
-  @NotNull
   public static Pair<String, Integer> addSpecSection(
-      @NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
+      String headingLine, String headingText, String[] sectionHeadings) {
     int lastSectionLevel =
         Math.max(1, Math.min(6, RichSequence.of(headingLine).countLeading(CharPredicate.HASH)));
     sectionHeadings[lastSectionLevel] = headingText;
@@ -212,9 +207,7 @@ public class TestUtils {
    * @return combined set from applying these options together
    */
   public static DataHolder getOptions(
-      @NotNull SpecExample example,
-      @Nullable String optionSets,
-      @NotNull Function<String, DataHolder> optionsProvider) {
+      SpecExample example, String optionSets, Function<String, DataHolder> optionsProvider) {
     if (optionSets == null) {
       return null;
     }
@@ -283,8 +276,7 @@ public class TestUtils {
     return new MutableDataSet(options).set(key, value);
   }
 
-  private static void throwIllegalStateException(
-      @NotNull SpecExample example, @NotNull String option) {
+  private static void throwIllegalStateException(SpecExample example, String option) {
     throw new IllegalStateException(
         "Option "
             + option
@@ -292,8 +284,7 @@ public class TestUtils {
             + example.getFileUrlWithLineNumber(-1));
   }
 
-  private static void throwIgnoredOption(
-      @NotNull SpecExample example, @NotNull String optionSets, @NotNull String option) {
+  private static void throwIgnoredOption(SpecExample example, String optionSets, String option) {
     throw new AssumptionViolatedException(
         "Ignored: example("
             + example.getSection()
@@ -307,8 +298,7 @@ public class TestUtils {
             + example.getFileUrlWithLineNumber(-1));
   }
 
-  @NotNull
-  public static String ast(@NotNull Node node) {
+  public static String ast(Node node) {
     return new AstCollectingVisitor().collectAndGetAstText(node);
   }
 
@@ -624,14 +614,11 @@ public class TestUtils {
         (render - start) / 1000000.0 / iterations);
   }
 
-  @NotNull
   private static String getFormattedSection(String section, int exampleNumber) {
     return section == null ? "" : section.trim() + ": " + exampleNumber;
   }
 
-  @NotNull
-  public static String getResolvedSpecResourcePath(
-      @NotNull String testClassName, @NotNull String resourcePath) {
+  public static String getResolvedSpecResourcePath(String testClassName, String resourcePath) {
     File specInfo = new File(resourcePath);
     File classInfo = new File("/" + testClassName.replace('.', '/'));
     return !specInfo.isAbsolute()
@@ -639,9 +626,7 @@ public class TestUtils {
         : resourcePath;
   }
 
-  @NotNull
-  public static String getSpecResourceFileUrl(
-      @NotNull Class<?> resourceClass, @NotNull String resourcePath) {
+  public static String getSpecResourceFileUrl(Class<?> resourceClass, String resourcePath) {
     if (resourcePath.isEmpty()) {
       throw new IllegalStateException("Empty resource paths not supported");
     }
@@ -652,7 +637,7 @@ public class TestUtils {
     return adjustedFileUrl(url);
   }
 
-  public static List<Object[]> getTestData(@NotNull ResourceLocation location) {
+  public static List<Object[]> getTestData(ResourceLocation location) {
     SpecReader specReader = SpecReader.createAndReadExamples(location, true);
     List<SpecExample> examples = specReader.getExamples();
     List<Object[]> data = new ArrayList<>();
@@ -666,16 +651,15 @@ public class TestUtils {
     return data;
   }
 
-  public static @NotNull String getUrlWithLineNumber(@NotNull String fileUrl, int lineNumber) {
+  public static String getUrlWithLineNumber(String fileUrl, int lineNumber) {
     return (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
   }
 
-  public static String adjustedFileUrl(@NotNull URL url) {
+  public static String adjustedFileUrl(URL url) {
     return ResourceResolverManager.adjustedFileUrl(url);
   }
 
-  @Nullable
-  public static DataHolder combineDefaultOptions(@Nullable DataHolder[] defaultOptions) {
+  public static DataHolder combineDefaultOptions(DataHolder[] defaultOptions) {
     DataHolder combinedOptions = null;
     if (defaultOptions != null) {
       for (DataHolder options : defaultOptions) {
@@ -685,10 +669,8 @@ public class TestUtils {
     return combinedOptions == null ? null : combinedOptions.toImmutable();
   }
 
-  @Nullable
   public static Map<String, ? extends DataHolder> optionsMaps(
-      @Nullable Map<String, ? extends DataHolder> other,
-      @Nullable Map<String, ? extends DataHolder> overrides) {
+      Map<String, ? extends DataHolder> other, Map<String, ? extends DataHolder> overrides) {
     if (other != null && overrides != null) {
       Map<String, DataHolder> map = new HashMap<>(other);
       map.putAll(overrides);
@@ -700,9 +682,7 @@ public class TestUtils {
     }
   }
 
-  @Nullable
-  public static DataHolder[] dataHolders(
-      @Nullable DataHolder other, @Nullable DataHolder[] overrides) {
+  public static DataHolder[] dataHolders(DataHolder other, DataHolder[] overrides) {
     if (other == null) {
       return overrides;
     } else if (overrides == null || overrides.length == 0) {
@@ -717,7 +697,7 @@ public class TestUtils {
 
   // handle custom string options
   public static DataHolder customStringOption(
-      @Nullable String params, @NotNull Function<String, DataHolder> resolver) {
+      String params, Function<String, DataHolder> resolver) {
     if (params != null) {
       // allow escape
       String text =
@@ -734,9 +714,7 @@ public class TestUtils {
   }
 
   public static DataHolder customIntOption(
-      @NotNull String option,
-      @Nullable String params,
-      @NotNull Function<Integer, DataHolder> resolver) {
+      String option, String params, Function<Integer, DataHolder> resolver) {
     int value = -1;
     if (params != null) {
       if (!params.matches("\\d*")) {
@@ -860,8 +838,7 @@ public class TestUtils {
       "------------------------------------------------------------------------";
   private static final int BANNER_LENGTH = BANNER_PADDING.length();
 
-  @NotNull
-  public static String bannerText(@NotNull String message) {
+  public static String bannerText(String message) {
     int leftPadding = 4;
     int rightPadding = BANNER_LENGTH - message.length() - 2 - leftPadding;
     return BANNER_PADDING.substring(0, leftPadding)
@@ -872,12 +849,11 @@ public class TestUtils {
         + "\n";
   }
 
-  public static void appendBanner(@NotNull StringBuilder out, @NotNull String banner) {
+  public static void appendBanner(StringBuilder out, String banner) {
     appendBanner(out, banner, true);
   }
 
-  public static void appendBanner(
-      @NotNull StringBuilder out, @NotNull String banner, boolean addBlankLine) {
+  public static void appendBanner(StringBuilder out, String banner, boolean addBlankLine) {
     if (out.length() > 0 && addBlankLine) {
       out.append("\n");
     }
@@ -885,7 +861,7 @@ public class TestUtils {
     out.append(banner);
   }
 
-  public static void appendBannerIfNeeded(@NotNull StringBuilder out, @NotNull String banner) {
+  public static void appendBannerIfNeeded(StringBuilder out, String banner) {
     if (out.length() > 0) {
       out.append("\n");
       out.append(banner);

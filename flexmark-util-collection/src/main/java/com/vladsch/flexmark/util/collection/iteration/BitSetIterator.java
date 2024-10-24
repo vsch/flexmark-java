@@ -3,19 +3,18 @@ package com.vladsch.flexmark.util.collection.iteration;
 import java.util.BitSet;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
 
 public class BitSetIterator implements ReversibleIterator<Integer> {
-  private final @NotNull BitSet bitSet;
+  private final BitSet bitSet;
   private final boolean reversed;
   private int next;
   private int last;
 
-  public BitSetIterator(@NotNull BitSet bitSet) {
+  public BitSetIterator(BitSet bitSet) {
     this(bitSet, false);
   }
 
-  public BitSetIterator(@NotNull BitSet bitSet, boolean reversed) {
+  public BitSetIterator(BitSet bitSet, boolean reversed) {
     this.bitSet = bitSet;
     this.reversed = reversed;
     next = reversed ? bitSet.previousSetBit(bitSet.length()) : bitSet.nextSetBit(0);
@@ -54,7 +53,7 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
   }
 
   @Override
-  public void forEachRemaining(@NotNull Consumer<? super Integer> consumer) {
+  public void forEachRemaining(Consumer<? super Integer> consumer) {
     while (hasNext()) {
       consumer.accept(next());
     }

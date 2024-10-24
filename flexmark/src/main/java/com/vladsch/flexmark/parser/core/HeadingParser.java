@@ -26,8 +26,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class HeadingParser extends AbstractBlockParser {
   private static class HeadingParsing extends Parsing {
@@ -84,7 +82,7 @@ public class HeadingParser extends AbstractBlockParser {
   public void closeBlock(ParserState state) {}
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       Set<Class<?>> set = new HashSet<>();
@@ -92,7 +90,6 @@ public class HeadingParser extends AbstractBlockParser {
       return set;
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return new HashSet<>(
@@ -110,7 +107,7 @@ public class HeadingParser extends AbstractBlockParser {
     }
 
     @Override
-    public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+    public SpecialLeadInHandler getLeadInHandler(DataHolder options) {
       boolean noAtxSpace =
           Parser.ESCAPE_HEADING_NO_ATX_SPACE.get(options)
               || Parser.HEADING_NO_ATX_SPACE.get(options);
@@ -119,9 +116,8 @@ public class HeadingParser extends AbstractBlockParser {
           : HeadingLeadInHandler.HANDLER_SPACE;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
   }

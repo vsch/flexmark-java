@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class TranslationFormatterSpecTest extends FormatterTranslationSpecTestBase {
   private static final boolean SHOW_INTERMEDIATE = false;
@@ -46,31 +44,31 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
   }
 
   protected TranslationFormatterSpecTest(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     super(
         example,
         ComboSpecTestCase.optionsMaps(optionsMap, optionMap),
         ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
   }
 
-  private static Parser getParser(@Nullable DataHolder options) {
+  private static Parser getParser(DataHolder options) {
     return Parser.builder(options).build();
   }
 
-  private static IRender getRenderer(@Nullable DataHolder options) {
+  private static IRender getRenderer(DataHolder options) {
     return new TranslationFormatter(Formatter.builder(options).build());
   }
 
   @Override
-  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public final SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
     return new FlexmarkSpecExampleRenderer(
         example, combinedOptions, getParser(combinedOptions), getRenderer(combinedOptions), true) {
       @Override
-      protected @NotNull String renderAst() {
+      protected String renderAst() {
         TranslationFormatter translationFormatter = (TranslationFormatter) getRenderer();
         if (translationFormatter.isShowIntermediateAst()) {
           return translationFormatter.getAst();
@@ -111,7 +109,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
     final Formatter myFormatter;
     boolean myShowIntermediate;
     boolean myShowIntermediateAst;
-    private @Nullable String myAst = null;
+    private String myAst = null;
 
     public TranslationFormatter(Formatter formatter) {
       myFormatter = formatter;
@@ -127,19 +125,17 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
       return myShowIntermediateAst;
     }
 
-    @NotNull
     public String getAst() {
       return myAst == null ? "" : myAst;
     }
 
-    @Nullable
     @Override
     public DataHolder getOptions() {
       return myFormatter.getOptions();
     }
 
     @Override
-    public void render(@NotNull Node node, @NotNull Appendable output) {
+    public void render(Node node, Appendable output) {
       Document document = (Document) node;
 
       TranslationHandler handler = myFormatter.getTranslationHandler();

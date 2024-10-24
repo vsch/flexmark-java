@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboYamlFrontMatterFormatterSpecTest extends FormatterSpecTest {
@@ -25,7 +24,7 @@ public class ComboYamlFrontMatterFormatterSpecTest extends FormatterSpecTest {
       placementAndSortOptions(
           Parser.REFERENCES_KEEP, Formatter.REFERENCE_PLACEMENT, Formatter.REFERENCE_SORT);
 
-  public ComboYamlFrontMatterFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboYamlFrontMatterFormatterSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

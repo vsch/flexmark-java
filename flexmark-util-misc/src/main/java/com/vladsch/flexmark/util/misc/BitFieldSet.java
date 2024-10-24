@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Re-Implementation of RegularEnumSet class for EnumSet, for "regular sized" enum types (i.e.,
@@ -33,7 +32,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Se
     static final ConcurrentHashMap<Class, Enum[]> enumUniverseMap = new ConcurrentHashMap<>();
     static final ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
 
-    @NotNull
     static Enum[] getUniverseSlow(Class elementType) {
       Enum[] cachedUniverse = enumUniverseMap.get(elementType);
       if (cachedUniverse != null) {
@@ -281,7 +279,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Se
    * @return an iterator over the elements contained in this set
    */
   @Override
-  @NotNull
   public Iterator<E> iterator() {
     return bitMasks.length == totalBits ? new EnumBitSetIterator<>() : new EnumBitFieldIterator<>();
   }
@@ -558,7 +555,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Se
    * @param <T> enum type
    * @return bit enum set
    */
-  public static <T extends Enum<T>> BitFieldSet<T> of(@NotNull Class<T> enumClass, long mask) {
+  public static <T extends Enum<T>> BitFieldSet<T> of(Class<T> enumClass, long mask) {
     BitFieldSet<T> optionSet = BitFieldSet.noneOf(enumClass);
     optionSet.orMask(mask);
     return optionSet;

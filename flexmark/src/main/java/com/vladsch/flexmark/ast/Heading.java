@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class Heading extends Block implements AnchorRefTarget {
   private int level;
@@ -16,11 +15,10 @@ public class Heading extends Block implements AnchorRefTarget {
   private boolean explicitAnchorRefId = false;
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {openingMarker, text, closingMarker};

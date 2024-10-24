@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import java.util.HashMap;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for GFM style task list items
@@ -75,7 +74,7 @@ public class TaskListExtension
   }
 
   @Override
-  public void rendererOptions(@NotNull MutableDataHolder options) {}
+  public void rendererOptions(MutableDataHolder options) {}
 
   @Override
   public void parserOptions(MutableDataHolder options) {
@@ -88,8 +87,7 @@ public class TaskListExtension
   }
 
   @Override
-  public void extend(
-      @NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+  public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
     if (htmlRendererBuilder.isRendererType("HTML")) {
       htmlRendererBuilder.nodeRendererFactory(new TaskListNodeRenderer.Factory());
     }

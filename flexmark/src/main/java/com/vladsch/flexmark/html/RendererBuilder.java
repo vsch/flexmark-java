@@ -2,7 +2,6 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension point for RenderingExtensions that only provide attributes, link resolvers or html id
@@ -15,9 +14,7 @@ interface RendererBuilder extends DataHolder {
    * @param attributeProviderFactory the attribute provider factory to add
    * @return {@code this}
    */
-  @NotNull
-  RendererBuilder attributeProviderFactory(
-      @NotNull AttributeProviderFactory attributeProviderFactory);
+  RendererBuilder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory);
 
   /**
    * Add a factory for resolving links in markdown to URI used in rendering
@@ -25,8 +22,7 @@ interface RendererBuilder extends DataHolder {
    * @param linkResolverFactory the factory for creating a node renderer
    * @return {@code this}
    */
-  @NotNull
-  RendererBuilder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory);
+  RendererBuilder linkResolverFactory(LinkResolverFactory linkResolverFactory);
 
   /**
    * Add a factory for resolving URI to content
@@ -34,8 +30,7 @@ interface RendererBuilder extends DataHolder {
    * @param contentResolverFactory the factory for creating a node renderer
    * @return {@code this}
    */
-  @NotNull
-  RendererBuilder contentResolverFactory(@NotNull UriContentResolverFactory contentResolverFactory);
+  RendererBuilder contentResolverFactory(UriContentResolverFactory contentResolverFactory);
 
   /**
    * Add a factory for generating the header id attribute from the header's text
@@ -43,6 +38,5 @@ interface RendererBuilder extends DataHolder {
    * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
    * @return {@code this}
    */
-  @NotNull
-  RendererBuilder htmlIdGeneratorFactory(@NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory);
+  RendererBuilder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory);
 }

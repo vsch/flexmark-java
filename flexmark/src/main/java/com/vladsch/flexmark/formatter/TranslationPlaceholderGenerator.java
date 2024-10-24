@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.formatter;
 
-import org.jetbrains.annotations.NotNull;
-
 public interface TranslationPlaceholderGenerator {
   /**
    * Return a placeholder for given translation span index
@@ -10,6 +8,5 @@ public interface TranslationPlaceholderGenerator {
    *     other customizers (huh?)
    * @return string for the placeholder
    */
-  @NotNull
   String getPlaceholder(int index);
 }

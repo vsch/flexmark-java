@@ -5,8 +5,6 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attributes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface LinkResolverContext extends LinkResolverBasicContext {
   /**
@@ -17,22 +15,19 @@ public interface LinkResolverContext extends LinkResolverBasicContext {
    * @return the current renderer options {@link DataHolder}
    */
   @Override
-  @NotNull
   DataHolder getOptions();
 
   /**
    * @return the {@link Document} node of the current context
    */
   @Override
-  @NotNull
   Document getDocument();
 
   /**
    * @param url to be encoded
    * @return an encoded URL (depending on the configuration)
    */
-  @NotNull
-  String encodeUrl(@NotNull CharSequence url);
+  String encodeUrl(CharSequence url);
 
   /**
    * Render the specified node and its children using the configured renderers. This should be used
@@ -41,19 +36,18 @@ public interface LinkResolverContext extends LinkResolverBasicContext {
    *
    * @param node the node to render
    */
-  void render(@NotNull Node node);
+  void render(Node node);
 
   /**
    * Render the children of the node, used by custom renderers
    *
    * @param parent node the children of which are to be rendered
    */
-  void renderChildren(@NotNull Node parent);
+  void renderChildren(Node parent);
 
   /**
    * @return the current node being rendered
    */
-  @NotNull
   Node getCurrentNode();
 
   /**
@@ -75,8 +69,7 @@ public interface LinkResolverContext extends LinkResolverBasicContext {
    *     be encoded.
    * @return resolved link url for this link and its resolved status
    */
-  default @NotNull ResolvedLink resolveLink(
-      @NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Boolean urlEncode) {
+  default ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
     return resolveLink(linkType, url, null, urlEncode);
   }
 
@@ -100,10 +93,6 @@ public interface LinkResolverContext extends LinkResolverBasicContext {
    *     be encoded.
    * @return resolved link url for this link and its resolved status
    */
-  @NotNull
   ResolvedLink resolveLink(
-      @NotNull LinkType linkType,
-      @NotNull CharSequence url,
-      @Nullable Attributes attributes,
-      @Nullable Boolean urlEncode);
+      LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode);
 }

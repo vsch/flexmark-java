@@ -3,7 +3,6 @@ package com.vladsch.flexmark.html.renderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 public interface LinkResolverBasicContext {
   /**
@@ -13,12 +12,10 @@ public interface LinkResolverBasicContext {
    *
    * @return the current renderer options {@link DataHolder}
    */
-  @NotNull
   DataHolder getOptions();
 
   /**
    * @return the {@link Document} node of the current context
    */
-  @NotNull
   Document getDocument();
 }

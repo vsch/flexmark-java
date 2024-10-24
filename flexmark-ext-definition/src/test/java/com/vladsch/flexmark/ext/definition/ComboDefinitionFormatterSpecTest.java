@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
@@ -43,7 +42,7 @@ public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
     optionsMap.put("no-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false));
   }
 
-  public ComboDefinitionFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboDefinitionFormatterSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

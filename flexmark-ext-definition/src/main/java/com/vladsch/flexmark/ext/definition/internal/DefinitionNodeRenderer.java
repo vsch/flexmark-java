@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class DefinitionNodeRenderer implements NodeRenderer {
   private final ListOptions listOptions;
@@ -78,9 +77,9 @@ public class DefinitionNodeRenderer implements NodeRenderer {
   }
 
   public static class Factory implements NodeRendererFactory {
-    @NotNull
+
     @Override
-    public NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
       return new DefinitionNodeRenderer(options);
     }
   }

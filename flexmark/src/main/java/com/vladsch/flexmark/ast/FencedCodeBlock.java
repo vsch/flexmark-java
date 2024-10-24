@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class FencedCodeBlock extends Block implements DoNotDecorate {
   private int fenceIndent;
@@ -14,7 +13,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
   private BasedSequence closingMarker = BasedSequence.NULL;
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     BasedSequence content = getContentChars();
     int lines = getContentLines().size();
     segmentSpanChars(out, openingMarker, "open");
@@ -25,7 +24,6 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
     segmentSpanChars(out, closingMarker, "close");
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {openingMarker, info, attributes, getContentChars(), closingMarker};

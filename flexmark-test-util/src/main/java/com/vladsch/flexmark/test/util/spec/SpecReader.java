@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
 
 public class SpecReader {
   public static final String EXAMPLE_KEYWORD = "example";
@@ -29,8 +28,8 @@ public class SpecReader {
   public static final String SECTION_TEST_BREAK = "…";
   private static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
-  private final @NotNull InputStream inputStream;
-  private final @NotNull ResourceLocation resourceLocation;
+  private final InputStream inputStream;
+  private final ResourceLocation resourceLocation;
   private final boolean compoundSections;
   private final List<SpecExample> examples = new ArrayList<>();
   private final String[] sections =
@@ -48,29 +47,24 @@ public class SpecReader {
   private int contentLineNumber = 0;
   private int commentLineNumber = 0;
 
-  public SpecReader(
-      @NotNull InputStream stream, @NotNull ResourceLocation location, boolean compoundSections) {
+  public SpecReader(InputStream stream, ResourceLocation location, boolean compoundSections) {
     this.inputStream = stream;
     this.resourceLocation = location;
     this.compoundSections = compoundSections;
   }
 
-  @NotNull
   public String getFileUrl() {
     return resourceLocation.getFileUrl();
   }
 
-  @NotNull
   public ResourceLocation getResourceLocation() {
     return resourceLocation;
   }
 
-  @NotNull
   public List<SpecExample> getExamples() {
     return examples;
   }
 
-  @NotNull
   public List<String> getExamplesSourceAsString() {
     List<String> result = new ArrayList<>();
     for (SpecExample example : examples) {
@@ -79,20 +73,20 @@ public class SpecReader {
     return result;
   }
 
-  public static @NotNull <S extends SpecReader> S create(
-      @NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
+  public static <S extends SpecReader> S create(
+      ResourceLocation location, SpecReaderFactory<S> readerFactory) {
     InputStream stream = location.getResourceInputStream();
     return readerFactory.create(stream, location);
   }
 
-  public static @NotNull SpecReader createAndReadExamples(
-      @NotNull ResourceLocation location, boolean compoundSections) {
+  public static SpecReader createAndReadExamples(
+      ResourceLocation location, boolean compoundSections) {
     return createAndReadExamples(
         location, (stream, location1) -> new SpecReader(stream, location1, compoundSections));
   }
 
-  public static @NotNull <S extends SpecReader> S createAndReadExamples(
-      @NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
+  public static <S extends SpecReader> S createAndReadExamples(
+      ResourceLocation location, SpecReaderFactory<S> readerFactory) {
     S reader = create(location, readerFactory);
     reader.readExamples();
     return reader;
@@ -124,7 +118,7 @@ public class SpecReader {
   // can use these to generate spec from source
   protected void addSpecLine(String line, boolean isSpecExampleOpen) {}
 
-  protected void addSpecExample(@NotNull SpecExample example) {
+  protected void addSpecExample(SpecExample example) {
     examples.add(example);
   }
 

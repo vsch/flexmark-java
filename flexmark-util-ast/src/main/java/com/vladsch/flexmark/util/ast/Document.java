@@ -15,14 +15,12 @@ import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.Collection;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Document extends Block implements MutableDataHolder {
   private final MutableDataSet dataSet;
 
   @Override
-  public @NotNull BasedSequence[] getSegments() {
+  public BasedSequence[] getSegments() {
     return EMPTY_SEGMENTS;
   }
 
@@ -32,84 +30,72 @@ public class Document extends Block implements MutableDataHolder {
   }
 
   @Override
-  public @NotNull MutableDataHolder clear() {
+  public MutableDataHolder clear() {
     throw new UnsupportedOperationException();
   }
 
-  @NotNull
   @Override
-  public <T> MutableDataHolder set(@NotNull DataKey<T> key, @NotNull T value) {
+  public <T> MutableDataHolder set(DataKey<T> key, T value) {
     return dataSet.set(key, value);
   }
 
-  @NotNull
   @Override
-  public <T> MutableDataHolder set(@NotNull NullableDataKey<T> key, @Nullable T value) {
+  public <T> MutableDataHolder set(NullableDataKey<T> key, T value) {
     return dataSet.set(key, value);
   }
 
-  @NotNull
   @Override
-  public MutableDataSet setFrom(@NotNull MutableDataSetter dataSetter) {
+  public MutableDataSet setFrom(MutableDataSetter dataSetter) {
     return dataSet.setFrom(dataSetter);
   }
 
-  @NotNull
   @Override
-  public MutableDataSet setAll(@NotNull DataHolder other) {
+  public MutableDataSet setAll(DataHolder other) {
     return dataSet.setAll(other);
   }
 
-  @NotNull
   @Override
-  public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+  public MutableDataHolder setIn(MutableDataHolder dataHolder) {
     return dataSet.setIn(dataHolder);
   }
 
-  @NotNull
   @Override
-  public MutableDataSet remove(@NotNull DataKeyBase<?> key) {
+  public MutableDataSet remove(DataKeyBase<?> key) {
     return dataSet.remove(key);
   }
 
   @Override
-  @Nullable
-  public Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+  public Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory) {
     return dataSet.getOrCompute(key, factory);
   }
 
   @Override
-  @NotNull
   public MutableDataSet toMutable() {
     return dataSet.toMutable();
   }
 
   @Override
-  @NotNull
   public DataSet toImmutable() {
     return dataSet.toImmutable();
   }
 
   @Override
-  @NotNull
   public MutableDataSet toDataSet() {
     return dataSet.toDataSet();
   }
 
   @Override
-  @NotNull
   public Map<? extends DataKeyBase<?>, Object> getAll() {
     return dataSet.getAll();
   }
 
   @Override
-  @NotNull
   public Collection<? extends DataKeyBase<?>> getKeys() {
     return dataSet.getKeys();
   }
 
   @Override
-  public boolean contains(@NotNull DataKeyBase<?> key) {
+  public boolean contains(DataKeyBase<?> key) {
     return dataSet.contains(key);
   }
 

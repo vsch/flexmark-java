@@ -9,14 +9,12 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.UnaryOperator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
   private static final int MIN_PART_CAPACITY = 8;
   private static final int[] EMPTY_PARTS = {};
 
-  private @NotNull int[] parts = EMPTY_PARTS;
+  private int[] parts = EMPTY_PARTS;
   private int partsSize = 0;
   private int anchorsSize = 0;
 
@@ -33,7 +31,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       new StringBuilder(); // text segment ranges come from this CharSequence
   private int immutableOffset = 0; // text offset for all committed text segments
 
-  private static int[] ensureCapacity(@NotNull int[] prev, int size) {
+  private static int[] ensureCapacity(int[] prev, int size) {
     int prevSize = prev.length / 2;
     if (prevSize <= size) {
       int nextSize = Math.max(MIN_PART_CAPACITY, Math.max(prevSize + prevSize >> 1, size));
@@ -87,7 +85,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return length == 0;
   }
 
-  @Nullable
   @Override
   public Range getBaseSubSequenceRange() {
     if (partsSize == 1 && !haveDanglingText()) {
@@ -131,7 +128,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @Override
-  public @NotNull Iterator<Object> iterator() {
+  public Iterator<Object> iterator() {
     return new PartsIterator(this);
   }
 
@@ -155,7 +152,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @Override
-  public @NotNull Iterable<Seg> getSegments() {
+  public Iterable<Seg> getSegments() {
     return new SegIterable(this);
   }
 
@@ -166,7 +163,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       this.builder = builder;
     }
 
-    @NotNull
     @Override
     public Iterator<Seg> iterator() {
       return new SegIterator(builder);
@@ -207,19 +203,16 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return startOffset > endOffset ? -1 : endOffset - startOffset;
   }
 
-  @Nullable
   private Seg getSegOrNull(int index) {
     int i = index * 2;
     return i + 1 >= parts.length ? null : Seg.segOf(parts[i], parts[i + 1]);
   }
 
-  @NotNull
   private Seg getSeg(int index) {
     int i = index * 2;
     return i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
   }
 
-  @NotNull
   public Object getPart(int index) {
     if (index == partsSize && haveDanglingText()) {
       // return dangling text
@@ -233,7 +226,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         : seg.isText() ? text.subSequence(seg.getTextStart(), seg.getTextEnd()) : Range.NULL;
   }
 
-  @NotNull
   private Seg getSegPart(int index) {
     if (index == partsSize && haveDanglingText()) {
       // return dangling text
@@ -265,7 +257,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     if (startOffset == endOffset) anchorsSize++;
   }
 
-  @Nullable
   private Seg lastSegOrNull() {
     return partsSize == 0 ? null : getSegOrNull(partsSize - 1);
   }
@@ -274,11 +265,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return text.length() > immutableOffset;
   }
 
-  protected Object[] optimizeText(@NotNull Object[] parts) {
+  protected Object[] optimizeText(Object[] parts) {
     return parts;
   }
 
-  protected Object[] handleOverlap(@NotNull Object[] parts) {
+  protected Object[] handleOverlap(Object[] parts) {
     // range overlaps with last segment in the list
     Range lastSeg = (Range) parts[0];
     CharSequence text = (CharSequence) parts[1];
@@ -305,7 +296,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       int segEnd,
       boolean resolveOverlap,
       boolean nullNextRange,
-      @NotNull UnaryOperator<Object[]> transform) {
+      UnaryOperator<Object[]> transform) {
     CharSequence text = this.text.subSequence(immutableOffset, this.text.length());
 
     Seg lastSeg = lastSegOrNull();
@@ -436,7 +427,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
    * @return this
    */
   @Override
-  @NotNull
   public S appendAnchor(int offset) {
     return append(offset, offset);
   }
@@ -449,8 +439,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
    * @return this
    */
   @Override
-  @NotNull
-  public S append(@NotNull Range range) {
+  public S append(Range range) {
     return append(range.getStart(), range.getEnd());
   }
 
@@ -463,7 +452,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
    * @return this
    */
   @Override
-  @NotNull
   public S append(int startOffset, int endOffset) {
     if (endOffset < 0 || startOffset > endOffset) {
       return (S) this;
@@ -518,8 +506,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @Override
-  @NotNull
-  public S append(@NotNull CharSequence text) {
+  public S append(CharSequence text) {
     int length = text.length();
     if (length != 0) {
       stats.addText(text);
@@ -531,7 +518,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return (S) this;
   }
 
-  @NotNull
   S append(char c) {
     stats.addText(c);
     textStats.addText(c);
@@ -542,7 +528,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return (S) this;
   }
 
-  @NotNull
   S append(char c, int repeat) {
     if (repeat > 0) {
       stats.addText(c, repeat);
@@ -554,12 +539,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return (S) this;
   }
 
-  @NotNull
   private String toString(
-      @NotNull CharSequence chars,
-      @NotNull CharSequence rangePrefix,
-      @NotNull CharSequence rangeSuffix,
-      @NotNull UnaryOperator<CharSequence> textMapper) {
+      CharSequence chars,
+      CharSequence rangePrefix,
+      CharSequence rangeSuffix,
+      UnaryOperator<CharSequence> textMapper) {
     if (endOffset > chars.length()) {
       throw new IllegalArgumentException(
           "baseSequence length() must be at least " + endOffset + ", got: " + chars.length());
@@ -592,20 +576,17 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @Override
-  @NotNull
-  public String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars) {
+  public String toStringWithRangesVisibleWhitespace(CharSequence chars) {
     return toString(chars, "⟦", "⟧", SequenceUtils::toVisibleWhitespaceString);
   }
 
   @Override
-  @NotNull
-  public String toStringWithRanges(@NotNull CharSequence chars) {
+  public String toStringWithRanges(CharSequence chars) {
     return toString(chars, "⟦", "⟧", UnaryOperator.identity());
   }
 
   @Override
-  @NotNull
-  public String toString(@NotNull CharSequence chars) {
+  public String toString(CharSequence chars) {
     return toString(chars, "", "", UnaryOperator.identity());
   }
 

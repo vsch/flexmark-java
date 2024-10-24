@@ -10,7 +10,6 @@ import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class StrikethroughJiraRenderer implements NodeRenderer {
   public StrikethroughJiraRenderer() {}
@@ -36,9 +35,9 @@ public class StrikethroughJiraRenderer implements NodeRenderer {
   }
 
   public static class Factory implements NodeRendererFactory {
-    @NotNull
+
     @Override
-    public NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
       return new StrikethroughJiraRenderer();
     }
   }

@@ -1,30 +1,28 @@
 package com.vladsch.flexmark.util.collection;
 
 import java.util.function.UnaryOperator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class CopyOnWriteRef<T> {
-  private @Nullable T value;
+  private T value;
   private int referenceCount;
-  private final @NotNull UnaryOperator<T> copyFunction;
+  private final UnaryOperator<T> copyFunction;
 
-  public CopyOnWriteRef(@Nullable T value, @NotNull UnaryOperator<T> copyFunction) {
+  public CopyOnWriteRef(T value, UnaryOperator<T> copyFunction) {
     this.value = value;
     referenceCount = 0;
     this.copyFunction = copyFunction;
   }
 
-  public @Nullable T getPeek() {
+  public T getPeek() {
     return value;
   }
 
-  public @Nullable T getImmutable() {
+  public T getImmutable() {
     if (value != null) referenceCount++;
     return value;
   }
 
-  public @Nullable T getMutable() {
+  public T getMutable() {
     if (referenceCount > 0) {
       value = copyFunction.apply(value);
       referenceCount = 0;
@@ -32,7 +30,7 @@ public class CopyOnWriteRef<T> {
     return value;
   }
 
-  public void setValue(@Nullable T value) {
+  public void setValue(T value) {
     referenceCount = 0;
     this.value = copyFunction.apply(value);
   }

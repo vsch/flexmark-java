@@ -15,8 +15,6 @@
 
 package com.vladsch.flexmark.util.collection.iteration;
 
-import org.jetbrains.annotations.NotNull;
-
 public class ArrayIterable<T> implements ReversibleIterable<T> {
   private final T[] array;
   private final int startIndex;
@@ -35,7 +33,7 @@ public class ArrayIterable<T> implements ReversibleIterable<T> {
   }
 
   @Override
-  public @NotNull ReversibleIterable<T> reversed() {
+  public ReversibleIterable<T> reversed() {
     return new ArrayIterable<>(array, startIndex, endIndex, !isReversed);
   }
 
@@ -45,11 +43,10 @@ public class ArrayIterable<T> implements ReversibleIterable<T> {
   }
 
   @Override
-  public @NotNull ReversibleIterator<T> reversedIterator() {
+  public ReversibleIterator<T> reversedIterator() {
     return new MyIterator<>(array, startIndex, endIndex, !isReversed);
   }
 
-  @NotNull
   @Override
   public ReversibleIterator<T> iterator() {
     return new MyIterator<>(array, startIndex, endIndex, isReversed);

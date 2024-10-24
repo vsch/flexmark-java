@@ -3,102 +3,69 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import java.util.List;
 import java.util.Stack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** Used to help with HTML output generation and formatting of HTML */
 interface HtmlAppendable extends LineAppendable {
-  @Nullable
+
   Attributes getAttributes();
 
-  @NotNull
-  HtmlAppendable setAttributes(@NotNull Attributes attributes);
+  HtmlAppendable setAttributes(Attributes attributes);
 
   boolean inPre();
 
-  @NotNull
   HtmlAppendable openPre();
 
-  @NotNull
   HtmlAppendable closePre();
 
-  @NotNull
-  HtmlAppendable raw(@NotNull CharSequence s);
+  HtmlAppendable raw(CharSequence s);
 
-  @NotNull
-  HtmlAppendable raw(@NotNull CharSequence s, int count);
+  HtmlAppendable raw(CharSequence s, int count);
 
-  @NotNull
-  HtmlAppendable rawPre(@NotNull CharSequence s);
+  HtmlAppendable rawPre(CharSequence s);
 
-  @NotNull
-  HtmlAppendable rawIndentedPre(@NotNull CharSequence s);
+  HtmlAppendable rawIndentedPre(CharSequence s);
 
-  @NotNull
-  HtmlAppendable text(@NotNull CharSequence s);
+  HtmlAppendable text(CharSequence s);
 
-  @NotNull
-  HtmlAppendable attr(@NotNull CharSequence attrName, @NotNull CharSequence value);
+  HtmlAppendable attr(CharSequence attrName, CharSequence value);
 
-  @NotNull
-  HtmlAppendable attr(@NotNull Attribute... attribute);
+  HtmlAppendable attr(Attribute... attribute);
 
-  @NotNull
-  HtmlAppendable attr(@NotNull Attributes attributes);
+  HtmlAppendable attr(Attributes attributes);
 
-  @NotNull
   HtmlAppendable withAttr();
 
   // tag tracking
-  @NotNull
+
   Stack<String> getOpenTags();
 
-  @NotNull
-  List<String> getOpenTagsAfterLast(@NotNull CharSequence latestTag);
+  List<String> getOpenTagsAfterLast(CharSequence latestTag);
 
-  @NotNull
   HtmlAppendable withCondLineOnChildText();
 
-  @NotNull
   HtmlAppendable withCondIndent();
 
-  @NotNull
-  HtmlAppendable tagVoid(@NotNull CharSequence tagName);
+  HtmlAppendable tagVoid(CharSequence tagName);
 
-  @NotNull
-  HtmlAppendable tag(@NotNull CharSequence tagName);
+  HtmlAppendable tag(CharSequence tagName);
 
-  @NotNull
-  HtmlAppendable tag(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+  HtmlAppendable tag(CharSequence tagName, Runnable runnable);
 
-  @NotNull
-  HtmlAppendable tag(@NotNull CharSequence tagName, boolean voidElement);
+  HtmlAppendable tag(CharSequence tagName, boolean voidElement);
 
-  @NotNull
-  HtmlAppendable tag(
-      @NotNull CharSequence tagName,
-      boolean withIndent,
-      boolean withLine,
-      @NotNull Runnable runnable);
+  HtmlAppendable tag(CharSequence tagName, boolean withIndent, boolean withLine, Runnable runnable);
 
-  @NotNull
-  HtmlAppendable tagVoidLine(@NotNull CharSequence tagName);
+  HtmlAppendable tagVoidLine(CharSequence tagName);
 
-  @NotNull
-  HtmlAppendable tagLine(@NotNull CharSequence tagName);
+  HtmlAppendable tagLine(CharSequence tagName);
 
-  @NotNull
-  HtmlAppendable tagLine(@NotNull CharSequence tagName, boolean voidElement);
+  HtmlAppendable tagLine(CharSequence tagName, boolean voidElement);
 
-  @NotNull
-  HtmlAppendable tagLine(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+  HtmlAppendable tagLine(CharSequence tagName, Runnable runnable);
 
-  @NotNull
-  HtmlAppendable tagIndent(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+  HtmlAppendable tagIndent(CharSequence tagName, Runnable runnable);
 
-  @NotNull
-  HtmlAppendable tagLineIndent(@NotNull CharSequence tagName, @NotNull Runnable runnable);
+  HtmlAppendable tagLineIndent(CharSequence tagName, Runnable runnable);
 
-  @NotNull
-  HtmlAppendable closeTag(@NotNull CharSequence tagName);
+  HtmlAppendable closeTag(CharSequence tagName);
 }

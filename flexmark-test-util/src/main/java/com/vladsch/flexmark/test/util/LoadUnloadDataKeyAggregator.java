@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
   public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS =
@@ -29,7 +27,7 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
   private LoadUnloadDataKeyAggregator() {}
 
   @Override
-  public @NotNull DataHolder aggregate(@NotNull DataHolder combined) {
+  public DataHolder aggregate(DataHolder combined) {
     if (combined.contains(LOAD_EXTENSIONS) || combined.contains(UNLOAD_EXTENSIONS)) {
       // have something to work with, or at least clean
       if (combined.contains(SharedDataKeys.EXTENSIONS) || combined.contains(LOAD_EXTENSIONS)) {
@@ -55,8 +53,7 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
   }
 
   @Override
-  public @NotNull DataHolder aggregateActions(
-      @NotNull DataHolder combined, @NotNull DataHolder other, @NotNull DataHolder overrides) {
+  public DataHolder aggregateActions(DataHolder combined, DataHolder other, DataHolder overrides) {
     if (other.contains(LOAD_EXTENSIONS) && overrides.contains(LOAD_EXTENSIONS)) {
       // have to combine these
       List<Extension> loadExtensions = new ArrayList<>(LOAD_EXTENSIONS.get(other));
@@ -75,7 +72,7 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
   }
 
   @Override
-  public @NotNull DataHolder clean(DataHolder combined) {
+  public DataHolder clean(DataHolder combined) {
     if (combined.contains(LOAD_EXTENSIONS) || combined.contains(UNLOAD_EXTENSIONS)) {
       return combined.toMutable().remove(LOAD_EXTENSIONS).remove(UNLOAD_EXTENSIONS);
     }
@@ -83,7 +80,7 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
   }
 
   @Override
-  public @Nullable Set<Class<?>> invokeAfterSet() {
+  public Set<Class<?>> invokeAfterSet() {
     return null;
   }
 }

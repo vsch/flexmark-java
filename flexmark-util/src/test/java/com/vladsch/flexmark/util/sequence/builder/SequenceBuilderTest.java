@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SequenceBuilderTest {
@@ -569,7 +568,7 @@ public class SequenceBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) builder.append("    ");
@@ -590,7 +589,7 @@ public class SequenceBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) builder.append("  ");
@@ -608,7 +607,7 @@ public class SequenceBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       builder.append(trim.getSourceRange());
@@ -625,7 +624,7 @@ public class SequenceBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, F_TRACK_FIRST256, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) builder.append("    ");
@@ -646,7 +645,7 @@ public class SequenceBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, F_TRACK_FIRST256, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) builder.append("  ");
@@ -664,7 +663,7 @@ public class SequenceBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, F_TRACK_FIRST256, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       builder.append(trim.getSourceRange());
@@ -682,7 +681,7 @@ public class SequenceBuilderTest {
     SequenceBuilder builder =
         SequenceBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) builder.append("    ");
@@ -704,7 +703,7 @@ public class SequenceBuilderTest {
     SequenceBuilder builder =
         SequenceBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       if (!trim.isEmpty()) builder.append("  ");
@@ -723,7 +722,7 @@ public class SequenceBuilderTest {
     SequenceBuilder builder =
         SequenceBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256, optimizer);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
       builder.append(trim.getSourceRange());

@@ -5,18 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
   private final Map<Function<P, I>, I> itemMap;
-  private final @NotNull P param;
+  private final P param;
 
-  public ItemFactoryMap(@NotNull P param) {
+  public ItemFactoryMap(P param) {
     this(param, 0);
   }
 
-  private ItemFactoryMap(@NotNull P param, int capacity) {
+  private ItemFactoryMap(P param, int capacity) {
     this.itemMap = new HashMap<>(capacity);
     this.param = param;
   }
@@ -31,7 +29,7 @@ public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
   }
 
   @Override
-  public @Nullable I get(@Nullable Object o) {
+  public I get(Object o) {
     if (o instanceof Function) {
       return getItem((Function<P, I>) o);
     }
@@ -49,22 +47,22 @@ public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
   }
 
   @Override
-  public boolean containsKey(@Nullable Object o) {
+  public boolean containsKey(Object o) {
     return itemMap.containsKey(o);
   }
 
   @Override
-  public @Nullable I put(@NotNull Function<P, I> factory, @NotNull I i) {
+  public I put(Function<P, I> factory, I i) {
     return itemMap.put(factory, i);
   }
 
   @Override
-  public void putAll(@NotNull Map<? extends Function<P, I>, ? extends I> map) {
+  public void putAll(Map<? extends Function<P, I>, ? extends I> map) {
     itemMap.putAll(map);
   }
 
   @Override
-  public @Nullable I remove(@Nullable Object o) {
+  public I remove(Object o) {
     return itemMap.remove(o);
   }
 
@@ -74,22 +72,22 @@ public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
   }
 
   @Override
-  public boolean containsValue(@Nullable Object o) {
+  public boolean containsValue(Object o) {
     return itemMap.containsValue(o);
   }
 
   @Override
-  public @NotNull Set<Function<P, I>> keySet() {
+  public Set<Function<P, I>> keySet() {
     return itemMap.keySet();
   }
 
   @Override
-  public @NotNull Collection<I> values() {
+  public Collection<I> values() {
     return itemMap.values();
   }
 
   @Override
-  public @NotNull Set<Entry<Function<P, I>, I>> entrySet() {
+  public Set<Entry<Function<P, I>, I>> entrySet() {
     return itemMap.entrySet();
   }
 }

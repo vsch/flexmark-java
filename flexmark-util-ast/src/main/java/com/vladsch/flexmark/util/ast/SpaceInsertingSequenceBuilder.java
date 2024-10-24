@@ -6,13 +6,11 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 class SpaceInsertingSequenceBuilder
     implements ISequenceBuilder<SpaceInsertingSequenceBuilder, BasedSequence> {
-  @NotNull
-  static SpaceInsertingSequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options) {
+
+  static SpaceInsertingSequenceBuilder emptyBuilder(BasedSequence base, int options) {
     return new SpaceInsertingSequenceBuilder(
         SequenceBuilder.emptyBuilder(base, options),
         BitFieldSet.any(options, TextContainer.F_ADD_SPACES_BETWEEN_NODES));
@@ -112,27 +110,22 @@ class SpaceInsertingSequenceBuilder
     return false;
   }
 
-  @NotNull
   private BasedSequence getBaseSequence() {
     return out.getBaseSequence();
   }
 
   @Override
-  @Nullable
   public BasedSequence getSingleBasedSequence() {
     return out.getSingleBasedSequence();
   }
 
   @Override
-  @NotNull
   public SpaceInsertingSequenceBuilder getBuilder() {
     return new SpaceInsertingSequenceBuilder(out.getBuilder(), addSpacesBetweenNodes);
   }
 
   @Override
-  @NotNull
-  public SpaceInsertingSequenceBuilder append(
-      @Nullable CharSequence chars, int startIndex, int endIndex) {
+  public SpaceInsertingSequenceBuilder append(CharSequence chars, int startIndex, int endIndex) {
     if (addSpaces
         && chars != null
         && startIndex < endIndex
@@ -146,7 +139,6 @@ class SpaceInsertingSequenceBuilder
   }
 
   @Override
-  @NotNull
   public SpaceInsertingSequenceBuilder append(char c) {
     if (addSpaces && !CharPredicate.WHITESPACE.test(c) && needSpace()) {
       out.append(' ');
@@ -157,7 +149,6 @@ class SpaceInsertingSequenceBuilder
   }
 
   @Override
-  @NotNull
   public SpaceInsertingSequenceBuilder append(char c, int count) {
     if (addSpaces && !CharPredicate.WHITESPACE.test(c) && needSpace()) {
       out.append(' ');
@@ -167,7 +158,6 @@ class SpaceInsertingSequenceBuilder
     return this;
   }
 
-  @NotNull
   private SpaceInsertingSequenceBuilder append(int startOffset, int endOffset) {
     if (addSpaces
         && startOffset < endOffset
@@ -181,7 +171,6 @@ class SpaceInsertingSequenceBuilder
   }
 
   @Override
-  @NotNull
   public BasedSequence toSequence() {
     return out.toSequence();
   }
@@ -197,13 +186,11 @@ class SpaceInsertingSequenceBuilder
   }
 
   @Override
-  @NotNull
   public SpaceInsertingSequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
     return append(sequences);
   }
 
   @Override
-  @NotNull
   public SpaceInsertingSequenceBuilder append(Iterable<? extends CharSequence> sequences) {
     for (CharSequence sequence : sequences) {
       append(sequence);
@@ -212,20 +199,17 @@ class SpaceInsertingSequenceBuilder
   }
 
   @Override
-  @NotNull
-  public SpaceInsertingSequenceBuilder add(@Nullable CharSequence chars) {
+  public SpaceInsertingSequenceBuilder add(CharSequence chars) {
     return append(chars);
   }
 
   @Override
-  @NotNull
-  public SpaceInsertingSequenceBuilder append(@Nullable CharSequence chars) {
+  public SpaceInsertingSequenceBuilder append(CharSequence chars) {
     return chars == null ? this : append(chars, 0, chars.length());
   }
 
   @Override
-  @NotNull
-  public SpaceInsertingSequenceBuilder append(@Nullable CharSequence chars, int startIndex) {
+  public SpaceInsertingSequenceBuilder append(CharSequence chars, int startIndex) {
     return chars == null ? this : append(chars, startIndex, chars.length());
   }
 }

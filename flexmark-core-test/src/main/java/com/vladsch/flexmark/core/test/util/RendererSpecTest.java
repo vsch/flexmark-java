@@ -10,8 +10,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.HashMap;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class RendererSpecTest extends ComboSpecTestCase {
   private static final DataHolder OPTIONS =
@@ -25,9 +23,9 @@ public abstract class RendererSpecTest extends ComboSpecTestCase {
   }
 
   protected RendererSpecTest(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     super(
         example,
         ComboSpecTestCase.optionsMaps(optionsMap, optionMap),
@@ -42,8 +40,8 @@ public abstract class RendererSpecTest extends ComboSpecTestCase {
   }
 
   @Override
-  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public final SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
     return new FlexmarkSpecExampleRenderer(
         example,

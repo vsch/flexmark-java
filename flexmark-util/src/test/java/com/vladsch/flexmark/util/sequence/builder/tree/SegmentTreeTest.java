@@ -19,7 +19,6 @@ import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import java.util.Arrays;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentTreeTest {
@@ -244,9 +243,7 @@ public class SegmentTreeTest {
   }
 
   private static void assertCharAt(
-      @NotNull BasedSequence sequence,
-      @NotNull PlainSegmentBuilder segments,
-      @NotNull SegmentTree segTree) {
+      BasedSequence sequence, PlainSegmentBuilder segments, SegmentTree segTree) {
     BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
     int iMax = sequenceFull.length();
     Segment seg = null;
@@ -395,7 +392,7 @@ public class SegmentTreeTest {
     BasedSegmentBuilder segments =
         BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
 
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
@@ -444,7 +441,7 @@ public class SegmentTreeTest {
     BasedSegmentBuilder segments =
         BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-    @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+    List<BasedSequence> lines = sequence.splitListEOL(false);
 
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();

@@ -10,8 +10,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.HashMap;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
   private Map<String, Integer> headerBaseIds = new HashMap<>();
@@ -25,7 +23,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     this(null);
   }
 
-  private HeaderIdGenerator(@Nullable DataHolder options) {
+  private HeaderIdGenerator(DataHolder options) {
     resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(options);
     toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.get(options);
     nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.get(options);
@@ -79,12 +77,12 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
   }
 
   @Override
-  public void generateIds(@NotNull Document document) {
+  public void generateIds(Document document) {
     generateIds(document, null);
   }
 
   @Override
-  public void generateIds(Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor) {
+  public void generateIds(Document document, AnchorRefTargetBlockPreVisitor preVisitor) {
     headerBaseIds.clear();
 
     resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(document);
@@ -95,7 +93,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
 
     new AnchorRefTargetBlockVisitor() {
       @Override
-      protected boolean preVisit(@NotNull Node node) {
+      protected boolean preVisit(Node node) {
         return preVisitor == null || preVisitor.preVisit(node, this);
       }
 
@@ -137,15 +135,13 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     return null;
   }
 
-  @Nullable
   @Override
-  public String getId(@NotNull Node node) {
+  public String getId(Node node) {
     return node instanceof AnchorRefTarget ? ((AnchorRefTarget) node).getAnchorRefId() : null;
   }
 
-  @Nullable
   @Override
-  public String getId(@NotNull CharSequence text) {
+  public String getId(CharSequence text) {
     return generateId(text.toString());
   }
 
@@ -195,13 +191,12 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
   }
 
   public static class Factory implements HeaderIdGeneratorFactory {
-    @NotNull
+
     @Override
-    public HeaderIdGenerator create(@NotNull LinkResolverContext context) {
+    public HeaderIdGenerator create(LinkResolverContext context) {
       return new HeaderIdGenerator();
     }
 
-    @NotNull
     @Override
     public HeaderIdGenerator create() {
       return new HeaderIdGenerator();

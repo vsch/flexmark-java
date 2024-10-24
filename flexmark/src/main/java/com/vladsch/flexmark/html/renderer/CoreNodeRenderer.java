@@ -62,7 +62,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
@@ -905,9 +904,9 @@ public class CoreNodeRenderer implements NodeRenderer {
   }
 
   public static class Factory implements NodeRendererFactory {
-    @NotNull
+
     @Override
-    public NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
       return new CoreNodeRenderer(options);
     }
   }

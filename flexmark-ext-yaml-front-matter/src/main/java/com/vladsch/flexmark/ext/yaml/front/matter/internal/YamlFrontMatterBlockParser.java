@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class YamlFrontMatterBlockParser extends AbstractBlockParser {
   private static final Pattern REGEX_METADATA =
@@ -143,13 +141,12 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
   public void parseInlines(InlineParser inlineParser) {}
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return null;
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return null;
@@ -160,9 +157,8 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory();
     }
   }

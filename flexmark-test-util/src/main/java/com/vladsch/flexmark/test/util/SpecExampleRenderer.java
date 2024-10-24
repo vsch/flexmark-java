@@ -2,19 +2,15 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface SpecExampleRenderer {
   boolean includeExampleInfo();
 
-  @Nullable
   DataHolder getOptions();
 
-  @NotNull
   SpecExample getExample();
 
-  void includeDocument(@NotNull String includedText);
+  void includeDocument(String includedText);
 
   void parse(CharSequence input);
 
@@ -27,10 +23,9 @@ public interface SpecExampleRenderer {
   void finalizeRender();
 
   // caches values and does not regenerate
-  @NotNull
+
   String getHtml();
 
-  @Nullable
   String getAst();
 
   SpecExampleRenderer NULL =
@@ -41,18 +36,18 @@ public interface SpecExampleRenderer {
         }
 
         @Override
-        public @Nullable DataHolder getOptions() {
+        public DataHolder getOptions() {
           return null;
         }
 
         @Override
-        public void includeDocument(@NotNull String includedText) {}
+        public void includeDocument(String includedText) {}
 
         @Override
         public void parse(CharSequence input) {}
 
         @Override
-        public @NotNull SpecExample getExample() {
+        public SpecExample getExample() {
           return SpecExample.NULL;
         }
 
@@ -60,12 +55,12 @@ public interface SpecExampleRenderer {
         public void finalizeDocument() {}
 
         @Override
-        public @NotNull String getHtml() {
+        public String getHtml() {
           return "";
         }
 
         @Override
-        public @Nullable String getAst() {
+        public String getAst() {
           return null;
         }
 

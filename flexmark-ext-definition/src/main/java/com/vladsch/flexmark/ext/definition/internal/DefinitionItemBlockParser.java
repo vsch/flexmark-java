@@ -27,8 +27,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class DefinitionItemBlockParser extends AbstractBlockParser {
   private final DefinitionItem block;
@@ -207,20 +205,19 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
   public void parseInlines(InlineParser inlineParser) {}
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return null;
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return null;
     }
 
     @Override
-    public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+    public SpecialLeadInHandler getLeadInHandler(DataHolder options) {
       boolean colon = DefinitionExtension.COLON_MARKER.get(options);
       boolean tilde = DefinitionExtension.TILDE_MARKER.get(options);
       return colon && tilde
@@ -235,9 +232,8 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
   }

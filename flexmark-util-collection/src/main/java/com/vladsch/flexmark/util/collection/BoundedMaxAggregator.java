@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
 import java.util.function.BinaryOperator;
-import org.jetbrains.annotations.Nullable;
 
 public class BoundedMaxAggregator implements BinaryOperator<Integer> {
   private final int maxBound;
@@ -11,7 +10,7 @@ public class BoundedMaxAggregator implements BinaryOperator<Integer> {
   }
 
   @Override
-  public Integer apply(@Nullable Integer aggregate, @Nullable Integer next) {
+  public Integer apply(Integer aggregate, Integer next) {
     if (next != null && next < maxBound) {
       return MaxAggregator.INSTANCE.apply(aggregate, next);
     }

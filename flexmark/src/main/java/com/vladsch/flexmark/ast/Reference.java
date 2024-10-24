@@ -5,15 +5,12 @@ import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Reference extends LinkNodeBase implements ReferenceNode<Reference, RefNode> {
   private BasedSequence openingMarker = BasedSequence.NULL;
   private BasedSequence reference = BasedSequence.NULL;
   private BasedSequence closingMarker = BasedSequence.NULL;
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {
@@ -32,7 +29,6 @@ public class Reference extends LinkNodeBase implements ReferenceNode<Reference, 
     };
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegmentsForChars() {
     return new BasedSequence[] {
@@ -56,14 +52,13 @@ public class Reference extends LinkNodeBase implements ReferenceNode<Reference, 
     return SequenceUtils.compare(getReference(), other.getReference(), true);
   }
 
-  @Nullable
   @Override
-  public RefNode getReferencingNode(@NotNull Node node) {
+  public RefNode getReferencingNode(Node node) {
     return node instanceof RefNode ? (RefNode) node : null;
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     delimitedSegmentSpanChars(out, openingMarker, reference, closingMarker, "ref");
     delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
     delimitedSegmentSpanChars(out, titleOpeningMarker, title, titleClosingMarker, "title");
@@ -200,7 +195,6 @@ public class Reference extends LinkNodeBase implements ReferenceNode<Reference, 
     this.title = title;
   }
 
-  @NotNull
   @Override
   protected String toStringAttributes() {
     return "reference=" + reference + ", url=" + url;

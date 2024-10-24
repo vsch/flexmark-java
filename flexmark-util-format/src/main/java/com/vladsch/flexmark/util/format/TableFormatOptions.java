@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
 
 public class TableFormatOptions implements MutableDataSetter {
   // NOTE: the value of \u001f is hardcoded in Parsing patterns
@@ -108,9 +107,8 @@ public class TableFormatOptions implements MutableDataSetter {
     dashWidth = charWidthProvider.getCharWidth('-');
   }
 
-  @NotNull
   @Override
-  public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+  public MutableDataHolder setIn(MutableDataHolder dataHolder) {
     dataHolder.set(FORMAT_TABLE_LEAD_TRAIL_PIPES, leadTrailPipes);
     dataHolder.set(FORMAT_TABLE_SPACE_AROUND_PIPES, spaceAroundPipes);
     dataHolder.set(FORMAT_TABLE_ADJUST_COLUMN_WIDTH, adjustColumnWidth);

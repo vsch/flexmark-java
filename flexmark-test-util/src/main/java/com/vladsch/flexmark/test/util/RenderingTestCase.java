@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
@@ -25,21 +23,21 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
    */
   @Override
   public void addFullSpecExample(
-      @NotNull SpecExampleRenderer exampleRenderer,
-      @NotNull SpecExampleParse exampleParse,
+      SpecExampleRenderer exampleRenderer,
+      SpecExampleParse exampleParse,
       DataHolder exampleOptions,
       boolean ignoredTestCase,
-      @NotNull String html,
-      @Nullable String ast) {}
+      String html,
+      String ast) {}
 
   /*
    * Convenience functions for those tests that do not have an example
    */
-  protected final void assertRendering(@NotNull String source, @NotNull String html) {
+  protected final void assertRendering(String source, String html) {
     assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, null));
   }
 
-  protected final void assertRendering(@NotNull SpecExample specExample) {
+  protected final void assertRendering(SpecExample specExample) {
     SpecExample example = checkExample(specExample);
     String message = example.getFileUrlWithLineNumber();
     String source = example.getSource();

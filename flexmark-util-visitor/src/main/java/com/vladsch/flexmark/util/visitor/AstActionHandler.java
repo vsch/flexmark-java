@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Intended to be completed by subclasses for specific node types and node actions
@@ -19,15 +17,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class AstActionHandler<
     C extends AstActionHandler<C, N, A, H>, N, A extends AstAction, H extends AstHandler<N, A>> {
-  private final @NotNull Map<Class<? extends N>, H> customHandlersMap = new HashMap<>();
-  private final @NotNull AstNode<N> astAdapter;
+  private final Map<Class<? extends N>, H> customHandlersMap = new HashMap<>();
+  private final AstNode<N> astAdapter;
 
-  protected AstActionHandler(@NotNull AstNode<N> astAdapter) {
+  protected AstActionHandler(AstNode<N> astAdapter) {
     this.astAdapter = astAdapter;
   }
 
   @SafeVarargs
-  protected final @NotNull C addActionHandlers(@NotNull H[]... handlers) {
+  protected final C addActionHandlers(H[]... handlers) {
     for (H[] moreHandlers : handlers) {
       for (H handler : moreHandlers) {
         customHandlersMap.put(handler.getNodeType(), handler);
@@ -36,20 +34,20 @@ public abstract class AstActionHandler<
     return (C) this;
   }
 
-  protected @NotNull C addActionHandler(@NotNull H handler) {
+  protected C addActionHandler(H handler) {
     customHandlersMap.put(handler.getNodeType(), handler);
     return (C) this;
   }
 
-  private @Nullable A getAction(@Nullable H handler) {
+  private A getAction(H handler) {
     return handler == null ? null : handler.getAdapter();
   }
 
-  private @Nullable A getAction(@NotNull N node) {
+  private A getAction(N node) {
     return getAction(customHandlersMap.get(node.getClass()));
   }
 
-  public @NotNull Set<Class<? extends N>> getNodeClasses() {
+  public Set<Class<? extends N>> getNodeClasses() {
     return customHandlersMap.keySet();
   }
 
@@ -63,8 +61,7 @@ public abstract class AstActionHandler<
    * @param processor processor to invoke to perform the processing, BiConsumer taking N node, and A
    *     action
    */
-  protected void processNode(
-      @NotNull N node, boolean withChildren, @NotNull BiConsumer<N, A> processor) {
+  protected void processNode(N node, boolean withChildren, BiConsumer<N, A> processor) {
     A action = getAction(node);
     if (action != null) {
       processor.accept(node, action);
@@ -73,7 +70,7 @@ public abstract class AstActionHandler<
     }
   }
 
-  protected final void processChildren(@NotNull N node, @NotNull BiConsumer<N, A> processor) {
+  protected final void processChildren(N node, BiConsumer<N, A> processor) {
     N child = astAdapter.getFirstChild(node);
     while (child != null) {
       // A subclass of this visitor might modify the node, resulting in getNext returning a

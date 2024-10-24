@@ -5,11 +5,9 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface TranslationContext {
-  @Nullable
+
   HtmlIdGenerator getIdGenerator();
 
   /**
@@ -17,11 +15,9 @@ public interface TranslationContext {
    *
    * @return RenderPurpose for current rendering
    */
-  @NotNull
   RenderPurpose getRenderPurpose();
 
   /** Get MutableDataHolder for storing this translation run values across render purpose phases */
-  @NotNull
   MutableDataHolder getTranslationStore();
 
   /**
@@ -53,26 +49,23 @@ public interface TranslationContext {
    *     element during parsing
    * @return text to be used in rendering for this phase
    */
-  @NotNull
   CharSequence transformNonTranslating(
-      @Nullable CharSequence prefix,
-      @NotNull CharSequence nonTranslatingText,
-      @Nullable CharSequence suffix,
-      @Nullable CharSequence suffix2);
+      CharSequence prefix,
+      CharSequence nonTranslatingText,
+      CharSequence suffix,
+      CharSequence suffix2);
 
   /**
    * @param postProcessor id post processor for TRANSLATED purpose
    * @param scope code to which the post processor applies
    */
-  void postProcessNonTranslating(
-      @NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope);
+  void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope);
 
   /**
    * @param postProcessor id post processor for TRANSLATED purpose
    * @param scope code to which the post processor applies
    */
-  <T> @NotNull T postProcessNonTranslating(
-      @NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope);
+  <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope);
 
   /**
    * @return true if non-translating post processor is set
@@ -99,12 +92,8 @@ public interface TranslationContext {
    *     element during parsing
    * @return text to be used in rendering for this phase
    */
-  @NotNull
   CharSequence transformTranslating(
-      @Nullable CharSequence prefix,
-      @NotNull CharSequence translatingText,
-      @Nullable CharSequence suffix,
-      @Nullable CharSequence suffix2);
+      CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2);
 
   /**
    * During {@link RenderPurpose#TRANSLATION_SPANS} this converts anchorRef to ordinal placeholder
@@ -116,8 +105,7 @@ public interface TranslationContext {
    * @param anchorRef anchor ref
    * @return anchorRef for the phase to be used for rendering
    */
-  @NotNull
-  CharSequence transformAnchorRef(@NotNull CharSequence pageRef, @NotNull CharSequence anchorRef);
+  CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef);
 
   /**
    * Separate translation span. Will generate a paragraph of text which should be translated as one
@@ -127,7 +115,7 @@ public interface TranslationContext {
    * spans During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead
    * outputs corresponding translated span During {@link RenderPurpose#TRANSLATED} calls render
    */
-  void translatingSpan(@NotNull TranslatingSpanRender render);
+  void translatingSpan(TranslatingSpanRender render);
 
   /**
    * Separate non-translation span. Will generate a paragraph of text which will not be translated
@@ -136,14 +124,14 @@ public interface TranslationContext {
    * spans During {@link RenderPurpose#TRANSLATED_SPANS} output from renderer is suppressed, instead
    * outputs corresponding translated span During {@link RenderPurpose#TRANSLATED} calls render
    */
-  void nonTranslatingSpan(@NotNull TranslatingSpanRender render);
+  void nonTranslatingSpan(TranslatingSpanRender render);
 
   /**
    * Separate translation span which is also a ref target
    *
    * @param target target node,
    */
-  void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render);
+  void translatingRefTargetSpan(Node target, TranslatingSpanRender render);
 
   /**
    * Temporarily change the format for placeholders
@@ -152,8 +140,7 @@ public interface TranslationContext {
    * @param render render which will be used with the custom generator
    */
   void customPlaceholderFormat(
-      @NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render);
+      TranslationPlaceholderGenerator generator, TranslatingSpanRender render);
 
-  @Nullable
   MergeContext getMergeContext();
 }

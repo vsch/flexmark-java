@@ -2,12 +2,10 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Document;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** A renderer for a document node for a specific rendering phase */
 public interface PhasedNodeFormatter extends NodeFormatter {
-  @Nullable
+
   Set<FormattingPhase> getFormattingPhases();
 
   /**
@@ -21,8 +19,8 @@ public interface PhasedNodeFormatter extends NodeFormatter {
    *     non-phased node rendering
    */
   void renderDocument(
-      @NotNull NodeFormatterContext context,
-      @NotNull MarkdownWriter markdown,
-      @NotNull Document document,
-      @NotNull FormattingPhase phase);
+      NodeFormatterContext context,
+      MarkdownWriter markdown,
+      Document document,
+      FormattingPhase phase);
 }

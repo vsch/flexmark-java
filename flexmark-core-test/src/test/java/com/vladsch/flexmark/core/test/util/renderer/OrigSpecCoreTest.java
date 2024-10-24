@@ -10,8 +10,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class OrigSpecCoreTest extends FullSpecTestCase {
   private static final DataHolder OPTIONS =
@@ -20,20 +18,20 @@ public abstract class OrigSpecCoreTest extends FullSpecTestCase {
           .set(TestUtils.NO_FILE_EOL, false)
           .toImmutable();
 
-  private final @Nullable DataHolder myDefaultOptions;
+  private final DataHolder myDefaultOptions;
 
-  protected OrigSpecCoreTest(@Nullable DataHolder defaultOptions) {
+  protected OrigSpecCoreTest(DataHolder defaultOptions) {
     myDefaultOptions = DataSet.aggregate(OPTIONS, defaultOptions);
   }
 
   @Override
-  public final @Nullable DataHolder options(@NotNull String option) {
+  public final DataHolder options(String option) {
     return null;
   }
 
   @Override
-  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
-      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+  public final SpecExampleRenderer getSpecExampleRenderer(
+      SpecExample example, DataHolder exampleOptions) {
     DataHolder combineOptions = DataSet.aggregate(myDefaultOptions, exampleOptions);
     return new FlexmarkSpecExampleRenderer(
         example,

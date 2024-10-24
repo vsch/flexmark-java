@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * CharSequence that repeats in a wraparound the given sequence.
  *
@@ -72,7 +70,6 @@ public class RepeatedSequence implements CharSequence {
     return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
   }
 
-  @NotNull
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -80,23 +77,19 @@ public class RepeatedSequence implements CharSequence {
     return sb.toString();
   }
 
-  @NotNull
   public static CharSequence ofSpaces(int count) {
     return new RepeatedSequence(" ", 0, count);
   }
 
-  @NotNull
   public static CharSequence repeatOf(char c, int count) {
     return new RepeatedSequence(String.valueOf(c), 0, count);
   }
 
-  @NotNull
-  public static CharSequence repeatOf(@NotNull CharSequence chars, int count) {
+  public static CharSequence repeatOf(CharSequence chars, int count) {
     return new RepeatedSequence(chars, 0, chars.length() * count);
   }
 
-  @NotNull
-  static CharSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
+  static CharSequence repeatOf(CharSequence chars, int startIndex, int endIndex) {
     return new RepeatedSequence(chars, startIndex, endIndex);
   }
 }

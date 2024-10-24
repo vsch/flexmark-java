@@ -3,8 +3,6 @@ package com.vladsch.flexmark.util.sequence.mappers;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface SpecialLeadInHandler {
   /**
@@ -21,10 +19,7 @@ public interface SpecialLeadInHandler {
    *     handler
    * @return true if sequence was a lead in for the handler
    */
-  boolean escape(
-      @NotNull BasedSequence sequence,
-      @Nullable DataHolder options,
-      @NotNull Consumer<CharSequence> consumer);
+  boolean escape(BasedSequence sequence, DataHolder options, Consumer<CharSequence> consumer);
 
   /**
    * UnEscape special lead-in characters which start a block element if first non-whitespace on the
@@ -40,8 +35,5 @@ public interface SpecialLeadInHandler {
    *     handler
    * @return true if sequence was a lead in for the handler
    */
-  boolean unEscape(
-      @NotNull BasedSequence sequence,
-      @Nullable DataHolder options,
-      @NotNull Consumer<CharSequence> consumer);
+  boolean unEscape(BasedSequence sequence, DataHolder options, Consumer<CharSequence> consumer);
 }

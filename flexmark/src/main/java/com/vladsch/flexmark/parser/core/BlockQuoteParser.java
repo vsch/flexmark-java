@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BlockQuoteParser extends AbstractBlockParser {
   private static final char MARKER_CHAR = '>';
@@ -140,13 +138,12 @@ public class BlockQuoteParser extends AbstractBlockParser {
   }
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return Collections.emptySet();
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return new HashSet<>(
@@ -161,7 +158,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
 
     @Override
-    public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+    public SpecialLeadInHandler getLeadInHandler(DataHolder options) {
       return BlockQuoteLeadInHandler.HANDLER;
     }
 
@@ -170,9 +167,8 @@ public class BlockQuoteParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
   }

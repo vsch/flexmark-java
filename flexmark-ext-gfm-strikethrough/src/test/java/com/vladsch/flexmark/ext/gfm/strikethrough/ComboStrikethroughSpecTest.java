@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboStrikethroughSpecTest extends RendererSpecTest {
@@ -34,7 +33,7 @@ public class ComboStrikethroughSpecTest extends RendererSpecTest {
             .set(StrikethroughExtension.STRIKETHROUGH_STYLE_HTML_CLOSE, "</span>"));
   }
 
-  public ComboStrikethroughSpecTest(@NotNull SpecExample example) {
+  public ComboStrikethroughSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

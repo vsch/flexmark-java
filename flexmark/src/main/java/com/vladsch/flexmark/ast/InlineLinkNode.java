@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class InlineLinkNode extends LinkNode {
   protected BasedSequence textOpeningMarker = BasedSequence.NULL;
@@ -10,7 +9,6 @@ public abstract class InlineLinkNode extends LinkNode {
   protected BasedSequence linkOpeningMarker = BasedSequence.NULL;
   protected BasedSequence linkClosingMarker = BasedSequence.NULL;
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {
@@ -31,7 +29,6 @@ public abstract class InlineLinkNode extends LinkNode {
     };
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegmentsForChars() {
     return new BasedSequence[] {
@@ -52,7 +49,7 @@ public abstract class InlineLinkNode extends LinkNode {
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
     segmentSpanChars(out, linkOpeningMarker, "linkOpen");
     delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
@@ -107,7 +104,6 @@ public abstract class InlineLinkNode extends LinkNode {
     this.linkClosingMarker = linkClosingMarker;
   }
 
-  @NotNull
   @Override
   protected String toStringAttributes() {
     return "text=" + text + ", url=" + url + ", title=" + title;

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /** Table cell of a {@link TableRow} containing inline nodes. */
 public class TableCell extends Node implements DelimitedNode {
@@ -109,14 +108,13 @@ public class TableCell extends Node implements DelimitedNode {
     this.span = span;
   }
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {openingMarker, text, closingMarker};
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     if (alignment != null) out.append(" ").append(alignment);
     if (header) out.append(" header");
     if (span > 1) out.append(" span=" + span);

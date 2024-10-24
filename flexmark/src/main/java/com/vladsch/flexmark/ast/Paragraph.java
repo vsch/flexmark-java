@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 public class Paragraph extends Block implements TextContainer {
   private static final int[] EMPTY_INDENTS = new int[0];
@@ -15,14 +14,13 @@ public class Paragraph extends Block implements TextContainer {
   private boolean trailingBlankLine = false;
   private boolean hasTableSeparator;
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return EMPTY_SEGMENTS;
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     super.getAstExtra(out);
     if (trailingBlankLine) out.append(" isTrailingBlankLine");
   }
@@ -38,7 +36,7 @@ public class Paragraph extends Block implements TextContainer {
   }
 
   @Override
-  public void setContent(@NotNull BlockContent blockContent) {
+  public void setContent(BlockContent blockContent) {
     super.setContent(blockContent);
     setLineIndents(blockContent.getLineIndents());
   }

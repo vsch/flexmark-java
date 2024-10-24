@@ -3,7 +3,6 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![] This includes footnote references
@@ -38,7 +37,7 @@ public interface LinkRefProcessor {
    * @param nodeChars text to match, including [] or ![]
    * @return true if it is a match
    */
-  boolean isMatch(@NotNull BasedSequence nodeChars);
+  boolean isMatch(BasedSequence nodeChars);
 
   /**
    * Create the desired element that was previously matched with isMatch
@@ -46,8 +45,7 @@ public interface LinkRefProcessor {
    * @param nodeChars char sequence from which to create the node
    * @return Node element to be inserted into the tree
    */
-  @NotNull
-  Node createNode(@NotNull BasedSequence nodeChars);
+  Node createNode(BasedSequence nodeChars);
 
   /**
    * Adjust child nodes' text as needed when some of the link ref text was used in the opening or
@@ -58,8 +56,7 @@ public interface LinkRefProcessor {
    *     used as part of the opener and/or closer sequence.
    * @return adjusted sequence to use for this node's child text
    */
-  @NotNull
-  BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node);
+  BasedSequence adjustInlineText(Document document, Node node);
 
   /**
    * Allows the delimiter processor to allow/disallow other delimiters in its inline text
@@ -69,8 +66,7 @@ public interface LinkRefProcessor {
    * @param node delimited node created by this processor @return true if delimiters are allowed in
    *     this part of the node's text
    */
-  boolean allowDelimiters(
-      @NotNull BasedSequence chars, @NotNull Document document, @NotNull Node node);
+  boolean allowDelimiters(BasedSequence chars, Document document, Node node);
 
   /**
    * Allows the processor to adjust nodes' elements after all delimiters have been processed inside
@@ -79,5 +75,5 @@ public interface LinkRefProcessor {
    * @param document document, can be used to get parsing options
    * @param node node whose elements can be adjusted
    */
-  void updateNodeElements(@NotNull Document document, @NotNull Node node);
+  void updateNodeElements(Document document, Node node);
 }

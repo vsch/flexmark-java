@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
 
 public interface AnchorRefTargetBlockPreVisitor {
   /**
@@ -12,6 +11,5 @@ public interface AnchorRefTargetBlockPreVisitor {
    *     targets
    * @return true, if children of block node need to be visited
    */
-  boolean preVisit(
-      @NotNull Node node, @NotNull AnchorRefTargetBlockVisitor anchorRefTargetBlockVisitor);
+  boolean preVisit(Node node, AnchorRefTargetBlockVisitor anchorRefTargetBlockVisitor);
 }

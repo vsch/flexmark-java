@@ -3,8 +3,6 @@ package com.vladsch.flexmark.html.renderer;
 import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockPreVisitor;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface HtmlIdGenerator {
   HtmlIdGenerator NULL =
@@ -13,29 +11,24 @@ public interface HtmlIdGenerator {
         public void generateIds(Document document) {}
 
         @Override
-        public void generateIds(
-            Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor) {}
+        public void generateIds(Document document, AnchorRefTargetBlockPreVisitor preVisitor) {}
 
-        @Nullable
         @Override
-        public String getId(@NotNull Node node) {
+        public String getId(Node node) {
           return null;
         }
 
-        @Nullable
         @Override
-        public String getId(@NotNull CharSequence text) {
+        public String getId(CharSequence text) {
           return null;
         }
       };
 
   void generateIds(Document document);
 
-  void generateIds(Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor);
+  void generateIds(Document document, AnchorRefTargetBlockPreVisitor preVisitor);
 
-  @Nullable
-  String getId(@NotNull Node node);
+  String getId(Node node);
 
-  @Nullable
-  String getId(@NotNull CharSequence text);
+  String getId(CharSequence text);
 }

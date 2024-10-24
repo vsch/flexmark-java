@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.tables.TableCell;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Table cell separator only used during parsing, not part of the AST, use the {@link
@@ -13,18 +12,16 @@ import org.jetbrains.annotations.NotNull;
 class TableColumnSeparator extends Node implements DoNotDecorate {
   TableColumnSeparator() {}
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return EMPTY_SEGMENTS;
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     astExtraChars(out);
   }
 
-  @NotNull
   @Override
   protected String toStringAttributes() {
     return "text=" + getChars();

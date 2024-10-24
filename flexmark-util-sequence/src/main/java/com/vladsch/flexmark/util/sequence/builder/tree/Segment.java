@@ -4,7 +4,6 @@ import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
-import org.jetbrains.annotations.NotNull;
 
 /** SegmentedSequence Segment stored in byte[] in serialized format */
 public abstract class Segment {
@@ -219,14 +218,9 @@ public abstract class Segment {
   private static class Base extends Segment {
     private final int startOffset;
     private final int endOffset;
-    private final @NotNull BasedSequence baseSeq;
+    private final BasedSequence baseSeq;
 
-    Base(
-        int pos,
-        byte[] bytes,
-        int byteOffset,
-        int indexOffset,
-        @NotNull BasedSequence basedSequence) {
+    Base(int pos, byte[] bytes, int byteOffset, int indexOffset, BasedSequence basedSequence) {
       super(pos, bytes, byteOffset, indexOffset);
 
       baseSeq = basedSequence;
@@ -349,7 +343,6 @@ public abstract class Segment {
       return create(startOffset + startIndex, endIndex - startIndex);
     }
 
-    @NotNull
     @Override
     public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -439,7 +432,6 @@ public abstract class Segment {
       return new TextRepeatedSequence(c, endIndex - startIndex);
     }
 
-    @NotNull
     @Override
     public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -451,7 +443,7 @@ public abstract class Segment {
   }
 
   private static class Text extends Segment {
-    private final @NotNull CharSequence chars;
+    private final CharSequence chars;
 
     Text(int pos, byte[] bytes, int byteOffset, int indexOffset) {
       super(pos, bytes, byteOffset, indexOffset);
@@ -566,7 +558,6 @@ public abstract class Segment {
       return -1;
     }
 
-    @NotNull
     @Override
     public CharSequence getCharSequence() {
       return chars;
@@ -574,11 +565,7 @@ public abstract class Segment {
   }
 
   static Segment getSegment(
-      byte[] bytes,
-      int byteOffset,
-      int pos,
-      int indexOffset,
-      @NotNull BasedSequence basedSequence) {
+      byte[] bytes, int byteOffset, int pos, int indexOffset, BasedSequence basedSequence) {
     int type = bytes[byteOffset] & TYPE_MASK;
 
     switch (type) {
@@ -599,7 +586,7 @@ public abstract class Segment {
     }
   }
 
-  static SegType getSegType(@NotNull Seg seg, @NotNull CharSequence textChars) {
+  static SegType getSegType(Seg seg, CharSequence textChars) {
     if (seg.isBase()) {
       return seg.isAnchor() ? SegType.ANCHOR : SegType.BASE;
     } else if (seg.isText()) {
@@ -641,7 +628,7 @@ public abstract class Segment {
     return length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
   }
 
-  static int getSegByteLength(@NotNull Segment.SegType segType, int segStart, int segLength) {
+  static int getSegByteLength(Segment.SegType segType, int segStart, int segLength) {
     int length = 1;
 
     if (segType.hasBoth()) {
@@ -665,7 +652,7 @@ public abstract class Segment {
     return length;
   }
 
-  static int getSegByteLength(@NotNull Seg seg, @NotNull CharSequence textChars) {
+  static int getSegByteLength(Seg seg, CharSequence textChars) {
     SegType segType = getSegType(seg, textChars);
     return getSegByteLength(segType, seg.getSegStart(), seg.length());
   }
@@ -712,7 +699,7 @@ public abstract class Segment {
     return c;
   }
 
-  static int addChars(byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
+  static int addChars(byte[] bytes, int offset, CharSequence chars, int start, int end) {
     for (int i = start; i < end; i++) {
       char c = chars.charAt(i);
       bytes[offset++] = (byte) ((c & 0x0000ff00) >> 8);
@@ -726,8 +713,7 @@ public abstract class Segment {
     return offset;
   }
 
-  static int addCharsAscii(
-      byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
+  static int addCharsAscii(byte[] bytes, int offset, CharSequence chars, int start, int end) {
     for (int i = start; i < end; i++) {
       char c = chars.charAt(i);
       bytes[offset++] = (byte) (c & 0x000000ff);
@@ -739,8 +725,7 @@ public abstract class Segment {
     return (char) (0x00ff & bytes[offset]);
   }
 
-  static int addSegBytes(
-      byte[] bytes, int offset, @NotNull Seg seg, @NotNull CharSequence textChars) {
+  static int addSegBytes(byte[] bytes, int offset, Seg seg, CharSequence textChars) {
     SegType segType = getSegType(seg, textChars);
     int segLength = seg.length();
 

@@ -16,26 +16,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-  private final @NotNull OrderedSet<K> keySet;
-  private final @NotNull OrderedSet<V> valueSet;
-  private final @Nullable CollectionHost<Paired<K, V>> host;
+  private final OrderedSet<K> keySet;
+  private final OrderedSet<V> valueSet;
+  private final CollectionHost<Paired<K, V>> host;
   private boolean isInKeyUpdate;
   private boolean isInValueUpdate;
-  private @Nullable Indexed<Entry<K, V>> indexedProxy;
+  private Indexed<Entry<K, V>> indexedProxy;
 
   public OrderedMultiMap() {
     this(0, null);
   }
 
-  public OrderedMultiMap(@NotNull CollectionHost<Paired<K, V>> host) {
+  public OrderedMultiMap(CollectionHost<Paired<K, V>> host) {
     this(0, host);
   }
 
-  private OrderedMultiMap(int capacity, @Nullable CollectionHost<Paired<K, V>> host) {
+  private OrderedMultiMap(int capacity, CollectionHost<Paired<K, V>> host) {
     this.host = host;
     this.indexedProxy = null;
     this.valueSet =
@@ -43,12 +41,12 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             capacity,
             new CollectionHost<V>() {
               @Override
-              public void adding(int index, @Nullable V v, @Nullable Object k) {
+              public void adding(int index, V v, Object k) {
                 addingValue(index, v, k);
               }
 
               @Override
-              public Object removing(int index, @Nullable V v) {
+              public Object removing(int index, V v) {
                 return removingValue(index, v);
               }
 
@@ -78,12 +76,12 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             capacity,
             new CollectionHost<K>() {
               @Override
-              public void adding(int index, @Nullable K k, @Nullable Object v) {
+              public void adding(int index, K k, Object v) {
                 addingKey(index, k, v);
               }
 
               @Override
-              public Object removing(int index, @Nullable K k) {
+              public Object removing(int index, K k) {
                 return removingKey(index, k);
               }
 
@@ -153,7 +151,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return (int) ((long) keySet.getModificationCount() + (long) valueSet.getModificationCount());
   }
 
-  private void addingKey(int index, @Nullable K k, @Nullable Object v) {
+  private void addingKey(int index, K k, Object v) {
     isInValueUpdate = true;
     if (host != null && !host.skipHostUpdate()) {
       host.adding(index, new Pair<>(k, (V) v), null);
@@ -175,7 +173,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     isInValueUpdate = false;
   }
 
-  private Object removingKey(int index, @Nullable K k) {
+  private Object removingKey(int index, K k) {
     isInValueUpdate = true;
     if (host != null && !host.skipHostUpdate()) {
       host.removing(index, new Pair<>(k, null));
@@ -185,7 +183,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return r;
   }
 
-  private void addingValue(int index, @Nullable V v, @Nullable Object k) {
+  private void addingValue(int index, V v, Object k) {
     isInKeyUpdate = true;
     if (host != null && !host.skipHostUpdate()) {
       host.adding(index, new Pair<>((K) k, v), null);
@@ -209,7 +207,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     isInKeyUpdate = false;
   }
 
-  private Object removingValue(int index, @Nullable V v) {
+  private Object removingValue(int index, V v) {
     isInKeyUpdate = true;
     if (host != null && !host.skipHostUpdate()) {
       host.removing(index, new Pair<>(null, v));
@@ -230,33 +228,33 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   }
 
   @Override
-  public boolean containsKey(@Nullable Object o) {
+  public boolean containsKey(Object o) {
     return keySet.contains(o);
   }
 
   @Override
-  public boolean containsValue(@Nullable Object o) {
+  public boolean containsValue(Object o) {
     int index = valueSet.indexOf(o);
     return keySet.isValidIndex(index);
   }
 
   @Override
-  public @Nullable V get(@Nullable Object o) {
+  public V get(Object o) {
     return getKeyValue(o);
   }
 
-  private @Nullable V getKeyValue(@Nullable Object o) {
+  private V getKeyValue(Object o) {
     int index = keySet.indexOf(o);
     return index == -1 ? null : valueSet.getValue(index);
   }
 
-  public @Nullable K getValueKey(@Nullable Object o) {
+  public K getValueKey(Object o) {
     int index = valueSet.indexOf(o);
     return index == -1 ? null : keySet.getValue(index);
   }
 
   @Override
-  public @Nullable V put(@Nullable K k, @Nullable V v) {
+  public V put(K k, V v) {
     return putKeyValue(k, v);
   }
 
@@ -274,23 +272,23 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     isInKeyUpdate = false;
   }
 
-  boolean putKeyValuePair(@NotNull Paired<K, V> e) {
+  boolean putKeyValuePair(Paired<K, V> e) {
     return addKeyValue(e.getFirst(), e.getSecond());
   }
 
-  boolean putValueKeyPair(@NotNull Paired<V, K> e) {
+  boolean putValueKeyPair(Paired<V, K> e) {
     return addKeyValue(e.getSecond(), e.getFirst());
   }
 
-  public V putKeyValue(@Nullable K k, @Nullable V v) {
+  public V putKeyValue(K k, V v) {
     return !addKeyValue(k, v) ? v : null;
   }
 
-  public K putValueKey(@Nullable V v, @Nullable K k) {
+  public K putValueKey(V v, K k) {
     return !addKeyValue(k, v) ? k : null;
   }
 
-  private boolean addKeyValue(@Nullable K k, @Nullable V v) {
+  private boolean addKeyValue(K k, V v) {
     int keyIndex = keySet.indexOf(k);
     int valueIndex = valueSet.indexOf(v);
 
@@ -372,7 +370,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   }
 
   @Override
-  public @Nullable V remove(@Nullable Object o) {
+  public V remove(Object o) {
     return removeKey(o);
   }
 
@@ -380,7 +378,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return removeEntryIndex(index, keySet.getValueOrNull(index), valueSet.getValueOrNull(index));
   }
 
-  private boolean removeEntryIndex(int index, @Nullable K k, @Nullable V v) {
+  private boolean removeEntryIndex(int index, K k, V v) {
     int keyIndex = keySet.indexOf(k);
     int valueIndex = valueSet.indexOf(v);
 
@@ -458,7 +456,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   }
 
   @Override
-  public void putAll(@NotNull Map<? extends K, ? extends V> map) {
+  public void putAll(Map<? extends K, ? extends V> map) {
     putAllKeyValues(map);
   }
 
@@ -483,13 +481,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     isInValueUpdate = false;
   }
 
-  @NotNull
   @Override
   public OrderedSet<K> keySet() {
     return keySet;
   }
 
-  @NotNull
   @Override
   public Collection<V> values() {
     if (!keySet.isSparse()) {
@@ -505,7 +501,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return valueSet;
   }
 
-  @NotNull
   @Override
   public OrderedSet<Map.Entry<K, V>> entrySet() {
     return keyValueEntrySet();
@@ -536,7 +531,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return bitSet;
   }
 
-  @NotNull
   @Override
   public Iterator<Map.Entry<K, V>> iterator() {
     return entrySetIterator();
@@ -560,12 +554,12 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             keySet.size(),
             new CollectionHost<Map.Entry<K, V>>() {
               @Override
-              public void adding(int index, @Nullable Map.Entry<K, V> entry, @Nullable Object v) {
+              public void adding(int index, Map.Entry<K, V> entry, Object v) {
                 OrderedMultiMap.this.putKeyValue(entry.getKey(), entry.getValue());
               }
 
               @Override
-              public Object removing(int index, @Nullable Map.Entry<K, V> entry) {
+              public Object removing(int index, Map.Entry<K, V> entry) {
                 boolean b =
                     OrderedMultiMap.this.removeEntryIndex(index, entry.getKey(), entry.getValue());
                 return b ? entry : null;

@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.visitor.AstActionHandler;
 import java.util.Collection;
-import org.jetbrains.annotations.NotNull;
 
 // @formatter:off
 
@@ -70,36 +69,35 @@ public class NodeVisitor
     super(Node.AST_ADAPTER);
   }
 
-  public NodeVisitor(@NotNull VisitHandler... handlers) {
+  public NodeVisitor(VisitHandler... handlers) {
     super(Node.AST_ADAPTER);
     super.addActionHandlers(handlers);
   }
 
-  private @NotNull NodeVisitor addHandlers(@NotNull Collection<VisitHandler> handlers) {
+  private NodeVisitor addHandlers(Collection<VisitHandler> handlers) {
     return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
   }
 
-  @NotNull
-  NodeVisitor addHandler(@NotNull VisitHandler handler) {
+  NodeVisitor addHandler(VisitHandler handler) {
     return super.addActionHandler(handler);
   }
 
   @Override
-  public final void visit(@NotNull Node node) {
+  public final void visit(Node node) {
     processNode(node, true, this::visit);
   }
 
   @Override
-  public final void visitNodeOnly(@NotNull Node node) {
+  public final void visitNodeOnly(Node node) {
     processNode(node, false, this::visit);
   }
 
   @Override
-  public final void visitChildren(@NotNull Node parent) {
+  public final void visitChildren(Node parent) {
     processChildren(parent, this::visit);
   }
 
-  private void visit(@NotNull Node node, @NotNull Visitor<Node> handler) {
+  private void visit(Node node, Visitor<Node> handler) {
     handler.visit(node);
   }
 }

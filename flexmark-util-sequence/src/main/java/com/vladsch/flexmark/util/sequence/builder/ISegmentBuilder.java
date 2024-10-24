@@ -3,8 +3,6 @@ package com.vladsch.flexmark.util.sequence.builder;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.Range;
 import java.util.Iterator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
   ISegmentBuilderOptions O_INCLUDE_ANCHORS = ISegmentBuilderOptions.INCLUDE_ANCHORS;
@@ -19,7 +17,6 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
 
   boolean isEmpty();
 
-  @Nullable
   Range getBaseSubSequenceRange();
 
   boolean haveOffsets();
@@ -45,7 +42,6 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
    *
    * @return iterator over segment builder parts
    */
-  @NotNull
   @Override
   Iterator<Object> iterator();
 
@@ -54,27 +50,19 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
    *
    * @return iterator over segment builder segments
    */
-  @NotNull
   Iterable<Seg> getSegments();
 
-  @NotNull
   S append(int startOffset, int endOffset);
 
-  @NotNull
   S append(CharSequence text);
 
-  @NotNull
   S appendAnchor(int offset);
 
-  @NotNull
-  S append(@NotNull Range range);
+  S append(Range range);
 
-  @NotNull
-  String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars);
+  String toStringWithRangesVisibleWhitespace(CharSequence chars);
 
-  @NotNull
-  String toStringWithRanges(@NotNull CharSequence chars);
+  String toStringWithRanges(CharSequence chars);
 
-  @NotNull
-  String toString(@NotNull CharSequence chars);
+  String toString(CharSequence chars);
 }

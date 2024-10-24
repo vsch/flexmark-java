@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.dependency;
 
 import java.util.Set;
-import org.jetbrains.annotations.Nullable;
 
 public interface Dependent {
   /**
@@ -9,7 +8,6 @@ public interface Dependent {
    *     the blocks in the list affect global state then these will be run on ALL blocks of the
    *     document before this preprocessor is called.
    */
-  @Nullable
   Set<Class<?>> getAfterDependents();
 
   /**
@@ -17,7 +15,6 @@ public interface Dependent {
    *     blocks in the list affect global state then these will be run on ALL blocks of the document
    *     before this preprocessor is called.
    */
-  @Nullable
   Set<Class<?>> getBeforeDependents();
 
   /**

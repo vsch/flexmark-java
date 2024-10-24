@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
-import org.jetbrains.annotations.NotNull;
 
 public class DelimitedLinkNode extends LinkNode {
   protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -11,14 +10,13 @@ public class DelimitedLinkNode extends LinkNode {
 
   public DelimitedLinkNode() {}
 
-  @NotNull
   @Override
   public BasedSequence[] getSegments() {
     return new BasedSequence[] {openingMarker, text, closingMarker};
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
   }
 

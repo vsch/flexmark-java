@@ -17,7 +17,6 @@ import com.vladsch.flexmark.util.format.options.ListNumberedMarker;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
@@ -133,7 +132,7 @@ public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterS
         "remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
   }
 
-  public ComboCoreTranslationFormatterSpecTest(@NotNull SpecExample example) {
+  public ComboCoreTranslationFormatterSpecTest(SpecExample example) {
     super(example, optionsMap);
   }
 

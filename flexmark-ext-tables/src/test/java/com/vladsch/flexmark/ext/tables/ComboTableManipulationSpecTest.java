@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboTableManipulationSpecTest extends FormatterSpecTest {
@@ -831,7 +830,7 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
                 (table, tableNoe) -> table.moveColumn(5, 6)));
   }
 
-  public ComboTableManipulationSpecTest(@NotNull SpecExample example) {
+  public ComboTableManipulationSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

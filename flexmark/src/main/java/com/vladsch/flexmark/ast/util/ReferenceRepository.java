@@ -13,32 +13,27 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class ReferenceRepository extends NodeRepository<Reference> {
   public ReferenceRepository(DataHolder options) {
     super(Parser.REFERENCES_KEEP.get(options));
   }
 
-  @NotNull
   @Override
   public DataKey<ReferenceRepository> getDataKey() {
     return Parser.REFERENCES;
   }
 
-  @NotNull
   @Override
   public DataKey<KeepType> getKeepDataKey() {
     return Parser.REFERENCES_KEEP;
   }
 
-  @NotNull
   @Override
-  public String normalizeKey(@NotNull CharSequence key) {
+  public String normalizeKey(CharSequence key) {
     return Escaping.normalizeReference(key, true);
   }
 
-  @NotNull
   @Override
   public Set<Reference> getReferencedElements(Node parent) {
     Set<Reference> references = new HashSet<>();

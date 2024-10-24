@@ -1,21 +1,16 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Range {
   public static final Range NULL = new Range(Integer.MAX_VALUE, Integer.MIN_VALUE);
 
-  @NotNull
   public static Range of(int start, int end) {
     return start == NULL.start && end == NULL.end ? NULL : new Range(start, end);
   }
 
-  @NotNull
   public static Range emptyOf(int position) {
     return new Range(position, position);
   }
 
-  @NotNull
   public static Range ofLength(int start, int length) {
     return new Range(start, start + length);
   }
@@ -88,27 +83,23 @@ public class Range {
     return start <= index && index < end;
   }
 
-  public boolean isAdjacentBefore(@NotNull Range other) {
+  public boolean isAdjacentBefore(Range other) {
     return end == other.start;
   }
 
-  @NotNull
-  public Range expandToInclude(@NotNull Range other) {
+  public Range expandToInclude(Range other) {
     return expandToInclude(other.start, other.end);
   }
 
-  @NotNull
   private Range expandToInclude(int start, int end) {
     return withRange(Math.min(this.start, start), Math.max(this.end, end));
   }
 
-  @NotNull
-  public BasedSequence basedSubSequence(@NotNull CharSequence charSequence) {
+  public BasedSequence basedSubSequence(CharSequence charSequence) {
     return BasedSequence.of(charSequence).subSequence(start, end);
   }
 
-  @NotNull
-  CharSequence safeSubSequence(@NotNull CharSequence charSequence) {
+  CharSequence safeSubSequence(CharSequence charSequence) {
     int end = Math.min(charSequence.length(), this.end);
     return isNull()
         ? charSequence.subSequence(0, 0)

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboDefinitionSpecTest extends RendererSpecTest {
@@ -37,7 +36,7 @@ public class ComboDefinitionSpecTest extends RendererSpecTest {
             .set(HtmlRenderer.INDENT_SIZE, 0));
   }
 
-  public ComboDefinitionSpecTest(@NotNull SpecExample example) {
+  public ComboDefinitionSpecTest(SpecExample example) {
     super(example, optionsMap, OPTIONS);
   }
 

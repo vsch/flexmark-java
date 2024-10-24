@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import java.util.Arrays;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentTest {
@@ -113,7 +112,6 @@ public class SegmentTest {
       return new DummyCharSequence(myChar, end - start);
     }
 
-    @NotNull
     @Override
     public String toString() {
       StringBuilder sb = new StringBuilder(length());

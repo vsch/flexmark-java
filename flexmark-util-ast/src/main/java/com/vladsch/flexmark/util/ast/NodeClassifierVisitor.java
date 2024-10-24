@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import org.jetbrains.annotations.NotNull;
 
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
   private final OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
@@ -30,7 +29,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     exclusionSet = classifyingNodeTracker.getExclusionSet();
   }
 
-  public @NotNull ClassifyingNodeTracker classify(@NotNull Node node) {
+  public ClassifyingNodeTracker classify(Node node) {
     // no double dipping
     visit(node);
     isClassificationDone = true;
@@ -38,31 +37,31 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
   }
 
   @Override
-  public void visit(@NotNull Node node) {
+  public void visit(Node node) {
     visitChildren(node);
   }
 
   @Override
-  public void nodeRemoved(@NotNull Node node) {}
+  public void nodeRemoved(Node node) {}
 
   @Override
-  public void nodeRemovedWithChildren(@NotNull Node node) {}
+  public void nodeRemovedWithChildren(Node node) {}
 
   @Override
-  public void nodeRemovedWithDescendants(@NotNull Node node) {}
+  public void nodeRemovedWithDescendants(Node node) {}
 
   @Override
-  public void nodeAddedWithChildren(@NotNull Node node) {
+  public void nodeAddedWithChildren(Node node) {
     nodeAdded(node);
   }
 
   @Override
-  public void nodeAddedWithDescendants(@NotNull Node node) {
+  public void nodeAddedWithDescendants(Node node) {
     nodeAdded(node);
   }
 
   @Override
-  public void nodeAdded(@NotNull Node node) {
+  public void nodeAdded(Node node) {
     if (isClassificationDone) {
       if (node.getParent() == null) {
         throw new IllegalStateException(
@@ -154,7 +153,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
    * @param parent the parent node whose children should be visited
    */
   @Override
-  public void visitChildren(@NotNull Node parent) {
+  public void visitChildren(Node parent) {
     if (!isClassificationDone) {
       // initial collection phase
       if (!(parent instanceof Document)) {

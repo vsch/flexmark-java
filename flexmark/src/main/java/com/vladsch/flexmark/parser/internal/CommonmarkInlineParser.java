@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 class CommonmarkInlineParser extends InlineParserImpl {
   CommonmarkInlineParser(
@@ -27,7 +26,7 @@ class CommonmarkInlineParser extends InlineParserImpl {
   }
 
   @Override
-  public void initializeDocument(@NotNull Document document) {
+  public void initializeDocument(Document document) {
     super.initializeDocument(document);
   }
 }

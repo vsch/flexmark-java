@@ -6,16 +6,14 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.HashMap;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
   private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
   ComboCoreFormatterSpecTestBase(
-      @NotNull SpecExample example,
-      @Nullable Map<String, ? extends DataHolder> optionMap,
-      @Nullable DataHolder... defaultOptions) {
+      SpecExample example,
+      Map<String, ? extends DataHolder> optionMap,
+      DataHolder... defaultOptions) {
     super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), defaultOptions);
   }
 }

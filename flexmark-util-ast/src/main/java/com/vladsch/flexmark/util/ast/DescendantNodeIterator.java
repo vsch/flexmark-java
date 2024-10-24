@@ -3,13 +3,11 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import java.util.Stack;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
   private final boolean isReversed;
-  private @NotNull ReversiblePeekingIterator<Node> iterator;
-  private @Nullable Stack<ReversiblePeekingIterator<Node>> iteratorStack;
+  private ReversiblePeekingIterator<Node> iterator;
+  private Stack<ReversiblePeekingIterator<Node>> iteratorStack;
   private Node result;
 
   /**
@@ -17,7 +15,7 @@ class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
    *
    * @param iterator iterator to use for iterating nodes and their descendants
    */
-  DescendantNodeIterator(@NotNull ReversiblePeekingIterator<Node> iterator) {
+  DescendantNodeIterator(ReversiblePeekingIterator<Node> iterator) {
     this.isReversed = iterator.isReversed();
     this.iterator =
         iterator instanceof DescendantNodeIterator
@@ -38,7 +36,7 @@ class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
   }
 
   @Override
-  public @NotNull Node next() {
+  public Node next() {
     result = iterator.next();
 
     if (result.getFirstChild() != null) {
@@ -61,7 +59,6 @@ class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
   }
 
   @Override
-  @Nullable
   public Node peek() {
     return iterator.peek();
   }
@@ -76,7 +73,7 @@ class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
   }
 
   @Override
-  public void forEachRemaining(@NotNull Consumer<? super Node> consumer) {
+  public void forEachRemaining(Consumer<? super Node> consumer) {
     while (hasNext()) {
       consumer.accept(next());
     }

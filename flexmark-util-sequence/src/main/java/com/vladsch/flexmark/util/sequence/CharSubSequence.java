@@ -2,8 +2,6 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A CharSequence that references original char[] a subSequence() returns a sub-sequence from the
@@ -54,17 +52,15 @@ public final class CharSubSequence extends BasedSequenceImpl {
   }
 
   @Override
-  public @Nullable DataHolder getOptions() {
+  public DataHolder getOptions() {
     return null;
   }
 
-  @NotNull
   @Override
   public CharSubSequence getBaseSequence() {
     return base;
   }
 
-  @NotNull
   @Override
   public char[] getBase() {
     return baseChars;
@@ -85,7 +81,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
     return endOffset - startOffset;
   }
 
-  @NotNull
   @Override
   public Range getSourceRange() {
     return Range.of(startOffset, endOffset);
@@ -104,14 +99,12 @@ public final class CharSubSequence extends BasedSequenceImpl {
     return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
   }
 
-  @NotNull
   @Override
   public CharSubSequence subSequence(int startIndex, int endIndex) {
     SequenceUtils.validateStartEnd(startIndex, endIndex, length());
     return base.baseSubSequence(startOffset + startIndex, startOffset + endIndex);
   }
 
-  @NotNull
   @Override
   public CharSubSequence baseSubSequence(int startIndex, int endIndex) {
     SequenceUtils.validateStartEnd(startIndex, endIndex, baseChars.length);

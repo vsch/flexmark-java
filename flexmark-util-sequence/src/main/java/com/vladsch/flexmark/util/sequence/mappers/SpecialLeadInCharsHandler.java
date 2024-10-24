@@ -4,8 +4,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
   private final CharPredicate predicate;
@@ -30,9 +28,7 @@ public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
    */
   @Override
   public boolean escape(
-      @NotNull BasedSequence sequence,
-      @Nullable DataHolder options,
-      @NotNull Consumer<CharSequence> consumer) {
+      BasedSequence sequence, DataHolder options, Consumer<CharSequence> consumer) {
     if (sequence.length() == 1 && predicate.test(sequence.charAt(0))) {
       consumer.accept("\\");
       consumer.accept(sequence);
@@ -57,9 +53,7 @@ public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
    */
   @Override
   public boolean unEscape(
-      @NotNull BasedSequence sequence,
-      @Nullable DataHolder options,
-      @NotNull Consumer<CharSequence> consumer) {
+      BasedSequence sequence, DataHolder options, Consumer<CharSequence> consumer) {
     if (sequence.length() == 2
         && sequence.charAt(0) == '\\'
         && predicate.test(sequence.charAt(1))) {
@@ -69,13 +63,11 @@ public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
     return false;
   }
 
-  @NotNull
   public static SpecialLeadInCharsHandler create(char leadInChar) {
     return new SpecialLeadInCharsHandler(CharPredicate.anyOf(leadInChar));
   }
 
-  @NotNull
-  public static SpecialLeadInCharsHandler create(@NotNull CharSequence leadInChar) {
+  public static SpecialLeadInCharsHandler create(CharSequence leadInChar) {
     return new SpecialLeadInCharsHandler(CharPredicate.anyOf(leadInChar));
   }
 }

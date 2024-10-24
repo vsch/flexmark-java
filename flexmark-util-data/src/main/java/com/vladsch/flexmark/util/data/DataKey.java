@@ -1,8 +1,5 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 /**
  * NOTE: Constructors have changed in a breaking way from 0.50.x and prior implementations
  *
@@ -36,8 +33,7 @@ public class DataKey<T> extends DataKeyBase<T> {
    * @param factory data value factory for creating a new default value for the key for a non-null
    *     data holder
    */
-  public DataKey(
-      @NotNull String name, @NotNull T defaultValue, @NotNull DataNotNullValueFactory<T> factory) {
+  public DataKey(String name, T defaultValue, DataNotNullValueFactory<T> factory) {
     super(name, defaultValue, factory);
   }
 
@@ -50,7 +46,7 @@ public class DataKey<T> extends DataKeyBase<T> {
    * @param supplier data value factory for creating a new default value for the key not dependent
    *     on dataHolder
    */
-  public DataKey(@NotNull String name, @NotNull NotNullValueSupplier<T> supplier) {
+  public DataKey(String name, NotNullValueSupplier<T> supplier) {
     super(name, supplier.get(), holder -> supplier.get());
   }
 
@@ -63,40 +59,36 @@ public class DataKey<T> extends DataKeyBase<T> {
    * @param name See {@link #getName()}.
    * @param defaultKey The NullableDataKey to take the default value from at time of construction.
    */
-  public DataKey(@NotNull String name, @NotNull DataKey<T> defaultKey) {
+  public DataKey(String name, DataKey<T> defaultKey) {
     this(name, defaultKey.getDefaultValue(), defaultKey::get);
   }
 
-  public DataKey(@NotNull String name, @NotNull T defaultValue) {
+  public DataKey(String name, T defaultValue) {
     this(name, defaultValue, options -> defaultValue);
   }
 
   @Override
-  @NotNull
   public DataNotNullValueFactory<T> getFactory() {
     return (DataNotNullValueFactory<T>) super.getFactory();
   }
 
   @Override
-  @NotNull
   public T getDefaultValue() {
     return super.getDefaultValue();
   }
 
   @Override
-  @NotNull
-  public T getDefaultValue(@NotNull DataHolder holder) {
+  public T getDefaultValue(DataHolder holder) {
     return super.getDefaultValue(holder);
   }
 
   @Override
-  @NotNull
-  public T get(@Nullable DataHolder holder) {
+  public T get(DataHolder holder) {
     return super.get(holder);
   }
 
   @Override
-  public @NotNull MutableDataHolder set(@NotNull MutableDataHolder dataHolder, @NotNull T value) {
+  public MutableDataHolder set(MutableDataHolder dataHolder, T value) {
     return dataHolder.set(this, value);
   }
 

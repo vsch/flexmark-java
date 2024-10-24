@@ -2,7 +2,6 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
 
 abstract class NodeRendererSubContext implements NodeRendererContext {
   final HtmlWriter htmlWriter;
@@ -10,14 +9,14 @@ abstract class NodeRendererSubContext implements NodeRendererContext {
   NodeRenderingHandlerWrapper renderingHandlerWrapper;
   int doNotRenderLinksNesting;
 
-  NodeRendererSubContext(@NotNull HtmlWriter htmlWriter) {
+  NodeRendererSubContext(HtmlWriter htmlWriter) {
     this.htmlWriter = htmlWriter;
     this.renderingNode = null;
     this.doNotRenderLinksNesting = 0;
   }
 
   @Override
-  public @NotNull HtmlWriter getHtmlWriter() {
+  public HtmlWriter getHtmlWriter() {
     return htmlWriter;
   }
 

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.ast.BlankLineContainer;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class ListBlock extends Block implements BlankLineContainer {
   private boolean tight;
@@ -32,7 +31,7 @@ public abstract class ListBlock extends Block implements BlankLineContainer {
   }
 
   @Override
-  public void getAstExtra(@NotNull StringBuilder out) {
+  public void getAstExtra(StringBuilder out) {
     super.getAstExtra(out);
     if (isTight()) {
       out.append(" isTight");

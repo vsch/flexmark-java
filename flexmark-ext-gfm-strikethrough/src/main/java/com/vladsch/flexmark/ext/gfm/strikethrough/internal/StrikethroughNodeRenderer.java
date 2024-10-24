@@ -11,7 +11,6 @@ import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class StrikethroughNodeRenderer implements NodeRenderer {
   private final String strikethroughStyleHtmlOpen;
@@ -70,9 +69,9 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
   }
 
   public static class Factory implements NodeRendererFactory {
-    @NotNull
+
     @Override
-    public NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
       return new StrikethroughNodeRenderer(options);
     }
   }

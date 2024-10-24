@@ -26,8 +26,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class TranslationHandlerImpl implements TranslationHandler {
   private final FormatterOptions myFormatterOptions;
@@ -92,11 +90,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   @Override
-  public void setMergeContext(@NotNull MergeContext context) {
+  public void setMergeContext(MergeContext context) {
     myMergeContext = context;
   }
 
-  @NotNull
   @Override
   public MutableDataSet getTranslationStore() {
     return myTranslationStore;
@@ -109,9 +106,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
   @Override
   public void beginRendering(
-      @NotNull Document node,
-      @NotNull NodeFormatterContext context,
-      @NotNull MarkdownWriter appendable) {
+      Document node, NodeFormatterContext context, MarkdownWriter appendable) {
     // collect anchor ref ids
     myWriter = appendable;
     myIdGenerator = myIdGeneratorFactory.create();
@@ -128,7 +123,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
     return false;
   }
 
-  @NotNull
   @Override
   public List<String> getTranslatingTexts() {
     myTranslatingPlaceholders.clear();
@@ -161,7 +155,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   @Override
-  public void setTranslatedTexts(@NotNull List<? extends CharSequence> translatedTexts) {
+  public void setTranslatedTexts(List<? extends CharSequence> translatedTexts) {
     myTranslatedTexts.clear();
     myTranslatedTexts.putAll(myTranslatingTexts);
     myTranslatedSpans.clear();
@@ -202,7 +196,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   @Override
-  public void setRenderPurpose(@NotNull RenderPurpose renderPurpose) {
+  public void setRenderPurpose(RenderPurpose renderPurpose) {
     myAnchorId = 0;
     myTranslatingSpanId = 0;
     myPlaceholderId = 0;
@@ -210,7 +204,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
     myNonTranslatingSpanId = 0;
   }
 
-  @NotNull
   @Override
   public RenderPurpose getRenderPurpose() {
     return myRenderPurpose;
@@ -221,10 +214,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
     return myRenderPurpose != RenderPurpose.FORMAT;
   }
 
-  @NotNull
   @Override
-  public CharSequence transformAnchorRef(
-      @NotNull CharSequence pageRef, @NotNull CharSequence anchorRef) {
+  public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
     switch (myRenderPurpose) {
       case TRANSLATION_SPANS:
         String replacedTextId = String.format(myFormatterOptions.translationIdFormat, ++myAnchorId);
@@ -268,7 +259,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
   @Override
   public void customPlaceholderFormat(
-      @NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render) {
+      TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
     if (myRenderPurpose != TRANSLATED_SPANS) {
       TranslationPlaceholderGenerator savedGenerator = myPlaceholderGenerator;
       myPlaceholderGenerator = generator;
@@ -278,7 +269,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   @Override
-  public void translatingSpan(@NotNull TranslatingSpanRender render) {
+  public void translatingSpan(TranslatingSpanRender render) {
     translatingRefTargetSpan(null, render);
   }
 
@@ -301,8 +292,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   @Override
-  public void translatingRefTargetSpan(
-      @Nullable Node target, @NotNull TranslatingSpanRender render) {
+  public void translatingRefTargetSpan(Node target, TranslatingSpanRender render) {
     switch (myRenderPurpose) {
       case TRANSLATION_SPANS:
         {
@@ -362,7 +352,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   @Override
-  public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
+  public void nonTranslatingSpan(TranslatingSpanRender render) {
     switch (myRenderPurpose) {
       case TRANSLATION_SPANS:
         {
@@ -442,7 +432,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
   @Override
   public void postProcessNonTranslating(
-      @NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
+      Function<String, CharSequence> postProcessor, Runnable scope) {
     Function<String, CharSequence> savedValue = myNonTranslatingPostProcessor;
     try {
       myNonTranslatingPostProcessor = postProcessor;
@@ -452,10 +442,9 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
   }
 
-  @NotNull
   @Override
   public <T> T postProcessNonTranslating(
-      @NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
+      Function<String, CharSequence> postProcessor, Supplier<T> scope) {
     Function<String, CharSequence> savedValue = myNonTranslatingPostProcessor;
     try {
       myNonTranslatingPostProcessor = postProcessor;
@@ -470,11 +459,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
     return myNonTranslatingPostProcessor != null;
   }
 
-  @NotNull
   @Override
   public CharSequence transformNonTranslating(
       CharSequence prefix,
-      @NotNull CharSequence nonTranslatingText,
+      CharSequence nonTranslatingText,
       CharSequence suffix,
       CharSequence suffix2) {
     // need to transfer trailing EOLs to id
@@ -538,11 +526,10 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
   }
 
-  @NotNull
   @Override
   public CharSequence transformTranslating(
       CharSequence prefix,
-      @NotNull CharSequence translatingText,
+      CharSequence translatingText,
       CharSequence suffix,
       CharSequence suffix2) {
     switch (myRenderPurpose) {

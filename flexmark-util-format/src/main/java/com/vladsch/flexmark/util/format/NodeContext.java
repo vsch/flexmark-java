@@ -2,8 +2,6 @@ package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface NodeContext<N, C extends NodeContext<N, C>> {
   /**
@@ -12,7 +10,6 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
    *
    * @return a new rendering context with a given appendable for its output
    */
-  @NotNull
   C getSubContext();
 
   /**
@@ -23,8 +20,7 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
    *     construction will be used)
    * @return a new rendering context with a given appendable for its output
    */
-  @NotNull
-  C getSubContext(@Nullable DataHolder options);
+  C getSubContext(DataHolder options);
 
   /**
    * Creates a child rendering context that can be used to collect rendered html text. The child
@@ -35,13 +31,11 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
    * @param builder sequence builder to user for appended text for tracking original base offsets
    * @return a new rendering context with a given appendable for its output
    */
-  @NotNull
-  C getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
+  C getSubContext(DataHolder options, ISequenceBuilder<?, ?> builder);
 
   /**
    * @return the current node being rendered
    */
-  @Nullable
   N getCurrentNode();
 
   /**
@@ -49,6 +43,5 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
    *
    * @return data holder
    */
-  @NotNull
   DataHolder getOptions();
 }

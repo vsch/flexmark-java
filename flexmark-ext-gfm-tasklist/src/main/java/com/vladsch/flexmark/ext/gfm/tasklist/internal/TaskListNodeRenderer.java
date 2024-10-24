@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
 
 public class TaskListNodeRenderer implements NodeRenderer {
   private static final AttributablePart TASK_ITEM_PARAGRAPH =
@@ -88,9 +87,9 @@ public class TaskListNodeRenderer implements NodeRenderer {
   }
 
   public static class Factory implements NodeRendererFactory {
-    @NotNull
+
     @Override
-    public NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
       return new TaskListNodeRenderer(options);
     }
   }

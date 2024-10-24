@@ -3,17 +3,13 @@ package com.vladsch.flexmark.test.util;
 import java.util.regex.Pattern;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.jetbrains.annotations.NotNull;
 
 public class ExceptionMatcher extends BaseMatcher<Throwable> {
-  private final @NotNull String prefix;
-  private final @NotNull Pattern pattern;
-  private final @NotNull String message;
+  private final String prefix;
+  private final Pattern pattern;
+  private final String message;
 
-  public ExceptionMatcher(
-      @NotNull Class<? extends Throwable> throwable,
-      @NotNull Pattern pattern,
-      @NotNull String message) {
+  public ExceptionMatcher(Class<? extends Throwable> throwable, Pattern pattern, String message) {
     this.prefix = throwable.getName();
     this.pattern = pattern;
     this.message = message;
@@ -47,21 +43,15 @@ public class ExceptionMatcher extends BaseMatcher<Throwable> {
     description.appendText(prefix + ": " + message);
   }
 
-  @NotNull
-  public static ExceptionMatcher match(
-      @NotNull Class<? extends Throwable> throwable, @NotNull String text) {
+  public static ExceptionMatcher match(Class<? extends Throwable> throwable, String text) {
     return new ExceptionMatcher(throwable, Pattern.compile(Pattern.quote(text)), text);
   }
 
-  @NotNull
-  public static ExceptionMatcher matchPrefix(
-      @NotNull Class<? extends Throwable> throwable, @NotNull String text) {
+  public static ExceptionMatcher matchPrefix(Class<? extends Throwable> throwable, String text) {
     return new ExceptionMatcher(throwable, Pattern.compile(Pattern.quote(text) + "(?s:.*)"), text);
   }
 
-  @NotNull
-  public static ExceptionMatcher matchRegEx(
-      @NotNull Class<? extends Throwable> throwable, @NotNull String regEx) {
+  public static ExceptionMatcher matchRegEx(Class<? extends Throwable> throwable, String regEx) {
     return new ExceptionMatcher(throwable, Pattern.compile(regEx), regEx);
   }
 }

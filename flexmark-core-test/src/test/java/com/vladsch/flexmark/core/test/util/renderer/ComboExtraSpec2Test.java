@@ -6,18 +6,16 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public final class ComboExtraSpec2Test extends CoreRendererSpecTest {
   private static final String SPEC_RESOURCE = "/core_extra_ast_spec2.md";
-  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
   private static final DataHolder OPTIONS =
       new MutableDataSet().set(HtmlRenderer.PERCENT_ENCODE_URLS, true).toImmutable();
 
-  public ComboExtraSpec2Test(@NotNull SpecExample example) {
+  public ComboExtraSpec2Test(SpecExample example) {
     super(example, null, OPTIONS);
   }
 

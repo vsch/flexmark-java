@@ -8,14 +8,11 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 interface LightInlineParser {
-  @NotNull
+
   List<BasedSequence> getCurrentText();
 
-  @NotNull
   BasedSequence getInput();
 
   void setInput(BasedSequence input);
@@ -24,16 +21,12 @@ interface LightInlineParser {
 
   void setIndex(int index);
 
-  @NotNull
   Node getBlock();
 
-  @Nullable
   BasedSequence match(Pattern re);
 
-  @Nullable
   BasedSequence[] matchWithGroups(Pattern re);
 
-  @Nullable
   Matcher matcher(Pattern re);
 
   char peek();
@@ -42,30 +35,27 @@ interface LightInlineParser {
 
   boolean flushTextNode();
 
-  @NotNull
   Document getDocument();
 
-  void setDocument(@NotNull Document document);
+  void setDocument(Document document);
 
-  @NotNull
   InlineParserOptions getOptions();
 
-  @NotNull
   Parsing getParsing();
 
-  void appendText(@NotNull BasedSequence text);
+  void appendText(BasedSequence text);
 
-  void appendText(@NotNull BasedSequence text, int beginIndex, int endIndex);
+  void appendText(BasedSequence text, int beginIndex, int endIndex);
 
-  void appendNode(@NotNull Node node);
+  void appendNode(Node node);
 
   // In some cases, we don't want the text to be appended to an existing node, we need it separate
-  @NotNull
-  Text appendSeparateText(@NotNull BasedSequence text);
 
-  void setBlock(@NotNull Node block);
+  Text appendSeparateText(BasedSequence text);
 
-  void moveNodes(@NotNull Node fromNode, @NotNull Node toNode);
+  void setBlock(Node block);
+
+  void moveNodes(Node fromNode, Node toNode);
 
   boolean spnl();
 
@@ -75,6 +65,5 @@ interface LightInlineParser {
 
   boolean spnlUrl();
 
-  @Nullable
   BasedSequence toEOL();
 }

@@ -12,8 +12,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.HashSet;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
   private final DefinitionOptions options;
@@ -57,7 +55,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
   }
 
   public static class Factory implements BlockPreProcessorFactory {
-    @NotNull
+
     @Override
     public Set<Class<? extends Block>> getBlockTypes() {
       Set<Class<? extends Block>> set = new HashSet<>();
@@ -65,7 +63,6 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
       return set;
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getAfterDependents() {
       Set<Class<?>> set = new HashSet<>();
@@ -73,7 +70,6 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
       return set;
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return null;
@@ -84,9 +80,8 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
       return true;
     }
 
-    @NotNull
     @Override
-    public BlockPreProcessor apply(@NotNull ParserState state) {
+    public BlockPreProcessor apply(ParserState state) {
       return new DefinitionListBlockPreProcessor(state.getProperties());
     }
   }

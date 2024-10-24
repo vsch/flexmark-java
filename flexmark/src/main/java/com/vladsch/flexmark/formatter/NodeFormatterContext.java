@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.Collection;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer
@@ -25,7 +24,6 @@ public interface NodeFormatterContext
   /**
    * @return the HTML writer to use
    */
-  @NotNull
   MarkdownWriter getMarkdown();
 
   /**
@@ -36,7 +34,7 @@ public interface NodeFormatterContext
    * @param node the node to render
    */
   @Override
-  void render(@NotNull Node node);
+  void render(Node node);
 
   /**
    * Render the children of the node, used by custom renderers
@@ -44,12 +42,11 @@ public interface NodeFormatterContext
    * @param parent node the children of which are to be rendered
    */
   @Override
-  void renderChildren(@NotNull Node parent);
+  void renderChildren(Node parent);
 
   /**
    * @return current rendering phase
    */
-  @NotNull
   FormattingPhase getFormattingPhase();
 
   /** pass node rendering to previously registered handler */
@@ -63,38 +60,32 @@ public interface NodeFormatterContext
    * @return the current renderer options {@link DataHolder}
    */
   @Override
-  @NotNull
   DataHolder getOptions();
 
   /**
    * @return the {@link FormatterOptions} for the context.
    */
-  @NotNull
   FormatterOptions getFormatterOptions();
 
   /**
    * @return the {@link Document} node of the current context
    */
   @Override
-  @NotNull
   Document getDocument();
 
   /**
    * @return predicate for prefix chars which compact like block quote prefix char
    */
-  @NotNull
   CharPredicate getBlockQuoteLikePrefixPredicate();
 
   /**
    * @return char sequence of all prefix chars which compact like block quote prefix char
    */
-  @NotNull
   BasedSequence getBlockQuoteLikePrefixChars();
 
   /**
    * @return tracked offset list
    */
-  @NotNull
   TrackedOffsetList getTrackedOffsets();
 
   boolean isRestoreTrackedSpaces();
@@ -109,7 +100,6 @@ public interface NodeFormatterContext
    *
    * @return original sequence used for tracked offsets.
    */
-  @NotNull
   BasedSequence getTrackedSequence();
 
   /**
@@ -123,11 +113,9 @@ public interface NodeFormatterContext
    * @param classes node classes to return
    * @return iterable
    */
-  @NotNull
-  Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes);
+  Iterable<? extends Node> nodesOfType(Class<?>[] classes);
 
-  @NotNull
-  Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes);
+  Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes);
 
   /**
    * Get iterable of nodes of given types, in reverse order of their appearance in the document
@@ -140,9 +128,7 @@ public interface NodeFormatterContext
    * @param classes node classes to return
    * @return iterable
    */
-  @NotNull
-  Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes);
+  Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes);
 
-  @NotNull
-  Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes);
+  Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes);
 }

@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
-import org.jetbrains.annotations.NotNull;
-
 public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>>
     implements ReversibleIndexedIterable<R> {
-  private final @NotNull ReversibleIterable<Integer> iterable;
-  private final @NotNull Indexed<S> items;
+  private final ReversibleIterable<Integer> iterable;
+  private final Indexed<S> items;
 
-  public IndexedIterable(@NotNull Indexed<S> items, @NotNull I iterable) {
+  public IndexedIterable(Indexed<S> items, I iterable) {
     this.items = items;
     this.iterable = iterable;
   }
@@ -17,19 +15,16 @@ public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>>
     return iterable.isReversed();
   }
 
-  @NotNull
   @Override
   public ReversibleIndexedIterator<R> iterator() {
     return new IndexedIterator<>(items, iterable.iterator());
   }
 
-  @NotNull
   @Override
   public ReversibleIndexedIterable<R> reversed() {
     return new IndexedIterable<>(items, iterable.reversed());
   }
 
-  @NotNull
   @Override
   public ReversibleIndexedIterator<R> reversedIterator() {
     return new IndexedIterator<>(items, iterable.reversedIterator());

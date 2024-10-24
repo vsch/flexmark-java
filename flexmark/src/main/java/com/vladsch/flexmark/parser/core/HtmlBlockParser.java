@@ -30,8 +30,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class HtmlBlockParser extends AbstractBlockParser {
   private static final String HTML_COMMENT_OPEN = "<!--";
@@ -243,7 +241,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
   }
 
   public static class Factory implements CustomBlockParserFactory {
-    @Nullable
+
     @Override
     public Set<Class<?>> getAfterDependents() {
       return new HashSet<>(
@@ -258,7 +256,6 @@ public class HtmlBlockParser extends AbstractBlockParser {
               ));
     }
 
-    @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return new HashSet<>(
@@ -277,9 +274,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
       return false;
     }
 
-    @NotNull
     @Override
-    public BlockParserFactory apply(@NotNull DataHolder options) {
+    public BlockParserFactory apply(DataHolder options) {
       return new BlockFactory(options);
     }
   }

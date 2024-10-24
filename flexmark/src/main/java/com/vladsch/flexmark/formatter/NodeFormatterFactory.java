@@ -3,8 +3,6 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** Factory for instantiating new node renderers when rendering is done. */
 public interface NodeFormatterFactory extends Dependent {
@@ -14,8 +12,7 @@ public interface NodeFormatterFactory extends Dependent {
    * @param options the context for rendering (normally passed on to the node renderer)
    * @return a node renderer
    */
-  @NotNull
-  NodeFormatter create(@NotNull DataHolder options);
+  NodeFormatter create(DataHolder options);
 
   /**
    * @return null or a list of processors that must be executed before calling this one if any of
@@ -23,7 +20,7 @@ public interface NodeFormatterFactory extends Dependent {
    *     document before this pre processor is called.
    */
   @Override
-  default @Nullable Set<Class<?>> getAfterDependents() {
+  default Set<Class<?>> getAfterDependents() {
     return null;
   }
 
@@ -33,7 +30,7 @@ public interface NodeFormatterFactory extends Dependent {
    *     this pre processor is called.
    */
   @Override
-  default @Nullable Set<Class<?>> getBeforeDependents() {
+  default Set<Class<?>> getBeforeDependents() {
     return null;
   }
 

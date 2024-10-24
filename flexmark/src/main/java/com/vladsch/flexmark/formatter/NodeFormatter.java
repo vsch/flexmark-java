@@ -2,14 +2,12 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.Set;
-import org.jetbrains.annotations.Nullable;
 
 /** A renderer for a set of node types. */
 public interface NodeFormatter {
   /**
    * @return the mapping of nodes this renderer handles to rendering function
    */
-  @Nullable
   Set<NodeFormattingHandler<?>> getNodeFormattingHandlers();
 
   /**
@@ -18,7 +16,6 @@ public interface NodeFormatter {
    *
    * @return the nodes of interest to this formatter during formatting.
    */
-  @Nullable
   Set<Class<?>> getNodeClasses();
 
   /**

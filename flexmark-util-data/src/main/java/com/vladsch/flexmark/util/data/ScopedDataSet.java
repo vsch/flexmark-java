@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ScopedDataSet extends DataSet {
   private final DataHolder parent;
 
-  public ScopedDataSet(@Nullable DataHolder parent, @Nullable DataHolder other) {
+  public ScopedDataSet(DataHolder parent, DataHolder other) {
     super(other);
     this.parent = parent;
   }
@@ -21,7 +19,7 @@ public class ScopedDataSet extends DataSet {
   }
 
   @Override
-  public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
+  public Map<? extends DataKeyBase<?>, Object> getAll() {
     if (parent != null) {
       Map<DataKeyBase<?>, Object> all = new HashMap<>(parent.getAll());
       all.putAll(super.getAll());
@@ -32,7 +30,7 @@ public class ScopedDataSet extends DataSet {
   }
 
   @Override
-  public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
+  public Collection<? extends DataKeyBase<?>> getKeys() {
     if (parent != null) {
       Set<DataKeyBase<?>> all = new HashSet<>(parent.getKeys());
       all.addAll(super.getKeys());
@@ -43,20 +41,19 @@ public class ScopedDataSet extends DataSet {
   }
 
   @Override
-  public @NotNull MutableDataSet toMutable() {
+  public MutableDataSet toMutable() {
     MutableDataSet mutableDataSet = new MutableDataSet();
     mutableDataSet.dataSet.putAll(super.getAll());
     return parent != null ? new MutableScopedDataSet(parent, mutableDataSet) : mutableDataSet;
   }
 
   @Override
-  public boolean contains(@NotNull DataKeyBase<?> key) {
+  public boolean contains(DataKeyBase<?> key) {
     return super.contains(key) || (parent != null && parent.contains(key));
   }
 
   @Override
-  public @Nullable Object getOrCompute(
-      @NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+  public Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory) {
     if (parent == null || super.contains(key) || !parent.contains(key)) {
       return super.getOrCompute(key, factory);
     }

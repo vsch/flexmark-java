@@ -3,8 +3,6 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import java.util.stream.IntStream;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A BasedSequence with offset tracking that follows editing operations and subSequence() chopping
@@ -14,12 +12,11 @@ import org.jetbrains.annotations.Nullable;
  * tracking
  */
 public final class BasedOptionsSequence implements CharSequence, BasedOptionsHolder {
-  private final @NotNull CharSequence chars;
+  private final CharSequence chars;
   private final int optionFlags;
-  private final @Nullable DataHolder options;
+  private final DataHolder options;
 
-  private BasedOptionsSequence(
-      @NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
+  private BasedOptionsSequence(CharSequence chars, int optionFlags, DataHolder options) {
     this.chars = chars;
     this.optionFlags =
         optionFlags
@@ -49,7 +46,6 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
     return dataKey.get(options);
   }
 
-  @Nullable
   @Override
   public DataHolder getOptions() {
     return options;
@@ -95,12 +91,11 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
     return chars.hashCode();
   }
 
-  public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags) {
+  public static BasedOptionsSequence of(CharSequence chars, int optionFlags) {
     return new BasedOptionsSequence(chars, optionFlags, null);
   }
 
-  public static BasedOptionsSequence of(
-      @NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
+  public static BasedOptionsSequence of(CharSequence chars, int optionFlags, DataHolder options) {
     return new BasedOptionsSequence(chars, optionFlags, options);
   }
 }

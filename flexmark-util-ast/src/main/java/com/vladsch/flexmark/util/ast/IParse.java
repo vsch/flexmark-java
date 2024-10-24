@@ -4,8 +4,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.io.IOException;
 import java.io.Reader;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /** Interface to generic parser for RenderingTestCase customizations */
 public interface IParse {
@@ -17,8 +15,7 @@ public interface IParse {
    * @param input the text to parse
    * @return the root node
    */
-  @NotNull
-  Node parse(@NotNull BasedSequence input);
+  Node parse(BasedSequence input);
 
   /**
    * Parse the specified input text into a tree of nodes.
@@ -28,8 +25,7 @@ public interface IParse {
    * @param input the text to parse
    * @return the root node
    */
-  @NotNull
-  Node parse(@NotNull String input);
+  Node parse(String input);
 
   /**
    * Parse the specified reader into a tree of nodes. The caller is responsible for closing the
@@ -41,15 +37,13 @@ public interface IParse {
    * @return the root node
    * @throws IOException when reading throws an exception
    */
-  @NotNull
-  Node parseReader(@NotNull Reader input) throws IOException;
+  Node parseReader(Reader input) throws IOException;
 
   /**
    * Get Options for parsing
    *
    * @return DataHolder for options
    */
-  @Nullable
   DataHolder getOptions();
 
   /**
@@ -62,6 +56,5 @@ public interface IParse {
    *     determination (if KEEP_FIRST then only transfer if undefined,
    * @return true if any references were transferred
    */
-  boolean transferReferences(
-      @NotNull Document document, @NotNull Document included, @Nullable Boolean onlyIfUndefined);
+  boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined);
 }

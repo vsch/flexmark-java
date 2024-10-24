@@ -1,17 +1,14 @@
 package com.vladsch.flexmark.util.format;
 
-import org.jetbrains.annotations.NotNull;
-
 public final class ColumnSort {
   final int column;
-  final @NotNull Sort sort;
+  final Sort sort;
 
-  private ColumnSort(int column, @NotNull Sort sort) {
+  private ColumnSort(int column, Sort sort) {
     this.column = column;
     this.sort = sort;
   }
 
-  @NotNull
   public static ColumnSort columnSort(
       int column, boolean descending, boolean numeric, boolean numericLast) {
     if (numeric) {

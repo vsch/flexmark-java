@@ -12,11 +12,10 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentedSequenceTreeTest {
-  private static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
+  private static BasedSequence basedSequenceOf(CharSequence chars) {
     return BasedSequence.of(
         BasedOptionsSequence.of(chars, BasedOptionsHolder.F_TREE_SEGMENTED_SEQUENCES));
   }
