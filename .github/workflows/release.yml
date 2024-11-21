@@ -44,4 +44,4 @@ jobs:
           git config user.email opensource@acrolinx.com
           git config user.name $GIT_USER_NAME
           git checkout -b $PR_BRANCH_NAME
-          mvn -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform
+          mvn -P sign -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform
