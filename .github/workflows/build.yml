@@ -24,7 +24,7 @@ jobs:
       - name: Sonar analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
-        run: mvn verify sonar:sonar
+        run: mvn verify sonar:sonar -P coverage
 
   Build:
     runs-on: ubuntu-latest
