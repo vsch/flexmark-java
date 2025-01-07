@@ -391,7 +391,7 @@ public class CoreNodeFormatter
             if (node.getClosingMarker().isNull()) {
               break;
             }
-            // fall through
+          // fall through
           case ADD:
             if (spaceAfterAtx) markdown.append(' ');
             markdown.append(node.getOpeningMarker());
