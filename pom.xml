@@ -107,7 +107,7 @@
           <pom>
             <sortPom>
               <expandEmptyElements>false</expandEmptyElements>
-              <indentSchemaLocation>true</indentSchemaLocation>
+              <indentAttribute>schemaLocation</indentAttribute>
               <lineSeparator>\n</lineSeparator>
               <sortDependencies>scope,groupId,artifactId</sortDependencies>
               <sortPlugins>groupId,artifactId</sortPlugins>
