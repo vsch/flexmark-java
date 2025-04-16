@@ -13,6 +13,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util-misc</artifactId>
             <version>${project.version}</version>
@@ -28,4 +32,14 @@
             <version>24.0.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
+
 </project>
