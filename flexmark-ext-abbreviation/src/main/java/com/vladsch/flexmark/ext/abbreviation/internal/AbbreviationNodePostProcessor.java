@@ -57,7 +57,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                 }
             }
 
-            if (sb.length() > 0) this.abbreviations = Pattern.compile(sb.toString());
+            if (sb.length() > 0) this.abbreviations = Pattern.compile(sb.toString(), Pattern.UNICODE_CHARACTER_CLASS);
         }
     }
 
