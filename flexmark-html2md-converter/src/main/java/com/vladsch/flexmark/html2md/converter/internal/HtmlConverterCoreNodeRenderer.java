@@ -62,8 +62,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     }
 
     @Override
-    public Set<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
-        HashSet<HtmlNodeRendererHandler<? extends Node>> result = new HashSet<>(Arrays.asList(
+    public List<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
+        List<HtmlNodeRendererHandler<? extends Node>> result = new ArrayList<>(Arrays.asList(
                 // Generic unknown node formatter
                 new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.COMMENT_NODE, Comment.class, this::processComment),
                 new HtmlNodeRendererHandler<>(FlexmarkHtmlConverter.A_NODE, Element.class, this::processA),
