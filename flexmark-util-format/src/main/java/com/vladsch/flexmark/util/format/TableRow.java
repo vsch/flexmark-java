@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.vladsch.flexmark.util.format.TableCellManipulator.BREAK;
+import static com.vladsch.flexmark.util.misc.Utils.max;
 import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
 import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
@@ -97,7 +98,7 @@ public class TableRow {
         int columns = 0;
         for (TableCell cell : cells) {
             if (cell == null) continue;
-            columns += cell.columnSpan;
+            columns += max(cell.columnSpan, 1);
         }
         return columns;
     }

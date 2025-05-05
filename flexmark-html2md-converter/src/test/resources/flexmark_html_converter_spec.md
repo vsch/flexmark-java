@@ -3029,6 +3029,25 @@ table where some rows end with colspan 0
 ````````````````````````````````
 
 
+table where all rows end with colspan 0
+
+```````````````````````````````` example Tables: 52
+|   Abc   | Def  
+|---------|-----|
+| no span | span 
+
+.
+<table>
+  <thead>
+    <tr><th>Abc</th><th colspan="0">Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>no span</td><td colspan="0">span</td></tr>
+  </tbody>
+</table>
+````````````````````````````````
+
+
 ## Definition Lists
 
 a definition in a block quote
