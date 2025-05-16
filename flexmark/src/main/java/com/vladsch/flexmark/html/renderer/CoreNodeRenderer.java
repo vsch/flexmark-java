@@ -139,7 +139,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
-        html.line();
+        html.lineIf(context.getHtmlOptions().htmlBlockOpenTagEol);
         html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
 
         BasedSequence info = node.getInfo();
@@ -172,7 +172,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
-        html.line();
+        html.lineIf(context.getHtmlOptions().htmlBlockOpenTagEol);
         html.srcPosWithEOL(node.getChars()).withAttr().tag("pre").openPre();
 
         String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
@@ -459,8 +459,8 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
-        html.line();
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
+        html.lineIf(htmlOptions.htmlBlockOpenTagEol);
 
         if (htmlOptions.sourceWrapHtmlBlocks) {
             html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("div").indent().line();
@@ -499,7 +499,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (suppress) return;
 
         if (node instanceof HtmlBlock)
-            html.line();
+            html.lineIf(context.getHtmlOptions().htmlBlockOpenTagEol);
 
         String normalizeEOL = node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL();
 
