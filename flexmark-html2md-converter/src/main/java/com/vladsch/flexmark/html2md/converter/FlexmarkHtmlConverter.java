@@ -1593,6 +1593,8 @@ public class FlexmarkHtmlConverter {
             } else {
                 // if we already have space or nothing before us
                 addSpaceBefore = !(out.getPendingEOL() == 0 || out.isPendingSpace() || out.offsetWithPending() == 0 || out.getPendingEOL() > 0);
+
+                if(". , : ; ! ? ) ] @ # $ % ^ & \" \' /".indexOf(text.charAt(0)) != -1) addSpaceBefore = true;
             }
 
             if (!text.isEmpty() && "\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {

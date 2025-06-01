@@ -423,7 +423,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             if (!myHtmlConverterOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 context.wrapTextNodes(element, "", false);
             } else {
-                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineDel.isTextOnly() ? "" : "~~", element.nextSibling() != null);
+                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineDel.isTextOnly() ? "" : "~~", element.nextSibling() != null || element.previousSibling() != null);
             }
         });
     }
@@ -626,7 +626,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             if (!myHtmlConverterOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 context.wrapTextNodes(element, "", false);
             } else {
-                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineEmphasis.isTextOnly() ? "" : "*", element.nextSibling() != null);
+                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineEmphasis.isTextOnly() ? "" : "*", element.nextSibling() != null || element.previousSibling() != null);
             }
         });
     }
@@ -748,7 +748,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             if (!myHtmlConverterOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 context.wrapTextNodes(element, "", false);
             } else {
-                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineIns.isTextOnly() ? "" : "++", element.nextSibling() != null);
+                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineIns.isTextOnly() ? "" : "++", element.nextSibling() != null || element.previousSibling() != null);
             }
         });
     }
@@ -758,7 +758,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             if (!myHtmlConverterOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
                 context.wrapTextNodes(element, "", false);
             } else {
-                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineStrong.isTextOnly() ? "" : "**", element.nextSibling() != null);
+                context.wrapTextNodes(element, myHtmlConverterOptions.extInlineStrong.isTextOnly() ? "" : "**", element.nextSibling() != null || element.previousSibling() != null);
             }
         });
     }
