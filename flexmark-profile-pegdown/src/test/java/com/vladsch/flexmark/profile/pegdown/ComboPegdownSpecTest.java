@@ -9,11 +9,19 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.runners.Parameterized;
 
 import java.util.List;
 
 public class ComboPegdownSpecTest extends ComboSpecTestCase {
+    @BeforeClass
+    public static void assumeJava8() {
+        Assume.assumeTrue("Parboiled is incompatible with Java 9+, skipping tests",
+                System.getProperty("java.specification.version").startsWith("1."));
+    }
+
     final private static String SPEC_RESOURCE = "/pegdown_spec.md";
     final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
