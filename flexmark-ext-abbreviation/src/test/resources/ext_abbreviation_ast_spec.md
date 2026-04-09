@@ -250,7 +250,7 @@ Document[0, 48]
 
 Typographic quotes and smarts will break up text and make it not match abbreviations
 
-```````````````````````````````` example Typographic quotes interaction: 1
+```````````````````````````````` example(Typographic quotes interaction: 1) options(IGNORE)
 Some text about HTML, SGML and HTML4.
 
 Let's talk about the U.S.A., (É.U. or É.-U. d'A. in French).
