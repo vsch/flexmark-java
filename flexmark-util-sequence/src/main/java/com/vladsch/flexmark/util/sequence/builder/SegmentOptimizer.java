@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
@@ -20,7 +19,7 @@ public interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Obj
      *         CharSequence with 0 length skipped
      */
     @Override
-    Object[] apply(@NotNull CharSequence chars, Object[] objects);
+    Object[] apply(CharSequence chars, Object[] objects);
 
     /**
      * Insert a null at index in given parts array
@@ -29,8 +28,7 @@ public interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Obj
      * @param index index where to insert
      * @return copy of input array with extra element inserted at index
      */
-    @NotNull
-    static Object[] insert(@NotNull Object[] parts, int index) {
+    static Object[] insert(Object[] parts, int index) {
         if (index < parts.length) {
             Object[] newParts = new Object[parts.length + 1];
             if (index == 0) {

@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
 import com.vladsch.flexmark.util.misc.MinMaxAvgLong;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +27,7 @@ public class SegmentedSequenceStats {
             this.overhead.add(overhead);
         }
 
-        public void add(@NotNull StatsEntry other) {
+        public void add(StatsEntry other) {
             count += other.count;
             this.segStats.add(other.segStats);
             this.length.add(other.length);
@@ -36,7 +35,7 @@ public class SegmentedSequenceStats {
         }
 
         @Override
-        public int compareTo(@NotNull SegmentedSequenceStats.StatsEntry o) {
+        public int compareTo(SegmentedSequenceStats.StatsEntry o) {
             int segs = Integer.compare(segments, o.segments);
             if (segs != 0) return segs;
             else return Integer.compare(count, o.count);
@@ -76,7 +75,6 @@ public class SegmentedSequenceStats {
         return 0;
     }
 
-    @NotNull
     public String getStatsText(List<StatsEntry> entries) {
         StringBuilder out = new StringBuilder();
         int iMax = entries.size();
@@ -124,7 +122,6 @@ public class SegmentedSequenceStats {
         return out.toString();
     }
 
-    @NotNull
     public String getAggregatedStatsText() {
         return getStatsText(getAggregatedStats());
     }
@@ -151,7 +148,6 @@ public class SegmentedSequenceStats {
 
     static final int MAX_BUCKETS = AGGR_STEPS.size();
 
-    @NotNull
     public List<StatsEntry> getAggregatedStats() {
         if (aggregatedStats == null) {
             List<StatsEntry> entries = getStats();
@@ -195,7 +191,6 @@ public class SegmentedSequenceStats {
         return aggregatedStats;
     }
 
-    @NotNull
     public String getStatsText() {
         List<StatsEntry> entries = getStats();
         return getStatsText(entries);
@@ -205,7 +200,6 @@ public class SegmentedSequenceStats {
         stats.clear();
     }
 
-    @NotNull
     public List<StatsEntry> getStats() {
         ArrayList<StatsEntry> entries = new ArrayList<>(stats.keySet());
 
@@ -213,7 +207,6 @@ public class SegmentedSequenceStats {
         return entries;
     }
 
-    @NotNull
     public static SegmentedSequenceStats getInstance() {
         return new SegmentedSequenceStats();
     }

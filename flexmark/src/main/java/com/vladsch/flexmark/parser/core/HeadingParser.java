@@ -13,8 +13,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInStartsWithCharsHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -105,14 +104,13 @@ public class HeadingParser extends AbstractBlockParser {
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+        public @Nullable SpecialLeadInHandler getLeadInHandler(DataHolder options) {
             boolean noAtxSpace = Parser.ESCAPE_HEADING_NO_ATX_SPACE.get(options) || Parser.HEADING_NO_ATX_SPACE.get(options);
             return noAtxSpace ? HeadingLeadInHandler.HANDLER_NO_SPACE : HeadingLeadInHandler.HANDLER_SPACE;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }

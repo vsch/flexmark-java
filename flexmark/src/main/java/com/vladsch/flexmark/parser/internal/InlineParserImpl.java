@@ -20,8 +20,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -81,7 +80,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void initializeDocument(@NotNull Document document) {
+    public void initializeDocument(Document document) {
         this.document = document;
         this.referenceRepository = Parser.REFERENCES.get(document);
 
@@ -115,7 +114,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void finalizeDocument(@NotNull Document document) {
+    public void finalizeDocument(Document document) {
         assert this.referenceRepository == Parser.REFERENCES.get(document);
 
         if (inlineParserExtensions != null) {
@@ -139,7 +138,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
     @Nullable
     @Override
-    public List<Node> parseCustom(@NotNull BasedSequence input, @NotNull Node node, @NotNull BitSet customCharacters, @NotNull Map<Character, CharacterNodeFactory> nodeFactoryMap) {
+    public List<Node> parseCustom(BasedSequence input, Node node, BitSet customCharacters, Map<Character, CharacterNodeFactory> nodeFactoryMap) {
         this.customCharacters = customCharacters;
         this.specialCharacters.or(customCharacters);
         this.customSpecialCharacterFactoryMap = nodeFactoryMap;
@@ -155,7 +154,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * Parse content in block into inline children, using reference map to resolve references.
      */
     @Override
-    public void parse(@NotNull BasedSequence content, @NotNull Node block) {
+    public void parse(BasedSequence content, Node block) {
         this.block = block;
         this.input = content.trim();
         this.index = 0;
@@ -1519,7 +1518,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void removeDelimitersBetween(@NotNull Delimiter opener, @NotNull Delimiter closer) {
+    public void removeDelimitersBetween(Delimiter opener, Delimiter closer) {
         Delimiter delimiter = closer.getPrevious();
         while (delimiter != null && delimiter != opener) {
             Delimiter previousDelimiter = delimiter.getPrevious();
@@ -1534,7 +1533,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * @param delim delimiter to remove
      */
     @Override
-    public void removeDelimiterAndNode(@NotNull Delimiter delim) {
+    public void removeDelimiterAndNode(Delimiter delim) {
         Text node = delim.getNode();
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
@@ -1554,7 +1553,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
      * @param delim delimiter being processed
      */
     @Override
-    public void removeDelimiterKeepNode(@NotNull Delimiter delim) {
+    public void removeDelimiterKeepNode(Delimiter delim) {
         Node node;
         DelimiterProcessor delimiterProcessor = delimiterProcessors.get(delim.getDelimiterChar());
         node = delimiterProcessor != null ? delimiterProcessor.unmatchedDelimiterNode(this, delim) : null;
@@ -1589,7 +1588,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     @Override
-    public void removeDelimiter(@NotNull Delimiter delim) {
+    public void removeDelimiter(Delimiter delim) {
         if (delim.getPrevious() != null) {
             delim.getPrevious().setNext(delim.getNext());
         }

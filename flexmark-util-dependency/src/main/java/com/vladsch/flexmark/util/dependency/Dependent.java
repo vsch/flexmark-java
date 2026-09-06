@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.dependency;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 

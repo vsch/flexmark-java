@@ -43,15 +43,14 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
 
 public class ComboFormatterIssueSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/formatter_issue_test_suite_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.EXTENSIONS, Arrays.asList(
@@ -133,18 +132,18 @@ public class ComboFormatterIssueSpecTest extends FormatterSpecTest {
                 .set(Formatter.REFERENCE_SORT, ElementPlacementSort.SORT)
         );
     }
-    public ComboFormatterIssueSpecTest(@NotNull SpecExample example) {
+    public ComboFormatterIssueSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(OPTIONS, exampleOptions);
 
         if (USE_BUILDER.get(combinedOptions)) {
             return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
                 @Override
-                protected @NotNull String renderHtml() {
+                protected String renderHtml() {
                     SequenceBuilder builder = SequenceBuilder.emptyBuilder(getDocument().getChars());
                     getRenderer().render(getDocument(), builder);
                     return builder.toString();

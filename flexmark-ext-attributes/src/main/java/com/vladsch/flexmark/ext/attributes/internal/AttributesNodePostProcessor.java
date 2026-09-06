@@ -12,7 +12,6 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -227,7 +226,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
         if (node instanceof AttributesNode) {
             AttributesNode attributesNode = (AttributesNode) node;
 
@@ -356,9 +355,8 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             addNodes(AttributesNode.class, FencedCodeBlock.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new AttributesNodePostProcessor(document);
         }
     }

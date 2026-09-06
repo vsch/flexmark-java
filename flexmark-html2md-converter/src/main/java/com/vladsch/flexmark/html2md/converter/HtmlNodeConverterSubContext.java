@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.html2md.converter;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.jsoup.nodes.Node;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ public abstract class HtmlNodeConverterSubContext implements HtmlNodeConverterCo
     NodeRenderingHandlerWrapper<?> renderingHandlerWrapper;
     @Nullable Node myRenderingNode;
 
-    public HtmlNodeConverterSubContext(@NotNull HtmlMarkdownWriter markdown) {
+    public HtmlNodeConverterSubContext(HtmlMarkdownWriter markdown) {
         this.markdown = markdown;
         this.myRenderingNode = null;
         this.markdown.setContext(this);
@@ -25,15 +24,15 @@ public abstract class HtmlNodeConverterSubContext implements HtmlNodeConverterCo
         this.myRenderingNode = renderingNode;
     }
 
-    public @NotNull HtmlMarkdownWriter getMarkdown() {
+    public HtmlMarkdownWriter getMarkdown() {
         return markdown;
     }
 
-    public void flushTo(@NotNull Appendable out, int maxTrailingBlankLines) {
+    public void flushTo(Appendable out, int maxTrailingBlankLines) {
         flushTo(out, getHtmlConverterOptions().maxBlankLines, maxTrailingBlankLines);
     }
 
-    public void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
+    public void flushTo(Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
         markdown.line();
         try {
             markdown.appendTo(out, maxBlankLines, maxTrailingBlankLines);

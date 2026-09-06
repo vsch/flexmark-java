@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.stream.IntStream;
 
@@ -14,11 +13,11 @@ import java.util.stream.IntStream;
  * a subSequence() returns a sub-sequence from the original base sequence with updated offset tracking
  */
 final public class BasedOptionsSequence implements CharSequence, BasedOptionsHolder {
-    final private @NotNull CharSequence chars;
+    final private CharSequence chars;
     final private int optionFlags;
     final private @Nullable DataHolder options;
 
-    private BasedOptionsSequence(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
+    private BasedOptionsSequence(CharSequence chars, int optionFlags, @Nullable DataHolder options) {
         this.chars = chars;
         this.optionFlags = optionFlags & ~(options == null || SEGMENTED_STATS.get(options) == null ? F_COLLECT_SEGMENTED_STATS : 0);
         this.options = options;
@@ -79,19 +78,19 @@ final public class BasedOptionsSequence implements CharSequence, BasedOptionsHol
         return chars.hashCode();
     }
 
-    public static BasedOptionsSequence of(@NotNull CharSequence chars, BitFieldSet<Options> optionFlags) {
+    public static BasedOptionsSequence of(CharSequence chars, BitFieldSet<Options> optionFlags) {
         return new BasedOptionsSequence(chars, optionFlags.toInt(), null);
     }
 
-    public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags) {
+    public static BasedOptionsSequence of(CharSequence chars, int optionFlags) {
         return new BasedOptionsSequence(chars, optionFlags, null);
     }
 
-    public static BasedOptionsSequence of(@NotNull CharSequence chars, BitFieldSet<Options> optionFlags, @Nullable DataHolder options) {
+    public static BasedOptionsSequence of(CharSequence chars, BitFieldSet<Options> optionFlags, @Nullable DataHolder options) {
         return new BasedOptionsSequence(chars, optionFlags.toInt(), options);
     }
 
-    public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
+    public static BasedOptionsSequence of(CharSequence chars, int optionFlags, @Nullable DataHolder options) {
         return new BasedOptionsSequence(chars, optionFlags, options);
     }
 }

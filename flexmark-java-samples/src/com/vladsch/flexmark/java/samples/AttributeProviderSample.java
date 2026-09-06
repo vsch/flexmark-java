@@ -14,19 +14,18 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.misc.Extension;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
 public class AttributeProviderSample {
     static class SampleExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
             // add any configuration settings to options you want to apply to everything, here
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
             htmlRendererBuilder.attributeProviderFactory(SampleAttributeProvider.Factory());
         }
 
@@ -37,7 +36,7 @@ public class AttributeProviderSample {
 
     static class SampleAttributeProvider implements AttributeProvider {
         @Override
-        public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
+        public void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
             if (node instanceof AutoLink && part == AttributablePart.LINK) {
 
 /*
@@ -72,9 +71,8 @@ public class AttributeProviderSample {
 
         static AttributeProviderFactory Factory() {
             return new IndependentAttributeProviderFactory() {
-                @NotNull
                 @Override
-                public AttributeProvider apply(@NotNull LinkResolverContext context) {
+                public AttributeProvider apply(LinkResolverContext context) {
                     return new SampleAttributeProvider();
                 }
             };

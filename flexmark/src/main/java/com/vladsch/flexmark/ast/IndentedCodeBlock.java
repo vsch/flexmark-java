@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 public class IndentedCodeBlock extends Block implements TextContainer {
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.DoNotAttributeDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TypographicText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A TypographicQuotes node
@@ -17,7 +16,6 @@ public class TypographicQuotes extends Node implements DelimitedNode, DoNotAttri
     protected String typographicOpening;
     protected String typographicClosing;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -25,7 +23,7 @@ public class TypographicQuotes extends Node implements DelimitedNode, DoNotAttri
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         if (openingMarker.isNotNull()) out.append(" typographicOpening: ").append(typographicOpening).append(" ");
         if (closingMarker.isNotNull()) out.append(" typographicClosing: ").append(typographicClosing).append(" ");
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");

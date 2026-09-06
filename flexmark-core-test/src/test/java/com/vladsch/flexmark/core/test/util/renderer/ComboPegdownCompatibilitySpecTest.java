@@ -8,7 +8,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 final public class ComboPegdownCompatibilitySpecTest extends CoreRendererSpecTest {
     final private static String SPEC_RESOURCE = "/core_pegdown_compatibility_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     final private static DataHolder OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.PEGDOWN_STRICT)
             .set(HtmlRenderer.INDENT_SIZE, 2)
@@ -41,7 +40,7 @@ final public class ComboPegdownCompatibilitySpecTest extends CoreRendererSpecTes
                 .set(Parser.LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE, false)
         );
     }
-    public ComboPegdownCompatibilitySpecTest(@NotNull SpecExample example) {
+    public ComboPegdownCompatibilitySpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

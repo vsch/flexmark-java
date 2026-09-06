@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.misc.BitField;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.misc.Utils;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Line information in LineAppendable
@@ -39,7 +38,6 @@ final public class LineInfo {
 //            System.out.println(String.format("Preformatted.%s ordinal: %d mask: %s", this.name(), this.ordinal(), Long.toBinaryString(this.mask)));
         }
 
-        @NotNull
         static Preformatted get(int flags) {
             int preformatted = flags & F_PREFORMATTED;
 
@@ -70,7 +68,7 @@ final public class LineInfo {
     final public int sumLength;         // total length of previous lines
     final public int flags;
 
-    private LineInfo(@NotNull CharSequence lineSeq, int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+    private LineInfo(CharSequence lineSeq, int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, Preformatted preformatted) {
         assert lineSeq == BasedSequence.NULL && index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
         assert lineSeq.length() == length;
 
@@ -115,7 +113,6 @@ final public class LineInfo {
         return BitFieldSet.any(flags, F_PREFORMATTED);
     }
 
-    @NotNull
     public Preformatted getPreformatted() {
         return Preformatted.get(flags);
     }
@@ -137,32 +134,26 @@ final public class LineInfo {
         return prefixLength + textLength;
     }
 
-    @NotNull
     public BasedSequence getLine() {
         return lineSeq instanceof BasedSequence ? (BasedSequence) lineSeq : BasedSequence.of(lineSeq);
     }
 
-    @NotNull
     public BasedSequence getPrefix() {
         return getLine().subSequence(0, prefixLength);
     }
 
-    @NotNull
     public BasedSequence getTextNoEOL() {
         return getLine().subSequence(prefixLength, prefixLength + textLength);
     }
 
-    @NotNull
     public BasedSequence getText() {
         return getLine().subSequence(prefixLength, length);
     }
 
-    @NotNull
     public BasedSequence getLineNoEOL() {
         return getLine().subSequence(0, prefixLength + textLength);
     }
 
-    @NotNull
     public BasedSequence getEOL() {
         return getLine().subSequence(prefixLength + textLength, length);
     }
@@ -182,13 +173,11 @@ final public class LineInfo {
                 '}';
     }
 
-    @NotNull
-    public static LineInfo create(@NotNull CharSequence line, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+    public static LineInfo create(CharSequence line, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, Preformatted preformatted) {
         return new LineInfo(line, 0, prefixLength, textLength, length, 0, 0, 0, isBlankPrefix, isBlankText, preformatted);
     }
 
-    @NotNull
-    public static LineInfo create(@NotNull CharSequence line, @NotNull LineInfo prevInfo, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+    public static LineInfo create(CharSequence line, LineInfo prevInfo, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, Preformatted preformatted) {
         return new LineInfo(
                 line,
                 prevInfo.index + 1,
@@ -204,8 +193,7 @@ final public class LineInfo {
         );
     }
 
-    @NotNull
-    public static LineInfo create(@NotNull LineInfo prevInfo, @NotNull LineInfo info) {
+    public static LineInfo create(LineInfo prevInfo, LineInfo info) {
         return new LineInfo(
                 info.lineSeq,
                 prevInfo.index + 1,

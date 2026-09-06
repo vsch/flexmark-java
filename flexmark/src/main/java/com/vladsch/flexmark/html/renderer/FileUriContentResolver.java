@@ -5,8 +5,7 @@ import com.vladsch.flexmark.html.UriContentResolverFactory;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.dependency.LastDependent;
 import com.vladsch.flexmark.util.misc.FileUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class FileUriContentResolver implements UriContentResolver {
     }
 
     @Override
-    public @NotNull ResolvedContent resolveContent(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedContent content) {
+    public ResolvedContent resolveContent(Node node, LinkResolverBasicContext context, ResolvedContent content) {
         ResolvedLink resolvedLink = content.getResolvedLink();
 
         if (resolvedLink.getStatus() == LinkStatus.VALID) {
@@ -61,9 +60,8 @@ public class FileUriContentResolver implements UriContentResolver {
             return false;
         }
 
-        @NotNull
         @Override
-        public UriContentResolver apply(@NotNull LinkResolverBasicContext context) {
+        public UriContentResolver apply(LinkResolverBasicContext context) {
             return new FileUriContentResolver(context);
         }
     }

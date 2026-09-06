@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.net.URL;
@@ -17,12 +16,11 @@ public class ResourceResolverManager {
      */
     final private static ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
     
-    public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
+    public static void registerUrlResolver(Function<String, String> resolver) {
         ResourceResolverManager.urlResolvers.add(resolver);
     }
 
-    @NotNull
-    public static String adjustedFileUrl(@NotNull URL url) {
+    public static String adjustedFileUrl(URL url) {
         String externalForm = url.toExternalForm();
         String bestProtocolMatch = null;
 

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.DefinitionMarker;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_definition_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(DefinitionExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -33,7 +32,7 @@ public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("marker-type-tilde", new MutableDataSet().set(DefinitionExtension.FORMAT_MARKER_TYPE, DefinitionMarker.TILDE));
         optionsMap.put("no-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false));
     }
-    public ComboDefinitionFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboDefinitionFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

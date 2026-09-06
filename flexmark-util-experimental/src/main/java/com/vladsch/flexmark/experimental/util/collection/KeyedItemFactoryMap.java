@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.experimental.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,21 +9,21 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class KeyedItemFactoryMap<K, I, P> implements Map<K, Function<P, I>> {
-    protected final @NotNull HashMap<K, Function<P, I>> factoryMap;
-    protected final @NotNull HashMap<K, I> itemMap;
-    protected final @NotNull P param;
+    protected final HashMap<K, Function<P, I>> factoryMap;
+    protected final HashMap<K, I> itemMap;
+    protected final P param;
 
-    public KeyedItemFactoryMap(@NotNull P param) {
+    public KeyedItemFactoryMap(P param) {
         this(param, 0);
     }
 
-    public KeyedItemFactoryMap(@NotNull P param, int capacity) {
+    public KeyedItemFactoryMap(P param, int capacity) {
         this.factoryMap = new HashMap<>(capacity);
         this.itemMap = new HashMap<>();
         this.param = param;
     }
 
-    public @Nullable I getItem(@NotNull K key) {
+    public @Nullable I getItem(K key) {
         I item = itemMap.get(key);
 
         if (item == null) {
@@ -52,10 +51,10 @@ public class KeyedItemFactoryMap<K, I, P> implements Map<K, Function<P, I>> {
     public boolean containsKey(@Nullable Object o) {return factoryMap.containsKey(o);}
 
     @Override
-    public @Nullable Function<P, I> put(@NotNull K k, @NotNull Function<P, I> factory) {return factoryMap.put(k, factory);}
+    public @Nullable Function<P, I> put(K k, Function<P, I> factory) {return factoryMap.put(k, factory);}
 
     @Override
-    public void putAll(@NotNull Map<? extends K, ? extends Function<P, I>> map) {factoryMap.putAll(map);}
+    public void putAll(Map<? extends K, ? extends Function<P, I>> map) {factoryMap.putAll(map);}
 
     @Override
     public @Nullable Function<P, I> remove(@Nullable Object o) {return factoryMap.remove(o);}
@@ -66,15 +65,12 @@ public class KeyedItemFactoryMap<K, I, P> implements Map<K, Function<P, I>> {
     @Override
     public boolean containsValue(Object o) {return factoryMap.containsValue(o);}
 
-    @NotNull
     @Override
     public Set<K> keySet() {return factoryMap.keySet();}
 
-    @NotNull
     @Override
     public Collection<Function<P, I>> values() {return factoryMap.values();}
 
-    @NotNull
     @Override
     public Set<Entry<K, Function<P, I>>> entrySet() {return factoryMap.entrySet();}
 }

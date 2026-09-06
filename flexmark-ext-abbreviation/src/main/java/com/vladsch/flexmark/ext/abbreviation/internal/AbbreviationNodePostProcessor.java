@@ -12,8 +12,7 @@ import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -62,7 +61,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
         if (abbreviations == null) return;
 
         BasedSequence original = node.getChars();
@@ -132,9 +131,8 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
             addNodeWithExclusions(Text.class, DoNotDecorate.class, DoNotLinkDecorate.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new AbbreviationNodePostProcessor(document);
         }
     }

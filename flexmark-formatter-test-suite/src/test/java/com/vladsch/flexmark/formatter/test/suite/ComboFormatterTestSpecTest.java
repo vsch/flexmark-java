@@ -32,7 +32,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.*;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -42,7 +41,7 @@ import java.util.Map;
 
 public class ComboFormatterTestSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/formatter_test_suite_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AbbreviationExtension.create(),
@@ -114,7 +113,7 @@ public class ComboFormatterTestSpecTest extends FormatterSpecTest {
         optionsMap.put("task-placement-complete-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_TO_NON_TASK));
         optionsMap.put("task-placement-complete-nested-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK));
     }
-    public ComboFormatterTestSpecTest(@NotNull SpecExample example) {
+    public ComboFormatterTestSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

@@ -15,8 +15,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -145,7 +144,6 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
     }
 
     public static class Factory implements BlockPreProcessorFactory {
-        @NotNull
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
             HashSet<Class<? extends Block>> set = new HashSet<>();
@@ -170,9 +168,8 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             return true;
         }
 
-        @NotNull
         @Override
-        public BlockPreProcessor apply(@NotNull ParserState state) {
+        public BlockPreProcessor apply(ParserState state) {
             return new DefinitionListItemBlockPreProcessor(state.getProperties());
         }
     }

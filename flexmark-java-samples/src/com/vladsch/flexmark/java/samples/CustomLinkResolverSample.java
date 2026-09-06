@@ -18,8 +18,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.misc.Utils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -53,9 +52,8 @@ public class CustomLinkResolverSample {
             prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.get(context.getOptions());
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
             if (node instanceof Image || node instanceof Link || node instanceof Reference || node instanceof JekyllTagBlock) {
                 String url = link.getUrl();
 
@@ -168,9 +166,8 @@ public class CustomLinkResolverSample {
                 return false;
             }
 
-            @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+            public LinkResolver apply(LinkResolverBasicContext context) {
                 return new com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver(context);
             }
         }
@@ -178,12 +175,12 @@ public class CustomLinkResolverSample {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(@NotNull Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(Builder htmlRendererBuilder, String rendererType) {
             htmlRendererBuilder.linkResolverFactory(new DocxLinkResolver.Factory());
             htmlRendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
@@ -195,9 +192,8 @@ public class CustomLinkResolverSample {
 
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomLinkRenderer();
             }
 

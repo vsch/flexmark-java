@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.macros;
 import com.vladsch.flexmark.ext.macros.internal.MacroDefinitionRepository;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A MacroReference node
@@ -19,7 +18,6 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
         return myMacroDefinitionBlock != null;
     }
 
-    @NotNull
     @Override
     public BasedSequence getReference() {
         return text;
@@ -51,7 +49,6 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
         this.myMacroDefinitionBlock = macroDefinitionBlock;
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -59,7 +56,7 @@ public class MacroReference extends Node implements DelimitedNode, DoNotDecorate
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

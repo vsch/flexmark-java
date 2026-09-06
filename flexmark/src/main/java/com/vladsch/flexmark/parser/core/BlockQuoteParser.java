@@ -10,8 +10,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInStartsWithCharsHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -140,7 +139,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+        public @Nullable SpecialLeadInHandler getLeadInHandler(DataHolder options) {
             return BlockQuoteLeadInHandler.HANDLER;
         }
 
@@ -149,9 +148,8 @@ public class BlockQuoteParser extends AbstractBlockParser {
             return false;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }

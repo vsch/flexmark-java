@@ -6,7 +6,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -15,7 +14,7 @@ import java.util.Map;
 
 public class ComboFootnotesTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_footnotes_translation_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(FootnoteExtension.create()))
             .toImmutable();
@@ -26,7 +25,7 @@ public class ComboFootnotesTranslationFormatterSpecTest extends TranslationForma
             FootnoteExtension.FOOTNOTE_SORT
     );
 
-    public ComboFootnotesTranslationFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboFootnotesTranslationFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

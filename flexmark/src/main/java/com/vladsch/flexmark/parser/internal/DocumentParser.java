@@ -18,7 +18,6 @@ import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -132,27 +131,27 @@ public class DocumentParser implements ParserState {
         blockTracker.blockParserRemoved(blockParser);
     }
 
-    public void blockAdded(@NotNull Block node) {
+    public void blockAdded(Block node) {
         blockTracker.blockAdded(node);
     }
 
-    public void blockAddedWithChildren(@NotNull Block node) {
+    public void blockAddedWithChildren(Block node) {
         blockTracker.blockAddedWithChildren(node);
     }
 
-    public void blockAddedWithDescendants(@NotNull Block node) {
+    public void blockAddedWithDescendants(Block node) {
         blockTracker.blockAddedWithDescendants(node);
     }
 
-    public void blockRemoved(@NotNull Block node) {
+    public void blockRemoved(Block node) {
         blockTracker.blockRemoved(node);
     }
 
-    public void blockRemovedWithChildren(@NotNull Block node) {
+    public void blockRemovedWithChildren(Block node) {
         blockTracker.blockRemovedWithChildren(node);
     }
 
-    public void blockRemovedWithDescendants(@NotNull Block node) {
+    public void blockRemovedWithDescendants(Block node) {
         blockTracker.blockRemovedWithDescendants(node);
     }
 

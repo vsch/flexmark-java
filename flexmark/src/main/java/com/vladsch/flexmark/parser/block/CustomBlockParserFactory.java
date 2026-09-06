@@ -3,8 +3,7 @@ package com.vladsch.flexmark.parser.block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.function.Function;
 
@@ -13,13 +12,13 @@ import java.util.function.Function;
  */
 public interface CustomBlockParserFactory extends Function<DataHolder, BlockParserFactory>, Dependent {
     @Override
-    @NotNull BlockParserFactory apply(@NotNull DataHolder options);
+    BlockParserFactory apply(DataHolder options);
 
     /**
      * @param options options for this parser session
      * @return special lead in character handler for the block parser elements
      */
-    default @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+    default @Nullable SpecialLeadInHandler getLeadInHandler(DataHolder options) {
         return null;
     }
 }

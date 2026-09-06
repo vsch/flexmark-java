@@ -8,7 +8,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 public class ComboYouTrackConverterSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/youtrack_converter_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(YouTrackConverterExtension.create(), StrikethroughExtension.create(), TablesExtension.create()));
 
@@ -34,7 +33,7 @@ public class ComboYouTrackConverterSpecTest extends RendererSpecTest {
 
         optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
     }
-    public ComboYouTrackConverterSpecTest(@NotNull SpecExample example) {
+    public ComboYouTrackConverterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

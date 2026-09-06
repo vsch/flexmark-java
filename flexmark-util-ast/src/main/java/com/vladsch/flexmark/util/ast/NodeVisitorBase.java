@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.ast;
 
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract visitor that visits all children by default.
@@ -9,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
  * call {@link #visitChildren}.
  */
 public abstract class NodeVisitorBase {
-    protected abstract void visit(@NotNull Node node);
+    protected abstract void visit(Node node);
 
-    public void visitChildren(@NotNull Node parent) {
+    public void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no

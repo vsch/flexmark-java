@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -86,9 +85,8 @@ final public class HtmlRendererTest {
     @Test
     public void attributeProviderForCodeBlock() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
-            @NotNull
             @Override
-            public AttributeProvider apply(@NotNull LinkResolverContext context) {
+            public AttributeProvider apply(LinkResolverContext context) {
                 return (node, part, attributes) -> {
                     if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
                         FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
@@ -112,9 +110,8 @@ final public class HtmlRendererTest {
     @Test
     public void attributeProviderForImage() {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
-            @NotNull
             @Override
-            public AttributeProvider apply(@NotNull LinkResolverContext context) {
+            public AttributeProvider apply(LinkResolverContext context) {
                 return (node, part, attributes) -> {
                     if (node instanceof Image) {
                         attributes.remove("alt");
@@ -219,9 +216,8 @@ final public class HtmlRendererTest {
         };
 
         NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return () -> {
                     HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
                     set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
@@ -270,9 +266,8 @@ final public class HtmlRendererTest {
         };
 
         NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return () -> {
                     HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
                     set.add(new NodeRenderingHandler<>(Link.class, (node, context, html) -> {
@@ -336,9 +331,8 @@ final public class HtmlRendererTest {
             docUrl = DOC_RELATIVE_URL.get(context.getOptions());
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
             if (node instanceof Link) {
                 Link linkNode = (Link) node;
                 if (linkNode.getUrl().equals("/url")) {
@@ -349,9 +343,8 @@ final public class HtmlRendererTest {
         }
 
         static class Factory extends IndependentLinkResolverFactory {
-            @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+            public LinkResolver apply(LinkResolverBasicContext context) {
                 return new CustomLinkResolverImpl(context);
             }
         }
@@ -371,9 +364,8 @@ final public class HtmlRendererTest {
 
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
             if (node instanceof LinkRef || node instanceof ImageRef) {
                 RefNode linkNode = (RefNode) node;
                 if (linkNode.getReference().startsWith(":")) {
@@ -384,9 +376,8 @@ final public class HtmlRendererTest {
         }
 
         static class Factory extends IndependentLinkResolverFactory {
-            @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+            public LinkResolver apply(LinkResolverBasicContext context) {
                 return new CustomLinkResolverImpl(context);
             }
         }

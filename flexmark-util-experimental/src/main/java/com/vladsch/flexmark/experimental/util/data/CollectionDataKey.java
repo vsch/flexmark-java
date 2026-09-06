@@ -2,7 +2,6 @@ package com.vladsch.flexmark.experimental.util.data;
 
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataNotNullValueFactory;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -14,11 +13,10 @@ public class CollectionDataKey<T> extends DataKey<Collection<T>> {
      * @param defaultValue default value for collection key
      * @param factory data value factory for creating a new default value for the key
      */
-    public CollectionDataKey(@NotNull String name, @NotNull Collection<T> defaultValue, DataNotNullValueFactory<Collection<T>> factory) {
+    public CollectionDataKey(String name, Collection<T> defaultValue, DataNotNullValueFactory<Collection<T>> factory) {
         super(name, defaultValue, factory);
     }
 
-    @NotNull
     public DataNotNullValueFactory<Collection<T>> getFactory() {
         return super.getFactory();
     }

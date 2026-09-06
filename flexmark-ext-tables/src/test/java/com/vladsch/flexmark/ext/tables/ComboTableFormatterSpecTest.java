@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -20,7 +19,7 @@ import java.util.Map;
 
 public class ComboTableFormatterSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_tables_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -82,7 +81,7 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
         );
         optionsMap.put("width-provider", new MutableDataSet().set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, WIDTH_PROVIDER));
     }
-    public ComboTableFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboTableFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

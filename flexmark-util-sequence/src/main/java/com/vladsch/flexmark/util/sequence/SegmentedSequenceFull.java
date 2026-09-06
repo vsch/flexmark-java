@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.sequence.builder.*;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A BasedSequence which consists of segments of other BasedSequences
@@ -29,7 +28,7 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
     }
 
     @Override
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+    public void addSegments(IBasedSegmentBuilder<?> builder) {
         // FIX: clean up and optimize the structure. it is error prone and inefficient
         BasedUtils.generateSegments(builder, this);
     }
@@ -52,7 +51,6 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
         }
     }
 
-    @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, length());
@@ -71,7 +69,7 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
      * @param builder builder for which to construct segmented sequence
      * @return segmented sequence
      */
-    public static SegmentedSequenceFull create(@NotNull BasedSequence baseSequence, ISegmentBuilder<?> builder) {
+    public static SegmentedSequenceFull create(BasedSequence baseSequence, ISegmentBuilder<?> builder) {
         BasedSequence baseSeq = baseSequence.getBaseSequence();
         int length = builder.length();
         int baseStartOffset = 0;
@@ -202,7 +200,7 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
      *         which does the builder calls for you.
      */
     @Deprecated
-    public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+    public static BasedSequence of(BasedSequence basedSequence, Iterable<? extends BasedSequence> segments) {
         return SegmentedSequence.create(basedSequence, segments);
     }
 

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class ComboWikiLinkSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_wikilink_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(WikiLinkExtension.create(), TypographicExtension.create()))
             .toImmutable();
@@ -39,7 +38,7 @@ public class ComboWikiLinkSpecTest extends RendererSpecTest {
         optionsMap.put("custom-link-escape", new MutableDataSet().set(WikiLinkExtension.LINK_ESCAPE_CHARS, " +<>").set(WikiLinkExtension.LINK_REPLACE_CHARS, "____"));
         optionsMap.put("link-text-priority", new MutableDataSet().set(Parser.LINK_TEXT_PRIORITY_OVER_LINK_REF, true));
     }
-    public ComboWikiLinkSpecTest(@NotNull SpecExample example) {
+    public ComboWikiLinkSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

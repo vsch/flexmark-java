@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,7 +20,7 @@ public class ExampleOption {
         BUILT_IN_OPTIONS_SET.add(TIMED_ITERATIONS_OPTION_NAME);
         BUILT_IN_OPTIONS_SET.add(TIMED_OPTION_NAME);
     }
-    private static ExampleOption build(@NotNull CharSequence option) {
+    private static ExampleOption build(CharSequence option) {
         BasedSequence optionName;
         BasedSequence customParams;
         boolean isDisabled = false;
@@ -53,7 +52,7 @@ public class ExampleOption {
         );
     }
 
-    public static ExampleOption of(@NotNull CharSequence optionText) {
+    public static ExampleOption of(CharSequence optionText) {
         return build(optionText);
     }
 
@@ -68,20 +67,19 @@ public class ExampleOption {
 //        BUILT_IN_OPTIONS_MAP.put(TIMED_ITERATIONS_OPTION_NAME, build(TIMED_ITERATIONS_OPTION_NAME));
         BUILT_IN_OPTIONS_MAP.put(TIMED_OPTION_NAME, build(TIMED_OPTION_NAME));
     }
-    @NotNull
     public static HashMap<String, ExampleOption> getBuiltInOptions() {
         return new HashMap<>(BUILT_IN_OPTIONS_MAP);
     }
 
-    final public @NotNull BasedSequence optionText;
-    final public @NotNull BasedSequence optionName;
-    final public @NotNull BasedSequence customParams;
+    final public BasedSequence optionText;
+    final public BasedSequence optionName;
+    final public BasedSequence customParams;
     final public boolean isBuiltIn;
     final public boolean isDisabled;
     final public boolean isCustom;
     final public boolean isValid;
 
-    private ExampleOption(@NotNull BasedSequence optionText, @NotNull BasedSequence optionName, @NotNull BasedSequence customParams, boolean isBuiltIn, boolean isDisabled, boolean isCustom, boolean isValid) {
+    private ExampleOption(BasedSequence optionText, BasedSequence optionName, BasedSequence customParams, boolean isBuiltIn, boolean isDisabled, boolean isCustom, boolean isValid) {
         this.optionText = optionText;
         this.optionName = optionName;
         this.customParams = customParams;
@@ -91,12 +89,10 @@ public class ExampleOption {
         this.isValid = isValid;
     }
 
-    @NotNull
     public String getOptionText() {
         return optionText.toString();
     }
 
-    @NotNull
     public String getOptionName() {
         return optionName.toString();
     }

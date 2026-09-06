@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.html.renderer;
 
-import org.jetbrains.annotations.NotNull;
 
 public class LinkType {
     final public static LinkType LINK = new LinkType("LINK");
@@ -8,13 +7,13 @@ public class LinkType {
     final public static LinkType LINK_REF = new LinkType("LINK_REF");
     final public static LinkType IMAGE_REF = new LinkType("IMAGE_REF");
 
-    final private @NotNull String myName;
+    final private String myName;
 
-    public LinkType(@NotNull String name) {
+    public LinkType(String name) {
         this.myName = name;
     }
 
-    public @NotNull String getName() {
+    public String getName() {
         return myName;
     }
 

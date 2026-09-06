@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.sequence.mappers;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -27,7 +26,7 @@ public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
      * @return true if sequence was a lead in for the handler
      */
     @Override
-    public boolean escape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+    public boolean escape(BasedSequence sequence, @Nullable DataHolder options, Consumer<CharSequence> consumer) {
         if (sequence.length() == 1 && predicate.test(sequence.charAt(0))) {
             consumer.accept("\\");
             consumer.accept(sequence);
@@ -48,7 +47,7 @@ public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
      * @return true if sequence was a lead in for the handler
      */
     @Override
-    public boolean unEscape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+    public boolean unEscape(BasedSequence sequence, @Nullable DataHolder options, Consumer<CharSequence> consumer) {
         if (sequence.length() == 2 && sequence.charAt(0) == '\\' && predicate.test(sequence.charAt(1))) {
             consumer.accept(sequence.subSequence(1));
             return true;
@@ -56,13 +55,11 @@ public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
         return false;
     }
 
-    @NotNull
     public static SpecialLeadInCharsHandler create(char leadInChar) {
         return new SpecialLeadInCharsHandler(CharPredicate.anyOf(leadInChar));
     }
 
-    @NotNull
-    public static SpecialLeadInCharsHandler create(@NotNull CharSequence leadInChar) {
+    public static SpecialLeadInCharsHandler create(CharSequence leadInChar) {
         return new SpecialLeadInCharsHandler(CharPredicate.anyOf(leadInChar));
     }
 }

@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.spec.example;
 
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class SpecExampleBlock extends Block {
     private BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         //BasedSequence content = getContentChars();
         //int lines = getSegments().length;
         //segmentSpanChars(out, openingMarker, "open");
@@ -56,7 +55,6 @@ public class SpecExampleBlock extends Block {
         if (closingMarker.isNotNull()) segmentSpan(out, closingMarker, "closingMarker");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] {

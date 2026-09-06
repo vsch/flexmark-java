@@ -2,7 +2,6 @@ package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.test.util.ExceptionMatcher;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -1649,10 +1648,10 @@ public class PositionListTest {
     }
 
     static class PreviewTracker implements IPreviewPositionListener {
-        final @NotNull StringBuilder out;
-        final @NotNull List<?> list;
+        final StringBuilder out;
+        final List<?> list;
 
-        public PreviewTracker(@NotNull StringBuilder out, @NotNull List<?> list) {
+        public PreviewTracker(StringBuilder out, List<?> list) {
             this.out = out;
             this.list = list;
         }

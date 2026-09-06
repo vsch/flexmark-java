@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.attributes.FencedCodeAddType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
-import org.jetbrains.annotations.NotNull;
 
 class AttributesOptions implements MutableDataSetter {
     final public boolean assignTextAttributes;
@@ -22,9 +21,8 @@ class AttributesOptions implements MutableDataSetter {
         fencedCodeAddAttributes = AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES.get(options);
     }
 
-    @NotNull
     @Override
-    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, assignTextAttributes);
         dataHolder.set(AttributesExtension.WRAP_NON_ATTRIBUTE_TEXT, wrapNonAttributeText);
         dataHolder.set(AttributesExtension.USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER, useEmptyImplicitAsSpanDelimiter);

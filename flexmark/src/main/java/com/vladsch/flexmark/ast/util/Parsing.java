@@ -6,8 +6,7 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.function.Function;
@@ -333,7 +332,7 @@ public class Parsing {
 
     final static HashMap<String, HashMap<PatternTypeFlags, Pattern>> cachedPatterns = new HashMap<>();
 
-    static Pattern getCachedPattern(@NotNull String patternName, @NotNull PatternTypeFlags cachedTypeFlags, @NotNull Function<PatternTypeFlags, Pattern> factory) {
+    static Pattern getCachedPattern(String patternName, PatternTypeFlags cachedTypeFlags, Function<PatternTypeFlags, Pattern> factory) {
         HashMap<PatternTypeFlags, Pattern> patternMap = cachedPatterns.computeIfAbsent(patternName, (key) -> new HashMap<>());
         return patternMap.computeIfAbsent(cachedTypeFlags, factory);
     }

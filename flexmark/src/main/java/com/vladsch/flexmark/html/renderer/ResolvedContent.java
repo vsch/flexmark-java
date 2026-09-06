@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.html.renderer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 
 public class ResolvedContent {
-    final private @NotNull ResolvedLink resolvedLink;
-    final private @NotNull LinkStatus status;
-    final private @Nullable byte[] content;
+    final private ResolvedLink resolvedLink;
+    final private LinkStatus status;
+    final private byte @Nullable [] content;
 
-    public ResolvedContent(@NotNull ResolvedLink resolvedLink, @NotNull LinkStatus status, @Nullable byte[] content) {
+    public ResolvedContent(ResolvedLink resolvedLink, LinkStatus status, byte @Nullable [] content) {
         this.resolvedLink = resolvedLink;
         this.status = status;
         this.content = content;
@@ -18,19 +17,19 @@ public class ResolvedContent {
     
     
     // @formatter:off
-    public ResolvedContent withStatus(@NotNull LinkStatus status) { return status == this.status ? this : new ResolvedContent(resolvedLink, status, content); }
-    public ResolvedContent withContent(@Nullable byte[] content) { return Arrays.equals(this.content, content) ? this : new ResolvedContent(resolvedLink, status, content); }
+    public ResolvedContent withStatus(LinkStatus status) { return status == this.status ? this : new ResolvedContent(resolvedLink, status, content); }
+    public ResolvedContent withContent(byte @Nullable [] content) { return Arrays.equals(this.content, content) ? this : new ResolvedContent(resolvedLink, status, content); }
     // @formatter:on
 
-    public @NotNull ResolvedLink getResolvedLink() {
+    public ResolvedLink getResolvedLink() {
         return resolvedLink;
     }
 
-    public @NotNull LinkStatus getStatus() {
+    public LinkStatus getStatus() {
         return status;
     }
 
-    public @Nullable byte[] getContent() {
+    public byte @Nullable [] getContent() {
         return content;
     }
 

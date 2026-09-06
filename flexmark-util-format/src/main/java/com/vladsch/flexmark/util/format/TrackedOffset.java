@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.misc.BitFieldSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Tracked Offset information
@@ -42,7 +41,7 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         this.spacesAfter = -1;
     }
 
-    private TrackedOffset(@NotNull TrackedOffset other) {
+    private TrackedOffset(TrackedOffset other) {
         this.original = other.original;
         this.offset = other.offset;
         this.flags = other.flags;
@@ -51,7 +50,7 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         this.spacesAfter = other.spacesAfter;
     }
 
-    private TrackedOffset(@NotNull TrackedOffset other, int offset) {
+    private TrackedOffset(TrackedOffset other, int offset) {
         this.original = other;
         this.offset = offset;
         this.flags = other.flags;
@@ -113,22 +112,20 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         return BitFieldSet.any(flags, F_AFTER_DELETE);
     }
 
-    @NotNull
     public TrackedOffset plusOffsetDelta(int delta) {
         return new TrackedOffset(this, offset + delta);
     }
 
-    @NotNull
     public TrackedOffset withOffset(int offset) {
         return new TrackedOffset(this, offset);
     }
 
     @Override
-    public int compareTo(@NotNull TrackedOffset o) {
+    public int compareTo(TrackedOffset o) {
         return Integer.compare(offset, o.offset);
     }
 
-    public int compareTo(@NotNull Integer o) {
+    public int compareTo(Integer o) {
         return Integer.compare(offset, o);
     }
 
@@ -164,7 +161,7 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
                 "}";
     }
 
-    public static TrackedOffset track(@NotNull TrackedOffset other) {
+    public static TrackedOffset track(TrackedOffset other) {
         return new TrackedOffset(other);
     }
 

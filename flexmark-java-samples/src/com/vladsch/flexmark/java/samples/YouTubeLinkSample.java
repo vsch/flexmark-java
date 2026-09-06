@@ -15,7 +15,6 @@ import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -53,7 +52,7 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void process(@NotNull NodeTracker state, @NotNull Node node) {
+        public void process(NodeTracker state, Node node) {
             if (node instanceof Link) {
                 Node previous = node.getPrevious();
 
@@ -81,9 +80,8 @@ public class YouTubeLinkSample {
                 addNodes(Link.class);
             }
 
-            @NotNull
             @Override
-            public NodePostProcessor apply(@NotNull Document document) {
+            public NodePostProcessor apply(Document document) {
                 return new YouTubeLinkNodePostProcessor(document);
             }
         }
@@ -119,9 +117,8 @@ public class YouTubeLinkSample {
         }
 
         public static class Factory implements NodeRendererFactory {
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new YouTubeLinkNodeRenderer(options);
             }
         }
@@ -141,7 +138,7 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
@@ -151,7 +148,7 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
             if (htmlRendererBuilder.isRendererType("HTML")) {
                 htmlRendererBuilder.nodeRendererFactory(new YouTubeLinkNodeRenderer.Factory());
             } else if (htmlRendererBuilder.isRendererType("JIRA")) {

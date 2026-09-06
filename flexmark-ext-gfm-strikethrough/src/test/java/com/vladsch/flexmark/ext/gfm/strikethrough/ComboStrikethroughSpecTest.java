@@ -7,7 +7,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class ComboStrikethroughSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_gfm_strikethrough_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 0)
             .set(Parser.EXTENSIONS, Collections.singleton(StrikethroughExtension.create()))
@@ -27,7 +26,7 @@ public class ComboStrikethroughSpecTest extends RendererSpecTest {
     static {
         optionsMap.put("style-strikethrough", new MutableDataSet().set(StrikethroughExtension.STRIKETHROUGH_STYLE_HTML_OPEN, "<span class=\"text-strike\">").set(StrikethroughExtension.STRIKETHROUGH_STYLE_HTML_CLOSE, "</span>"));
     }
-    public ComboStrikethroughSpecTest(@NotNull SpecExample example) {
+    public ComboStrikethroughSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

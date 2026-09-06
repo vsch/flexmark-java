@@ -10,8 +10,7 @@ import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A Footnote definition node containing text and other inline nodes nodes as children.
@@ -40,7 +39,7 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
 
     @Nullable
     @Override
-    public Footnote getReferencingNode(@NotNull Node node) {
+    public Footnote getReferencingNode(Node node) {
         return node instanceof Footnote ? (Footnote) node : null;
     }
 
@@ -69,7 +68,7 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         out.append(" ordinal: ").append(footnoteOrdinal).append(" ");
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, text, "text");
@@ -77,7 +76,6 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
         segmentSpan(out, footnote, "footnote");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, footnote };

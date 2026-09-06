@@ -9,8 +9,7 @@ import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A EnumeratedReference block node
@@ -28,19 +27,18 @@ public class EnumeratedReferenceBlock extends Block implements ReferenceNode<Enu
 
     @Nullable
     @Override
-    public EnumeratedReferenceText getReferencingNode(@NotNull Node node) {
+    public EnumeratedReferenceText getReferencingNode(Node node) {
         return node instanceof EnumeratedReferenceText ? (EnumeratedReferenceText) node : null;
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, text, "text");
         segmentSpan(out, closingMarker, "close");
         segmentSpan(out, enumeratedReference, "enumeratedReference");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, enumeratedReference };

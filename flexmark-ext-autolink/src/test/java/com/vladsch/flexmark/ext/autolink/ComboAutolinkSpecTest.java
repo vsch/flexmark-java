@@ -8,7 +8,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -17,7 +16,7 @@ import java.util.*;
 @RunWith(Parameterized.class)
 public class ComboAutolinkSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_autolink_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AutolinkExtension.create()))
             .toImmutable();
@@ -30,7 +29,7 @@ public class ComboAutolinkSpecTest extends RendererSpecTest {
         optionsMap.put("intellij-dummy", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("typographic-ext", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), TypographicExtension.create())));
     }
-    public ComboAutolinkSpecTest(@NotNull SpecExample example) {
+    public ComboAutolinkSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

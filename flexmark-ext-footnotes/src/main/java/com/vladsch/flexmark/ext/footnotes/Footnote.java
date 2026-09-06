@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.LinkRendered;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A Footnote referencing node
@@ -25,7 +24,6 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Link
 
     protected int referenceOrdinal;
 
-    @NotNull
     @Override
     public BasedSequence getReference() {
         return text;
@@ -69,14 +67,13 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Link
         this.footnoteBlock = footnoteBlock;
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         out.append(" ordinal: ").append(footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0).append(" ");
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }

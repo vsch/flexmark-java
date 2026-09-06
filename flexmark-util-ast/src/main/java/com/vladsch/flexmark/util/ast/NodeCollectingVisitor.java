@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.ClassificationBag;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.Function;
@@ -11,13 +10,13 @@ public class NodeCollectingVisitor {
     final public static Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
     final private static Class<?>[] EMPTY_CLASSES = new Class<?>[0];
 
-    final private @NotNull HashMap<Class<?>, List<Class<?>>> subClassMap;
-    final private @NotNull HashSet<Class<?>> included;
-    final private @NotNull HashSet<Class<?>> excluded;
-    final private @NotNull ClassificationBag<Class<?>, Node> nodes;
-    final private @NotNull Class<?>[] classes;
+    final private HashMap<Class<?>, List<Class<?>>> subClassMap;
+    final private HashSet<Class<?>> included;
+    final private HashSet<Class<?>> excluded;
+    final private ClassificationBag<Class<?>, Node> nodes;
+    final private Class<?>[] classes;
 
-    public NodeCollectingVisitor(@NotNull Set<Class<?>> classes) {
+    public NodeCollectingVisitor(Set<Class<?>> classes) {
         this.classes = classes.toArray(EMPTY_CLASSES);
 
         subClassMap = new HashMap<>();
@@ -34,7 +33,7 @@ public class NodeCollectingVisitor {
         nodes = new ClassificationBag<>(NODE_CLASSIFIER);
     }
 
-    public void collect(@NotNull Node node) {
+    public void collect(Node node) {
         visit(node);
     }
 
@@ -42,7 +41,7 @@ public class NodeCollectingVisitor {
         return new SubClassingBag<>(nodes, subClassMap);
     }
 
-    private void visit(@NotNull Node node) {
+    private void visit(Node node) {
         Class<?> nodeClass = node.getClass();
         if (included.contains(nodeClass)) {
             nodes.add(node);
@@ -74,7 +73,7 @@ public class NodeCollectingVisitor {
         visitChildren(node);
     }
 
-    private void visitChildren(@NotNull Node parent) {
+    private void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no

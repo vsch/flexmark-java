@@ -23,8 +23,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -64,12 +63,12 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     @Override
-    public @Nullable DataHolder options(@NotNull String option) {
+    public @Nullable DataHolder options(String option) {
         return null;
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = DataSet.aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
     }
@@ -189,7 +188,6 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
         protected BasedSequence text = BasedSequence.NULL;
         protected BasedSequence closingMarker = BasedSequence.NULL;
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return new BasedSequence[] { openingMarker, text, closingMarker };
@@ -237,9 +235,8 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
     private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
         UpperCaseNodeRendererFactory() {}
 
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new UpperCaseNodeRenderer(options);
         }
     }

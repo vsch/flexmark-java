@@ -8,8 +8,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -29,7 +28,7 @@ public class FormatControlProcessor {
     private volatile Pattern formatterOffPattern;
     private volatile Pattern formatterOnPattern;
 
-    public FormatControlProcessor(@NotNull Document document, @Nullable DataHolder options) {
+    public FormatControlProcessor(Document document, @Nullable DataHolder options) {
         FormatterOptions formatterOptions = new FormatterOptions(options);
         this.formatterOnTag = formatterOptions.formatterOnTag;
         this.formatterOffTag = formatterOptions.formatterOffTag;
@@ -60,7 +59,7 @@ public class FormatControlProcessor {
     }
 
     @Nullable
-    private Pattern getPatternOrDisableRegexp(@NotNull String markerText) {
+    private Pattern getPatternOrDisableRegexp(String markerText) {
         try {
             return Pattern.compile(markerText);
         } catch (PatternSyntaxException var3) {
@@ -120,11 +119,11 @@ public class FormatControlProcessor {
         return null;
     }
 
-    public void initializeFrom(@NotNull Node element) {
+    public void initializeFrom(Node element) {
         myFormatterOff = !isFormattingRegion(element.getStartOffset(), element, true);
     }
 
-    public void processFormatControl(@NotNull Node node) {
+    public void processFormatControl(Node node) {
         justTurnedOffFormatting = false;
         justTurnedOnFormatting = false;
 
@@ -141,7 +140,7 @@ public class FormatControlProcessor {
         }
     }
 
-    private boolean isFormattingRegion(int offset, @NotNull Node node, boolean checkParent) {
+    private boolean isFormattingRegion(int offset, Node node, boolean checkParent) {
         while (node != null) {
             if (node.getStartOffset() <= offset) {
                 if (node instanceof Block && !(node instanceof Paragraph) && node.hasChildren()) {
@@ -164,7 +163,7 @@ public class FormatControlProcessor {
         return true;
     }
 
-    public boolean isFormattingRegion(@NotNull Node node) {
+    public boolean isFormattingRegion(Node node) {
         // find the first HTML comment with a formatter directive
         if (!formatterTagsEnabled || node.getStartOffset() == 0) return true;
         return isFormattingRegion(node.getStartOffset(), node, true);

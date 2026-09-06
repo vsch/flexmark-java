@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
@@ -10,15 +9,15 @@ public abstract class Block extends ContentNode {
     public Block() {
     }
 
-    public Block(@NotNull BasedSequence chars) {
+    public Block(BasedSequence chars) {
         super(chars);
     }
 
-    public Block(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
+    public Block(BasedSequence chars, List<BasedSequence> lineSegments) {
         super(chars, lineSegments);
     }
 
-    public Block(@NotNull List<BasedSequence> lineSegments) {
+    public Block(List<BasedSequence> lineSegments) {
         super(lineSegments);
     }
 

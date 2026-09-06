@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -599,7 +598,6 @@ public class Utils {
         return sb.toString();
     }
 
-    @NotNull
     public static String escapeJavaString(@Nullable CharSequence param) {
         if (param == null) return "null";
         StringBuilder out = new StringBuilder();
@@ -607,7 +605,6 @@ public class Utils {
         return out.toString();
     }
 
-    @NotNull
     public static String quoteJavaString(@Nullable CharSequence param) {
         if (param == null) return "null";
         StringBuilder out = new StringBuilder();
@@ -617,7 +614,7 @@ public class Utils {
         return out.toString();
     }
 
-    public static void escapeJavaString(@NotNull StringBuilder out, @NotNull CharSequence chars) {
+    public static void escapeJavaString(StringBuilder out, CharSequence chars) {
         int iMax = chars.length();
         for (int i = 0; i < iMax; i++) {
             char c = chars.charAt(i);
@@ -654,14 +651,14 @@ public class Utils {
         }
     }
 
-    public static <T> T getOrNull(@NotNull List<T> list, int index) {
+    public static <T> T getOrNull(List<T> list, int index) {
         if (index >= 0 && index < list.size()) {
             return list.get(index);
         }
         return null;
     }
 
-    public static <T, S extends T> S getOrNull(@NotNull List<T> list, int index, Class<S> elementClass) {
+    public static <T, S extends T> S getOrNull(List<T> list, int index, Class<S> elementClass) {
         if (index >= 0 && index < list.size()) {
             T value = list.get(index);
             //noinspection unchecked
@@ -670,7 +667,7 @@ public class Utils {
         return null;
     }
 
-    public static <T> T setOrAdd(@NotNull List<T> list, int index, T value) {
+    public static <T> T setOrAdd(List<T> list, int index, T value) {
         if (index == list.size()) {
             list.add(value);
             return null;

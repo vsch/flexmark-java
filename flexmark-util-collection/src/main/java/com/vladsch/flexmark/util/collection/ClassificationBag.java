@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.util.collection.iteration.BitSetIterable;
 import com.vladsch.flexmark.util.collection.iteration.IndexedIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.BitSet;
 import java.util.Collection;
@@ -12,23 +11,23 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class ClassificationBag<K, V> {
-    final private @NotNull OrderedSet<V> items;
-    final @NotNull IndexedItemBitSetMap<K, V> bag;
+    final private OrderedSet<V> items;
+    final IndexedItemBitSetMap<K, V> bag;
     final @Nullable CollectionHost<V> host;
 
     public ClassificationBag(Function<V, K> mapper) {
         this(0, mapper);
     }
 
-    public ClassificationBag(@NotNull Function<V, K> mapper, @Nullable CollectionHost<V> host) {
+    public ClassificationBag(Function<V, K> mapper, @Nullable CollectionHost<V> host) {
         this(0, mapper, host);
     }
 
-    public ClassificationBag(int capacity, @NotNull Function<V, K> mapper) {
+    public ClassificationBag(int capacity, Function<V, K> mapper) {
         this(capacity, mapper, null);
     }
 
-    public ClassificationBag(int capacity, @NotNull Function<V, K> mapper, @Nullable CollectionHost<V> host) {
+    public ClassificationBag(int capacity, Function<V, K> mapper, @Nullable CollectionHost<V> host) {
         this.host = host;
         this.items = new OrderedSet<>(capacity, new CollectionHost<V>() {
             @Override
@@ -70,7 +69,6 @@ public class ClassificationBag<K, V> {
         this.bag = new IndexedItemBitSetMap<>(mapper);
     }
 
-    @NotNull
     public OrderedSet<V> getItems() {
         return items;
     }
@@ -111,7 +109,7 @@ public class ClassificationBag<K, V> {
         return bitSet == null ? 0 : bitSet.cardinality();
     }
 
-    public @NotNull Map<K, BitSet> getCategoryMap() {
+    public Map<K, BitSet> getCategoryMap() {
         return bag;
     }
 
@@ -120,34 +118,34 @@ public class ClassificationBag<K, V> {
     }
 
     @SafeVarargs
-    final public <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> xClass, @NotNull K... categories) {
+    final public <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> xClass, K... categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
 
-    final public <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> xClass, @NotNull Collection<? extends K> categories) {
+    final public <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> xClass, Collection<? extends K> categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
 
-    final public <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
+    final public <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> xClass, BitSet bitSet) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
     }
 
     @SafeVarargs
-    final public <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull Class<? extends X> xClass, @NotNull K... categories) {
+    final public <X> ReversibleIterable<X> getCategoryItemsReversed(Class<? extends X> xClass, K... categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
 
-    final public <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull Class<? extends X> xClass, @NotNull Collection<? extends K> categories) {
+    final public <X> ReversibleIterable<X> getCategoryItemsReversed(Class<? extends X> xClass, Collection<? extends K> categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
 
-    final public <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
+    final public <X> ReversibleIterable<X> getCategoryItemsReversed(Class<? extends X> xClass, BitSet bitSet) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, true));
     }
 
     @SafeVarargs
     @SuppressWarnings("WeakerAccess")
-    final public @NotNull BitSet categoriesBitSet(@NotNull K... categories) {
+    final public BitSet categoriesBitSet(K... categories) {
         BitSet bitSet = new BitSet();
         for (K category : categories) {
             BitSet bitSet1 = bag.get(category);
@@ -158,7 +156,7 @@ public class ClassificationBag<K, V> {
         return bitSet;
     }
 
-    final public @NotNull BitSet categoriesBitSet(@NotNull Collection<? extends K> categories) {
+    final public BitSet categoriesBitSet(Collection<? extends K> categories) {
         BitSet bitSet = new BitSet();
         for (K category : categories) {
             BitSet bitSet1 = bag.get(category);

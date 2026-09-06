@@ -39,8 +39,7 @@ import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -137,23 +136,23 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         return new MutableDataSet(options).set(DocxRenderer.DOC_RELATIVE_URL, filePath);
     }
 
-    public ComboDocxConverterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public ComboDocxConverterSpecTestBase(SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), DocxRenderer.builder(combineOptions).build(), true);
     }
 
-    final public @NotNull String getFileTestCaseDumpLocation() {
+    final public String getFileTestCaseDumpLocation() {
         String specResource = removeSuffix(removePrefix(getSpecResourceLocation().getResourcePath(), '/'), '/');
         String testDir = suffixWith(removeSuffix(specResource, ".md"), '/');
         return TEST_ROOT_DIRECTORY + testDir;
     }
 
-    final public @NotNull String getFileAllTestsDumpName() {
+    final public String getFileAllTestsDumpName() {
         return getFileTestCaseDumpLocation() + "AllTests";
     }
 
@@ -199,7 +198,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     @Override
-    final public void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
+    final public void addFullSpecExample(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, String html, @Nullable String ast) {
         if (!DUMP_ALL_TESTS_FILES) return;
 
         SpecExample example = exampleRenderer.getExample();

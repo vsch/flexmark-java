@@ -9,8 +9,7 @@ import com.vladsch.flexmark.util.misc.Immutable;
 import com.vladsch.flexmark.util.misc.Mutable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @SuppressWarnings("WeakerAccess")
 public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, MutableDataSetter {
@@ -59,7 +58,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, false, true, "", "", true);
     }
 
-    public TocOptions(@NotNull TocOptions.AsMutable other) {
+    public TocOptions(TocOptions.AsMutable other) {
         this(
                 other.levels
                 , other.isHtml
@@ -76,7 +75,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         );
     }
 
-    public TocOptions(@NotNull TocOptions other) {
+    public TocOptions(TocOptions other) {
         this(
                 other.levels
                 , other.isHtml
@@ -114,9 +113,8 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         );
     }
 
-    @NotNull
     @Override
-    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(TocExtension.LEVELS, levels);
         dataHolder.set(TocExtension.IS_TEXT_ONLY, isTextOnly);
         dataHolder.set(TocExtension.IS_NUMBERED, isNumbered);
@@ -326,9 +324,8 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             return this;
         }
 
-        @NotNull
         @Override
-        public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+        public MutableDataHolder setIn(MutableDataHolder dataHolder) {
             return toImmutable().setIn(dataHolder);
         }
 

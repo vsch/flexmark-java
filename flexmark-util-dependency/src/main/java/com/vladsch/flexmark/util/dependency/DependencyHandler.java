@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import com.vladsch.flexmark.util.misc.Ref;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -12,9 +11,9 @@ import java.util.*;
 @SuppressWarnings("rawtypes")
 @Deprecated
 public abstract class DependencyHandler<D extends Dependent, S, R extends ResolvedDependencies<S>> {
-    protected abstract @NotNull S createStage(List<D> dependents);
-    protected abstract @NotNull Class getDependentClass(D dependent);
-    protected abstract @NotNull R createResolvedDependencies(List<S> stages);
+    protected abstract S createStage(List<D> dependents);
+    protected abstract Class getDependentClass(D dependent);
+    protected abstract R createResolvedDependencies(List<S> stages);
 
     public R resolveDependencies(List<D> dependentsList) {
         if (dependentsList.size() == 0) {

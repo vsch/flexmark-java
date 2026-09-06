@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface DataValueNullableFactory<T> extends DataValueFactory<T> {
     @Override

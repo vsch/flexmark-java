@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -20,7 +19,7 @@ class PositionIterator<T, P extends IPositionHolder<T, P>> implements Iterator<P
     private @Nullable P myIndex;
     private @Nullable P myNext;
 
-    public PositionIterator(@NotNull P index) {
+    public PositionIterator(P index) {
         assert index.getAnchor() != CURRENT;
         myIndex = null;
         myNext = index;

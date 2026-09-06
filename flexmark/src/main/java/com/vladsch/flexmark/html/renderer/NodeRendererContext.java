@@ -5,8 +5,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
@@ -20,7 +19,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
      * @return the extended attributes with added/updated/removed entries
      */
-    @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes);
+    MutableAttributes extendRenderingNodeAttributes(AttributablePart part, @Nullable Attributes attributes);
 
     /**
      * Extend the attributes by extensions for the node being currently rendered.
@@ -30,12 +29,12 @@ public interface NodeRendererContext extends LinkResolverContext {
      * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
      * @return the extended attributes with added/updated/removed entries
      */
-    @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes);
+    MutableAttributes extendRenderingNodeAttributes(Node node, AttributablePart part, @Nullable Attributes attributes);
 
     /**
      * @return the HTML writer to use
      */
-    @NotNull HtmlWriter getHtmlWriter();
+    HtmlWriter getHtmlWriter();
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
@@ -44,7 +43,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
      * @return a new rendering context with a given appendable for its output
      */
-    @NotNull NodeRendererContext getSubContext(boolean inheritIndent);
+    NodeRendererContext getSubContext(boolean inheritIndent);
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text of the previously registered node renderer. The child context inherits
@@ -53,7 +52,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
      * @return a new rendering context with a given appendable for its output
      */
-    @NotNull NodeRendererContext getDelegatedSubContext(boolean inheritIndent);
+    NodeRendererContext getDelegatedSubContext(boolean inheritIndent);
 
     /**
      * pass node rendering to previously registered handler
@@ -67,7 +66,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      *             only creates ids for {@link com.vladsch.flexmark.ast.Heading} nodes or custom nodes that implement {@link com.vladsch.flexmark.ast.AnchorRefTarget} interface.
      * @return id string or null
      */
-    @Nullable String getNodeId(@NotNull Node node);
+    @Nullable String getNodeId(Node node);
 
     /**
      * Whether the current rendering context has link rendering disabled. When true any renderer that would render a link, should only output the
@@ -119,10 +118,10 @@ public interface NodeRendererContext extends LinkResolverContext {
     /**
      * @return current rendering phase
      */
-    @NotNull RenderingPhase getRenderingPhase();
+    RenderingPhase getRenderingPhase();
 
     /**
      * @return the {@link HtmlRendererOptions} for the context.
      */
-    @NotNull HtmlRendererOptions getHtmlOptions();
+    HtmlRendererOptions getHtmlOptions();
 }

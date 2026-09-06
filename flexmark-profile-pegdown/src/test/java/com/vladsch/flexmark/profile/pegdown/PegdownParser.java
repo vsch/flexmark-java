@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 import org.pegdown.PegDownProcessor;
 import org.pegdown.ast.RootNode;
 
@@ -55,7 +54,6 @@ class PegdownParser extends IParseBase {
             myRootNode = rootNode;
         }
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return Node.EMPTY_SEGMENTS;
@@ -63,7 +61,7 @@ class PegdownParser extends IParseBase {
     }
 
     @Override
-    public @NotNull Node parse(@NotNull BasedSequence input) {
+    public Node parse(BasedSequence input) {
         // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
         int pegdownExtensions = getPegdownExtensions(getOptions());
         RootNode rootNode = new PegDownProcessor(pegdownExtensions).parseMarkdown(input.toString().toCharArray());

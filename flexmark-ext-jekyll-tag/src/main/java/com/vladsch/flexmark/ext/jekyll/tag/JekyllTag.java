@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.jekyll.tag;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A JekyllTag node
@@ -14,7 +13,6 @@ public class JekyllTag extends Block {
     protected BasedSequence parameters = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -22,7 +20,7 @@ public class JekyllTag extends Block {
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, tag, "tag");
         segmentSpanChars(out, parameters, "parameters");

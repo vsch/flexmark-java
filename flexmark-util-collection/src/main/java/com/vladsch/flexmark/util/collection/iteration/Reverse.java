@@ -1,29 +1,28 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class Reverse<T> implements ReversibleIterable<T> {
-    final private @NotNull List<T> list;
+    final private List<T> list;
     final private boolean isReversed;
 
-    public Reverse(@NotNull List<T> list) {
+    public Reverse(List<T> list) {
         this(list, true);
     }
 
-    public Reverse(@NotNull List<T> list, boolean isReversed) {
+    public Reverse(List<T> list, boolean isReversed) {
         this.list = list;
         this.isReversed = isReversed;
     }
 
     static class ReversedListIterator<T> implements ReversibleIterator<T> {
-        final private @NotNull List<T> list;
+        final private List<T> list;
         final private boolean isReversed;
         private int index;
 
-        ReversedListIterator(@NotNull List<T> list, boolean isReversed) {
+        ReversedListIterator(List<T> list, boolean isReversed) {
             this.list = list;
             this.isReversed = isReversed;
             if (isReversed) {
@@ -67,13 +66,11 @@ public class Reverse<T> implements ReversibleIterable<T> {
         }
     }
 
-    @NotNull
     @Override
     public ReversibleIterator<T> iterator() {
         return new ReversedListIterator<>(list, isReversed);
     }
 
-    @NotNull
     @Override
     public ReversibleIterable<T> reversed() {
         return new Reverse<>(list, !isReversed);
@@ -84,7 +81,6 @@ public class Reverse<T> implements ReversibleIterable<T> {
         return isReversed;
     }
 
-    @NotNull
     @Override
     public ReversibleIterator<T> reversedIterator() {
         return new ReversedListIterator<>(list, !isReversed);

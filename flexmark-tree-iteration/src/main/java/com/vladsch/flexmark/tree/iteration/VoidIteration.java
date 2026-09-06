@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.tree.iteration;
 
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 public interface VoidIteration {
     Object NULL = new Object();
@@ -77,7 +76,7 @@ public interface VoidIteration {
      *
      * @param runnable to run
      */
-    void ifIncomplete(@NotNull Runnable runnable);
+    void ifIncomplete(Runnable runnable);
 
     /**
      * @return times through the loop of the current recursion level, includes skipped elements due to filtering

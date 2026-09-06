@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.collection.iteration.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -10,8 +9,8 @@ import java.util.function.Function;
 
 @SuppressWarnings("WeakerAccess")
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-    final @NotNull OrderedSet<K> keySet;
-    final private @NotNull ArrayList<V> valueList;
+    final OrderedSet<K> keySet;
+    final private ArrayList<V> valueList;
     final private @Nullable CollectionHost<K> host;
     boolean inUpdate;
     private @Nullable Indexed<Entry<K, V>> indexedEntryProxy;
@@ -25,7 +24,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         this(capacity, null);
     }
 
-    public OrderedMap(@NotNull CollectionHost<K> host) {
+    public OrderedMap(CollectionHost<K> host) {
         this(0, host);
     }
 
@@ -68,7 +67,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         });
     }
 
-    public @NotNull Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
+    public Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
         if (indexedEntryProxy != null) return indexedEntryProxy;
         indexedEntryProxy = new Indexed<Map.Entry<K, V>>() {
             @Override
@@ -100,7 +99,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return indexedEntryProxy;
     }
 
-    public @NotNull Indexed<V> getIndexedValueProxy() {
+    public Indexed<V> getIndexedValueProxy() {
         if (indexedValueProxy != null) return indexedValueProxy;
         indexedValueProxy = new Indexed<V>() {
             @Override
@@ -132,7 +131,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return indexedValueProxy;
     }
 
-    @NotNull Map.Entry<K, V> getEntry(int index) {
+    Map.Entry<K, V> getEntry(int index) {
         return new MapEntry<>(keySet.getValue(index), valueList.get(index));
     }
 
@@ -140,7 +139,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return keySet.getModificationCount();
     }
 
-    void adding(int index, @NotNull K k, @NotNull Object v) {
+    void adding(int index, K k, Object v) {
         if (v == null) throw new IllegalArgumentException();
         if (host != null && !host.skipHostUpdate()) {
             host.adding(index, k, v);
@@ -156,7 +155,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         addNulls(index);
     }
 
-    Object removing(int index, @NotNull K k) {
+    Object removing(int index, K k) {
         if (host != null && !host.skipHostUpdate()) {
             host.removing(index, k);
         }
@@ -210,7 +209,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     @Override
-    public @Nullable V put(@NotNull K k, @NotNull V v) {
+    public @Nullable V put(K k, V v) {
         int index = keySet.indexOf(k);
         if (index == -1) {
             keySet.add(k, v);
@@ -222,7 +221,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return old;
     }
 
-    public @NotNull V computeIfMissing(@NotNull K k, @NotNull Function<? super K, ? extends V> runnableValue) {
+    public V computeIfMissing(K k, Function<? super K, ? extends V> runnableValue) {
         int index = keySet.indexOf(k);
         if (index == -1) {
             V v = runnableValue.apply(k);
@@ -234,19 +233,19 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     @Override
-    public @NotNull V remove(@Nullable Object o) {
+    public V remove(@Nullable Object o) {
         //noinspection unchecked
         return (V) keySet.removeHosted(o);
     }
 
     @Override
-    public void putAll(@NotNull Map<? extends K, ? extends V> map) {
+    public void putAll(Map<? extends K, ? extends V> map) {
         for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
     }
 
-    public void addAll(@NotNull Collection<? extends Map.Entry<? extends K, ? extends V>> entries) {
+    public void addAll(Collection<? extends Map.Entry<? extends K, ? extends V>> entries) {
         for (Map.Entry<? extends K, ? extends V> entry : entries) {
             put(entry.getKey(), entry.getValue());
         }
@@ -257,13 +256,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         keySet.clear();
     }
 
-    @NotNull
     @Override
     public OrderedSet<K> keySet() {
         return keySet;
     }
 
-    @NotNull
     @Override
     public Collection<V> values() {
         if (!keySet.isSparse()) {
@@ -288,7 +285,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return valueList.get(index);
     }
 
-    @NotNull
     @Override
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         // create it with inHostUpdate already set so we can populate it without callbacks
@@ -305,7 +301,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return values;
     }
 
-    public @NotNull List<Entry<K, V>> entries() {
+    public List<Entry<K, V>> entries() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         List<Map.Entry<K, V>> values = new ArrayList<>();
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
@@ -315,64 +311,64 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return values;
     }
 
-    public @NotNull List<K> keys() {
+    public List<K> keys() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         return keySet.values();
     }
 
-    public @NotNull ReversibleIndexedIterator<V> valueIterator() {
+    public ReversibleIndexedIterator<V> valueIterator() {
         return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
     }
 
-    public @NotNull ReversibleIndexedIterator<V> reversedValueIterator() {
+    public ReversibleIndexedIterator<V> reversedValueIterator() {
         return new IndexedIterator<>(getIndexedValueProxy(), keySet.reversedIndexIterator());
     }
 
-    public @NotNull ReversibleIndexedIterator<K> keyIterator() {
+    public ReversibleIndexedIterator<K> keyIterator() {
         return keySet.iterator();
     }
 
-    public @NotNull ReversibleIndexedIterator<K> reversedKeyIterator() {
+    public ReversibleIndexedIterator<K> reversedKeyIterator() {
         return keySet.reversedIterator();
     }
 
-    public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
+    public ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
         return new IndexedIterator<>(getIndexedEntryProxy(), keySet.indexIterator());
     }
 
-    public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
+    public ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
         return new IndexedIterator<>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
     }
 
-    public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
+    public ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
         return reversedEntryIterator();
     }
 
-    public @NotNull ReversibleIterable<V> valueIterable() {
+    public ReversibleIterable<V> valueIterable() {
         return new IndexedIterable<>(getIndexedValueProxy(), keySet.indexIterable());
     }
 
-    public @NotNull ReversibleIterable<V> reversedValueIterable() {
+    public ReversibleIterable<V> reversedValueIterable() {
         return new IndexedIterable<>(getIndexedValueProxy(), keySet.reversedIndexIterable());
     }
 
-    public @NotNull ReversibleIterable<K> keyIterable() {
+    public ReversibleIterable<K> keyIterable() {
         return keySet.iterable();
     }
 
-    public @NotNull ReversibleIterable<K> reversedKeyIterable() {
+    public ReversibleIterable<K> reversedKeyIterable() {
         return keySet.reversedIterable();
     }
 
-    public @NotNull ReversibleIterable<Map.Entry<K, V>> entryIterable() {
+    public ReversibleIterable<Map.Entry<K, V>> entryIterable() {
         return new IndexedIterable<>(getIndexedEntryProxy(), keySet.indexIterable());
     }
 
-    public @NotNull ReversibleIterable<Entry<K, V>> reversedEntryIterable() {
+    public ReversibleIterable<Entry<K, V>> reversedEntryIterable() {
         return new IndexedIterable<>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
     }
 
-    public @NotNull ReversibleIterable<Map.Entry<K, V>> reversedIterable() {
+    public ReversibleIterable<Map.Entry<K, V>> reversedIterable() {
         return reversedEntryIterable();
     }
 
@@ -380,7 +376,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
      * Iterable
      */
 
-    @NotNull
     @Override
     public ReversibleIndexedIterator<Map.Entry<K, V>> iterator() {
         return entryIterator();

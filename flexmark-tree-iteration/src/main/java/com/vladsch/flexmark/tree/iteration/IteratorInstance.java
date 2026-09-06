@@ -2,8 +2,7 @@ package com.vladsch.flexmark.tree.iteration;
 
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.Stack;
@@ -16,37 +15,37 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
 
     private Iteration<N> myIteration;               // current iteration information
     private @Nullable Stack<Iteration<N>> myRecursions;       // recursion frames
-    final private @NotNull IterationConditions<N> myIterationConditions;
-    final private @NotNull Predicate<? super N> myRecursionPredicate;
-    final private @NotNull Predicate<? super N> myFilterPredicate;
+    final private IterationConditions<N> myIterationConditions;
+    final private Predicate<? super N> myRecursionPredicate;
+    final private Predicate<? super N> myFilterPredicate;
     private int myTotalLoopCount = 0;                        // total looping count across all nesting levels, including filtered out elements
     private int myTotalAcceptCount = 0;                            // total looping count across all nesting levels, only consumed elements
     private @Nullable N myMatch;
     private @Nullable MutableDataSet myDataSet;
-    final private @NotNull Object myDefaultValue;
+    final private Object myDefaultValue;
 
     // ValueResult
-    private @NotNull Object myResult;
+    private Object myResult;
     private boolean myBreak = false;
     private boolean myHadRecurse = false;          // true if current iteration had performed recurse
     private boolean myIsDefaultResult = true;
     private int myMaxRecursions = 0;
 
     public IteratorInstance(
-            @NotNull IterationConditions<N> iterationConditions,
-            @NotNull Predicate<? super N> filterPredicate,
-            @NotNull Predicate<? super N> recursionPredicate,
-            @NotNull N element
+            IterationConditions<N> iterationConditions,
+            Predicate<? super N> filterPredicate,
+            Predicate<? super N> recursionPredicate,
+            N element
     ) {
         this(iterationConditions, filterPredicate, recursionPredicate, element, VoidIteration.NULL);
     }
 
     public IteratorInstance(
-            @NotNull IterationConditions<N> iterationConditions,
-            @NotNull Predicate<? super N> filterPredicate,
-            @NotNull Predicate<? super N> recursionPredicate,
-            @NotNull N element,
-            @NotNull Object defaultValue
+            IterationConditions<N> iterationConditions,
+            Predicate<? super N> filterPredicate,
+            Predicate<? super N> recursionPredicate,
+            N element,
+            Object defaultValue
     ) {
         myIterationConditions = iterationConditions;
         myRecursionPredicate = recursionPredicate;
@@ -56,11 +55,11 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
         myResult = defaultValue;
     }
 
-    public void iterate(@NotNull VoidIterationConsumer<? super N> consumer) {
+    public void iterate(VoidIterationConsumer<? super N> consumer) {
         iterate(new VoidToValueIConsumerAdapter<>(consumer));
     }
 
-    public void iterate(@NotNull ValueIterationConsumer<? super N, R> consumer) {
+    public void iterate(ValueIterationConsumer<? super N, R> consumer) {
         consumer.beforeStart(this);
         if (LOG_INFO.isDebugEnabled()) LOG_INFO.debug("Starting looping " + myIteration);
 
@@ -129,12 +128,11 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
     }
 
     @Override
-    public void setResult(@NotNull Object value) {
+    public void setResult(Object value) {
         myResult = value;
         myIsDefaultResult = false;
     }
 
-    @NotNull
     @Override
     public R getResult() {
         //noinspection unchecked
@@ -142,7 +140,7 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
     }
 
     @Override
-    public void Return(@NotNull Object value) {
+    public void Return(Object value) {
         myResult = value;
         myBreak = true;
         myMatch = null;
@@ -234,7 +232,7 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
     }
 
     @Override
-    public void ifIncomplete(@NotNull Runnable runnable) {
+    public void ifIncomplete(Runnable runnable) {
         if (isIncomplete()) {
             runnable.run();
         }
@@ -280,7 +278,6 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
         return myIsDefaultResult;
     }
 
-    @NotNull
     @Override
     public R getDefaultValue() {
         //noinspection unchecked

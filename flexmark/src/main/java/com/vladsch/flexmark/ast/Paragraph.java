@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -16,14 +15,13 @@ public class Paragraph extends Block implements TextContainer {
     private boolean trailingBlankLine = false;
     private boolean hasTableSeparator;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
         if (trailingBlankLine) out.append(" isTrailingBlankLine");
     }
@@ -65,7 +63,7 @@ public class Paragraph extends Block implements TextContainer {
     @Override
     // FIX: add indent tracking then deprecate. ContentNode does not have indents
 //    @Deprecated
-    public void setContent(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
+    public void setContent(BasedSequence chars, List<BasedSequence> lineSegments) {
         super.setContent(chars, lineSegments);
     }
 
@@ -79,12 +77,12 @@ public class Paragraph extends Block implements TextContainer {
     @Override
     // FIX: add indent tracking then deprecate. ContentNode does not have indents
 //    @Deprecated
-    public void setContent(@NotNull List<BasedSequence> lineSegments) {
+    public void setContent(List<BasedSequence> lineSegments) {
         super.setContent(lineSegments);
     }
 
     @Override
-    public void setContent(@NotNull BlockContent blockContent) {
+    public void setContent(BlockContent blockContent) {
         super.setContent(blockContent);
         setLineIndents(blockContent.getLineIndents());
     }

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
@@ -18,12 +17,11 @@ import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
  */
 public class HtmlEntity extends Node implements TextContainer {
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         if (!getChars().isEmpty()) out.append(" \"").append(getChars()).append("\"");
     }
 
     // TODO: add opening and closing marker with intermediate text so that completions can be easily done
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

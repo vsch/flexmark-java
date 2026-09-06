@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.tree.iteration;
 
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class NodeIterator<N extends Node> extends MappedIterator<Node, N> {
-    public NodeIterator(@NotNull Node element, @NotNull ValueIterationAdapter<? super Node, N> adapter, @NotNull TreeIterator<Node> treeIterator) {
+    public NodeIterator(Node element, ValueIterationAdapter<? super Node, N> adapter, TreeIterator<Node> treeIterator) {
         super(element, adapter, treeIterator);
     }
 
@@ -18,12 +17,10 @@ public class NodeIterator<N extends Node> extends MappedIterator<Node, N> {
     //
     // *******************************************************
 
-    @NotNull
     public NodeIterator<N> getModifiedCopy(Node element, ValueIterationAdapter<? super Node, N> adapter, TreeIterator<Node> treeIterator) {
         return new NodeIterator<>(element, adapter, treeIterator);
     }
 
-    @NotNull
     public <F extends Node> NodeIterator<F> getModifiedCopyF(Node element, ValueIterationAdapter<? super Node, F> adapter, TreeIterator<Node> treeIterator) {
         return new NodeIterator<>(element, adapter, treeIterator);
     }
@@ -34,111 +31,93 @@ public class NodeIterator<N extends Node> extends MappedIterator<Node, N> {
     //
     // *******************************************************
 
-    @NotNull
     @Override
     public NodeIterator<N> reversed() {
         return (NodeIterator<N>) super.reversed();
     }
 
-    @NotNull
     @Override
     public NodeIterator<N> recursive() {
         return (NodeIterator<N>) super.recursive();
     }
 
-    @NotNull
     @Override
     public NodeIterator<N> nonRecursive() {
         return (NodeIterator<N>) super.nonRecursive();
     }
 
-    @NotNull
     @Override
     public NodeIterator<N> recursive(boolean recursive) {
         return (NodeIterator<N>) super.recursive(recursive);
     }
 
-    @NotNull
     @Override
     public NodeIterator<N> nonRecursive(boolean nonRecursive) {
         return (NodeIterator<N>) super.nonRecursive(nonRecursive);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> recurse(@NotNull Predicate<? super Node> predicate) {
+    public NodeIterator<N> recurse(Predicate<? super Node> predicate) {
         return (NodeIterator<N>) super.recurse(predicate);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> recurse(@NotNull Class<? super Node> clazz) {
+    public NodeIterator<N> recurse(Class<? super Node> clazz) {
         return (NodeIterator<N>) super.recurse(clazz);
     }
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<N> recurse(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F extends Node> NodeIterator<N> recurse(Class<F> clazz, Predicate<? super F> predicate) {
         return (NodeIterator<N>) super.recurse(clazz, predicate);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> noRecurse(@NotNull Predicate<? super Node> predicate) {
+    public NodeIterator<N> noRecurse(Predicate<? super Node> predicate) {
         return (NodeIterator<N>) super.noRecurse(predicate);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> noRecurse(@NotNull Class<? super Node> clazz) {
+    public NodeIterator<N> noRecurse(Class<? super Node> clazz) {
         return (NodeIterator<N>) super.noRecurse(clazz);
     }
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<N> noRecurse(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F extends Node> NodeIterator<N> noRecurse(Class<F> clazz, Predicate<? super F> predicate) {
         return (NodeIterator<N>) super.noRecurse(clazz, predicate);
     }
 
-    @NotNull
     @Override
     public NodeIterator<N> filterFalse() {
         return (NodeIterator<N>) super.filterFalse();
     }
 
-    @NotNull
     @Override
     public NodeIterator<N> aborted() {
         return (NodeIterator<N>) super.aborted();
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> filterOut(@NotNull Predicate<? super Node> predicate) {
+    public NodeIterator<N> filterOut(Predicate<? super Node> predicate) {
         return (NodeIterator<N>) super.filterOut(predicate);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> filterOut(@NotNull Class<? super Node> clazz) {
+    public NodeIterator<N> filterOut(Class<? super Node> clazz) {
         return (NodeIterator<N>) super.filterOut(clazz);
     }
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<N> filterOut(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F extends Node> NodeIterator<N> filterOut(Class<F> clazz, Predicate<? super F> predicate) {
         return (NodeIterator<N>) super.filterOut(clazz, predicate);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> filter(@NotNull Predicate<? super Node> predicate) {
+    public NodeIterator<N> filter(Predicate<? super Node> predicate) {
         return (NodeIterator<N>) super.filter(predicate);
     }
 
-    @NotNull
     @Override
-    public NodeIterator<N> acceptFilter(@NotNull ValueIterationFilter<? super N> filter) {
+    public NodeIterator<N> acceptFilter(ValueIterationFilter<? super N> filter) {
         return (NodeIterator<N>) super.acceptFilter(filter);
     }
 
@@ -148,27 +127,23 @@ public class NodeIterator<N extends Node> extends MappedIterator<Node, N> {
     //
     // *******************************************************
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<F> filter(@NotNull Class<F> clazz) {
+    public <F extends Node> NodeIterator<F> filter(Class<F> clazz) {
         return (NodeIterator<F>) super.filter(clazz);
     }
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<F> filter(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F extends Node> NodeIterator<F> filter(Class<F> clazz, Predicate<? super F> predicate) {
         return (NodeIterator<F>) super.filter(clazz, predicate);
     }
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<F> adapt(@NotNull Function<? super N, F> adapter) {
+    public <F extends Node> NodeIterator<F> adapt(Function<? super N, F> adapter) {
         return (NodeIterator<F>) super.adapt(adapter);
     }
 
-    @NotNull
     @Override
-    public <F extends Node> NodeIterator<F> adapt(@NotNull ValueIterationAdapter<? super N, F> adapter) {
+    public <F extends Node> NodeIterator<F> adapt(ValueIterationAdapter<? super N, F> adapter) {
         return (NodeIterator<F>) super.adapt(adapter);
     }
 
@@ -178,22 +153,18 @@ public class NodeIterator<N extends Node> extends MappedIterator<Node, N> {
     //
     // *******************************************************
 
-    @NotNull
-    public NodeIterator<N> recurse(@NotNull Set<Class<? super Node>> nodeClassSet) {
+    public NodeIterator<N> recurse(Set<Class<? super Node>> nodeClassSet) {
         return getModifiedCopyF(myElement, myAdapter, myTreeIterator.recurse(it -> nodeClassSet.contains(it.getClass())));
     }
 
-    @NotNull
-    public NodeIterator<N> filterOut(@NotNull Set<Class<? super Node>> nodeClassSet) {
+    public NodeIterator<N> filterOut(Set<Class<? super Node>> nodeClassSet) {
         return getModifiedCopyF(myElement, myAdapter, myTreeIterator.filterOut(it -> nodeClassSet.contains(it.getClass())));
     }
 
-    @NotNull
-    public NodeIterator<N> filter(@NotNull Set<Class<? super Node>> nodeClassSet) {
+    public NodeIterator<N> filter(Set<Class<? super Node>> nodeClassSet) {
         return getModifiedCopyF(myElement, myAdapter, myTreeIterator.filter(it -> nodeClassSet.contains(it.getClass())));
     }
 
-    @NotNull
     public MappedIterator<Object, Node> toNodeObjectMapped() {
         return toObjectMapped(Node.class);
     }
@@ -204,19 +175,19 @@ public class NodeIterator<N extends Node> extends MappedIterator<Node, N> {
     //
     // *******************************************************
 
-    public static NodeIterator<Node> of(@NotNull Node element, @NotNull TreeIterator<Node> treeIterator) {
+    public static NodeIterator<Node> of(Node element, TreeIterator<Node> treeIterator) {
         return new NodeIterator<>(element, ValueIterationAdapterImpl.of(), treeIterator);
     }
 
-    public static NodeIterator<Node> of(@NotNull Node element, @NotNull IterationConditions<Node> constraints) {
+    public static NodeIterator<Node> of(Node element, IterationConditions<Node> constraints) {
         return of(element, new TreeIterator<>(constraints));
     }
 
-    public static NodeIterator<Node> of(@NotNull Node element, @NotNull IterationConditions<Node> constraints, @NotNull Predicate<? super Node> filter) {
+    public static NodeIterator<Node> of(Node element, IterationConditions<Node> constraints, Predicate<? super Node> filter) {
         return of(element, new TreeIterator<>(constraints, filter));
     }
 
-    public static NodeIterator<Node> of(@NotNull Node element, @NotNull IterationConditions<Node> constraints, @NotNull Predicate<? super Node> filter, @NotNull Predicate<? super Node> recursion) {
+    public static NodeIterator<Node> of(Node element, IterationConditions<Node> constraints, Predicate<? super Node> filter, Predicate<? super Node> recursion) {
         return of(element, new TreeIterator<>(constraints, filter, recursion));
     }
 }

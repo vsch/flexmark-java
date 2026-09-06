@@ -2,8 +2,7 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -19,5 +18,5 @@ public interface UriContentResolverFactory extends Function<LinkResolverBasicCon
     boolean affectsGlobalScope();
 
     @Override
-    @NotNull UriContentResolver apply(@NotNull LinkResolverBasicContext context);
+    UriContentResolver apply(LinkResolverBasicContext context);
 }

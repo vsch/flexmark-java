@@ -9,14 +9,13 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class ZzzzzzNodePostProcessor extends NodePostProcessor {
     public ZzzzzzNodePostProcessor(Document document) {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
 
     }
 
@@ -44,9 +43,8 @@ public class ZzzzzzNodePostProcessor extends NodePostProcessor {
             //addNodes(HtmlBlock.class, HtmlCommentBlock.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new ZzzzzzNodePostProcessor(document);
         }
     }

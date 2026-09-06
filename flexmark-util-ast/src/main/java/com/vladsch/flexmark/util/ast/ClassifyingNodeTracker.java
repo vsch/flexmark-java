@@ -6,8 +6,7 @@ import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.BitSet;
 import java.util.HashMap;
@@ -15,13 +14,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class ClassifyingNodeTracker implements NodeTracker {
-    protected final @NotNull ClassificationBag<Class<?>, Node> nodeClassifier;
+    protected final ClassificationBag<Class<?>, Node> nodeClassifier;
     final private @Nullable NodeTracker host;
-    final private @NotNull OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
-    final private @NotNull OrderedSet<Class<?>> exclusionSet;
-    final private @NotNull HashMap<Integer, BitSet> nodeAncestryMap;
+    final private OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
+    final private OrderedSet<Class<?>> exclusionSet;
+    final private HashMap<Integer, BitSet> nodeAncestryMap;
 
-    public ClassifyingNodeTracker(@Nullable NodeTracker host, @NotNull Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
+    public ClassifyingNodeTracker(@Nullable NodeTracker host, Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
         this.host = host;
         nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
         this.exclusionMap = new OrderedMap<>(exclusionMap.size());
@@ -37,22 +36,18 @@ public class ClassifyingNodeTracker implements NodeTracker {
         nodeAncestryMap = new HashMap<>();
     }
 
-    @NotNull
     public OrderedMap<Class<?>, Set<Class<?>>> getExclusionMap() {
         return exclusionMap;
     }
 
-    @NotNull
     public HashMap<Integer, BitSet> getNodeAncestryMap() {
         return nodeAncestryMap;
     }
 
-    @NotNull
     public OrderedSet<Class<?>> getExclusionSet() {
         return exclusionSet;
     }
 
-    @NotNull
     public ClassificationBag<Class<?>, Node> getNodeClassifier() {
         return nodeClassifier;
     }
@@ -64,14 +59,14 @@ public class ClassifyingNodeTracker implements NodeTracker {
     }
 
     @Override
-    public void nodeAdded(@NotNull Node node) {
+    public void nodeAdded(Node node) {
         validateLinked(node);
         nodeClassifier.add(node);
         if (host != null) host.nodeAdded(node);
     }
 
     @Override
-    public void nodeAddedWithChildren(@NotNull Node node) {
+    public void nodeAddedWithChildren(Node node) {
         validateLinked(node);
         nodeClassifier.add(node);
         addNodes(node.getChildren());
@@ -79,54 +74,54 @@ public class ClassifyingNodeTracker implements NodeTracker {
     }
 
     @Override
-    public void nodeAddedWithDescendants(@NotNull Node node) {
+    public void nodeAddedWithDescendants(Node node) {
         validateLinked(node);
         nodeClassifier.add(node);
         addNodes(node.getDescendants());
         if (host != null) host.nodeAddedWithDescendants(node);
     }
 
-    private void addNodes(@NotNull ReversiblePeekingIterable<Node> nodes) {
+    private void addNodes(ReversiblePeekingIterable<Node> nodes) {
         for (Node child : nodes) {
             nodeClassifier.add(child);
         }
     }
 
-    private void validateUnlinked(@NotNull Node node) {
+    private void validateUnlinked(Node node) {
         if (!(node.getNext() == null && node.getParent() == null)) {
             throw new IllegalStateException("Removed block " + node + " is still linked in the AST");
         }
     }
 
     @Override
-    public void nodeRemoved(@NotNull Node node) {
+    public void nodeRemoved(Node node) {
         nodeRemovedWithDescendants(node);
     }
 
     @Override
-    public void nodeRemovedWithChildren(@NotNull Node node) {
+    public void nodeRemovedWithChildren(Node node) {
         nodeRemovedWithDescendants(node);
     }
 
     @Override
-    public void nodeRemovedWithDescendants(@NotNull Node node) {
+    public void nodeRemovedWithDescendants(Node node) {
         validateUnlinked(node);
         nodeClassifier.add(node);
         removeNodes(node.getDescendants());
         if (host != null) host.nodeRemovedWithDescendants(node);
     }
 
-    private void removeNodes(@NotNull ReversiblePeekingIterable<Node> nodes) {
+    private void removeNodes(ReversiblePeekingIterable<Node> nodes) {
         for (Node child : nodes) {
             nodeClassifier.add(child);
         }
     }
 
-    public @NotNull OrderedSet<Node> getItems() {
+    public OrderedSet<Node> getItems() {
         return nodeClassifier.getItems();
     }
 
-    public <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> nodeClass, @NotNull Set<Class<?>> classes) {
+    public <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> nodeClass, Set<Class<?>> classes) {
         return nodeClassifier.getCategoryItems(nodeClass, classes);
     }
 }

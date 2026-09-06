@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A node containing the abbreviated text that will be rendered as an abbr tag or a link with title attribute
@@ -20,18 +19,16 @@ public class Abbreviation extends Node implements DoNotDecorate, DoNotLinkDecora
         return abbreviation;
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         astExtraChars(out);
     }
 
-    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();
@@ -42,7 +39,6 @@ public class Abbreviation extends Node implements DoNotDecorate, DoNotLinkDecora
         return true;
     }
 
-    @NotNull
     @Override
     public BasedSequence getReference() {
         return abbreviation;

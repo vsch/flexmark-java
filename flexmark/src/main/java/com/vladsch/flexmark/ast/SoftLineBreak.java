@@ -3,10 +3,8 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 public class SoftLineBreak extends Node implements DoNotAttributeDecorate, DoNotTrim, TextContainer {
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -20,7 +18,7 @@ public class SoftLineBreak extends Node implements DoNotAttributeDecorate, DoNot
     }
 
     @Override
-    public void setChars(@NotNull BasedSequence chars) {
+    public void setChars(BasedSequence chars) {
         super.setChars(chars);
         assert getChars().isNotEmpty();
     }

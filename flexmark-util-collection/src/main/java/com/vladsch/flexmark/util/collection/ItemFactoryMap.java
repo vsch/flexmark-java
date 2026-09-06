@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,13 +10,13 @@ import java.util.function.Function;
 
 public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
     protected final HashMap<Function<P, I>, I> itemMap;
-    protected final @NotNull P param;
+    protected final P param;
 
-    public ItemFactoryMap(@NotNull P param) {
+    public ItemFactoryMap(P param) {
         this(param, 0);
     }
 
-    public ItemFactoryMap(@NotNull P param, int capacity) {
+    public ItemFactoryMap(P param, int capacity) {
         this.itemMap = new HashMap<>(capacity);
         this.param = param;
     }
@@ -50,10 +49,10 @@ public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
     public boolean containsKey(@Nullable Object o) {return itemMap.containsKey(o);}
 
     @Override
-    public @Nullable I put(@NotNull Function<P, I> factory, @NotNull I i) {return itemMap.put(factory, i);}
+    public @Nullable I put(Function<P, I> factory, I i) {return itemMap.put(factory, i);}
 
     @Override
-    public void putAll(@NotNull Map<? extends Function<P, I>, ? extends I> map) {itemMap.putAll(map);}
+    public void putAll(Map<? extends Function<P, I>, ? extends I> map) {itemMap.putAll(map);}
 
     @Override
     public @Nullable I remove(@Nullable Object o) {return itemMap.remove(o);}
@@ -65,11 +64,11 @@ public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
     public boolean containsValue(@Nullable Object o) {return itemMap.containsValue(o);}
 
     @Override
-    public @NotNull Set<Function<P, I>> keySet() {return itemMap.keySet();}
+    public Set<Function<P, I>> keySet() {return itemMap.keySet();}
 
     @Override
-    public @NotNull Collection<I> values() {return itemMap.values();}
+    public Collection<I> values() {return itemMap.values();}
 
     @Override
-    public @NotNull Set<Entry<Function<P, I>, I>> entrySet() {return itemMap.entrySet();}
+    public Set<Entry<Function<P, I>, I>> entrySet() {return itemMap.entrySet();}
 }

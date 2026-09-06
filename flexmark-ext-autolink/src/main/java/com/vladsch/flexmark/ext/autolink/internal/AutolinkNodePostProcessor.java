@@ -8,7 +8,6 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.*;
-import org.jetbrains.annotations.NotNull;
 import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
@@ -70,7 +69,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
         // TODO: figure our why optimization does not work after AutoLink inserted by inline parser
         if (node.getAncestorOfType(DoNotDecorate.class, DoNotLinkDecorate.class) != null) return;
 
@@ -268,9 +267,8 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             addNodes(Text.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new AutolinkNodePostProcessor(document);
         }
     }

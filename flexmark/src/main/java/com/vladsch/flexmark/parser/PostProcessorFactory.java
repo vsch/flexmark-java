@@ -2,8 +2,7 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Set;
@@ -23,5 +22,5 @@ public interface PostProcessorFactory extends Function<Document, PostProcessor>,
      * @return post processor for the document
      */
     @Override
-    @NotNull PostProcessor apply(@NotNull Document document);
+    PostProcessor apply(Document document);
 }

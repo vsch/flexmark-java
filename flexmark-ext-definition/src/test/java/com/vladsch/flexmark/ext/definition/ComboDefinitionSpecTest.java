@@ -7,7 +7,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class ComboDefinitionSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/ext_definition_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(DefinitionExtension.create()))
             .toImmutable();
@@ -29,7 +28,7 @@ public class ComboDefinitionSpecTest extends RendererSpecTest {
         optionsMap.put("break-list", new MutableDataSet().set(DefinitionExtension.DOUBLE_BLANK_LINE_BREAKS_LIST, true));
         optionsMap.put("suppress-format-eol", new MutableDataSet().set(HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL, false).set(HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL, false).set(HtmlRenderer.INDENT_SIZE, 0));
     }
-    public ComboDefinitionSpecTest(@NotNull SpecExample example) {
+    public ComboDefinitionSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

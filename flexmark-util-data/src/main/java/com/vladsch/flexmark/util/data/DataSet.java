@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -24,8 +23,7 @@ public class DataSet implements DataHolder {
      * @param overrides overrides on options
      * @return resulting options where aggregate action keys were aggregated but not applied
      */
-    @NotNull
-    public static DataHolder aggregateActions(@NotNull DataHolder other, @NotNull DataHolder overrides) {
+    public static DataHolder aggregateActions(DataHolder other, DataHolder overrides) {
         DataSet combined = new DataSet(other);
         combined.dataSet.putAll(overrides.getAll());
 
@@ -40,7 +38,6 @@ public class DataSet implements DataHolder {
      *
      * @return resulting data holder
      */
-    @NotNull
     public DataHolder aggregate() {
         DataHolder combined = this;
         for (DataKeyAggregator combiner : ourDataKeyAggregators) {
@@ -56,7 +53,6 @@ public class DataSet implements DataHolder {
      * @param overrides overrides which may contain aggregate actions
      * @return resulting options with aggregate actions applied and removed from set
      */
-    @NotNull
     public static DataHolder aggregate(@Nullable DataHolder other, @Nullable DataHolder overrides) {
         if (other == null && overrides == null) {
             return new DataSet();
@@ -70,22 +66,22 @@ public class DataSet implements DataHolder {
     }
 
     @Override
-    public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
+    public Map<? extends DataKeyBase<?>, Object> getAll() {
         return dataSet;
     }
 
     @Override
-    public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
+    public Collection<? extends DataKeyBase<?>> getKeys() {
         return dataSet.keySet();
     }
 
     @Override
-    public boolean contains(@NotNull DataKeyBase<?> key) {
+    public boolean contains(DataKeyBase<?> key) {
         return dataSet.containsKey(key);
     }
 
     @Override
-    public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+    public @Nullable Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory) {
         if (dataSet.containsKey(key)) {
             return dataSet.get(key);
         } else {
@@ -93,8 +89,7 @@ public class DataSet implements DataHolder {
         }
     }
 
-    @NotNull
-    public static DataSet merge(@NotNull DataHolder... dataHolders) {
+    public static DataSet merge(DataHolder... dataHolders) {
         DataSet dataSet = new DataSet();
         for (DataHolder dataHolder : dataHolders) {
             dataSet.dataSet.putAll(dataHolder.getAll());
@@ -102,26 +97,24 @@ public class DataSet implements DataHolder {
         return dataSet;
     }
 
-    @NotNull
     @Override
     public MutableDataSet toMutable() {
         return new MutableDataSet(this);
     }
 
-    @NotNull
     @Override
     public DataSet toImmutable() {
         return this;
     }
 
     @Override
-    public @NotNull DataSet toDataSet() {
+    public DataSet toDataSet() {
         return this;
     }
 
     final private static ArrayList<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
 
-    public static void registerDataKeyAggregator(@NotNull DataKeyAggregator keyAggregator) {
+    public static void registerDataKeyAggregator(DataKeyAggregator keyAggregator) {
         if (isAggregatorRegistered(keyAggregator)) {
             throw new IllegalStateException("Aggregator " + keyAggregator + " is already registered");
         }
@@ -146,14 +139,14 @@ public class DataSet implements DataHolder {
         ourDataKeyAggregators.add(keyAggregator);
     }
 
-    static boolean isAggregatorRegistered(@NotNull DataKeyAggregator keyAggregator) {
+    static boolean isAggregatorRegistered(DataKeyAggregator keyAggregator) {
         for (DataKeyAggregator aggregator : ourDataKeyAggregators) {
             if (aggregator.getClass() == keyAggregator.getClass()) return true;
         }
         return false;
     }
 
-    static boolean invokeSetContains(@Nullable Set<Class<?>> invokeSet, @NotNull DataKeyAggregator aggregator) {
+    static boolean invokeSetContains(@Nullable Set<Class<?>> invokeSet, DataKeyAggregator aggregator) {
         if (invokeSet == null) return false;
         return invokeSet.contains(aggregator.getClass());
     }

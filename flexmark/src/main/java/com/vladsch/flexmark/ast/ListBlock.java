@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -50,7 +49,7 @@ public abstract class ListBlock extends Block implements BlankLineContainer {
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
         if (isTight()) out.append(" isTight");
         else out.append(" isLoose");

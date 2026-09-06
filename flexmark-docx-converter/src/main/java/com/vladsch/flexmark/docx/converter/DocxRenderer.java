@@ -37,8 +37,7 @@ import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
 import org.docx4j.wml.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -376,8 +375,7 @@ public class DocxRenderer implements IRender {
      * @param document the root node
      * @return the rendered HTML
      */
-    @NotNull
-    public String render(@NotNull Node document) {
+    public String render(Node document) {
         String resourcePath = DEFAULT_TEMPLATE_RESOURCE.get(getOptions());
         WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
         render(document, mlPackage);
@@ -397,7 +395,7 @@ public class DocxRenderer implements IRender {
     }
 
     @Override
-    public void render(@NotNull Node document, @NotNull Appendable output) {
+    public void render(Node document, Appendable output) {
         String docx = render(document);
         try {
             output.append(docx);
@@ -426,7 +424,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected void removeApiPoint(@NotNull Object apiPoint) {
+        protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeDocxRendererFactory) this.nodeDocxRendererFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -438,7 +436,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected void preloadExtension(@NotNull Extension extension) {
+        protected void preloadExtension(Extension extension) {
             if (extension instanceof DocxRendererExtension) {
                 DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
                 docxRendererExtension.rendererOptions(this);
@@ -449,7 +447,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(@NotNull Extension extension) {
+        protected boolean loadExtension(Extension extension) {
             if (extension instanceof DocxRendererExtension) {
                 DocxRendererExtension docxRendererExtension = (DocxRendererExtension) extension;
                 docxRendererExtension.extend(this);
@@ -465,7 +463,6 @@ public class DocxRenderer implements IRender {
         /**
          * @return the configured {@link DocxRenderer}
          */
-        @NotNull
         public DocxRenderer build() {
             return new DocxRenderer(this);
         }
@@ -492,9 +489,8 @@ public class DocxRenderer implements IRender {
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        @NotNull
         @Override
-        public Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
+        public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
             addExtensionApiPoint(linkResolverFactory);
             return this;
@@ -506,9 +502,8 @@ public class DocxRenderer implements IRender {
          * @param contentResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        @NotNull
         @Override
-        public Builder contentResolverFactory(@NotNull UriContentResolverFactory contentResolverFactory) {
+        public Builder contentResolverFactory(UriContentResolverFactory contentResolverFactory) {
             this.contentResolverFactories.add(contentResolverFactory);
             addExtensionApiPoint(contentResolverFactory);
             return this;
@@ -520,9 +515,8 @@ public class DocxRenderer implements IRender {
          * @param attributeProviderFactory the attribute provider factory to add
          * @return {@code this}
          */
-        @NotNull
         @Override
-        public Builder attributeProviderFactory(@NotNull AttributeProviderFactory attributeProviderFactory) {
+        public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
             this.attributeProviderFactories.add(attributeProviderFactory);
             addExtensionApiPoint(attributeProviderFactory);
             return this;
@@ -534,9 +528,8 @@ public class DocxRenderer implements IRender {
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
          * @return {@code this}
          */
-        @NotNull
         @Override
-        public Builder htmlIdGeneratorFactory(@NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
+        public Builder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
             //noinspection VariableNotUsedInsideIf
             if (this.htmlIdGeneratorFactory != null) {
                 throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
@@ -759,9 +752,8 @@ public class DocxRenderer implements IRender {
             return nodeIdMap.getFirst(nodeId);
         }
 
-        @NotNull
         @Override
-        public String encodeUrl(@NotNull CharSequence url) {
+        public String encodeUrl(CharSequence url) {
             if (rendererOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
             } else {
@@ -770,7 +762,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public MutableAttributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes) {
+        public MutableAttributes extendRenderingNodeAttributes(AttributablePart part, @Nullable Attributes attributes) {
             MutableAttributes attr = attributes != null ? attributes.toMutable() : new MutableAttributes();
             for (AttributeProvider attributeProvider : myAttributeProviders) {
                 attributeProvider.setAttributes(this.renderingNode, part, attr);
@@ -779,7 +771,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public MutableAttributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes) {
+        public MutableAttributes extendRenderingNodeAttributes(Node node, AttributablePart part, @Nullable Attributes attributes) {
             MutableAttributes attr = attributes != null ? attributes.toMutable() : new MutableAttributes();
             for (AttributeProvider attributeProvider : myAttributeProviders) {
                 attributeProvider.setAttributes(node, part, attr);
@@ -788,26 +780,25 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public @NotNull Node getCurrentNode() {
+        public Node getCurrentNode() {
             return renderingNode;
         }
 
         @Override
-        public @NotNull Node getContextFrame() {
+        public Node getContextFrame() {
             return renderingNode;
         }
 
         @Override
-        public @NotNull DataHolder getOptions() {
+        public DataHolder getOptions() {
             return options;
         }
 
         @Override
-        public @NotNull DocxRendererOptions getDocxRendererOptions() {
+        public DocxRendererOptions getDocxRendererOptions() {
             return rendererOptions;
         }
 
-        @NotNull
         @Override
         public Document getDocument() {
             return document;
@@ -838,9 +829,8 @@ public class DocxRenderer implements IRender {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
             String urlSeq = String.valueOf(url);
@@ -867,9 +857,8 @@ public class DocxRenderer implements IRender {
             return resolvedLink;
         }
 
-        @NotNull
         @Override
-        public ResolvedContent resolvedContent(@NotNull ResolvedLink resolvedLink) {
+        public ResolvedContent resolvedContent(ResolvedLink resolvedLink) {
             ResolvedContent resolvedContent = resolvedContentMap.get(resolvedLink.getUrl());
 
             if (resolvedContent == null) {
@@ -889,14 +878,14 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void render(@NotNull Node node) {
+        public void render(Node node) {
             if (node instanceof Document) {
                 htmlIdGenerator.generateIds(document);
 
                 // now create a map of node to id so we can validate hyperlinks
                 new AllNodesVisitor() {
                     @Override
-                    protected void process(@NotNull Node node) {
+                    protected void process(Node node) {
                         String id = calculateNodeId(node);
                         if (id != null && !id.isEmpty()) {
                             nodeIdMap.add(node, id);
@@ -979,7 +968,7 @@ public class DocxRenderer implements IRender {
             }
         }
 
-        public void renderChildren(@NotNull Node parent) {
+        public void renderChildren(Node parent) {
             String id = getNodeId(parent);
             if (id != null && !id.isEmpty()) {
                 if (bookmarkWrapsChildren.contains(parent.getClass())) {

@@ -9,7 +9,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 public class ComboMacrosSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/ext_macros_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(MacrosExtension.create(), GitLabExtension.create(), TablesExtension.create()))
             .set(GitLabExtension.RENDER_BLOCK_MATH, false)
@@ -33,7 +32,7 @@ public class ComboMacrosSpecTest extends RendererSpecTest {
         optionsMap.put("references-keep-first", new MutableDataSet().set(MacrosExtension.MACRO_DEFINITIONS_KEEP, KeepType.FIRST));
         optionsMap.put("references-keep-last", new MutableDataSet().set(MacrosExtension.MACRO_DEFINITIONS_KEEP, KeepType.LAST));
     }
-    public ComboMacrosSpecTest(@NotNull SpecExample example) {
+    public ComboMacrosSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

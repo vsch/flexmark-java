@@ -9,7 +9,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.BitSet;
 import java.util.HashMap;

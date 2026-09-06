@@ -11,7 +11,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for tocs
@@ -51,7 +50,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
         // set header id options if not already set
         if (!options.contains(HtmlRenderer.GENERATE_HEADER_ID)) {
             options.set(HtmlRenderer.GENERATE_HEADER_ID, true);
@@ -82,7 +81,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new SimTocNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

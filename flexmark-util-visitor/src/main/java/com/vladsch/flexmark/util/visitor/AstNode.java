@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.visitor;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface for converting to AstAccess
@@ -9,6 +8,6 @@ import org.jetbrains.annotations.Nullable;
  * @param <N> type of node
  */
 public interface AstNode<N> {
-    @Nullable N getFirstChild(@NotNull N node);
-    @Nullable N getNext(@NotNull N node);
+    @Nullable N getFirstChild(N node);
+    @Nullable N getNext(N node);
 }

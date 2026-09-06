@@ -6,7 +6,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 public class ComboWikiLinkTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_wikilink_translation_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(WikiLinkExtension.create()))
             .set(Parser.UNDERSCORE_DELIMITER_PROCESSOR, false);
@@ -38,7 +37,7 @@ public class ComboWikiLinkTranslationFormatterSpecTest extends TranslationFormat
         optionsMap.put("custom-link-escape", new MutableDataSet().set(WikiLinkExtension.LINK_ESCAPE_CHARS, " +<>").set(WikiLinkExtension.LINK_REPLACE_CHARS, "____"));
     }
 
-    public ComboWikiLinkTranslationFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboWikiLinkTranslationFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

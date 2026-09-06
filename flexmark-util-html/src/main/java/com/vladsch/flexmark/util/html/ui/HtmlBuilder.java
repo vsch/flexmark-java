@@ -22,8 +22,7 @@ import com.vladsch.flexmark.util.html.AttributeImpl;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
@@ -78,9 +77,8 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
         return this;
     }
 
-    @NotNull
     @Override
-    public HtmlBuilder attr(@NotNull CharSequence name, @Nullable CharSequence value) {
+    public HtmlBuilder attr(CharSequence name, @Nullable CharSequence value) {
         super.withAttr();
         return super.attr(name, value);
     }
@@ -90,16 +88,14 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
         return super.attr(Attribute.STYLE_ATTR, value);
     }
 
-    @NotNull
     @Override
-    public HtmlBuilder attr(@NotNull Attribute... attribute) {
+    public HtmlBuilder attr(Attribute... attribute) {
         super.withAttr();
         return super.attr(attribute);
     }
 
-    @NotNull
     @Override
-    public HtmlBuilder attr(@NotNull Attributes attributes) {
+    public HtmlBuilder attr(Attributes attributes) {
         super.withAttr();
         return super.attr(attributes);
     }
@@ -188,11 +184,9 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
 
     public HtmlBuilder append(StringBuffer sb) { return super.append(sb.toString()); }
 
-    @NotNull
-    public HtmlBuilder append(@NotNull CharSequence s) { return super.append(s); }
+    public HtmlBuilder append(CharSequence s) { return super.append(s); }
 
-    @NotNull
-    public HtmlBuilder append(@NotNull CharSequence s, int start, int end) { return super.append(s, start, end); }
+    public HtmlBuilder append(CharSequence s, int start, int end) { return super.append(s, start, end); }
 
     public HtmlBuilder append(char[] str) { return super.append(String.valueOf(str)); }
 
@@ -200,7 +194,6 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
 
     public HtmlBuilder append(boolean b) { return super.append(b ? "true" : "false"); }
 
-    @NotNull
     public HtmlBuilder append(char c) { return super.append(c); }
 
     public HtmlBuilder append(int i) { return super.append(String.valueOf(i)); }

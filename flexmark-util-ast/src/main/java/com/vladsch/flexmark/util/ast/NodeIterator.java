@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;

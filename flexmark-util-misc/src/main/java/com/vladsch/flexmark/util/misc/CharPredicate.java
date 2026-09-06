@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.BitSet;
 import java.util.Objects;
@@ -71,8 +70,7 @@ public interface CharPredicate extends IntPredicate {
      *         AND of this predicate and the {@code other} predicate
      * @throws NullPointerException if other is null
      */
-    @NotNull
-    default CharPredicate and(@NotNull CharPredicate other) {
+    default CharPredicate and(CharPredicate other) {
         Objects.requireNonNull(other);
         return this == NONE || other == NONE ? NONE : this == ALL ? other : other == ALL ? this : (value) -> test(value) && other.test(value);
     }
@@ -84,7 +82,6 @@ public interface CharPredicate extends IntPredicate {
      * @return a predicate that represents the logical negation of this
      *         predicate
      */
-    @NotNull
     default CharPredicate negate() {
         return this == NONE ? ALL : this == ALL ? NONE : (value) -> !test(value);
     }
@@ -105,13 +102,11 @@ public interface CharPredicate extends IntPredicate {
      *         OR of this predicate and the {@code other} predicate
      * @throws NullPointerException if other is null
      */
-    @NotNull
-    default CharPredicate or(@NotNull CharPredicate other) {
+    default CharPredicate or(CharPredicate other) {
         Objects.requireNonNull(other);
         return this == ALL || other == ALL ? ALL : this == NONE ? other : other == NONE ? this : (value) -> test(value) || other.test(value);
     }
 
-    @NotNull
     static CharPredicate standardOrAnyOf(char c1) {
         return SPACE.test(c1) ? SPACE
                 : EOL.test(c1) ? EOL
@@ -119,7 +114,6 @@ public interface CharPredicate extends IntPredicate {
                 : value1 -> value1 == (int) c1;
     }
 
-    @NotNull
     static CharPredicate standardOrAnyOf(char c1, char c2) {
         return c1 == c2 ? standardOrAnyOf(c1)
                 : SPACE_TAB.test(c1) && SPACE_TAB.test(c2) ? SPACE_TAB
@@ -127,7 +121,6 @@ public interface CharPredicate extends IntPredicate {
                 : value -> value == (int) c1 || value == (int) c2;
     }
 
-    @NotNull
     static CharPredicate standardOrAnyOf(char c1, char c2, char c3) {
         return c1 == c2 && c2 == c3 ? standardOrAnyOf(c1)
                 : c1 == c2 || c1 == c3 ? standardOrAnyOf(c2, c3)
@@ -135,7 +128,6 @@ public interface CharPredicate extends IntPredicate {
                 : value -> value == (int) c1 || value == (int) c2 || value == (int) c3;
     }
 
-    @NotNull
     static CharPredicate standardOrAnyOf(char c1, char c2, char c3, char c4) {
         return c1 == c2 && c2 == c3 && c3 == c4 ? standardOrAnyOf(c1)
                 : c1 == c2 || c1 == c3 || c1 == c4 ? standardOrAnyOf(c2, c3, c4)
@@ -145,7 +137,6 @@ public interface CharPredicate extends IntPredicate {
                 : value -> value == (int) c1 || value == (int) c2 || value == (int) c3 || value == (int) c4;
     }
 
-    @NotNull
     static CharPredicate anyOf(char... chars) {
         switch (chars.length) {
             case 0:
@@ -163,11 +154,11 @@ public interface CharPredicate extends IntPredicate {
         }
     }
 
-    static int indexOf(@NotNull CharSequence thizz, char c) {
+    static int indexOf(CharSequence thizz, char c) {
         return indexOf(thizz, c, 0, thizz.length());
     }
 
-    static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
+    static int indexOf(CharSequence thizz, char c, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(thizz.length(), endIndex);
 
@@ -177,8 +168,7 @@ public interface CharPredicate extends IntPredicate {
         return -1;
     }
 
-    @NotNull
-    static CharPredicate anyOf(@NotNull CharSequence chars) {
+    static CharPredicate anyOf(CharSequence chars) {
         int maxFixed = 4;
         switch (chars.length()) {
             case 0:

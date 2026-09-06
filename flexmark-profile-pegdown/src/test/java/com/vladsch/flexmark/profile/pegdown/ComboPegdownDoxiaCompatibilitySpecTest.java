@@ -10,7 +10,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -22,7 +21,7 @@ import static com.vladsch.flexmark.parser.PegdownExtensions.*;
 
 public class ComboPegdownDoxiaCompatibilitySpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/pegdown_doxia_compatibility_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(ALL & ~(HARDWRAPS | ANCHORLINKS)).toMutable()
             .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
@@ -40,7 +39,7 @@ public class ComboPegdownDoxiaCompatibilitySpecTest extends RendererSpecTest {
         optionsMap.put("code-soft-breaks", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, "\n"));
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
     }
-    public ComboPegdownDoxiaCompatibilitySpecTest(@NotNull SpecExample example) {
+    public ComboPegdownDoxiaCompatibilitySpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

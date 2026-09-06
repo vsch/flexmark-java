@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.zzzzzz;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A Zzzzzz block node
@@ -41,7 +40,7 @@ public class ZzzzzzBlock extends Block {
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         out.append(" ordinal: ").append(zzzzzzOrdinal).append(" ");
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, text, "text");
@@ -49,7 +48,6 @@ public class ZzzzzzBlock extends Block {
         segmentSpan(out, zzzzzz, "zzzzzz");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, zzzzzz };

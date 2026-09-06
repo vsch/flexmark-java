@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +46,7 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void renderDocument(@NotNull NodeRendererContext context, @NotNull HtmlWriter html, @NotNull Document document, @NotNull RenderingPhase phase) {
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_TOP) {
             if (recheckUndefinedReferences) {
                 // need to see if have undefined footnotes that were defined after parsing
@@ -114,9 +113,8 @@ public class MacrosNodeRenderer implements PhasedNodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new MacrosNodeRenderer(options);
         }
     }

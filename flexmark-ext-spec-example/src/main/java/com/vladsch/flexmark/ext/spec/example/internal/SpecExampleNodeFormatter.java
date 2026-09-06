@@ -11,8 +11,7 @@ import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +58,7 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
             markdown.blankLine();
 
             BasedSequence optionsSet = node.getOptions();
-            @NotNull List<BasedSequence> optionsList = optionsSet.splitList(",", 0, BasedSequence.SPLIT_INCLUDE_DELIM_PARTS | BasedSequence.SPLIT_TRIM_SKIP_EMPTY, CharPredicate.SPACE_TAB);
+            List<BasedSequence> optionsList = optionsSet.splitList(",", 0, BasedSequence.SPLIT_INCLUDE_DELIM_PARTS | BasedSequence.SPLIT_TRIM_SKIP_EMPTY, CharPredicate.SPACE_TAB);
             SequenceBuilder builder = node.getChars().getBuilder();
             if (optionsList.isEmpty()) optionsSet = BasedSequence.NULL;
             else {
@@ -115,9 +114,8 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
             return null;//Collections.singleton(CoreNodeFormatter.Factory.class);
         }
 
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new SpecExampleNodeFormatter(options);
         }
     }

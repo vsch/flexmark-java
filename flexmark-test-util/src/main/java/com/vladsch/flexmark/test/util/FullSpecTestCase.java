@@ -2,14 +2,12 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor {
-    @NotNull
-    public DumpSpecReader create(@NotNull ResourceLocation location) {
+    public DumpSpecReader create(ResourceLocation location) {
         return SpecReader.create(location, (stream, fileUrl) -> new DumpSpecReader(stream, this, fileUrl, compoundSections()));
     }
 
@@ -17,7 +15,7 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         return false;
     }
 
-    abstract protected @NotNull ResourceLocation getSpecResourceLocation();
+    abstract protected ResourceLocation getSpecResourceLocation();
 
     protected void fullTestSpecStarting() {
 

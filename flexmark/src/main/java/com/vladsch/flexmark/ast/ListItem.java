@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, markerSuffix, "openSuffix");
         if (isTight()) out.append(" isTight");
@@ -60,7 +59,6 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         else if (isContainsBlankLine()) out.append(" hadBlankLine");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, markerSuffix };

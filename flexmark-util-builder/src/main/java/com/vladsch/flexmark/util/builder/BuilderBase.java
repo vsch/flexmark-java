@@ -2,8 +2,7 @@ package com.vladsch.flexmark.util.builder;
 
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.misc.Extension;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,14 +25,14 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      *
      * @param apiPoint api point object
      */
-    protected abstract void removeApiPoint(@NotNull Object apiPoint);
+    protected abstract void removeApiPoint(Object apiPoint);
 
     /**
      * Preload operation for extension, perform any data config and other operation needed for loading extension
      *
      * @param extension to preload
      */
-    protected abstract void preloadExtension(@NotNull Extension extension);
+    protected abstract void preloadExtension(Extension extension);
 
     /**
      * Load extension if it is valid
@@ -41,13 +40,13 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @param extension to load
      * @return true if extension was loaded
      */
-    protected abstract boolean loadExtension(@NotNull Extension extension);
+    protected abstract boolean loadExtension(Extension extension);
 
     /**
      * @param extensions extensions to load
      * @return {@code this}
      */
-    final public @NotNull T extensions(@NotNull Collection<? extends Extension> extensions) {
+    final public T extensions(Collection<? extends Extension> extensions) {
         ArrayList<Extension> addedExtensions = new ArrayList<>(EXTENSIONS.get(this).size() + extensions.size());
 
         // first give extensions a chance to modify parser options
@@ -85,7 +84,6 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
     /**
      * @return actual instance the builder is supposed to build
      */
-    @NotNull
     public abstract Object build();
 
     /**
@@ -93,7 +91,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      *
      * @param apiPoint point registered
      */
-    protected void addExtensionApiPoint(@NotNull Object apiPoint) {
+    protected void addExtensionApiPoint(Object apiPoint) {
         Extension extension = currentExtension;
 
         if (extension != null) {
@@ -110,16 +108,14 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @param value value for the key
      * @return builder
      */
-    @NotNull
     @Override
-    public <V> MutableDataSet set(@NotNull DataKey<V> key, @NotNull V value) {
+    public <V> MutableDataSet set(DataKey<V> key, V value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }
 
-    @NotNull
     @Override
-    public <V> MutableDataSet set(@NotNull NullableDataKey<V> key, @Nullable V value) {
+    public <V> MutableDataSet set(NullableDataKey<V> key, @Nullable V value) {
         addExtensionApiPoint(key);
         return super.set(key, value);
     }
@@ -134,7 +130,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      */
     @Deprecated
     @Override
-    public <V> V get(@NotNull DataKey<V> key) {
+    public <V> V get(DataKey<V> key) {
         return key.get(this);
     }
 
@@ -159,7 +155,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @param excludeExtensions collection of extension classes to remove from extensions
      * @return modified options if removed and options were immutable or the same options if nothing to remove or options were mutable.
      */
-    public static DataHolder removeExtensions(@NotNull DataHolder options, @NotNull Collection<Class<? extends Extension>> excludeExtensions) {
+    public static DataHolder removeExtensions(DataHolder options, Collection<Class<? extends Extension>> excludeExtensions) {
         if (options.contains(EXTENSIONS)) {
             ArrayList<Extension> extensions = new ArrayList<>(EXTENSIONS.get(options));
             boolean removed = extensions.removeIf(it -> excludeExtensions.contains(it.getClass()));

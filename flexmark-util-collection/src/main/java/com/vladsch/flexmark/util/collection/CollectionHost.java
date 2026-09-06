@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface CollectionHost<K> {
     void adding(int index, @Nullable K k, @Nullable Object v);

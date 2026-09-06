@@ -6,7 +6,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 public class ComboSuperscriptSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/superscript_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(SuperscriptExtension.create()))
             .toImmutable();
@@ -25,7 +24,7 @@ public class ComboSuperscriptSpecTest extends RendererSpecTest {
     static {
         optionsMap.put("style-superscript", new MutableDataSet().set(SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_OPEN, "<span class=\"text-sup\">").set(SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_CLOSE, "</span>"));
     }
-    public ComboSuperscriptSpecTest(@NotNull SpecExample example) {
+    public ComboSuperscriptSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

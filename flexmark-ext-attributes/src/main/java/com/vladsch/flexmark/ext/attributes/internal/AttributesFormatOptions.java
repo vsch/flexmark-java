@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
-import org.jetbrains.annotations.NotNull;
 
 class AttributesFormatOptions implements MutableDataSetter {
     final public boolean attributesCombineConsecutive;
@@ -28,9 +27,8 @@ class AttributesFormatOptions implements MutableDataSetter {
         attributeClassFormat = AttributesExtension.FORMAT_ATTRIBUTE_CLASS.get(options);
     }
 
-    @NotNull
     @Override
-    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE, attributesCombineConsecutive);
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTES_SORT, attributesSort);
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTES_SPACES, attributesSpaces);

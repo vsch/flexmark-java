@@ -3,8 +3,7 @@ package com.vladsch.flexmark.experimental.util.collection;
 import com.vladsch.flexmark.util.collection.iteration.BitSetIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
@@ -18,7 +17,7 @@ import java.util.function.IntConsumer;
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {
     final public static int[] EMPTY_INT = new int[0];
 
-    final private @NotNull BitSet myBits;
+    final private BitSet myBits;
     final private boolean myReversed;
 
     public BitIntegerSet() {
@@ -30,16 +29,16 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         myReversed = false;
     }
 
-    public BitIntegerSet(@NotNull BitSet other) {
+    public BitIntegerSet(BitSet other) {
         myBits = (BitSet) other.clone();
         myReversed = false;
     }
 
-    public BitIntegerSet(@NotNull BitIntegerSet other) {
+    public BitIntegerSet(BitIntegerSet other) {
         this(other, other.isReversed());
     }
 
-    private BitIntegerSet(@NotNull BitIntegerSet other, boolean reversed) {
+    private BitIntegerSet(BitIntegerSet other, boolean reversed) {
         myBits = (BitSet) other.myBits.clone();
         myReversed = reversed;
     }
@@ -90,7 +89,6 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         return o instanceof Integer && myBits.get((Integer) o);
     }
 
-    @NotNull
     @Override
     public Object[] toArray() {
         Object[] array = new Object[cardinality()];
@@ -101,9 +99,8 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         return array;
     }
 
-    @NotNull
     @Override
-    public <T> T[] toArray(@NotNull T[] array) {
+    public <T> T[] toArray(T[] array) {
         Object[] objects = array;
         int count = cardinality();
 
@@ -129,19 +126,17 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean add(@NotNull Integer item) {
+    public boolean add(Integer item) {
         boolean old = myBits.get(item);
         myBits.set(item);
         return old;
     }
 
-    @NotNull
-    public int[] toArray(@Nullable int[] array) {
+    public int[] toArray(int @Nullable [] array) {
         return toArray(array, 0);
     }
 
-    @NotNull
-    public int[] toArray(@Nullable int[] array, int destinationIndex) {
+    public int[] toArray(int @Nullable [] array, int destinationIndex) {
         int arrayLength = array == null ? 0 : array.length;
         assert destinationIndex <= arrayLength;
 
@@ -171,7 +166,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean containsAll(@NotNull Collection<?> collection) {
+    public boolean containsAll(Collection<?> collection) {
         if (collection instanceof BitIntegerSet) {
             BitSet other = ((BitIntegerSet) collection).myBits;
             BitSet bitSet = (BitSet) this.myBits.clone();
@@ -190,11 +185,11 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         return addAll(collection, 0, Integer.MAX_VALUE);
     }
 
-    public boolean addAll(@NotNull int[] collection, int startIndex) {
+    public boolean addAll(int[] collection, int startIndex) {
         return addAll(collection, startIndex, Integer.MAX_VALUE);
     }
 
-    public boolean addAll(@NotNull int[] collection, int startIndex, int endIndex) {
+    public boolean addAll(int[] collection, int startIndex, int endIndex) {
         assert startIndex <= endIndex;
 
         boolean changed = false;
@@ -207,7 +202,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean addAll(@NotNull Collection<? extends Integer> collection) {
+    public boolean addAll(Collection<? extends Integer> collection) {
         if (collection instanceof BitIntegerSet) {
             BitSet other = ((BitIntegerSet) collection).myBits;
             BitSet bitSet = (BitSet) this.myBits.clone();
@@ -224,7 +219,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean retainAll(@NotNull Collection<?> collection) {
+    public boolean retainAll(Collection<?> collection) {
         BitSet other;
         if (!(collection instanceof BitSet)) {
             other = new BitSet();
@@ -244,7 +239,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public boolean removeAll(@NotNull Collection<?> collection) {
+    public boolean removeAll(Collection<?> collection) {
         if (collection instanceof BitIntegerSet) {
             BitSet other = ((BitIntegerSet) collection).myBits;
             BitSet bitSet = (BitSet) this.myBits.clone();
@@ -263,7 +258,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         return changed;
     }
 
-    public void forEach(@NotNull Consumer<? super Integer> consumer) {
+    public void forEach(Consumer<? super Integer> consumer) {
         int index = myBits.nextSetBit(0);
         while (index >= 0) {
             consumer.accept(index);
@@ -271,7 +266,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
         }
     }
 
-    public void forEach(@NotNull IntConsumer consumer) {
+    public void forEach(IntConsumer consumer) {
         int index = myBits.nextSetBit(0);
         while (index >= 0) {
             consumer.accept(index);
@@ -295,35 +290,35 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     // @formatter:off
-    public static @NotNull BitIntegerSet valueOf(@NotNull long[] longs) {return new BitIntegerSet(BitSet.valueOf(longs));}
-    public static @NotNull BitIntegerSet valueOf(@NotNull LongBuffer buffer) {return new BitIntegerSet(BitSet.valueOf(buffer));}
-    public static @NotNull BitIntegerSet valueOf(@NotNull byte[] bytes) {return new BitIntegerSet(BitSet.valueOf(bytes));}
-    public static @NotNull BitIntegerSet valueOf(@NotNull ByteBuffer buffer) {return new BitIntegerSet(BitSet.valueOf(buffer));}
+    public static BitIntegerSet valueOf(long[] longs) {return new BitIntegerSet(BitSet.valueOf(longs));}
+    public static BitIntegerSet valueOf(LongBuffer buffer) {return new BitIntegerSet(BitSet.valueOf(buffer));}
+    public static BitIntegerSet valueOf(byte[] bytes) {return new BitIntegerSet(BitSet.valueOf(bytes));}
+    public static BitIntegerSet valueOf(ByteBuffer buffer) {return new BitIntegerSet(BitSet.valueOf(buffer));}
 
-    public @NotNull byte[] toByteArray() {return myBits.toByteArray();}
-    public @NotNull long[] toLongArray() {return myBits.toLongArray();}
+    public byte[] toByteArray() {return myBits.toByteArray();}
+    public long[] toLongArray() {return myBits.toLongArray();}
 
-    public @NotNull BitIntegerSet flip(int i) {myBits.flip(i); return this;}
-    public @NotNull BitIntegerSet flip(int i, int i1) {myBits.flip(i, i1); return this;}
-    public @NotNull BitIntegerSet set(int i) {myBits.set(i); return this;}
-    public @NotNull BitIntegerSet set(int i, boolean b) {myBits.set(i, b); return this;}
-    public @NotNull BitIntegerSet set(int i, int i1) {myBits.set(i, i1); return this;}
-    public @NotNull BitIntegerSet set(int i, int i1, boolean b) {myBits.set(i, i1, b); return this;}
-    public @NotNull BitIntegerSet clear(int i) {myBits.clear(i); return this;}
-    public @NotNull BitIntegerSet clear(int i, int i1) {myBits.clear(i, i1); return this;}
+    public BitIntegerSet flip(int i) {myBits.flip(i); return this;}
+    public BitIntegerSet flip(int i, int i1) {myBits.flip(i, i1); return this;}
+    public BitIntegerSet set(int i) {myBits.set(i); return this;}
+    public BitIntegerSet set(int i, boolean b) {myBits.set(i, b); return this;}
+    public BitIntegerSet set(int i, int i1) {myBits.set(i, i1); return this;}
+    public BitIntegerSet set(int i, int i1, boolean b) {myBits.set(i, i1, b); return this;}
+    public BitIntegerSet clear(int i) {myBits.clear(i); return this;}
+    public BitIntegerSet clear(int i, int i1) {myBits.clear(i, i1); return this;}
 
-    public @NotNull BitIntegerSet and(@NotNull BitSet set) {myBits.and(set); return this;}
-    public @NotNull BitIntegerSet or(@NotNull BitSet set) {myBits.or(set); return this;}
-    public @NotNull BitIntegerSet xor(@NotNull BitSet set) {myBits.xor(set); return this;}
-    public @NotNull BitIntegerSet andNot(@NotNull BitSet set) {myBits.andNot(set); return this;}
-    public @NotNull BitIntegerSet and(@NotNull BitIntegerSet set) {myBits.and(set.myBits); return this;}
-    public @NotNull BitIntegerSet or(@NotNull BitIntegerSet set) {myBits.or(set.myBits); return this;}
-    public @NotNull BitIntegerSet xor(@NotNull BitIntegerSet set) {myBits.xor(set.myBits); return this;}
-    public @NotNull BitIntegerSet andNot(@NotNull BitIntegerSet set) {myBits.andNot(set.myBits); return this;}
+    public BitIntegerSet and(BitSet set) {myBits.and(set); return this;}
+    public BitIntegerSet or(BitSet set) {myBits.or(set); return this;}
+    public BitIntegerSet xor(BitSet set) {myBits.xor(set); return this;}
+    public BitIntegerSet andNot(BitSet set) {myBits.andNot(set); return this;}
+    public BitIntegerSet and(BitIntegerSet set) {myBits.and(set.myBits); return this;}
+    public BitIntegerSet or(BitIntegerSet set) {myBits.or(set.myBits); return this;}
+    public BitIntegerSet xor(BitIntegerSet set) {myBits.xor(set.myBits); return this;}
+    public BitIntegerSet andNot(BitIntegerSet set) {myBits.andNot(set.myBits); return this;}
 
     public boolean get(int i) {return myBits.get(i);}
 
-    public @NotNull BitIntegerSet get(int i, int i1) {return new BitIntegerSet(myBits.get(i, i1));}
+    public BitIntegerSet get(int i, int i1) {return new BitIntegerSet(myBits.get(i, i1));}
 
     public int nextSetBit(int i) {return myBits.nextSetBit(i);}
     public int nextClearBit(int i) {return myBits.nextClearBit(i);}
@@ -331,16 +326,16 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     public int previousClearBit(int i) {return myBits.previousClearBit(i);}
     public boolean intersects(BitSet set) {return myBits.intersects(set);}
 
-    public @NotNull BitSet bitSet() { return myBits; }
+    public BitSet bitSet() { return myBits; }
     // @formatter:on
 
     @Override
-    public @NotNull ReversibleIterator<Integer> iterator() {
+    public ReversibleIterator<Integer> iterator() {
         return new BitSetIterator(myBits, myReversed);
     }
 
     @Override
-    public @NotNull ReversibleIterable<Integer> reversed() {
+    public ReversibleIterable<Integer> reversed() {
         return new BitIntegerSet(this, !myReversed);
     }
 
@@ -350,7 +345,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     @Override
-    public @NotNull ReversibleIterator<Integer> reversedIterator() {
+    public ReversibleIterator<Integer> reversedIterator() {
         return new BitSetIterator(myBits, !myReversed);
     }
 }

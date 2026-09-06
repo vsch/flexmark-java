@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for attributes
@@ -68,12 +67,12 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (ASSIGN_TEXT_ATTRIBUTES.get(htmlRendererBuilder)) {
             htmlRendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         }
@@ -81,7 +80,7 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull RendererBuilder rendererBuilder, @NotNull String rendererType) {
+    public void extend(RendererBuilder rendererBuilder, String rendererType) {
         //rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
     }

@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.tree.iteration;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
 public class FixedIterationConditions<N> implements IterationConditions<N> {
-    final private @NotNull Function<? super N, N> initializer;
-    final private @NotNull Function<? super N, N> iterator;
-    final private @NotNull Function<? super N, N> reverseInitializer;
-    final private @NotNull Function<? super N, N> reverseIterator;
+    final private Function<? super N, N> initializer;
+    final private Function<? super N, N> iterator;
+    final private Function<? super N, N> reverseInitializer;
+    final private Function<? super N, N> reverseIterator;
 
-    public FixedIterationConditions(@NotNull Function<? super N, N> initializer, @NotNull Function<? super N, N> iterator, @NotNull Function<? super N, N> reverseInitializer, @NotNull Function<? super N, N> reverseIterator) {
+    public FixedIterationConditions(Function<? super N, N> initializer, Function<? super N, N> iterator, Function<? super N, N> reverseInitializer, Function<? super N, N> reverseIterator) {
         this.initializer = initializer;
         this.iterator = iterator;
         this.reverseInitializer = reverseInitializer;
@@ -18,18 +17,15 @@ public class FixedIterationConditions<N> implements IterationConditions<N> {
     }
 
     @Override
-    @NotNull
     public Function<? super N, N> getInitializer() {
         return initializer;
     }
 
     @Override
-    @NotNull
     public Function<? super N, N> getIterator() {
         return iterator;
     }
 
-    @NotNull
     @Override
     public IterationConditions<N> getReversed() {
         return new FixedIterationConditions<>(reverseInitializer, reverseIterator, initializer, iterator);

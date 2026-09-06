@@ -6,8 +6,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @SuppressWarnings("UnusedReturnValue")
 public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, NodeFormatterContext> {
@@ -23,14 +22,13 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         super(appendable, formatOptions);
     }
 
-    @NotNull
     @Override
     public MarkdownWriter getEmptyAppendable() {
         return new MarkdownWriter(appendable, appendable.getOptions());
     }
 
     @Override
-    public @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
+    public BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
         Node node = context.getCurrentNode();
         while (node != null && node.getNextAnyNot(BlankLine.class) == null) {
             Node parent = node.getParent();
@@ -48,19 +46,19 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return prefix;
     }
 
-    public @NotNull MarkdownWriter appendNonTranslating(@NotNull CharSequence csq) {
+    public MarkdownWriter appendNonTranslating(CharSequence csq) {
         return appendNonTranslating(null, csq, null, null);
     }
 
-    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq) {
+    public MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, CharSequence csq) {
         return appendNonTranslating(prefix, csq, null, null);
     }
 
-    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix) {
+    public MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, CharSequence csq, @Nullable CharSequence suffix) {
         return appendNonTranslating(prefix, csq, suffix, null);
     }
 
-    public @NotNull MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2) {
+    public MarkdownWriter appendNonTranslating(@Nullable CharSequence prefix, CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2) {
         if (context.isTransformingText()) {
             append(context.transformNonTranslating(prefix, csq, suffix, suffix2));
         } else {
@@ -69,19 +67,19 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 
-    public @NotNull MarkdownWriter appendTranslating(@NotNull CharSequence csq) {
+    public MarkdownWriter appendTranslating(CharSequence csq) {
         return appendTranslating(null, csq, null, null);
     }
 
-    public @NotNull MarkdownWriter appendTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq) {
+    public MarkdownWriter appendTranslating(@Nullable CharSequence prefix, CharSequence csq) {
         return appendTranslating(prefix, csq, null, null);
     }
 
-    public @NotNull MarkdownWriter appendTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix) {
+    public MarkdownWriter appendTranslating(@Nullable CharSequence prefix, CharSequence csq, @Nullable CharSequence suffix) {
         return appendTranslating(prefix, csq, suffix, null);
     }
 
-    public @NotNull MarkdownWriter appendTranslating(@Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2) {
+    public MarkdownWriter appendTranslating(@Nullable CharSequence prefix, CharSequence csq, @Nullable CharSequence suffix, @Nullable CharSequence suffix2) {
         if (context.isTransformingText()) {
             append(context.transformTranslating(prefix, csq, suffix, suffix2));
         } else {

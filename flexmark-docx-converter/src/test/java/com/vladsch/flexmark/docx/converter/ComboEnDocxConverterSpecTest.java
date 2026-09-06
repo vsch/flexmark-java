@@ -2,16 +2,15 @@ package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.List;
 
 public class ComboEnDocxConverterSpecTest extends ComboDocxConverterSpecTestBase {
     final private static String SPEC_RESOURCE = "/docx_converter_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    public ComboEnDocxConverterSpecTest(@NotNull SpecExample example) {
+    public ComboEnDocxConverterSpecTest(SpecExample example) {
         super(example, null, getDefaultOptions(RESOURCE_LOCATION));
     }
 

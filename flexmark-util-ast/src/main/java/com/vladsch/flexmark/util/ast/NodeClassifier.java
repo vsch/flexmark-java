@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.ast;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -11,7 +10,7 @@ public class NodeClassifier implements Function<Node, Class<?>> {
     }
 
     @Override
-    public @NotNull Class<?> apply(@NotNull Node value) {
+    public Class<?> apply(Node value) {
         return value.getClass();
     }
 }

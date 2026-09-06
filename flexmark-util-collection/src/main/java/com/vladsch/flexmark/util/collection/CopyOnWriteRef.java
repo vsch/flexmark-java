@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.function.Function;
 
 public class CopyOnWriteRef<T> {
     private @Nullable T value;
     private int referenceCount;
-    final private @NotNull Function<T, T> copyFunction;
+    final private Function<T, T> copyFunction;
 
-    public CopyOnWriteRef(@Nullable T value, @NotNull Function<T, T> copyFunction) {
+    public CopyOnWriteRef(@Nullable T value, Function<T, T> copyFunction) {
         this.value = value;
         referenceCount = 0;
         this.copyFunction = copyFunction;

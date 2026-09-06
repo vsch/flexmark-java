@@ -5,8 +5,7 @@ import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -29,7 +28,7 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     }
 
     @Override
-    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         if (phase == FormattingPhase.DOCUMENT_FIRST) {
             Node node = document.getFirstChild();
             if (node instanceof YamlFrontMatterBlock) {
@@ -53,9 +52,8 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new YamlFrontMatterNodeFormatter(options);
         }
     }

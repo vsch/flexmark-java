@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.function.Function;
@@ -63,7 +62,7 @@ public class BasedOffsetTrackerTest {
         return resolveOffset(sequence1, actual, info1.getSecond(), isEndOffset);
     }
 
-    String wrapText(String input, boolean isEndOffset, int margin, @NotNull Function<BasedSequence, BasedSequence> postProcessor) {
+    String wrapText(String input, boolean isEndOffset, int margin, Function<BasedSequence, BasedSequence> postProcessor) {
         BasedSequence actual = postProcessor.apply(wrapText(input, margin));
         Pair<String, Integer> info1 = getInput(input);
         BasedSequence sequence1 = BasedSequence.of(info1.getFirst());

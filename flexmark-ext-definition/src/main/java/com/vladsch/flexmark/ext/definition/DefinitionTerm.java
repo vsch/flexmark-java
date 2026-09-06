@@ -6,7 +6,6 @@ import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A Definition block node
@@ -14,10 +13,9 @@ import org.jetbrains.annotations.NotNull;
 public class DefinitionTerm extends ListItem {
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return Node.EMPTY_SEGMENTS;

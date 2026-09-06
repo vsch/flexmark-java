@@ -3,16 +3,15 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Utils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class HtmlRendererOptions {
-    final public @NotNull String softBreak;
+    final public String softBreak;
     final public boolean isSoftBreakAllSpaces;
-    final public @NotNull String hardBreak;
+    final public String hardBreak;
     final public @Nullable String strongEmphasisStyleHtmlOpen;
     final public @Nullable String strongEmphasisStyleHtmlClose;
     final public @Nullable String emphasisStyleHtmlOpen;
@@ -32,12 +31,12 @@ public class HtmlRendererOptions {
     final public boolean doNotRenderLinksInDocument;
     final public boolean renderHeaderId;
     final public boolean generateHeaderIds;
-    final public @NotNull String languageClassPrefix;
-    final public @NotNull HashMap<String, String> languageClassMap;
-    final public @NotNull String languageDelimiters;
+    final public String languageClassPrefix;
+    final public HashMap<String, String> languageClassMap;
+    final public String languageDelimiters;
     final public CharPredicate languageDelimiterSet;
-    final public @NotNull String noLanguageClass;
-    final public @NotNull String sourcePositionAttribute;
+    final public String noLanguageClass;
+    final public String sourcePositionAttribute;
     final public @Nullable String inlineCodeSpliceClass;
     final public boolean sourcePositionParagraphLines;
     final public boolean sourceWrapHtmlBlocks;
@@ -48,7 +47,7 @@ public class HtmlRendererOptions {
     final public boolean htmlBlockCloseTagEol;
     final public boolean unescapeHtmlEntities;
     final public boolean noPTagsUseBr;
-    final public @NotNull String autolinkWwwPrefix;
+    final public String autolinkWwwPrefix;
     final public @Nullable Pattern suppressedLinks;
 
     public HtmlRendererOptions(DataHolder options) {

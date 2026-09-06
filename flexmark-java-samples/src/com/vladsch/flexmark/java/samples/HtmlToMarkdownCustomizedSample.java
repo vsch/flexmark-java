@@ -6,8 +6,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
@@ -60,12 +59,12 @@ public class HtmlToMarkdownCustomizedSample {
         }
 
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(FlexmarkHtmlConverter.@NotNull Builder builder) {
+        public void extend(FlexmarkHtmlConverter.Builder builder) {
             builder.linkResolverFactory(new CustomLinkResolver.Factory());
             builder.htmlNodeRendererFactory(new CustomHtmlNodeConverter.Factory());
         }

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 

@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -31,7 +30,7 @@ public class AttributesAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
+    public void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
         // regression bug, issue #372, add option, default to both as before
         if (part == CoreNodeRenderer.CODE_CONTENT ? attributeOptions.fencedCodeAddAttributes.addToCode : attributeOptions.fencedCodeAddAttributes.addToPre) {
             ArrayList<AttributesNode> nodeAttributesList = nodeAttributeRepository.get(node);
@@ -90,9 +89,8 @@ public class AttributesAttributeProvider implements AttributeProvider {
         //    return false;
         //}
 
-        @NotNull
         @Override
-        public AttributeProvider apply(@NotNull LinkResolverContext context) {
+        public AttributeProvider apply(LinkResolverContext context) {
             return new AttributesAttributeProvider(context);
         }
     }

@@ -19,8 +19,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -430,14 +429,13 @@ public class ListBlockParser extends AbstractBlockParser {
             return false;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+        public @Nullable SpecialLeadInHandler getLeadInHandler(DataHolder options) {
             return ListItemLeadInHandler.create(Parser.LISTS_ITEM_PREFIX_CHARS.get(options), Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options));
         }
     }
@@ -448,8 +446,7 @@ public class ListBlockParser extends AbstractBlockParser {
         final static SpecialLeadInHandler ORDERED_DELIM_DOT_HANDLER = new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), true);
         final static SpecialLeadInHandler ORDERED_DELIM_DOT_PARENS_HANDLER = new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), false);
 
-        @NotNull
-        static SpecialLeadInHandler create(@NotNull CharSequence listItemDelims, boolean dotOnly) {
+        static SpecialLeadInHandler create(CharSequence listItemDelims, boolean dotOnly) {
             return SequenceUtils.equals(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), listItemDelims)
                     ? dotOnly ? ORDERED_DELIM_DOT_HANDLER : ORDERED_DELIM_DOT_PARENS_HANDLER
                     : new ListItemLeadInHandler(listItemDelims, dotOnly);
@@ -463,7 +460,7 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public boolean escape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+        public boolean escape(BasedSequence sequence, @Nullable DataHolder options, Consumer<CharSequence> consumer) {
             if (super.escape(sequence, options, consumer)) return true;
             if (ESCAPE_NUMBERED_LEAD_IN.get(options)) {
                 int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
@@ -478,7 +475,7 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public boolean unEscape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+        public boolean unEscape(BasedSequence sequence, @Nullable DataHolder options, Consumer<CharSequence> consumer) {
             if (super.unEscape(sequence, options, consumer)) return true;
             int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
             if (nonDigit > 0 && nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {

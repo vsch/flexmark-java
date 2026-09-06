@@ -11,8 +11,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -27,11 +26,11 @@ public class YamlFrontMatterTest extends RenderingTestCase {
             .set(TestUtils.NO_FILE_EOL, false)
             .set(Parser.EXTENSIONS, Collections.singleton(YamlFrontMatterExtension.create()))
             .toImmutable();
-    final private static @NotNull Parser PARSER = Parser.builder(OPTIONS).build();
-    final private static @NotNull HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    final private static Parser PARSER = Parser.builder(OPTIONS).build();
+    final private static HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = DataSet.aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, PARSER, RENDERER, true);
     }
@@ -233,7 +232,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
     }
 
     @Override
-    public @Nullable DataHolder options(@NotNull String option) {
+    public @Nullable DataHolder options(String option) {
         return null;
     }
 }

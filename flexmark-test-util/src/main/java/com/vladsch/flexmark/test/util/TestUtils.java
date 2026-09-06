@@ -15,8 +15,7 @@ import com.vladsch.flexmark.util.sequence.RichSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
 
 import java.io.File;
@@ -38,8 +37,8 @@ public class TestUtils {
     final public static String MARKUP_CARET = Character.toString(MARKUP_CARET_CHAR);
     final public static String MARKUP_SELECTION_START = Character.toString(MARKUP_SELECTION_START_CHAR);
     final public static String MARKUP_SELECTION_END = Character.toString(MARKUP_SELECTION_END_CHAR);
-    final public static @NotNull CharPredicate CARET_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR);
-    final public static @NotNull CharPredicate MARKUP_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR, MARKUP_SELECTION_START_CHAR, MARKUP_SELECTION_END_CHAR);
+    final public static CharPredicate CARET_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR);
+    final public static CharPredicate MARKUP_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR, MARKUP_SELECTION_START_CHAR, MARKUP_SELECTION_END_CHAR);
     final public static int[] EMPTY_OFFSETS = new int[0];
     static {
         // CAUTION: need to register our url resolvers
@@ -78,7 +77,7 @@ public class TestUtils {
     final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = new DataKey<>("CUSTOM_OPTION", (option, params) -> EMPTY_OPTIONS);
     final public static String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
 
-    public static DataHolder processOption(@NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
+    public static DataHolder processOption(Map<String, ? extends DataHolder> optionsMap, String option) {
         DataHolder dataHolder = null;
         if (!option.startsWith(DISABLED_OPTION_PREFIX)) {
             dataHolder = optionsMap.get(option);
@@ -105,8 +104,7 @@ public class TestUtils {
         return dataHolder;
     }
 
-    @NotNull
-    public static <T> HashMap<String, T> buildOptionsMap(@NotNull String[] options, @NotNull BiFunction<ExampleOption, Integer, T> factory) {
+    public static <T> HashMap<String, T> buildOptionsMap(String[] options, BiFunction<ExampleOption, Integer, T> factory) {
         HashMap<String, T> hashMap = new HashMap<>();
         int i = 0;
         for (String option : options) {
@@ -127,8 +125,7 @@ public class TestUtils {
      * @param <T>                     type of value in the map
      * @return constructed hash map of option name
      */
-    @NotNull
-    public static <T> HashMap<String, T> buildOptionsMap(boolean ensureAllBuiltInPresent, @NotNull Object[][] options, @NotNull BiFunction<ExampleOption, Object[], T> factory) {
+    public static <T> HashMap<String, T> buildOptionsMap(boolean ensureAllBuiltInPresent, Object[][] options, BiFunction<ExampleOption, Object[], T> factory) {
         HashMap<String, T> hashMap = new HashMap<>();
         HashSet<String> builtInSet = new HashSet<>(ExampleOption.getBuiltInOptions().keySet());
 
@@ -155,8 +152,7 @@ public class TestUtils {
         return hashMap;
     }
 
-    @NotNull
-    public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
+    public static Pair<String, Integer> addSpecSection(String headingLine, String headingText, String[] sectionHeadings) {
         assert sectionHeadings.length == 7;
         int lastSectionLevel = Math.max(1, Math.min(6, RichSequence.of(headingLine).countLeading(CharPredicate.HASH)));
         sectionHeadings[lastSectionLevel] = headingText;
@@ -190,7 +186,7 @@ public class TestUtils {
      * @param optionsProvider function to take a string option name and provide settings based on it
      * @return combined set from applying these options together
      */
-    public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider) {
+    public static DataHolder getOptions(SpecExample example, @Nullable String optionSets, Function<String, DataHolder> optionsProvider) {
         if (optionSets == null) return null;
         String[] optionNames = optionSets.replace('\u00A0', ' ').split(",");
         DataHolder options = null;
@@ -254,16 +250,15 @@ public class TestUtils {
         }
     }
 
-    public static void throwIllegalStateException(@NotNull SpecExample example, @NotNull String option) {
+    public static void throwIllegalStateException(SpecExample example, String option) {
         throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass\n" + example.getFileUrlWithLineNumber(-1));
     }
 
-    public static void throwIgnoredOption(@NotNull SpecExample example, @NotNull String optionSets, @NotNull String option) {
+    public static void throwIgnoredOption(SpecExample example, String optionSets, String option) {
         throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option\n" + example.getFileUrlWithLineNumber(-1));
     }
 
-    @NotNull
-    public static String ast(@NotNull Node node) {
+    public static String ast(Node node) {
         return new AstCollectingVisitor().collectAndGetAstText(node);
     }
 
@@ -529,26 +524,22 @@ public class TestUtils {
         return String.format(TIMED_FORMAT_STRING, getFormattedSection(section, exampleNumber), (parse - start) / 1000000.0 / iterations, (render - parse) / 1000000.0 / iterations, (render - start) / 1000000.0 / iterations);
     }
 
-    @NotNull
     public static String getFormattedSection(String section, int exampleNumber) {
         return section == null ? "" : section.trim() + ": " + exampleNumber;
     }
 
-    @NotNull
-    public static String getResolvedSpecResourcePath(@NotNull String testClassName, @NotNull String resourcePath) {
+    public static String getResolvedSpecResourcePath(String testClassName, String resourcePath) {
         File specInfo = new File(resourcePath);
         File classInfo = new File("/" + testClassName.replace('.', '/'));
         return !specInfo.isAbsolute() ? new File(classInfo.getParent(), resourcePath).getAbsolutePath() : resourcePath;
     }
 
-    @NotNull
-    public static String getAbsoluteSpecResourcePath(@NotNull String testClassPath, @NotNull String resourceRootPath, @NotNull String resourcePath) {
+    public static String getAbsoluteSpecResourcePath(String testClassPath, String resourceRootPath, String resourcePath) {
         File resourceFile = resourcePath.startsWith("/") ? new File(resourceRootPath, resourcePath.substring(1)) : new File(new File(testClassPath).getParent(), resourcePath);
         return resourceFile.getAbsolutePath();
     }
 
-    @NotNull
-    public static String getSpecResourceFileUrl(@NotNull Class<?> resourceClass, @NotNull String resourcePath) {
+    public static String getSpecResourceFileUrl(Class<?> resourceClass, String resourcePath) {
         if (resourcePath.isEmpty()) {
             throw new IllegalStateException("Empty resource paths not supported");
         } else {
@@ -559,7 +550,7 @@ public class TestUtils {
         }
     }
 
-    public static ArrayList<Object[]> getTestData(@NotNull ResourceLocation location) {
+    public static ArrayList<Object[]> getTestData(ResourceLocation location) {
         SpecReader specReader = SpecReader.createAndReadExamples(location, true);
         List<SpecExample> examples = specReader.getExamples();
         ArrayList<Object[]> data = new ArrayList<>();
@@ -573,16 +564,16 @@ public class TestUtils {
         return data;
     }
 
-    public static @NotNull String getUrlWithLineNumber(@NotNull String fileUrl, int lineNumber) {
+    public static String getUrlWithLineNumber(String fileUrl, int lineNumber) {
         return (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
     }
 
-    public static String adjustedFileUrl(@NotNull URL url) {
+    public static String adjustedFileUrl(URL url) {
         return ResourceResolverManager.adjustedFileUrl(url);
     }
 
     @Nullable
-    public static DataHolder combineDefaultOptions(@Nullable DataHolder[] defaultOptions) {
+    public static DataHolder combineDefaultOptions(DataHolder @Nullable [] defaultOptions) {
         DataHolder combinedOptions = null;
         if (defaultOptions != null) {
             for (DataHolder options : defaultOptions) {
@@ -606,7 +597,7 @@ public class TestUtils {
     }
 
     @Nullable
-    public static DataHolder[] dataHolders(@Nullable DataHolder other, @Nullable DataHolder[] overrides) {
+    public static DataHolder[] dataHolders(@Nullable DataHolder other, DataHolder @Nullable [] overrides) {
         if (other == null) return overrides;
         else if (overrides == null || overrides.length == 0) return new DataHolder[] { other };
 
@@ -616,15 +607,13 @@ public class TestUtils {
         return holders;
     }
 
-    @NotNull
-    public static String getTestResourceRootDirectoryForModule(@NotNull Class<?> resourceClass, @NotNull String moduleRootPackage) {
+    public static String getTestResourceRootDirectoryForModule(Class<?> resourceClass, String moduleRootPackage) {
         String fileUrl;
         fileUrl = getSpecResourceFileUrl(resourceClass, wrapWith(moduleRootPackage, "/", ".txt"));
         return removePrefix(removeSuffix(fileUrl, suffixWith(moduleRootPackage, ".txt")), FILE_PROTOCOL);
     }
 
-    @NotNull
-    public static String getRootDirectoryForModule(@NotNull Class<?> resourceClass, @NotNull String moduleDirectoryName) {
+    public static String getRootDirectoryForModule(Class<?> resourceClass, String moduleDirectoryName) {
         // get project root from our class file url path
         String fileUrl = SpecExample.ofCaller(0, resourceClass, "", "", "").getFileUrl();
         int pos = fileUrl.indexOf(wrapWith(moduleDirectoryName, '/'));
@@ -636,7 +625,7 @@ public class TestUtils {
     }
 
     // handle custom string options
-    public static DataHolder customStringOption(@NotNull String option, @Nullable String params, @NotNull Function<String, DataHolder> resolver) {
+    public static DataHolder customStringOption(String option, @Nullable String params, Function<String, DataHolder> resolver) {
         if (params != null) {
             // allow escape
             String text = params
@@ -651,7 +640,7 @@ public class TestUtils {
         return resolver.apply(null);
     }
 
-    public static DataHolder customIntOption(@NotNull String option, @Nullable String params, @NotNull Function<Integer, DataHolder> resolver) {
+    public static DataHolder customIntOption(String option, @Nullable String params, Function<Integer, DataHolder> resolver) {
         int value = -1;
         if (params != null) {
             if (!params.matches("\\d*")) {
@@ -782,18 +771,17 @@ public class TestUtils {
     final public static String BANNER_PADDING = "------------------------------------------------------------------------";
     final public static int BANNER_LENGTH = BANNER_PADDING.length();
 
-    @NotNull
-    public static String bannerText(@NotNull String message) {
+    public static String bannerText(String message) {
         int leftPadding = 4; //(BANNER_LENGTH - message.length() - 2) >> 4;
         int rightPadding = BANNER_LENGTH - message.length() - 2 - leftPadding;
         return BANNER_PADDING.substring(0, leftPadding) + " " + message + " " + BANNER_PADDING.substring(0, rightPadding) + "\n";
     }
 
-    public static void appendBanner(@NotNull StringBuilder out, @NotNull String banner) {
+    public static void appendBanner(StringBuilder out, String banner) {
         appendBanner(out, banner, true);
     }
 
-    public static void appendBanner(@NotNull StringBuilder out, @NotNull String banner, boolean addBlankLine) {
+    public static void appendBanner(StringBuilder out, String banner, boolean addBlankLine) {
         if (out.length() > 0 && addBlankLine) {
             out.append("\n");
         }
@@ -801,7 +789,7 @@ public class TestUtils {
         out.append(banner);
     }
 
-    public static void appendBannerIfNeeded(@NotNull StringBuilder out, @NotNull String banner) {
+    public static void appendBannerIfNeeded(StringBuilder out, String banner) {
         if (out.length() > 0) {
             out.append("\n");
             out.append(banner);

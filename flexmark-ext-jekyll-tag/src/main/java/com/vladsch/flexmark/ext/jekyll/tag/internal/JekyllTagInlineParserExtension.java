@@ -7,8 +7,7 @@ import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -24,16 +23,16 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
     }
 
     @Override
-    public void finalizeDocument(@NotNull InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(@NotNull InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
     }
 
     @Override
-    public boolean parse(@NotNull LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '%' && (inlineParser.peek(2) == ' ' || inlineParser.peek(2) == '\t')) {
             BasedSequence input = inlineParser.getInput();
             Matcher matcher = inlineParser.matcher(parsing.MACRO_TAG);
@@ -65,7 +64,6 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
             return null;
         }
 
-        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "{";
@@ -77,9 +75,8 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
             return null;
         }
 
-        @NotNull
         @Override
-        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new JekyllTagInlineParserExtension(lightInlineParser);
         }
 

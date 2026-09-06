@@ -2,7 +2,6 @@ package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,12 +17,12 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     final private static int F_DETACHED = 8;
     final private static int F_SETTING = 16;  // setting element, index will not be updated
 
-    final private @NotNull IPositionUpdater<T, P> myParent;
-    final private @NotNull List<T> myList;
+    final private IPositionUpdater<T, P> myParent;
+    final private List<T> myList;
     private int myIndex;
     private byte myFlags;
 
-    public IPositionBase(@NotNull IPositionUpdater<T, P> parent, int index, @NotNull PositionAnchor anchor) {
+    public IPositionBase(IPositionUpdater<T, P> parent, int index, PositionAnchor anchor) {
         myParent = parent;
         myList = myParent.getList();
         myIndex = index;
@@ -178,13 +177,12 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     @Override
-    public @NotNull PositionAnchor getAnchor() {
+    public PositionAnchor getAnchor() {
         return ((myFlags & F_NEXT) != 0) ? NEXT : ((myFlags & F_PREVIOUS) != 0) ? PREVIOUS : CURRENT;
     }
 
-    @NotNull
     @Override
-    public P withAnchor(@NotNull PositionAnchor anchor) {
+    public P withAnchor(PositionAnchor anchor) {
         if (getAnchor() != anchor) {
             return myParent.getPosition(myIndex, anchor);
         } else {
@@ -432,12 +430,12 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     @Override
-    public boolean addAll(@NotNull Collection<T> elements) {
+    public boolean addAll(Collection<T> elements) {
         return addAll(0, elements);
     }
 
     @Override
-    public boolean addAll(int offset, @NotNull Collection<T> elements) {
+    public boolean addAll(int offset, Collection<T> elements) {
         int index = getIndex(offset);
         validateWithIndex(index, offset);
 
@@ -524,12 +522,12 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     @Override
-    public P indexOf(@NotNull Predicate<P> predicate) {
+    public P indexOf(Predicate<P> predicate) {
         return indexOf(0, predicate);
     }
 
     @Override
-    public P indexOf(int offset, @NotNull Predicate<P> predicate) {
+    public P indexOf(int offset, Predicate<P> predicate) {
         int index = getIndex(offset);
         validateWithIndex(index, offset);
 
@@ -560,12 +558,12 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     @Override
-    public P lastIndexOf(@NotNull Predicate<P> predicate) {
+    public P lastIndexOf(Predicate<P> predicate) {
         return lastIndexOf(0, predicate);
     }
 
     @Override
-    public P lastIndexOf(int offset, @NotNull Predicate<P> predicate) {
+    public P lastIndexOf(int offset, Predicate<P> predicate) {
         int index = getIndex(offset);
         validateWithIndex(index, offset);
 

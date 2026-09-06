@@ -15,8 +15,7 @@ import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -59,7 +58,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     @Override
-    public void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
+    public void addExplicitId(Node node, @Nullable String id, NodeFormatterContext context, MarkdownWriter markdown) {
         if (id != null && node instanceof Heading) {
             // if our id != generated id we add explicit attributes if none are found already
             if (context.getRenderPurpose() == TRANSLATED) {
@@ -96,7 +95,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     @Override
-    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         // reset storage for attribute keys and attributes map
         if (context.isTransformingText()) {
             context.getTranslationStore().set(ATTRIBUTE_TRANSLATION_ID, 0);
@@ -666,9 +665,8 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new AttributesNodeFormatter(options);
         }
     }

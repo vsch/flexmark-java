@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Map;
@@ -9,10 +8,10 @@ import java.util.Map;
 public interface DataHolder extends MutableDataSetter {
     DataHolder NULL = new DataSet();
 
-    @NotNull Map<? extends DataKeyBase<?>, Object> getAll();
-    @NotNull Collection<? extends DataKeyBase<?>> getKeys();
+    Map<? extends DataKeyBase<?>, Object> getAll();
+    Collection<? extends DataKeyBase<?>> getKeys();
 
-    boolean contains(@NotNull DataKeyBase<?> key);
+    boolean contains(DataKeyBase<?> key);
 
     /**
      * @param key data key
@@ -21,12 +20,12 @@ public interface DataHolder extends MutableDataSetter {
      */
     @Deprecated
     @Nullable
-    default <T> T get(@NotNull DataKey<T> key) {
+    default <T> T get(DataKey<T> key) {
         return key.get(this);
     }
 
     @Override
-    default @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    default MutableDataHolder setIn(MutableDataHolder dataHolder) {
         return dataHolder.setAll(this);
     }
 
@@ -43,12 +42,11 @@ public interface DataHolder extends MutableDataSetter {
      * @param factory factory taking this data holder and computing/providing default value
      * @return object value for the key
      */
-    Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory);
+    Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory);
 
-    @NotNull MutableDataHolder toMutable();
-    @NotNull DataHolder toImmutable();
+    MutableDataHolder toMutable();
+    DataHolder toImmutable();
 
-    @NotNull
     default DataSet toDataSet() {
         return this instanceof DataSet ? (DataSet) this : this instanceof MutableDataHolder ? new MutableDataSet(this) : new DataSet(this);
     }

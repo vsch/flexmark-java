@@ -13,8 +13,7 @@ import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,12 +26,12 @@ public class PegdownCustomLinkResolverOptions {
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
             htmlRendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
             htmlRendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
@@ -49,9 +48,8 @@ public class PegdownCustomLinkResolverOptions {
             // context.getHtmlOptions();
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
             // you can also set/clear/modify attributes through ResolvedLink.getAttributes() and ResolvedLink.getNonNullAttributes()
 
             if (node instanceof WikiImage) {
@@ -90,9 +88,8 @@ public class PegdownCustomLinkResolverOptions {
                 return false;
             }
 
-            @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+            public LinkResolver apply(LinkResolverBasicContext context) {
                 return new CustomLinkResolver(context);
             }
         }
@@ -100,9 +97,8 @@ public class PegdownCustomLinkResolverOptions {
 
     static class CustomLinkRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomLinkRenderer();
             }
 

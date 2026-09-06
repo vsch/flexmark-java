@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -202,8 +201,8 @@ public interface IPosition<T, P extends IPosition<T, P>> extends IPositionHolder
      * @return true
      */
     boolean add(int offset, T element);
-    boolean addAll(@NotNull Collection<T> elements);
-    boolean addAll(int offset, @NotNull Collection<T> elements);
+    boolean addAll(Collection<T> elements);
+    boolean addAll(int offset, Collection<T> elements);
 
     /**
      * @return removed current element, throws IllegalStateException if current index is not valid or after last element of list
@@ -232,14 +231,14 @@ public interface IPosition<T, P extends IPosition<T, P>> extends IPositionHolder
     // test isValidPosition() to see if actual element was found
     P indexOf(T o);
     P indexOf(int offset, T o);
-    P indexOf(@NotNull Predicate<P> predicate);
-    P indexOf(int offset, @NotNull Predicate<P> predicate);
+    P indexOf(Predicate<P> predicate);
+    P indexOf(int offset, Predicate<P> predicate);
 
     // these return position relative to current index and operate on elements before the current index
     // if not found returned position will point to index after the last element. ie. getIndex() == size()
     // test isValidPosition() to see if actual element was found
     P lastIndexOf(T o);
-    P lastIndexOf(@NotNull Predicate<P> predicate);
+    P lastIndexOf(Predicate<P> predicate);
     P lastIndexOf(int offset, T o);
-    P lastIndexOf(int offset, @NotNull Predicate<P> predicate);
+    P lastIndexOf(int offset, Predicate<P> predicate);
 }

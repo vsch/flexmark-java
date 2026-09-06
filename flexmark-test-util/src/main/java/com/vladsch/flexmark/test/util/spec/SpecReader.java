@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.misc.Pair;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,8 +29,8 @@ public class SpecReader {
     final public static String SECTION_TEST_BREAK = "…";
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
-    protected final @NotNull InputStream inputStream;
-    protected final @NotNull ResourceLocation resourceLocation;
+    protected final InputStream inputStream;
+    protected final ResourceLocation resourceLocation;
     protected final boolean compoundSections;
     protected final List<SpecExample> examples = new ArrayList<>();
 
@@ -50,28 +49,24 @@ public class SpecReader {
     protected int contentLineNumber = 0;
     protected int commentLineNumber = 0;
 
-    public SpecReader(@NotNull InputStream stream, @NotNull ResourceLocation location, boolean compoundSections) {
+    public SpecReader(InputStream stream, ResourceLocation location, boolean compoundSections) {
         this.inputStream = stream;
         this.resourceLocation = location;
         this.compoundSections = compoundSections;
     }
 
-    @NotNull
     public String getFileUrl() {
         return resourceLocation.getFileUrl();
     }
 
-    @NotNull
     public ResourceLocation getResourceLocation() {
         return resourceLocation;
     }
 
-    @NotNull
     public List<SpecExample> getExamples() {
         return examples;
     }
 
-    @NotNull
     public List<String> getExamplesSourceAsString() {
         List<String> result = new ArrayList<>();
         for (SpecExample example : examples) {
@@ -80,20 +75,20 @@ public class SpecReader {
         return result;
     }
 
-    public static @NotNull SpecReader create(@NotNull ResourceLocation location, boolean compoundSections) {
+    public static SpecReader create(ResourceLocation location, boolean compoundSections) {
         return create(location, (stream, location1) -> new SpecReader(stream, location1, compoundSections));
     }
 
-    public static @NotNull <S extends SpecReader> S create(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
+    public static <S extends SpecReader> S create(ResourceLocation location, SpecReaderFactory<S> readerFactory) {
         InputStream stream = location.getResourceInputStream();
         return readerFactory.create(stream, location);
     }
 
-    public static @NotNull SpecReader createAndReadExamples(@NotNull ResourceLocation location, boolean compoundSections) {
+    public static SpecReader createAndReadExamples(ResourceLocation location, boolean compoundSections) {
         return createAndReadExamples(location, (stream, location1) -> new SpecReader(stream, location1, compoundSections));
     }
 
-    public static @NotNull <S extends SpecReader> S createAndReadExamples(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
+    public static <S extends SpecReader> S createAndReadExamples(ResourceLocation location, SpecReaderFactory<S> readerFactory) {
         S reader = create(location, readerFactory);
         reader.readExamples();
         return reader;
@@ -125,7 +120,7 @@ public class SpecReader {
 
     }
 
-    protected void addSpecExample(@NotNull SpecExample example) {
+    protected void addSpecExample(SpecExample example) {
         examples.add(example);
     }
 

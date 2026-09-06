@@ -7,7 +7,6 @@ import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for jekyll_front_matters
@@ -30,7 +29,7 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -45,7 +44,7 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new JekyllFrontMatterNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

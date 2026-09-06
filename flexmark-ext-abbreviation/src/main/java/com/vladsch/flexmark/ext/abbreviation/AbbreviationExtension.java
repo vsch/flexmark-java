@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for adding abbreviations to markdown
@@ -51,7 +50,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -80,7 +79,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new AbbreviationNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

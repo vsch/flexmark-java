@@ -22,8 +22,7 @@ import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -200,7 +199,6 @@ public class Formatter implements IRender {
         return new TranslationHandlerImpl(options, idGeneratorFactory);
     }
 
-    @NotNull
     @Override
     public DataHolder getOptions() {
         return options;
@@ -233,7 +231,7 @@ public class Formatter implements IRender {
      * @param node   node to render
      * @param output appendable to use for the output
      */
-    public void render(@NotNull Node node, @NotNull Appendable output) {
+    public void render(Node node, Appendable output) {
         render(node, output, MAX_TRAILING_BLANK_LINES.get(options));
     }
 
@@ -246,7 +244,7 @@ public class Formatter implements IRender {
      * @param output                appendable to which to render the resulting text
      * @param maxTrailingBlankLines max trailing blank lines in output, -1 means no last line EOL
      */
-    public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
+    public void render(Node node, Appendable output, int maxTrailingBlankLines) {
         // NOTE: output to MarkdownWriter is only used to get builder if output is LineAppendable or ISequenceBuilder
         MarkdownWriter markdown = new MarkdownWriter(output, FORMAT_FLAGS.get(options));
         MainNodeFormatter renderer = new MainNodeFormatter(options, markdown, node.getDocument(), null);
@@ -269,8 +267,7 @@ public class Formatter implements IRender {
      * @param document the root node
      * @return the formatted markdown
      */
-    @NotNull
-    public String render(@NotNull Node document) {
+    public String render(Node document) {
         StringBuilder sb = new StringBuilder();
         render(document, sb);
         return sb.toString();
@@ -429,13 +426,12 @@ public class Formatter implements IRender {
         /**
          * @return the configured {@link Formatter}
          */
-        @NotNull
         public Formatter build() {
             return new Formatter(this);
         }
 
         @Override
-        protected void removeApiPoint(@NotNull Object apiPoint) {
+        protected void removeApiPoint(Object apiPoint) {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeFormatterFactory) this.nodeFormatterFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
@@ -446,7 +442,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected void preloadExtension(@NotNull Extension extension) {
+        protected void preloadExtension(Extension extension) {
             if (extension instanceof FormatterExtension) {
                 FormatterExtension formatterExtension = (FormatterExtension) extension;
                 formatterExtension.rendererOptions(this);
@@ -454,7 +450,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        protected boolean loadExtension(@NotNull Extension extension) {
+        protected boolean loadExtension(Extension extension) {
             if (extension instanceof FormatterExtension) {
                 FormatterExtension formatterExtension = (FormatterExtension) extension;
                 formatterExtension.extend(this);
@@ -485,8 +481,7 @@ public class Formatter implements IRender {
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
          * @return {@code this}
          */
-        @NotNull
-        public Builder htmlIdGeneratorFactory(@NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
+        public Builder htmlIdGeneratorFactory(HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
             //noinspection VariableNotUsedInsideIf
             if (this.htmlIdGeneratorFactory != null) {
                 throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
@@ -506,7 +501,7 @@ public class Formatter implements IRender {
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        public @NotNull Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
+        public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
             addExtensionApiPoint(linkResolverFactory);
             return this;
@@ -553,7 +548,7 @@ public class Formatter implements IRender {
         final private List<PhasedNodeFormatter> phasedFormatters;
         final private Set<FormattingPhase> renderingPhases;
         final private DataHolder options;
-        private @NotNull final Boolean isFormatControlEnabled;
+        private final Boolean isFormatControlEnabled;
         private FormattingPhase phase;
         final TranslationHandler translationHandler;
         final private LinkResolver[] linkResolvers;
@@ -676,15 +671,13 @@ public class Formatter implements IRender {
             }
         }
 
-        @NotNull
         @Override
-        public String encodeUrl(@NotNull CharSequence url) {
+        public String encodeUrl(CharSequence url) {
             return String.valueOf(url);
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
             return resolveLink(this, linkType, url, attributes);
         }
 
@@ -712,13 +705,12 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
+        public void addExplicitId(Node node, @Nullable String id, NodeFormatterContext context, MarkdownWriter markdown) {
             if (id != null && explicitAttributeIdProvider != null) {
                 explicitAttributeIdProvider.addExplicitId(node, id, context, markdown);
             }
         }
 
-        @NotNull
         @Override
         public RenderPurpose getRenderPurpose() {
             return translationHandler == null ? RenderPurpose.FORMAT : translationHandler.getRenderPurpose();
@@ -729,33 +721,29 @@ public class Formatter implements IRender {
             return translationHandler != null && translationHandler.isTransformingText();
         }
 
-        @NotNull
         @Override
-        public CharSequence transformNonTranslating(CharSequence prefix, @NotNull CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
+        public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
             return translationHandler == null ? nonTranslatingText : translationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
         }
 
-        @NotNull
         @Override
-        public CharSequence transformTranslating(CharSequence prefix, @NotNull CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
+        public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
             return translationHandler == null ? translatingText : translationHandler.transformTranslating(prefix, translatingText, suffix, suffix2);
         }
 
-        @NotNull
         @Override
-        public CharSequence transformAnchorRef(@NotNull CharSequence pageRef, @NotNull CharSequence anchorRef) {
+        public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
             return translationHandler == null ? anchorRef : translationHandler.transformAnchorRef(pageRef, anchorRef);
         }
 
         @Override
-        public void postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
+        public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
             if (translationHandler != null) translationHandler.postProcessNonTranslating(postProcessor, scope);
             else scope.run();
         }
 
-        @NotNull
         @Override
-        public <T> T postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
+        public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
             if (translationHandler != null) return translationHandler.postProcessNonTranslating(postProcessor, scope);
             else return scope.get();
         }
@@ -776,7 +764,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void translatingSpan(@NotNull TranslatingSpanRender render) {
+        public void translatingSpan(TranslatingSpanRender render) {
             if (translationHandler != null) {
                 translationHandler.translatingSpan(render);
             } else {
@@ -785,7 +773,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
+        public void nonTranslatingSpan(TranslatingSpanRender render) {
             if (translationHandler != null) {
                 translationHandler.nonTranslatingSpan(render);
             } else {
@@ -794,7 +782,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render) {
+        public void translatingRefTargetSpan(@Nullable Node target, TranslatingSpanRender render) {
             if (translationHandler != null) {
                 translationHandler.translatingRefTargetSpan(target, render);
             } else {
@@ -802,7 +790,6 @@ public class Formatter implements IRender {
             }
         }
 
-        @NotNull
         @Override
         public MutableDataHolder getTranslationStore() {
             if (translationHandler != null) {
@@ -813,7 +800,7 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void customPlaceholderFormat(@NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render) {
+        public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
             if (translationHandler != null) {
                 translationHandler.customPlaceholderFormat(generator, render);
             } else {
@@ -821,41 +808,38 @@ public class Formatter implements IRender {
             }
         }
 
-        @NotNull
         @Override
         public Node getCurrentNode() {
             return renderingNode;
         }
 
         @Override
-        public @NotNull DataHolder getOptions() {
+        public DataHolder getOptions() {
             return options;
         }
 
-        @NotNull
         @Override
         public FormatterOptions getFormatterOptions() {
             return formatterOptions;
         }
 
-        @NotNull
         @Override
         public Document getDocument() {
             return document;
         }
 
         @Override
-        public @NotNull CharPredicate getBlockQuoteLikePrefixPredicate() {
+        public CharPredicate getBlockQuoteLikePrefixPredicate() {
             return blockQuoteLikePredicate;
         }
 
         @Override
-        public @NotNull BasedSequence getBlockQuoteLikePrefixChars() {
+        public BasedSequence getBlockQuoteLikePrefixChars() {
             return blockQuoteLikeChars;
         }
 
         @Override
-        public @NotNull TrackedOffsetList getTrackedOffsets() {
+        public TrackedOffsetList getTrackedOffsets() {
             return trackedOffsets;
         }
 
@@ -865,61 +849,56 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public @NotNull BasedSequence getTrackedSequence() {
+        public BasedSequence getTrackedSequence() {
             return trackedSequence;
         }
 
-        @NotNull
         @Override
         public FormattingPhase getFormattingPhase() {
             return phase;
         }
 
         @Override
-        public void render(@NotNull Node node) {
+        public void render(Node node) {
             renderNode(node, this);
         }
 
-        @NotNull
         @Override
-        final public Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes) {
+        final public Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
-        @NotNull
         @Override
-        final public Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes) {
+        final public Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
-        @NotNull
         @Override
-        final public Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes) {
-            return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
-        }
-
-        @NotNull
-        @Override
-        final public Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes) {
+        final public Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
         @Override
-        public @NotNull NodeFormatterContext getSubContext() {
+        final public Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
+            return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
+        }
+
+        @Override
+        public NodeFormatterContext getSubContext() {
             return getSubContextRaw(null, markdown.getBuilder());
         }
 
         @Override
-        public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options) {
+        public NodeFormatterContext getSubContext(@Nullable DataHolder options) {
             return getSubContextRaw(options, markdown.getBuilder());
         }
 
         @Override
-        public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+        public NodeFormatterContext getSubContext(@Nullable DataHolder options, ISequenceBuilder<?, ?> builder) {
             return getSubContextRaw(options, builder);
         }
 
-        NodeFormatterContext getSubContextRaw(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+        NodeFormatterContext getSubContextRaw(@Nullable DataHolder options, ISequenceBuilder<?, ?> builder) {
             MarkdownWriter writer = new MarkdownWriter(builder, getMarkdown().getOptions());
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
@@ -1004,7 +983,7 @@ public class Formatter implements IRender {
             }
         }
 
-        public void renderChildren(@NotNull Node parent) {
+        public void renderChildren(Node parent) {
             renderChildrenNode(parent, this);
         }
 
@@ -1076,53 +1055,44 @@ public class Formatter implements IRender {
                 myFormatterOptions = new FormatterOptions(myOptions);
             }
 
-            @NotNull
             @Override
             public MutableDataHolder getTranslationStore() {
                 return myMainNodeRenderer.getTranslationStore();
             }
 
-            @NotNull
             @Override
-            final public Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes) {
+            final public Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
 
-            @NotNull
             @Override
-            final public Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes) {
+            final public Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
                 return myMainNodeRenderer.nodesOfType(classes);
             }
 
-            @NotNull
             @Override
-            final public Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes) {
-                return myMainNodeRenderer.reversedNodesOfType(classes);
-            }
-
-            @NotNull
-            @Override
-            final public Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes) {
+            final public Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 
             @Override
-            public @NotNull DataHolder getOptions() {return myOptions;}
+            final public Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
+                return myMainNodeRenderer.reversedNodesOfType(classes);
+            }
 
-            @NotNull
+            @Override
+            public DataHolder getOptions() {return myOptions;}
+
             @Override
             public FormatterOptions getFormatterOptions() {return myFormatterOptions;}
 
-            @NotNull
             @Override
             public Document getDocument() {return myMainNodeRenderer.getDocument();}
 
             @Override
-            @NotNull
             public CharPredicate getBlockQuoteLikePrefixPredicate() {return myMainNodeRenderer.getBlockQuoteLikePrefixPredicate();}
 
             @Override
-            @NotNull
             public BasedSequence getBlockQuoteLikePrefixChars() {return myMainNodeRenderer.getBlockQuoteLikePrefixChars();}
 
             /**
@@ -1131,7 +1101,7 @@ public class Formatter implements IRender {
              * @return empty lise
              */
             @Override
-            public @NotNull TrackedOffsetList getTrackedOffsets() {
+            public TrackedOffsetList getTrackedOffsets() {
                 return TrackedOffsetList.EMPTY_LIST;
             }
 
@@ -1141,20 +1111,18 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public @NotNull BasedSequence getTrackedSequence() {
+            public BasedSequence getTrackedSequence() {
                 return myMainNodeRenderer.getTrackedSequence();
             }
 
-            @NotNull
             @Override
             public FormattingPhase getFormattingPhase() {return myMainNodeRenderer.getFormattingPhase();}
 
             @Override
-            public void render(@NotNull Node node) {
+            public void render(Node node) {
                 myMainNodeRenderer.renderNode(node, this);
             }
 
-            @NotNull
             @Override
             public Node getCurrentNode() {
                 return this.renderingNode;
@@ -1166,17 +1134,17 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public @NotNull NodeFormatterContext getSubContext() {
+            public NodeFormatterContext getSubContext() {
                 return getSubContext(null, markdown.getBuilder());
             }
 
             @Override
-            public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options) {
+            public NodeFormatterContext getSubContext(@Nullable DataHolder options) {
                 return getSubContext(options, markdown.getBuilder());
             }
 
             @Override
-            public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+            public NodeFormatterContext getSubContext(@Nullable DataHolder options, ISequenceBuilder<?, ?> builder) {
                 MarkdownWriter htmlWriter = new MarkdownWriter(builder, this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
@@ -1184,15 +1152,13 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public void renderChildren(@NotNull Node parent) {
+            public void renderChildren(Node parent) {
                 myMainNodeRenderer.renderChildrenNode(parent, this);
             }
 
-            @NotNull
             @Override
             public MarkdownWriter getMarkdown() { return markdown; }
 
-            @NotNull
             @Override
             public RenderPurpose getRenderPurpose() {
                 return myMainNodeRenderer.getRenderPurpose();
@@ -1203,70 +1169,63 @@ public class Formatter implements IRender {
                 return myMainNodeRenderer.isTransformingText();
             }
 
-            @NotNull
             @Override
-            public CharSequence transformNonTranslating(CharSequence prefix, @NotNull CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
+            public CharSequence transformNonTranslating(CharSequence prefix, CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
                 return myMainNodeRenderer.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
             }
 
-            @NotNull
             @Override
-            public CharSequence transformTranslating(CharSequence prefix, @NotNull CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
+            public CharSequence transformTranslating(CharSequence prefix, CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
                 return myMainNodeRenderer.transformTranslating(prefix, translatingText, suffix, suffix2);
             }
 
-            @NotNull
             @Override
-            public CharSequence transformAnchorRef(@NotNull CharSequence pageRef, @NotNull CharSequence anchorRef) {
+            public CharSequence transformAnchorRef(CharSequence pageRef, CharSequence anchorRef) {
                 return myMainNodeRenderer.transformAnchorRef(pageRef, anchorRef);
             }
 
             @Override
-            public void translatingSpan(@NotNull TranslatingSpanRender render) {
+            public void translatingSpan(TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingSpan(render);
             }
 
             @Override
-            public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
+            public void nonTranslatingSpan(TranslatingSpanRender render) {
                 myMainNodeRenderer.nonTranslatingSpan(render);
             }
 
             @Override
-            public void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render) {
+            public void translatingRefTargetSpan(@Nullable Node target, TranslatingSpanRender render) {
                 myMainNodeRenderer.translatingRefTargetSpan(target, render);
             }
 
             @Override
-            public void customPlaceholderFormat(@NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render) {
+            public void customPlaceholderFormat(TranslationPlaceholderGenerator generator, TranslatingSpanRender render) {
                 myMainNodeRenderer.customPlaceholderFormat(generator, render);
             }
 
-            @NotNull
             @Override
-            public String encodeUrl(@NotNull CharSequence url) {
+            public String encodeUrl(CharSequence url) {
                 return myMainNodeRenderer.encodeUrl(url);
             }
 
-            @NotNull
             @Override
-            public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
                 return myMainNodeRenderer.resolveLink(this, linkType, url, null);
             }
 
-            @NotNull
             @Override
-            public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
                 return myMainNodeRenderer.resolveLink(this, linkType, url, attributes);
             }
 
             @Override
-            public void postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
+            public void postProcessNonTranslating(Function<String, CharSequence> postProcessor, Runnable scope) {
                 myMainNodeRenderer.postProcessNonTranslating(postProcessor, scope);
             }
 
-            @NotNull
             @Override
-            public <T> T postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
+            public <T> T postProcessNonTranslating(Function<String, CharSequence> postProcessor, Supplier<T> scope) {
                 return myMainNodeRenderer.postProcessNonTranslating(postProcessor, scope);
             }
 
@@ -1281,7 +1240,7 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
+            public void addExplicitId(Node node, @Nullable String id, NodeFormatterContext context, MarkdownWriter markdown) {
                 myMainNodeRenderer.addExplicitId(node, id, context, markdown);
             }
 

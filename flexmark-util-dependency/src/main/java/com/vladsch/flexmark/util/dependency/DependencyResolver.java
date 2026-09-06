@@ -2,14 +2,13 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import com.vladsch.flexmark.util.misc.Ref;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
 
 public class DependencyResolver {
-    public static <D extends Dependent> @NotNull List<D> resolveFlatDependencies(@NotNull List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {
+    public static <D extends Dependent> List<D> resolveFlatDependencies(List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {
         List<List<D>> list = resolveDependencies(dependentsList, itemSorter, classExtractor);
         if (list.isEmpty()) {
             return Collections.emptyList();
@@ -29,7 +28,7 @@ public class DependencyResolver {
         }
     }
 
-    public static <D extends Dependent> @NotNull List<List<D>> resolveDependencies(@NotNull List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {
+    public static <D extends Dependent> List<List<D>> resolveDependencies(List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {
         if (dependentsList.size() == 0) {
             return Collections.emptyList();
         } else if (dependentsList.size() == 1) {

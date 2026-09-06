@@ -6,8 +6,7 @@ import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -20,15 +19,15 @@ public class ResizableImageInlineParserExtension implements InlineParserExtensio
     }
 
     @Override
-    public void finalizeDocument(@NotNull InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
     }
 
     @Override
-    public void finalizeBlock(@NotNull InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
     }
 
     @Override
-    public boolean parse(@NotNull LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         int index = inlineParser.getIndex();
         char c = inlineParser.getInput().safeCharAt(index + 1);
         if (c == '[') {
@@ -56,7 +55,6 @@ public class ResizableImageInlineParserExtension implements InlineParserExtensio
             return null;
         }
 
-        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "!";
@@ -68,9 +66,8 @@ public class ResizableImageInlineParserExtension implements InlineParserExtensio
             return null;
         }
 
-        @NotNull
         @Override
-        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new ResizableImageInlineParserExtension(lightInlineParser);
         }
 

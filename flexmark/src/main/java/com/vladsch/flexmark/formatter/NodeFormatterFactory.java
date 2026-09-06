@@ -2,8 +2,7 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public interface NodeFormatterFactory extends Dependent {
      * @param options the context for rendering (normally passed on to the node renderer)
      * @return a node renderer
      */
-    @NotNull NodeFormatter create(@NotNull DataHolder options);
+    NodeFormatter create(DataHolder options);
 
     /**
      * @return null or a list of processors that must be executed before calling this one

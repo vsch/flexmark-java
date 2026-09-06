@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -11,7 +10,7 @@ public interface InlineParserExtensionFactory extends Function<LightInlineParser
      *
      * @return set of characters for which this processor should be invoked
      */
-    @NotNull CharSequence getCharacters();
+    CharSequence getCharacters();
 
     /**
      * Create a paragraph pre processor for the document
@@ -19,5 +18,5 @@ public interface InlineParserExtensionFactory extends Function<LightInlineParser
      * @param inlineParser inline parser instance
      * @return inline parser extension
      */
-    @NotNull InlineParserExtension apply(@NotNull LightInlineParser inlineParser);
+    InlineParserExtension apply(LightInlineParser inlineParser);
 }

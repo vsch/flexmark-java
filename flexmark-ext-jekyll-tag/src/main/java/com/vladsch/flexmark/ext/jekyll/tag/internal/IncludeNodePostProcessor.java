@@ -16,8 +16,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.dependency.FirstDependent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -34,17 +33,17 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
     final private boolean embedIncludedContent;
     final private Map<String, String> includedHtml;
 
-    public IncludeNodePostProcessor(@NotNull Document document) {
+    public IncludeNodePostProcessor(Document document) {
         this.document = document;
         parser = Parser.builder(document).build();
         context = new LinkResolverBasicContext() {
             @Override
-            public @NotNull DataHolder getOptions() {
+            public DataHolder getOptions() {
                 return document;
             }
 
             @Override
-            public @NotNull Document getDocument() {
+            public Document getDocument() {
                 return document;
             }
         };
@@ -69,7 +68,7 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
         if (node instanceof JekyllTag && !includedDocuments.containsKey(node)) {
             JekyllTag jekyllTag = (JekyllTag) node;
             //noinspection EqualsBetweenInconvertibleTypes
@@ -157,9 +156,8 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
             return Collections.singleton(FirstDependent.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new IncludeNodePostProcessor(document);
         }
     }

@@ -9,7 +9,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 public class ComboSpecExampleSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/ext_spec_example_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(SpecExampleExtension.SPEC_EXAMPLE_BREAK, SpecReader.EXAMPLE_TEST_BREAK)
             .set(SpecExampleExtension.SPEC_SECTION_BREAK, SpecReader.SECTION_TEST_BREAK)
@@ -34,7 +33,7 @@ public class ComboSpecExampleSpecTest extends RendererSpecTest {
         optionsMap.put("as-def-list", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.DEFINITION_LIST));
         optionsMap.put("as-fenced-code", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.FENCED_CODE));
     }
-    public ComboSpecExampleSpecTest(@NotNull SpecExample example) {
+    public ComboSpecExampleSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

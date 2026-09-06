@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.lang.reflect.Array;
 import java.util.BitSet;
@@ -143,7 +142,7 @@ public class ArrayUtils {
         return -1;
     }
 
-    public static int[] toArray(@NotNull BitSet bitSet) {
+    public static int[] toArray(BitSet bitSet) {
         int i = bitSet.cardinality();
         int[] bits = new int[i];
 
