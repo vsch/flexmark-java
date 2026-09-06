@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 
 public class TwoWayHashMap<F, S> {
-    private @NotNull HashMap<F, S> fToSMap = new HashMap<>();
-    private @NotNull HashMap<S, F> sToFMap = new HashMap<>();
+    private HashMap<F, S> fToSMap = new HashMap<>();
+    private HashMap<S, F> sToFMap = new HashMap<>();
 
     public void add(@Nullable F f, @Nullable S s) {
         fToSMap.put(f, s);

@@ -7,19 +7,18 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.util.List;
 
 public class ComboPegdownSpecTest extends ComboSpecTestCase {
     final private static String SPEC_RESOURCE = "/pegdown_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(PegdownParser.PEGDOWN_EXTENSIONS, Extensions.FENCED_CODE_BLOCKS);
 
-    public ComboPegdownSpecTest(@NotNull SpecExample example) {
+    public ComboPegdownSpecTest(SpecExample example) {
         super(example, null, OPTIONS);
     }
 
@@ -29,7 +28,7 @@ public class ComboPegdownSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combineOptions = aggregate(OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combineOptions, new PegdownParser(combineOptions), new PegdownRenderer(combineOptions), true);
     }

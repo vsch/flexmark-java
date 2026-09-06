@@ -7,8 +7,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -140,7 +139,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     }
 
     @Override
-    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
         if (context.isTransformingText() && myReferenceMapKey != null) {
             if (context.getRenderPurpose() == TRANSLATION_SPANS) {

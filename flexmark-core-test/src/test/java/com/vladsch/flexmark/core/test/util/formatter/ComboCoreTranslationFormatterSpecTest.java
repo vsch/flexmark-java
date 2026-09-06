@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.*;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     final private static String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
             Parser.REFERENCES_KEEP,
@@ -61,7 +60,7 @@ public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterS
         optionsMap.put("explicit-links-at-start", new MutableDataSet().set(Formatter.KEEP_EXPLICIT_LINKS_AT_START, true));
         optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
     }
-    public ComboCoreTranslationFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboCoreTranslationFormatterSpecTest(SpecExample example) {
         super(example, optionsMap);
     }
 

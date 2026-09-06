@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface MutableDataHolder extends DataHolder, MutableDataSetter {
     /**
@@ -13,12 +12,12 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @deprecated use key.get(dataHolder) instead, which will do the same thing an carries nullable information for the data
      */
     @Deprecated
-    default <T> T get(@NotNull DataKey<T> key) {
+    default <T> T get(DataKey<T> key) {
         return key.get(this);
     }
 
     @Override
-    Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory);
+    Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory);
 
     /**
      * Store the given value for the key
@@ -28,7 +27,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param value value to store
      * @return mutable data holder for chained calls
      */
-    @NotNull <T> MutableDataHolder set(@NotNull DataKey<T> key, @NotNull T value);
+    <T> MutableDataHolder set(DataKey<T> key, T value);
 
     /**
      * Store the given value for the key
@@ -38,7 +37,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param value value to store
      * @return mutable data holder for chained calls
      */
-    @NotNull <T> MutableDataHolder set(@NotNull NullableDataKey<T> key, @Nullable T value);
+    <T> MutableDataHolder set(NullableDataKey<T> key, @Nullable T value);
 
     /**
      * Remove the stored value for the key, used to force to default or to force recompute
@@ -46,7 +45,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param key data key to remove
      * @return mutable data holder for chained calls
      */
-    @NotNull MutableDataHolder remove(@NotNull DataKeyBase<?> key);
+    MutableDataHolder remove(DataKeyBase<?> key);
 
     /**
      * Store the given value for the key
@@ -54,7 +53,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param dataSetter data setter which will set values
      * @return mutable data holder for chained calls
      */
-    @NotNull MutableDataHolder setFrom(@NotNull MutableDataSetter dataSetter);
+    MutableDataHolder setFrom(MutableDataSetter dataSetter);
 
     /**
      * Copy all values from one data holder to this data holder
@@ -62,7 +61,7 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param other data holder from which to copy all values
      * @return mutable data holder for chained calls
      */
-    @NotNull MutableDataHolder setAll(@NotNull DataHolder other);
+    MutableDataHolder setAll(DataHolder other);
 
     /**
      * Set options in given mutable data holder
@@ -70,14 +69,13 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
      * @param dataHolder data holder where to copy options from this data holder
      * @return dataHolder
      */
-    @NotNull
     @Override
-    MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder);
+    MutableDataHolder setIn(MutableDataHolder dataHolder);
 
     /**
      * clear all options out of the data set
      *
      * @return mutable data holder for chained calls
      */
-    @NotNull MutableDataHolder clear();
+    MutableDataHolder clear();
 }

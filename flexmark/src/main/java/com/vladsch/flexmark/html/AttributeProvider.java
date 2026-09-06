@@ -4,7 +4,6 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension point for adding/changing attributes on the primary HTML tag for a node.
@@ -32,5 +31,5 @@ public interface AttributeProvider {
      *                   AttributablePart.ID and generic AttributablePart.NODE, extensions are free to define more
      * @param attributes the attributes, with any default attributes already set in the map
      */
-    void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes);
+    void setAttributes(Node node, AttributablePart part, MutableAttributes attributes);
 }

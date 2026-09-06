@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 class HtmlConverter extends IParseBase {
     final static public DataKey<Integer> HTML_EXTENSIONS = new DataKey<>("HTML_EXTENSIONS", 0
@@ -53,7 +52,6 @@ class HtmlConverter extends IParseBase {
             myRootNode = rootNode;
         }
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return Node.EMPTY_SEGMENTS;
@@ -61,7 +59,7 @@ class HtmlConverter extends IParseBase {
     }
 
     @Override
-    public @NotNull Node parse(@NotNull BasedSequence input) {
+    public Node parse(BasedSequence input) {
         // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
         String rootNode = FlexmarkHtmlConverter.builder(getOptions()).build().convert(input.toString(), 1);
         return new RootNode(rootNode);

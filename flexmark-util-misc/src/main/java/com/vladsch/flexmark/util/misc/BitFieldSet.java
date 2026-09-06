@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.AbstractSet;
@@ -34,7 +33,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
 
         @SuppressWarnings("rawtypes")
-        @NotNull
         public static <E extends Enum<E>> Enum[] getUniverseSlow(Class<E> elementType) {
             assert (elementType.isEnum());
             Enum[] cachedUniverse = enumUniverseMap.get(elementType);
@@ -521,7 +519,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      *
      * @return an iterator over the elements contained in this set
      */
-    @NotNull
     public Iterator<E> iterator() {
         return bitMasks.length == totalBits ? new EnumBitSetIterator<>() : new EnumBitFieldIterator<>();
     }
@@ -778,7 +775,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param <T>       enum type
      * @return bit enum set
      */
-    public static <T extends Enum<T>> BitFieldSet<T> of(@NotNull Class<T> enumClass, long mask) {
+    public static <T extends Enum<T>> BitFieldSet<T> of(Class<T> enumClass, long mask) {
         BitFieldSet<T> optionSet = BitFieldSet.noneOf(enumClass);
         optionSet.orMask(mask);
         return optionSet;
@@ -1267,7 +1264,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @throws NullPointerException if any of the specified elements are null,
      *                              or if rest is null
      */
-    public static <E extends Enum<E>> BitFieldSet<E> of(@NotNull Class<E> declaringClass, E[] rest) {
+    public static <E extends Enum<E>> BitFieldSet<E> of(Class<E> declaringClass, E[] rest) {
         BitFieldSet<E> result = noneOf(declaringClass);
         for (E e : rest) { result.add(e); }
         return result;

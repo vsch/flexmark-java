@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*ListIterator<P>,*/ IPositionListener {
 
@@ -68,7 +67,7 @@ public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*L
      *
      * @return position anchor
      */
-    @NotNull PositionAnchor getAnchor();
+    PositionAnchor getAnchor();
 
     /**
      * Get a new position with requested anchor from this position
@@ -85,7 +84,7 @@ public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*L
      */
     // FIX: remove this, use previous() and next() to get the right anchor type and index, this should never be used.
     //   positions need to be created with the right anchor or need to add isValidElement to this method for completion
-    @NotNull P withAnchor(@NotNull PositionAnchor anchor);
+    P withAnchor(PositionAnchor anchor);
 
     /**
      * Get previous index position relative to current,

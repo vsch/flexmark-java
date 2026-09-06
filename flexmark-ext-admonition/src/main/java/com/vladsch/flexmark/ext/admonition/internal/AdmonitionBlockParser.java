@@ -8,8 +8,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -85,7 +84,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+        public @Nullable SpecialLeadInHandler getLeadInHandler(DataHolder options) {
             return AdmonitionLeadInHandler.HANDLER;
         }
 
@@ -94,9 +93,8 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
             return false;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }
@@ -105,7 +103,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         final static SpecialLeadInHandler HANDLER = new AdmonitionLeadInHandler();
 
         @Override
-        public boolean escape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+        public boolean escape(BasedSequence sequence, @Nullable DataHolder options, Consumer<CharSequence> consumer) {
             if ((sequence.length() == 3 || sequence.length() == 4 && sequence.charAt(3) == '+') && (sequence.startsWith("???") || sequence.startsWith("!!!"))) {
                 consumer.accept("\\");
                 consumer.accept(sequence);
@@ -115,7 +113,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public boolean unEscape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+        public boolean unEscape(BasedSequence sequence, @Nullable DataHolder options, Consumer<CharSequence> consumer) {
             if ((sequence.length() == 4 || sequence.length() == 5 && sequence.charAt(4) == '+') && (sequence.startsWith("\\???") || sequence.startsWith("\\!!!"))) {
                 consumer.accept(sequence.subSequence(1));
                 return true;

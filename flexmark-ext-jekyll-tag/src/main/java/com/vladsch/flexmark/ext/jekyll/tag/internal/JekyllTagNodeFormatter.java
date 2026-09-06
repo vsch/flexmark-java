@@ -8,8 +8,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,7 +27,7 @@ public class JekyllTagNodeFormatter implements PhasedNodeFormatter {
     }
 
     @Override
-    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
+    public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
         this.embedIncludedContent = JekyllTagExtension.EMBED_INCLUDED_CONTENT.get(document);
     }
 
@@ -98,9 +97,8 @@ public class JekyllTagNodeFormatter implements PhasedNodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new JekyllTagNodeFormatter(options);
         }
     }

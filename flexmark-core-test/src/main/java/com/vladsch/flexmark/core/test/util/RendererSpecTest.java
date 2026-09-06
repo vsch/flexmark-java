@@ -8,8 +8,7 @@ import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +22,7 @@ public abstract class RendererSpecTest extends ComboSpecTestCase {
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
-    public RendererSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public RendererSpecTest(SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 
@@ -35,7 +34,7 @@ public abstract class RendererSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    final public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), wantExampleInfo());
     }

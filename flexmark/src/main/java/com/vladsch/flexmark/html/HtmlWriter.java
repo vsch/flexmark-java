@@ -9,8 +9,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -37,28 +36,28 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
         setSuppressCloseTagLine(suppressCloseTagLine);
     }
 
-    void setContext(@NotNull NodeRendererContext context) {
+    void setContext(NodeRendererContext context) {
         this.context = context;
     }
 
-    public @NotNull NodeRendererContext getContext() {
+    public NodeRendererContext getContext() {
         assert context != null;
         return context;
     }
 
-    public @NotNull HtmlWriter srcPos() {
+    public HtmlWriter srcPos() {
         return context == null ? this : srcPos(context.getCurrentNode().getChars());
     }
 
-    public @NotNull HtmlWriter srcPosWithEOL() {
+    public HtmlWriter srcPosWithEOL() {
         return context == null ? this : srcPosWithEOL(context.getCurrentNode().getChars());
     }
 
-    public @NotNull HtmlWriter srcPosWithTrailingEOL() {
+    public HtmlWriter srcPosWithTrailingEOL() {
         return context == null ? this : srcPosWithTrailingEOL(context.getCurrentNode().getChars());
     }
 
-    public @NotNull HtmlWriter srcPos(@NotNull BasedSequence sourceText) {
+    public HtmlWriter srcPos(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             BasedSequence trimmed = sourceText.trimEOL();
             return srcPos(trimmed.getStartOffset(), trimmed.getEndOffset());
@@ -67,7 +66,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public @NotNull HtmlWriter srcPosWithEOL(@NotNull BasedSequence sourceText) {
+    public HtmlWriter srcPosWithEOL(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
         }
@@ -75,7 +74,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public @NotNull HtmlWriter srcPosWithTrailingEOL(@NotNull BasedSequence sourceText) {
+    public HtmlWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             int endOffset = sourceText.getEndOffset();
             BasedSequence base = sourceText.getBaseSequence();
@@ -98,36 +97,34 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
         return this;
     }
 
-    public @NotNull HtmlWriter srcPos(int startOffset, int endOffset) {
+    public HtmlWriter srcPos(int startOffset, int endOffset) {
         if (startOffset <= endOffset && context != null && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
             super.attr(context.getHtmlOptions().sourcePositionAttribute, startOffset + "-" + endOffset);
         }
         return this;
     }
 
-    @NotNull
     public HtmlWriter withAttr() {
         return withAttr(AttributablePart.NODE);
     }
 
-    public @NotNull HtmlWriter withAttr(@NotNull AttributablePart part) {
+    public HtmlWriter withAttr(AttributablePart part) {
         super.withAttr();
         useAttributes = part;
         return this;
     }
 
-    public @NotNull HtmlWriter withAttr(@NotNull LinkStatus status) {
+    public HtmlWriter withAttr(LinkStatus status) {
         attr(Attribute.LINK_STATUS_ATTR, status.getName());
         return withAttr(AttributablePart.LINK);
     }
 
-    public @NotNull HtmlWriter withAttr(@NotNull ResolvedLink resolvedLink) {
+    public HtmlWriter withAttr(ResolvedLink resolvedLink) {
         return withAttr(resolvedLink.getStatus());
     }
 
-    @NotNull
     @Override
-    public HtmlWriter tag(@NotNull CharSequence tagName, boolean voidElement) {
+    public HtmlWriter tag(CharSequence tagName, boolean voidElement) {
         if (useAttributes != null) {
             String attributeValue;
             final Attributes attributes;

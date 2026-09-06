@@ -11,7 +11,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -21,7 +20,7 @@ import java.util.Map;
 
 public class ComboPegdownExtensionCompatibilitySpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/pegdown_extension_compatibility_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((PegdownExtensions.ALL & ~(PegdownExtensions.HARDWRAPS | PegdownExtensions.ANCHORLINKS)) | (PegdownExtensions.ALL_OPTIONALS & ~(PegdownExtensions.EXTANCHORLINKS_WRAP)) | PegdownExtensions.ABBREVIATIONS | PegdownExtensions.EXTANCHORLINKS).toMutable()
             .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
@@ -39,7 +38,7 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends RendererSpecTest
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
         optionsMap.put("no-wiki-ref-anchors", new MutableDataSet().set(WikiLinkExtension.ALLOW_ANCHORS, false));
     }
-    public ComboPegdownExtensionCompatibilitySpecTest(@NotNull SpecExample example) {
+    public ComboPegdownExtensionCompatibilitySpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

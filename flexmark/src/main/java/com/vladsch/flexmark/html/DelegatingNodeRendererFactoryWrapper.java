@@ -5,8 +5,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,11 +26,11 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeR
     }
 
     @Override
-    public @NotNull NodeRenderer apply(@NotNull DataHolder options) {
+    public NodeRenderer apply(DataHolder options) {
         return nodeRendererFactory.apply(options);
     }
 
-    public @NotNull NodeRendererFactory getFactory() {
+    public NodeRendererFactory getFactory() {
         return nodeRendererFactory;
     }
 

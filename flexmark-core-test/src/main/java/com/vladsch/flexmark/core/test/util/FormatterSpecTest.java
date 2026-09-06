@@ -12,24 +12,23 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
 import static com.vladsch.flexmark.formatter.Formatter.RESTORE_TRACKED_SPACES;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
-    public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public FormatterSpecTest(SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionMap, defaultOptions);
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
 
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
-            @NotNull List<TrackedOffset> trackedOffsets = Collections.emptyList();
+            List<TrackedOffset> trackedOffsets = Collections.emptyList();
             BasedSequence trackedSequence;
             BasedSequence originalSequence;
 
@@ -64,7 +63,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
             }
 
             @Override
-            protected @NotNull String renderHtml() {
+            protected String renderHtml() {
                 if (trackedOffsets.isEmpty() && !SHOW_LINE_RANGES.get(myOptions)) {
                     return getRenderer().render(getDocument());
                 } else {

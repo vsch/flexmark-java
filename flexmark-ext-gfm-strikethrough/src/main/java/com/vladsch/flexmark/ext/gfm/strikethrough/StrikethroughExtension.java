@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).
@@ -29,7 +28,7 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -44,7 +43,7 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new StrikethroughNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("YOUTRACK")) {

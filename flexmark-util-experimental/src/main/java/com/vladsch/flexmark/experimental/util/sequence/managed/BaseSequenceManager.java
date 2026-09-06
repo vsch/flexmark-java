@@ -2,8 +2,7 @@ package com.vladsch.flexmark.experimental.util.sequence.managed;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -13,8 +12,8 @@ import java.util.function.Function;
 public class BaseSequenceManager {
     // NOTE: baseMap will keep reference to BaseSequenceEntry as long as the underlying base object is in use
     //   baseSet relies on baseMap to keep references alive for used BasedSequence and its BaseSequenceEntry for quick fail/pass on equals
-    final private @NotNull WeakHashMap<Object, WeakReference<BasedSequence>> baseMap = new WeakHashMap<>();
-    final private @NotNull WeakHashMap<BasedSequence, BaseSequenceEntry> baseSet = new WeakHashMap<>();
+    final private WeakHashMap<Object, WeakReference<BasedSequence>> baseMap = new WeakHashMap<>();
+    final private WeakHashMap<BasedSequence, BaseSequenceEntry> baseSet = new WeakHashMap<>();
 
     public BaseSequenceManager() {
 
@@ -35,8 +34,7 @@ public class BaseSequenceManager {
      * @param factory   factory to create based sequence from the object
      * @return existing equivalent base or newly created base
      */
-    @NotNull
-    public <T> BasedSequence getBaseSequence(@NotNull T object, @Nullable int[] callTypes, @NotNull Function<T, BasedSequence> factory) {
+    public <T> BasedSequence getBaseSequence(T object, int @Nullable [] callTypes, Function<T, BasedSequence> factory) {
         WeakReference<BasedSequence> baseEntry;
         BasedSequence baseSeq;
 

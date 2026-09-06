@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.RichSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A RichSequence implementation
@@ -19,31 +18,27 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
         this.charSequence = charSequence;
     }
 
-    @NotNull
     @Override
     public RichSequence[] emptyArray() {
         return EMPTY_ARRAY;
     }
 
-    @NotNull
     @Override
     public RichSequence nullSequence() {
         return NULL;
     }
 
-    @NotNull
     @Override
     public RichSequence sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return of(charSequence, startIndex, endIndex);
     }
 
     @Override
-    public <B extends ISequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
+    public <B extends ISequenceBuilder<B, RichSequence>> B getBuilder() {
         //noinspection unchecked
         return (B) RichSequenceBuilder.emptyBuilder();
     }
 
-    @NotNull
     @Override
     public RichSequence subSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, length());
@@ -62,7 +57,6 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
         return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
     }
 
-    @NotNull
     @Override
     public RichSequence toMapped(CharMapper mapper) {
         return MappedRichSequence.mappedOf(mapper, this);

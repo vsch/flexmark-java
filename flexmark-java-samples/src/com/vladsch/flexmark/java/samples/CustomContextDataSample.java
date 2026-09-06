@@ -16,8 +16,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
@@ -30,12 +29,12 @@ public class CustomContextDataSample {
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
             htmlRendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
         }
 
@@ -52,9 +51,8 @@ public class CustomContextDataSample {
             // context.getHtmlOptions();
         }
 
-        @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
             Document document = context.getDocument();
             XhtmlContent xhtmlContent = XHTML_CONTENT.get(document);
 
@@ -94,9 +92,8 @@ public class CustomContextDataSample {
                 return false;
             }
 
-            @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+            public LinkResolver apply(LinkResolverBasicContext context) {
                 return new CustomLinkResolver(context);
             }
         }

@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.util.ast;
 
-import org.jetbrains.annotations.NotNull;
 
 public abstract class AllNodesVisitor {
-    protected abstract void process(@NotNull Node node);
+    protected abstract void process(Node node);
 
-    public void visit(@NotNull Node node) {
+    public void visit(Node node) {
         visitChildren(node);
     }
 
-    private void visitChildren(@NotNull Node parent) {
+    private void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no

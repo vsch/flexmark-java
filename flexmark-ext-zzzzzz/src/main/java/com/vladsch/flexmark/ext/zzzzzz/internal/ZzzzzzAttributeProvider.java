@@ -13,7 +13,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
 import static com.vladsch.flexmark.util.html.Attribute.LINK_STATUS_ATTR;
@@ -37,7 +36,7 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
+    public void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
         nodeAdapter.setAttributes(node, part, attributes);
     }
 
@@ -76,9 +75,8 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         //    return false;
         //}
 
-        @NotNull
         @Override
-        public AttributeProvider apply(@NotNull LinkResolverContext context) {
+        public AttributeProvider apply(LinkResolverContext context) {
             return new ZzzzzzAttributeProvider(context);
         }
     }

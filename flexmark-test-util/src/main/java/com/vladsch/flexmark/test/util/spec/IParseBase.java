@@ -5,8 +5,7 @@ import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,17 +23,17 @@ public abstract class IParseBase implements IParse {
     }
 
     @Override
-    public @NotNull Node parse(@NotNull String input) {
+    public Node parse(String input) {
         return parse(BasedSequence.of(input));
     }
 
     @Override
-    public boolean transferReferences(@NotNull Document document, @NotNull Document included, Boolean onlyIfUndefined) {
+    public boolean transferReferences(Document document, Document included, Boolean onlyIfUndefined) {
         return false;
     }
 
     @Override
-    public @NotNull Node parseReader(@NotNull Reader input) throws IOException {
+    public Node parseReader(Reader input) throws IOException {
         BufferedReader bufferedReader;
         if (input instanceof BufferedReader) {
             bufferedReader = (BufferedReader) input;

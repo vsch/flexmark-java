@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for enumerated_references
@@ -42,7 +41,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -73,7 +72,7 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new EnumeratedReferenceNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

@@ -15,7 +15,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -25,7 +24,7 @@ import java.util.Map;
 
 public class ComboExtAttributesSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/ext_attributes_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true)
@@ -58,7 +57,7 @@ public class ComboExtAttributesSpecTest extends RendererSpecTest {
         optionsMap.put("fenced-code-to-code", new MutableDataSet().set(AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES, FencedCodeAddType.ADD_TO_CODE));
         optionsMap.put("custom", new MutableDataSet().set(CUSTOM_OPTION, (option, text) -> null));
     }
-    public ComboExtAttributesSpecTest(@NotNull SpecExample example) {
+    public ComboExtAttributesSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

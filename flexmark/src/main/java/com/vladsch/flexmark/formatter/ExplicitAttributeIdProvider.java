@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface ExplicitAttributeIdProvider {
     /**
@@ -13,5 +12,5 @@ public interface ExplicitAttributeIdProvider {
      * @param context  context
      * @param markdown markdown writer
      */
-    void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown);
+    void addExplicitId(Node node, @Nullable String id, NodeFormatterContext context, MarkdownWriter markdown);
 }

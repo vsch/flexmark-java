@@ -18,7 +18,6 @@ import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
-import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
@@ -491,7 +490,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         }
     }
 
-    private boolean hasIntersection(@NotNull Set<String> stringSet1, String[] stringSet2) {
+    private boolean hasIntersection(Set<String> stringSet1, String[] stringSet2) {
         for (String item : stringSet2) {
             if (stringSet1.contains(item)) return true;
         }

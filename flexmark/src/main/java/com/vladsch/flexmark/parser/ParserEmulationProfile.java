@@ -3,7 +3,6 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.*;
-import org.jetbrains.annotations.NotNull;
 
 public enum ParserEmulationProfile implements MutableDataSetter {
     COMMONMARK(null),
@@ -305,9 +304,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
         return new MutableListOptions((DataHolder) null);
     }
 
-    @NotNull
     @Override
-    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         if (this == FIXED_INDENT) {
             getOptions(dataHolder).setIn(dataHolder)
                     .set(Parser.STRONG_WRAPS_EMPHASIS, true)

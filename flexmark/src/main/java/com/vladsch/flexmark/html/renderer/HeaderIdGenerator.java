@@ -8,8 +8,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -79,7 +78,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     }
 
     @Override
-    public void generateIds(@NotNull Document document) {
+    public void generateIds(Document document) {
         generateIds(document, null);
     }
     
@@ -95,7 +94,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
 
         new AnchorRefTargetBlockVisitor() {
             @Override
-            protected boolean preVisit(@NotNull Node node) {
+            protected boolean preVisit(Node node) {
                 return preVisitor == null || preVisitor.preVisit(node, this);
             }
 
@@ -138,13 +137,13 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
 
     @Nullable
     @Override
-    public String getId(@NotNull Node node) {
+    public String getId(Node node) {
         return node instanceof AnchorRefTarget ? ((AnchorRefTarget) node).getAnchorRefId() : null;
     }
 
     @Nullable
     @Override
-    public String getId(@NotNull CharSequence text) {
+    public String getId(CharSequence text) {
         return generateId(text.toString());
     }
 
@@ -188,13 +187,11 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     }
 
     public static class Factory implements HeaderIdGeneratorFactory {
-        @NotNull
         @Override
-        public HeaderIdGenerator create(@NotNull LinkResolverContext context) {
+        public HeaderIdGenerator create(LinkResolverContext context) {
             return new HeaderIdGenerator();
         }
 
-        @NotNull
         @Override
         public HeaderIdGenerator create() {
             return new HeaderIdGenerator();

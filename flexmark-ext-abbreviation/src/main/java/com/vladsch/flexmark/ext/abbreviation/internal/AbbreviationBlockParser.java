@@ -7,8 +7,7 @@ import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -69,9 +68,8 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
             return false;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }

@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -21,7 +20,7 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
     /**
      * @return the HTML writer to use
      */
-    @NotNull MarkdownWriter getMarkdown();
+    MarkdownWriter getMarkdown();
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
@@ -29,19 +28,19 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      *
      * @param node the node to render
      */
-    void render(@NotNull Node node);
+    void render(Node node);
 
     /**
      * Render the children of the node, used by custom renderers
      *
      * @param parent node the children of which are to be rendered
      */
-    void renderChildren(@NotNull Node parent);
+    void renderChildren(Node parent);
 
     /**
      * @return current rendering phase
      */
-    @NotNull FormattingPhase getFormattingPhase();
+    FormattingPhase getFormattingPhase();
 
     /**
      * pass node rendering to previously registered handler
@@ -54,32 +53,32 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      *
      * @return the current renderer options {@link DataHolder}
      */
-    @NotNull DataHolder getOptions();
+    DataHolder getOptions();
 
     /**
      * @return the {@link FormatterOptions} for the context.
      */
-    @NotNull FormatterOptions getFormatterOptions();
+    FormatterOptions getFormatterOptions();
 
     /**
      * @return the {@link Document} node of the current context
      */
-    @NotNull Document getDocument();
+    Document getDocument();
 
     /**
      * @return predicate for prefix chars which compact like block quote prefix char
      */
-    @NotNull CharPredicate getBlockQuoteLikePrefixPredicate();
+    CharPredicate getBlockQuoteLikePrefixPredicate();
 
     /**
      * @return char sequence of all prefix chars which compact like block quote prefix char
      */
-    @NotNull BasedSequence getBlockQuoteLikePrefixChars();
+    BasedSequence getBlockQuoteLikePrefixChars();
 
     /**
      * @return tracked offset list
      */
-    @NotNull TrackedOffsetList getTrackedOffsets();
+    TrackedOffsetList getTrackedOffsets();
 
     boolean isRestoreTrackedSpaces();
 
@@ -92,7 +91,6 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      *
      * @return original sequence used for tracked offsets.
      */
-    @NotNull
     BasedSequence getTrackedSequence();
 
     /**
@@ -107,9 +105,9 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * @param classes node classes to return
      * @return iterable
      */
-    @NotNull Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes);
+    Iterable<? extends Node> nodesOfType(Class<?>[] classes);
 
-    @NotNull Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes);
+    Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes);
 
     /**
      * Get iterable of nodes of given types, in reverse order of their appearance in the document tree, depth first traversal.
@@ -123,7 +121,7 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * @param classes node classes to return
      * @return iterable
      */
-    @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes);
+    Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes);
 
-    @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes);
+    Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes);
 }

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.function.Function;

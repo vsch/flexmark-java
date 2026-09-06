@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.tree.iteration;
 
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,17 +37,14 @@ public class TreeIterator<N> {
         myFilter = filter;
     }
 
-    @NotNull
-    public Predicate<N> getPredicate(@NotNull Class<? super N> clazz) {
+    public Predicate<N> getPredicate(Class<? super N> clazz) {
         return clazz::isInstance;
     }
 
-    @NotNull
-    public <F> Predicate<N> getPredicate(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F> Predicate<N> getPredicate(Class<F> clazz, Predicate<? super F> predicate) {
         return (it) -> clazz.isInstance(it) && predicate.test(clazz.cast(it));
     }
 
-    @NotNull
     public IterationConditions<N> getConstraints() {
         return myConstraints;
     }
@@ -61,157 +57,133 @@ public class TreeIterator<N> {
         return myFilter;
     }
 
-    @NotNull
-    public TreeIterator<N> modifiedCopy(@NotNull IterationConditions<N> constraints, @NotNull Predicate<? super N> filter, @NotNull Predicate<? super N> recursion) {
+    public TreeIterator<N> modifiedCopy(IterationConditions<N> constraints, Predicate<? super N> filter, Predicate<? super N> recursion) {
         return new TreeIterator<>(constraints, filter, recursion);
     }
 
-    @NotNull
     public TreeIterator<N> reversed() {
         return modifiedCopy(myConstraints.getReversed(), myFilter, myRecursion);
     }
 
-    @NotNull
     public TreeIterator<N> recursive() {
         //noinspection unchecked
         return modifiedCopy(myConstraints, myFilter, (Predicate<N>) TRUE);
     }
 
-    @NotNull
     public TreeIterator<N> nonRecursive() {
         //noinspection unchecked
         return modifiedCopy(myConstraints, myFilter, (Predicate<N>) FALSE);
     }
 
-    @NotNull
-    public TreeIterator<N> recurse(@NotNull Predicate<? super N> predicate) {
+    public TreeIterator<N> recurse(Predicate<? super N> predicate) {
         return modifiedCopy(myConstraints, myFilter, it -> myRecursion.test(it) || predicate.test(it));
     }
 
-    @NotNull
-    public TreeIterator<N> recurse(@NotNull Class<? super N> clazz) {
+    public TreeIterator<N> recurse(Class<? super N> clazz) {
         return recurse(getPredicate(clazz));
     }
 
-    @NotNull
-    public <F> TreeIterator<N> recurse(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F> TreeIterator<N> recurse(Class<F> clazz, Predicate<? super F> predicate) {
         return recurse(getPredicate(clazz, predicate));
     }
 
-    @NotNull
-    public TreeIterator<N> noRecurse(@NotNull Predicate<? super N> predicate) {
+    public TreeIterator<N> noRecurse(Predicate<? super N> predicate) {
         return modifiedCopy(myConstraints, myFilter, it -> myRecursion.test(it) && !predicate.test(it));
     }
 
-    @NotNull
-    public TreeIterator<N> noRecurse(@NotNull Class<? super N> clazz) {
+    public TreeIterator<N> noRecurse(Class<? super N> clazz) {
         return noRecurse(getPredicate(clazz));
     }
 
-    @NotNull
-    public <F> TreeIterator<N> noRecurse(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F> TreeIterator<N> noRecurse(Class<F> clazz, Predicate<? super F> predicate) {
         return noRecurse(getPredicate(clazz, predicate));
     }
 
-    @NotNull
     public TreeIterator<N> aborted() {
         return modifiedCopy(myConstraints.getAborted(), myFilter, myRecursion);
     }
 
-    @NotNull
-    public TreeIterator<N> filterOut(@NotNull Predicate<? super N> predicate) {
+    public TreeIterator<N> filterOut(Predicate<? super N> predicate) {
         return modifiedCopy(myConstraints, it -> myFilter.test(it) && !predicate.test(it), myRecursion);
     }
 
-    @NotNull
-    public TreeIterator<N> filterOut(@NotNull Class<? super N> clazz) {
+    public TreeIterator<N> filterOut(Class<? super N> clazz) {
         return filterOut(getPredicate(clazz));
     }
 
-    @NotNull
-    public <F> TreeIterator<N> filterOut(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F> TreeIterator<N> filterOut(Class<F> clazz, Predicate<? super F> predicate) {
         return filterOut(getPredicate(clazz, predicate));
     }
 
-    @NotNull
-    public TreeIterator<N> filter(@NotNull Predicate<? super N> predicate) {
+    public TreeIterator<N> filter(Predicate<? super N> predicate) {
         return modifiedCopy(myConstraints, it -> myFilter.test(it) && predicate.test(it), myRecursion);
     }
 
-    @NotNull
-    public TreeIterator<N> filter(@NotNull Class<? super N> clazz) {
+    public TreeIterator<N> filter(Class<? super N> clazz) {
         return filter(getPredicate(clazz));
     }
 
-    @NotNull
-    public <F> TreeIterator<N> filter(@NotNull Class<F> clazz, @NotNull Predicate<? super F> predicate) {
+    public <F> TreeIterator<N> filter(Class<F> clazz, Predicate<? super F> predicate) {
         return filter(getPredicate(clazz, predicate));
     }
 
-    @NotNull
-    public static <N> TreeIterator<N> of(@NotNull IterationConditions<N> constraints) {
+    public static <N> TreeIterator<N> of(IterationConditions<N> constraints) {
         return new TreeIterator<>(constraints);
     }
 
-    @NotNull
-    public static <N> TreeIterator<N> of(@NotNull IterationConditions<N> constraints, @NotNull Predicate<? super N> filter) {
+    public static <N> TreeIterator<N> of(IterationConditions<N> constraints, Predicate<? super N> filter) {
         return new TreeIterator<>(constraints, filter);
     }
 
-    @NotNull
-    public static <N> TreeIterator<N> of(@NotNull IterationConditions<N> constraints, @NotNull Predicate<? super N> filter, @NotNull Predicate<? super N> recursion) {
+    public static <N> TreeIterator<N> of(IterationConditions<N> constraints, Predicate<? super N> filter, Predicate<? super N> recursion) {
         return new TreeIterator<>(constraints, filter, recursion);
     }
 
-    @NotNull
     public static <N> Predicate<N> TRUE() {
         return n -> true;
     }
 
-    @NotNull
     public static <N> Predicate<N> FALSE() {
         return n -> true;
     }
 
-    public <R> ValueIteration<R> iterate(@NotNull N element, @NotNull R defaultValue, @NotNull ValueIterationConsumer<? super N, R> consumer) {
+    public <R> ValueIteration<R> iterate(N element, R defaultValue, ValueIterationConsumer<? super N, R> consumer) {
         IteratorInstance<N, R> instance = new IteratorInstance<>(getConstraints(), getFilter(), getRecursion(), element, defaultValue);
         instance.iterate(consumer);
         return instance;
     }
 
-    public <T, R> ValueIteration<R> iterate(@NotNull N element, @NotNull R defaultValue, @NotNull ValueIterationAdapter<? super N, T> adapter, @NotNull ValueIterationConsumer<? super T, R> consumer) {
+    public <T, R> ValueIteration<R> iterate(N element, R defaultValue, ValueIterationAdapter<? super N, T> adapter, ValueIterationConsumer<? super T, R> consumer) {
         IteratorInstance<N, R> instance = new IteratorInstance<>(getConstraints(), getFilter(), getRecursion(), element, defaultValue);
         instance.iterate(adapter.getConsumerAdapter().getConsumer(consumer));
         return instance;
     }
 
-    public <R> VoidIteration iterate(@NotNull N element, @NotNull VoidIterationConsumer<? super N> consumer) {
+    public <R> VoidIteration iterate(N element, VoidIterationConsumer<? super N> consumer) {
         IteratorInstance<N, R> instance = new IteratorInstance<>(getConstraints(), getFilter(), getRecursion(), element);
         instance.iterate(consumer);
         return instance;
     }
 
-    public <T, R> VoidIteration iterate(@NotNull N element, @NotNull ValueIterationAdapter<? super N, T> adapter, @NotNull VoidIterationConsumer<? super T> consumer) {
+    public <T, R> VoidIteration iterate(N element, ValueIterationAdapter<? super N, T> adapter, VoidIterationConsumer<? super T> consumer) {
         IteratorInstance<N, R> instance = new IteratorInstance<>(getConstraints(), getFilter(), getRecursion(), element);
         instance.iterate(adapter.getConsumerAdapter().getConsumer(consumer));
         return instance;
     }
 
-    @NotNull
-    public <R> R doLoop(@NotNull N element, @NotNull R defaultValue, @NotNull ValueIterationConsumer<? super N, R> consumer) {
+    public <R> R doLoop(N element, R defaultValue, ValueIterationConsumer<? super N, R> consumer) {
         return iterate(element, defaultValue, consumer).getResult();
     }
 
-    public void doLoop(@NotNull N element, @NotNull VoidIterationConsumer<? super N> consumer) {
+    public void doLoop(N element, VoidIterationConsumer<? super N> consumer) {
         iterate(element, consumer);
     }
 
-    @NotNull
-    public <T, R> R doLoop(@NotNull N element, @NotNull R defaultValue, @NotNull ValueIterationAdapter<? super N, T> adapter, @NotNull ValueIterationConsumer<? super T, R> consumer) {
+    public <T, R> R doLoop(N element, R defaultValue, ValueIterationAdapter<? super N, T> adapter, ValueIterationConsumer<? super T, R> consumer) {
         return iterate(element, defaultValue, adapter, consumer).getResult();
     }
 
-    public <T, R> void doLoop(@NotNull N element, @NotNull ValueIterationAdapter<? super N, T> adapter, @NotNull VoidIterationConsumer<? super T> consumer) {
+    public <T, R> void doLoop(N element, ValueIterationAdapter<? super N, T> adapter, VoidIterationConsumer<? super T> consumer) {
         iterate(element, adapter, consumer);
     }
 }

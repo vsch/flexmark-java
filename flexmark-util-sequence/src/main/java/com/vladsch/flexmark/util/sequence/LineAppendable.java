@@ -2,8 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -98,7 +97,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
         return getOptionSet().toInt();
     }
 
-    @NotNull
     LineAppendable getEmptyAppendable();
 
     /**
@@ -109,27 +107,22 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param withPrefixes true if to include prefixes
      * @return copy of appendable with requested content
      */
-    @NotNull
     default LineAppendable copyAppendable(int startLine, int endLine, boolean withPrefixes) {
         return getEmptyAppendable().append(this, startLine, endLine, withPrefixes);
     }
 
-    @NotNull
     default LineAppendable copyAppendable(int startLine, int endLine) {
         return getEmptyAppendable().append(this, startLine, endLine, false);
     }
 
-    @NotNull
     default LineAppendable copyAppendable(int startLine) {
         return getEmptyAppendable().append(this, startLine, Integer.MAX_VALUE, false);
     }
 
-    @NotNull
     default LineAppendable copyAppendable() {
         return getEmptyAppendable().append(this, 0, Integer.MAX_VALUE, false);
     }
 
-    @NotNull
     default LineAppendable copyAppendable(boolean withPrefixes) {
         return getEmptyAppendable().append(this, 0, Integer.MAX_VALUE, withPrefixes);
     }
@@ -139,46 +132,36 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return mutable option set
      */
-    @NotNull
     BitFieldSet<Options> getOptionSet();
 
-    @NotNull
     LineAppendable pushOptions();
 
-    @NotNull
     LineAppendable popOptions();
 
-    @NotNull
     default LineAppendable noTrimLeading() {
         return changeOptions(0, F_TRIM_LEADING_WHITESPACE);
     }
 
-    @NotNull
     default LineAppendable trimLeading() {
         return changeOptions(F_TRIM_LEADING_WHITESPACE, 0);
     }
 
-    @NotNull
     default LineAppendable preserveSpaces() {
         return changeOptions(0, F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE);
     }
 
-    @NotNull
     default LineAppendable noPreserveSpaces() {
         return changeOptions(F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE, 0);
     }
 
-    @NotNull
     default LineAppendable removeOptions(int flags) {
         return changeOptions(0, flags);
     }
 
-    @NotNull
     default LineAppendable addOptions(int flags) {
         return changeOptions(flags, 0);
     }
 
-    @NotNull
     LineAppendable changeOptions(int addFlags, int removeFlags);
 
     /**
@@ -187,12 +170,10 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param flags option flags
      * @return this
      */
-    @NotNull
     default LineAppendable setOptions(int flags) {
         return setOptions(toOptionSet(flags));
     }
 
-    @NotNull
     default LineAppendable setOptions(Options... options) {
         return setOptions(toOptionSet(options).toInt());
     }
@@ -203,7 +184,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param options option set
      * @return this
      */
-    @NotNull
     default LineAppendable setOptions(BitFieldSet<Options> options) {
         return setOptions(options.toInt());
     }
@@ -213,7 +193,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return builder used for accumulation
      */
-    @NotNull
     ISequenceBuilder<?, ?> getBuilder();
 
     /**
@@ -235,18 +214,17 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
 
     // these methods are monitored for content and formatting applied
     @Override
-    @NotNull LineAppendable append(@NotNull CharSequence csq);
+    LineAppendable append(CharSequence csq);
 
     @Override
-    @NotNull LineAppendable append(@NotNull CharSequence csq, int start, int end);
+    LineAppendable append(CharSequence csq, int start, int end);
 
     @Override
-    @NotNull LineAppendable append(char c);
+    LineAppendable append(char c);
 
-    @NotNull LineAppendable append(char c, int count);
+    LineAppendable append(char c, int count);
 
-    @NotNull
-    default LineAppendable appendAll(@NotNull Iterable<CharSequence> sequences) {
+    default LineAppendable appendAll(Iterable<CharSequence> sequences) {
         for (CharSequence sequence : sequences) {
             append(sequence);
         }
@@ -267,7 +245,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param withPrefixes   true if to include prefixes from the lineAppendable.
      * @return this
      */
-    @NotNull LineAppendable append(@NotNull LineAppendable lineAppendable, int startLine, int endLine, boolean withPrefixes);
+    LineAppendable append(LineAppendable lineAppendable, int startLine, int endLine, boolean withPrefixes);
 
     /**
      * Append lines from another line formatting appendable.
@@ -279,8 +257,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param lineAppendable lines to append
      * @return this
      */
-    @NotNull
-    default LineAppendable append(@NotNull LineAppendable lineAppendable) {
+    default LineAppendable append(LineAppendable lineAppendable) {
         return append(lineAppendable, 0, Integer.MAX_VALUE, true);
     }
 
@@ -295,8 +272,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param withPrefixes   true if to include prefixes from the lineAppendable.
      * @return this
      */
-    @NotNull
-    default LineAppendable append(@NotNull LineAppendable lineAppendable, boolean withPrefixes) {
+    default LineAppendable append(LineAppendable lineAppendable, boolean withPrefixes) {
         return append(lineAppendable, 0, Integer.MAX_VALUE, withPrefixes);
     }
 
@@ -305,7 +281,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return this
      */
-    @NotNull LineAppendable line();
+    LineAppendable line();
 
     /**
      * Add a new line, keep trailing spaces if there was any unterminated text appended
@@ -315,7 +291,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param count number of trailing spaces to add
      * @return this
      */
-    @NotNull LineAppendable lineWithTrailingSpaces(int count);
+    LineAppendable lineWithTrailingSpaces(int count);
 
     /**
      * Add a new line, if predicate is true and line() would add an EOL.
@@ -323,14 +299,14 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param predicate call {@link #line()} if value is true.
      * @return this
      */
-    @NotNull LineAppendable lineIf(boolean predicate);
+    LineAppendable lineIf(boolean predicate);
 
     /**
      * Add a blank line, if there is not one already appended.
      *
      * @return this
      */
-    @NotNull LineAppendable blankLine();
+    LineAppendable blankLine();
 
     /**
      * Add a blank line, if predicate is true and there isn't already blank lines appended.
@@ -338,7 +314,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param predicate when true append blank line
      * @return this
      */
-    @NotNull LineAppendable blankLineIf(boolean predicate);
+    LineAppendable blankLineIf(boolean predicate);
 
     /**
      * Add a blank lines, if there isn't already given number of blank lines appended.
@@ -347,7 +323,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param count number of blank lines to append
      * @return this
      */
-    @NotNull LineAppendable blankLine(int count);
+    LineAppendable blankLine(int count);
 
     /**
      * @return true if in pre-formatted region
@@ -360,14 +336,14 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param addPrefixToFirstLine if true will add the current prefix to first line
      * @return this
      */
-    @NotNull LineAppendable openPreFormatted(boolean addPrefixToFirstLine);
+    LineAppendable openPreFormatted(boolean addPrefixToFirstLine);
 
     /**
      * Close preformatted section and suspend content modification
      *
      * @return this
      */
-    @NotNull LineAppendable closePreFormatted();
+    LineAppendable closePreFormatted();
 
     /**
      * Increase the indent level, will terminate the current line if there is unterminated text
@@ -377,7 +353,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return this
      */
-    @NotNull LineAppendable indent();
+    LineAppendable indent();
 
     /**
      * Decrease the indent level, min level is 0, will terminate the current line if there is unterminated text
@@ -387,7 +363,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return this
      */
-    @NotNull LineAppendable unIndent();
+    LineAppendable unIndent();
 
     /**
      * Decrease the indent level, if there is unterminated text then unindented prefix
@@ -399,14 +375,14 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return this
      */
-    @NotNull LineAppendable unIndentNoEol();
+    LineAppendable unIndentNoEol();
 
     /**
      * Get prefix appended after a new line character for every indent level
      *
      * @return char sequence of the current indent prefix used for each indent level
      */
-    @NotNull BasedSequence getIndentPrefix();
+    BasedSequence getIndentPrefix();
 
     /**
      * Set prefix to append after a new line character for every indent level
@@ -414,7 +390,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param prefix prefix characters for new lines appended after this is set
      * @return this
      */
-    @NotNull LineAppendable setIndentPrefix(@Nullable CharSequence prefix);
+    LineAppendable setIndentPrefix(@Nullable CharSequence prefix);
 
     /**
      * Get prefix being applied to all lines, even in pre-formatted sections
@@ -422,14 +398,14 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return char sequence of the current prefix
      */
-    @NotNull BasedSequence getPrefix();
+    BasedSequence getPrefix();
 
     /**
      * Get prefix used before EOL
      *
      * @return char sequence of the current prefix
      */
-    @NotNull BasedSequence getBeforeEolPrefix();
+    BasedSequence getBeforeEolPrefix();
 
     /**
      * Add to prefix appended after a new line character for every line
@@ -441,7 +417,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol);
+    LineAppendable addPrefix(CharSequence prefix, boolean afterEol);
 
     /**
      * Set prefix appended after a new line character for every line
@@ -453,7 +429,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol);
+    LineAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol);
 
     /**
      * Add to prefix appended after a new line character for every line
@@ -464,8 +440,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
      * @return this
      */
-    @NotNull
-    default LineAppendable addPrefix(@NotNull CharSequence prefix) {
+    default LineAppendable addPrefix(CharSequence prefix) {
         return addPrefix(prefix, getPendingEOL() == 0);
     }
 
@@ -478,8 +453,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
      * @return this
      */
-    @NotNull
-    default LineAppendable setPrefix(@NotNull CharSequence prefix) {
+    default LineAppendable setPrefix(CharSequence prefix) {
         return setPrefix(prefix, getPendingEOL() == 0);
     }
 
@@ -488,7 +462,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return this
      */
-    @NotNull LineAppendable pushPrefix();
+    LineAppendable pushPrefix();
 
     /**
      * Pop a prefix from the stack and set the current prefix
@@ -496,14 +470,13 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineAppendable popPrefix(boolean afterEol);
+    LineAppendable popPrefix(boolean afterEol);
 
     /**
      * Pop a prefix from the stack and set the current prefix
      *
      * @return this
      */
-    @NotNull
     default LineAppendable popPrefix() {
         return popPrefix(false);
     }
@@ -557,14 +530,12 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      */
     int getPendingEOL();
 
-    @NotNull LineAppendable lineOnFirstText(boolean value);
+    LineAppendable lineOnFirstText(boolean value);
 
-    @NotNull
     default LineAppendable setLineOnFirstText() {
         return lineOnFirstText(true);
     }
 
-    @NotNull
     default LineAppendable clearLineOnFirstText() {
         return lineOnFirstText(false);
     }
@@ -575,7 +546,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param listener runnable to run if adding indent on first EOL
      * @return this
      */
-    @NotNull LineAppendable addIndentOnFirstEOL(@NotNull Runnable listener);
+    LineAppendable addIndentOnFirstEOL(Runnable listener);
 
     /**
      * Remove runnable, has no effect if EOL was already appended and runnable was run
@@ -583,7 +554,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param listener runnable added with addIndentOnFirstEOL
      * @return this
      */
-    @NotNull LineAppendable removeIndentOnFirstEOL(@NotNull Runnable listener);
+    LineAppendable removeIndentOnFirstEOL(Runnable listener);
 
     /**
      * Get the number of lines appended, not including any unterminated ones
@@ -627,7 +598,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param lineIndex line index for the info to get
      * @return line info
      */
-    @NotNull
     LineInfo getLineInfo(int lineIndex);
 
     /**
@@ -636,7 +606,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param lineIndex line index
      * @return line info
      */
-    @NotNull
     default LineInfo get(int lineIndex) {
         return getLineInfo(lineIndex);
     }
@@ -649,7 +618,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param lineIndex line index
      * @return line char sequence
      */
-    @NotNull BasedSequence getLine(int lineIndex);
+    BasedSequence getLine(int lineIndex);
 
     /**
      * Full line iterator
@@ -657,7 +626,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      *
      * @return iterator over lines
      */
-    @NotNull
     @Override
     Iterator<LineInfo> iterator();
 
@@ -672,25 +640,20 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param withPrefixes true if prefixes should be included, else only non-prefix line text
      * @return iterator over lines
      */
-    @NotNull
     Iterable<BasedSequence> getLines(int maxTrailingBlankLines, int startLine, int endLine, boolean withPrefixes);
 
-    @NotNull
     default Iterable<BasedSequence> getLines(int maxTrailingBlankLines) {
         return getLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, true);
     }
 
-    @NotNull
     default Iterable<BasedSequence> getLines() {
         return getLines(Integer.MAX_VALUE, 0, Integer.MAX_VALUE, true);
     }
 
-    @NotNull
     default Iterable<BasedSequence> getLines(int maxTrailingBlankLines, boolean withPrefixes) {
         return getLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, withPrefixes);
     }
 
-    @NotNull
     default Iterable<BasedSequence> getLines(boolean withPrefixes) {
         return getLines(Integer.MAX_VALUE, 0, Integer.MAX_VALUE, withPrefixes);
     }
@@ -705,15 +668,12 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param endLine end line index, exclusive
      * @return iterator over lines
      */
-    @NotNull
     Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines, int startLine, int endLine);
 
-    @NotNull
     default Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines) {
         return getLinesInfo(maxTrailingBlankLines, 0, Integer.MAX_VALUE);
     }
 
-    @NotNull
     default Iterable<LineInfo> getLinesInfo() {
         return getLinesInfo(Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
     }
@@ -724,7 +684,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param lineIndex line index
      * @return char sequence for the line
      */
-    @NotNull
     default BasedSequence getLineContent(int lineIndex) {
         LineInfo lineInfo = getLineInfo(lineIndex);
         BasedSequence line = getLine(lineIndex);
@@ -737,7 +696,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param lineIndex line index
      * @return line prefix char sequence
      */
-    @NotNull
     default BasedSequence getLinePrefix(int lineIndex) {
         LineInfo lineInfo = getLineInfo(lineIndex);
         BasedSequence line = getLine(lineIndex);
@@ -759,7 +717,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param prefix    prefix of the line
      * @param text      content text of the line
      */
-    void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text);
+    void setLine(int lineIndex, CharSequence prefix, CharSequence text);
 
     /**
      * Insert a line at the index with given content and prefix for a line
@@ -768,9 +726,9 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param prefix    prefix of the line
      * @param text      content text of the line
      */
-    void insertLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text);
+    void insertLine(int lineIndex, CharSequence prefix, CharSequence text);
 
-    @NotNull LineAppendable removeLines(int startLine, int endLine);
+    LineAppendable removeLines(int startLine, int endLine);
 
     /**
      * get the resulting text for all lines
@@ -780,20 +738,16 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param withPrefixes          true if to include prefixes
      * @return resulting text
      */
-    @NotNull
     String toString(int maxBlankLines, int maxTrailingBlankLines, boolean withPrefixes);
 
-    @NotNull
     default String toString(int maxBlankLines, int maxTrailingBlankLines) {
         return toString(maxBlankLines, maxTrailingBlankLines, true);
     }
 
-    @NotNull
     default String toString(int maxBlankLines, boolean withPrefixes) {
         return toString(maxBlankLines, maxBlankLines, withPrefixes);
     }
 
-    @NotNull
     default String toString(boolean withPrefixes) {
         return toString(Integer.MAX_VALUE, Integer.MAX_VALUE, withPrefixes);
     }
@@ -804,7 +758,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param maxBlankLines maximum blank lines to allow, if -1 then no trailing EOL will be generated
      * @return resulting text
      */
-    @NotNull
     default String toString(int maxBlankLines) {
         return toString(maxBlankLines, maxBlankLines, true);
     }
@@ -817,31 +770,26 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @param withPrefixes          true if to include prefixes
      * @return resulting text
      */
-    @NotNull
     CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines, boolean withPrefixes);
 
-    @NotNull
     default CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines) {
         return toSequence(maxBlankLines, maxTrailingBlankLines, true);
     }
 
-    @NotNull
     default CharSequence toSequence(int maxBlankLines, boolean withPrefixes) {
         return toSequence(maxBlankLines, maxBlankLines, withPrefixes);
     }
 
-    @NotNull
     default CharSequence toSequence(boolean withPrefixes) {
         return toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE, withPrefixes);
     }
 
-    @NotNull
     default CharSequence toSequence() {
         return toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE, true);
     }
 
     @Deprecated
-    default <T extends Appendable> T appendTo(@NotNull T out, int maxTrailingBlankLines) throws IOException {
+    default <T extends Appendable> T appendTo(T out, int maxTrailingBlankLines) throws IOException {
         return appendTo(out, Integer.MAX_VALUE, maxTrailingBlankLines);
     }
 
@@ -860,13 +808,13 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @return out
      * @throws IOException if thrown by appendable
      */
-    <T extends Appendable> T appendTo(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException;
+    <T extends Appendable> T appendTo(T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException;
 
-    default <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException {
+    default <T extends Appendable> T appendTo(T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException {
         return appendTo(out, true, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
     }
 
-    default <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines) throws IOException {
+    default <T extends Appendable> T appendTo(T out, int maxBlankLines, int maxTrailingBlankLines) throws IOException {
         return appendTo(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
     }
 
@@ -878,11 +826,11 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @return out
      * @throws IOException thrown by {@code out}.
      */
-    default <T extends Appendable> T appendTo(@NotNull T out) throws IOException {
+    default <T extends Appendable> T appendTo(T out) throws IOException {
         return appendTo(out, 0, 0, 0, Integer.MAX_VALUE);
     }
 
-    default <T extends Appendable> T appendToSilently(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
+    default <T extends Appendable> T appendToSilently(T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
         try {
             appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
         } catch (IOException ignored) {
@@ -891,17 +839,17 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
         return out;
     }
 
-    default <T extends Appendable> T appendToSilently(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
+    default <T extends Appendable> T appendToSilently(T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
         appendToSilently(out, true, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
         return out;
     }
 
-    default <T extends Appendable> T appendToSilently(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines) {
+    default <T extends Appendable> T appendToSilently(T out, int maxBlankLines, int maxTrailingBlankLines) {
         appendToSilently(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
         return out;
     }
 
-    default <T extends Appendable> T appendToSilently(@NotNull T out) {
+    default <T extends Appendable> T appendToSilently(T out) {
         return appendToSilently(out, 0, 0, 0, Integer.MAX_VALUE);
     }
 

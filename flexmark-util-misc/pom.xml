@@ -18,9 +18,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>24.0.1</version>
+            <groupId>org.jspecify</groupId>
+            <artifactId>jspecify</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 </project>

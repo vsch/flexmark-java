@@ -2,16 +2,15 @@ package com.vladsch.flexmark.core.test.util.formatter;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.List;
 
 public class ComboCoreFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
     final private static String SPEC_RESOURCE = "/core_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    public ComboCoreFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboCoreFormatterSpecTest(SpecExample example) {
         super(example, null);
     }
 

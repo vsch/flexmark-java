@@ -21,8 +21,7 @@ import com.vladsch.flexmark.util.sequence.LineInfo;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class FormatterUtils {
     final public static DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ITEM_NUMBER", NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
     final public static NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
 
-    public static String getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, BlockQuoteMarker blockQuoteMarkers, @NotNull BasedSequence prefix) {
+    public static String getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, BlockQuoteMarker blockQuoteMarkers, BasedSequence prefix) {
         String prefixChars = node.getOpeningMarker().toString();
         String usePrefix;
         boolean compactPrefix = false;
@@ -103,7 +102,6 @@ public class FormatterUtils {
         return chars;
     }
 
-    @NotNull
     public static String getActualAdditionalPrefix(BasedSequence contentChars, MarkdownWriter markdown) {
         String prefix;
         int parentPrefix = markdown.getPrefix().length();
@@ -113,7 +111,6 @@ public class FormatterUtils {
         return prefix;
     }
 
-    @NotNull
     public static String getAdditionalPrefix(BasedSequence fromChars, BasedSequence toChars) {
         String prefix;
         int parentPrefix = fromChars.getStartOffset();
@@ -604,7 +601,7 @@ public class FormatterUtils {
                     for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
                         if (trackedOffset.isResolved()) {
                             int offsetIndex = trackedOffset.getIndex();
-                            @NotNull Pair<Integer, Integer> lineColumn = wrappedText.lineColumnAtIndex(offsetIndex);
+                            Pair<Integer, Integer> lineColumn = wrappedText.lineColumnAtIndex(offsetIndex);
                             int trackedLine = lineColumn.getFirst();
                             LineInfo lineInfo = markdown.getLineInfo(startLine + trackedLine);
 

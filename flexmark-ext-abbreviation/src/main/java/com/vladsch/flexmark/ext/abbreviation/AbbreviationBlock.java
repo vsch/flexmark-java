@@ -6,8 +6,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A block node that contains the abbreviation definition
@@ -20,7 +19,7 @@ public class AbbreviationBlock extends Block implements ReferenceNode<Abbreviati
 
     @Nullable
     @Override
-    public Abbreviation getReferencingNode(@NotNull Node node) {
+    public Abbreviation getReferencingNode(Node node) {
         return node instanceof Abbreviation ? (Abbreviation) node : null;
     }
 
@@ -30,14 +29,13 @@ public class AbbreviationBlock extends Block implements ReferenceNode<Abbreviati
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, text, "text");
         segmentSpan(out, closingMarker, "close");
         segmentSpan(out, abbreviation, "abbreviation");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker, abbreviation };

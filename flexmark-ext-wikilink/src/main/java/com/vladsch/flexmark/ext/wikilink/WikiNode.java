@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 public class WikiNode extends Node implements DoNotDecorate, TextContainer, LinkRefDerived {
     final public static char SEPARATOR_CHAR = '|';
@@ -25,7 +24,6 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer, Link
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected final boolean linkIsFirst;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         if (linkIsFirst) {
@@ -54,7 +52,7 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer, Link
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         if (linkIsFirst) {
             segmentSpanChars(out, openingMarker, "linkOpen");
             segmentSpanChars(out, text, "text");

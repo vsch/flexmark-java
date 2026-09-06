@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -58,7 +57,6 @@ public class FileUtil {
         return null;
     }
 
-    @NotNull
     public static String getFileContentWithExceptions(File receiver) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line;
@@ -85,7 +83,6 @@ public class FileUtil {
         return null;
     }
 
-    @NotNull
     public static byte[] getFileContentBytesWithExceptions(File receiver) throws IOException {
         return Files.readAllBytes(receiver.toPath());
     }

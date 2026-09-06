@@ -18,8 +18,7 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ import static com.vladsch.flexmark.util.sequence.SequenceUtils.EOL;
 
 public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
     final private static String SPEC_RESOURCE = "/core_paragraph_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     final public static DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
 
@@ -44,7 +43,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     static {
         optionsMap.put("first-width-delta", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, ComboParagraphFormatterSpecTest::firstWidthDeltaOption)));
     }
-    public ComboParagraphFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboParagraphFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 
@@ -59,11 +58,10 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     }
 
     static class ParagraphTextNode extends Node {
-        public ParagraphTextNode(@NotNull BasedSequence chars) {
+        public ParagraphTextNode(BasedSequence chars) {
             super(chars);
         }
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return EMPTY_SEGMENTS;
@@ -79,7 +77,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
         }
 
         @Override
-        public @NotNull Node parse(@NotNull BasedSequence input) {
+        public Node parse(BasedSequence input) {
             return new ParagraphTextNode(input);
         }
     }
@@ -97,7 +95,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
         final static String BANNER_RESULT = TestUtils.bannerText("Result");
 
         @Override
-        public void render(@NotNull Node document, @NotNull Appendable output) {
+        public void render(Node document, Appendable output) {
             BasedSequence input = document.getChars();
             StringBuilder out = new StringBuilder();
             Boolean inTest = SharedDataKeys.RUNNING_TESTS.get(getOptions());
@@ -186,12 +184,12 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     }
 
     @Override
-    final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    final public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, new ParagraphParser(combinedOptions), new ParagraphFormatter(combinedOptions), true) {
 
             @Override
-            protected @NotNull String renderHtml() {
+            protected String renderHtml() {
                 if (SharedDataKeys.RUNNING_TESTS.get(myOptions)) {
                     System.out.printf("%s:%d%n", myExample.getSection(), myExample.getExampleNumber());
                 }
@@ -200,7 +198,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             }
 
             @Override
-            protected @NotNull String renderAst() {
+            protected String renderAst() {
                 return TestUtils.ast(getDocument());
             }
         };

@@ -5,8 +5,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A BasedSequence which consists of segments of other BasedSequences
@@ -36,13 +35,11 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
         this.length = length;
     }
 
-    @NotNull
     @Override
     final public Object getBase() {
         return baseSeq.getBase();
     }
 
-    @NotNull
     @Override
     final public BasedSequence getBaseSequence() {
         return baseSeq;
@@ -102,13 +99,11 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
         return length;
     }
 
-    @NotNull
     @Override
     final public Range getSourceRange() {
         return Range.of(getStartOffset(), getEndOffset());
     }
 
-    @NotNull
     @Override
     final public BasedSequence baseSubSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, baseSeq.length());
@@ -131,7 +126,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
      */
-    public static BasedSequence create(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+    public static BasedSequence create(BasedSequence basedSequence, Iterable<? extends BasedSequence> segments) {
         return create(basedSequence.getBuilder().addAll(segments));
     }
 
@@ -168,7 +163,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
      *         If you absolutely need to use the old method then use {@link SegmentedSequence#create(BasedSequence, Iterable)}
      */
     @Deprecated
-    public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+    public static BasedSequence of(BasedSequence basedSequence, Iterable<? extends BasedSequence> segments) {
         return create(basedSequence, segments);
     }
 

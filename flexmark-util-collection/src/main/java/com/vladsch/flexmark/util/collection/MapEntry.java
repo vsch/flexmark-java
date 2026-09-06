@@ -1,22 +1,21 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Objects;
 
 final public class MapEntry<K, V> implements Map.Entry<K, V> {
-    final private @NotNull K key;
+    final private K key;
     final private @Nullable V value;
 
-    public MapEntry(@NotNull K key, @Nullable V value) {
+    public MapEntry(K key, @Nullable V value) {
         this.key = key;
         this.value = value;
     }
 
     @Override
-    public @NotNull K getKey() {
+    public K getKey() {
         return key;
     }
 

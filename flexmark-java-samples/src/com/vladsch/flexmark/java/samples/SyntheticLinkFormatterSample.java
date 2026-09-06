@@ -14,8 +14,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ public class SyntheticLinkFormatterSample {
         }
 
         @Override
-        public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
+        public void renderDocument(NodeFormatterContext context, MarkdownWriter markdown, Document document, FormattingPhase phase) {
             switch (phase) {
                 case DOCUMENT_BOTTOM:
                     markdown.blankLine();
@@ -103,9 +102,8 @@ public class SyntheticLinkFormatterSample {
         }
 
         static class Factory implements NodeFormatterFactory {
-            @NotNull
             @Override
-            public NodeFormatter create(@NotNull DataHolder options) {
+            public NodeFormatter create(DataHolder options) {
                 return new SyntheticLinkNodeFormatter(options);
             }
         }

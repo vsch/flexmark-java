@@ -8,7 +8,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 public class ComboSpecExampleFormatterSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_spec_example_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(JekyllFrontMatterExtension.create(), SpecExampleExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -30,7 +29,7 @@ public class ComboSpecExampleFormatterSpecTest extends FormatterSpecTest {
     static {
 //        optionsMap.put("class-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.EXPLICIT_PREFERRED));
     }
-    public ComboSpecExampleFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboSpecExampleFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

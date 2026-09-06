@@ -5,7 +5,6 @@ import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.ResolvedContent;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -51,6 +50,5 @@ public interface DocxRendererContext extends DocxContext<Node>, LinkResolverCont
      * @param resolvedLink resolved link
      * @return resolved content for the link
      */
-    @NotNull
-    ResolvedContent resolvedContent(@NotNull ResolvedLink resolvedLink);
+    ResolvedContent resolvedContent(ResolvedLink resolvedLink);
 }

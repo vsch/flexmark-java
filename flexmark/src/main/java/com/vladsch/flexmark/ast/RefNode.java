@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class RefNode extends Node implements LinkRefDerived, ReferencingNode<ReferenceRepository, Reference>, DoNotLinkDecorate, TextContainer {
     protected BasedSequence textOpeningMarker = BasedSequence.NULL;
@@ -19,7 +18,6 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
     protected BasedSequence referenceClosingMarker = BasedSequence.NULL;
     protected boolean isDefined = false;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         if (isReferenceTextCombined()) {
@@ -44,7 +42,7 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         if (isReferenceTextCombined()) {
             delimitedSegmentSpanChars(out, referenceOpeningMarker, reference, referenceClosingMarker, "reference");
             delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
@@ -145,7 +143,6 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
         return text;
     }
 
-    @NotNull
     @Override
     public BasedSequence getReference() {
         return reference;
@@ -267,7 +264,6 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
         }
     }
 
-    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + text + ", reference=" + reference;

@@ -8,8 +8,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.regex.MatchResult;
@@ -31,7 +30,6 @@ public class LightInlineParserImpl implements LightInlineParser {
         this.myParsing = new Parsing(dataOptions);
     }
 
-    @NotNull
     @Override
     public ArrayList<BasedSequence> getCurrentText() {
         if (currentText == null) {
@@ -41,7 +39,6 @@ public class LightInlineParserImpl implements LightInlineParser {
         return currentText;
     }
 
-    @NotNull
     @Override
     public BasedSequence getInput() {
         return input;
@@ -62,42 +59,38 @@ public class LightInlineParserImpl implements LightInlineParser {
         this.index = index;
     }
 
-    @NotNull
     @Override
     public Document getDocument() {
         return document;
     }
 
     @Override
-    public void setDocument(@NotNull Document document) {
+    public void setDocument(Document document) {
         this.document = document;
     }
 
-    @NotNull
     @Override
     public InlineParserOptions getOptions() {
         return options;
     }
 
-    @NotNull
     @Override
     public Parsing getParsing() {
         return myParsing;
     }
 
-    @NotNull
     @Override
     public Node getBlock() {
         return block;
     }
 
     @Override
-    public void setBlock(@NotNull Node block) {
+    public void setBlock(Node block) {
         this.block = block;
     }
 
     @Override
-    public void moveNodes(@NotNull Node fromNode, @NotNull Node toNode) {
+    public void moveNodes(Node fromNode, Node toNode) {
         if (fromNode != toNode) {
             Node next = fromNode.getNext();
             while (next != null) {
@@ -113,25 +106,24 @@ public class LightInlineParserImpl implements LightInlineParser {
     }
 
     @Override
-    public void appendText(@NotNull BasedSequence text) {
+    public void appendText(BasedSequence text) {
         getCurrentText().add(text);
     }
 
     @Override
-    public void appendText(@NotNull BasedSequence text, int beginIndex, int endIndex) {
+    public void appendText(BasedSequence text, int beginIndex, int endIndex) {
         getCurrentText().add(text.subSequence(beginIndex, endIndex));
     }
 
     @Override
-    public void appendNode(@NotNull Node node) {
+    public void appendNode(Node node) {
         flushTextNode();
         block.appendChild(node);
     }
 
     // In some cases, we don't want the text to be appended to an existing node, we need it separate
-    @NotNull
     @Override
-    public Text appendSeparateText(@NotNull BasedSequence text) {
+    public Text appendSeparateText(BasedSequence text) {
         Text node = new Text(text);
         appendNode(node);
         return node;

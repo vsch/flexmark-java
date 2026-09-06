@@ -9,7 +9,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 final public class ComboIssuesSpecTest extends CoreRendererSpecTest {
     final private static String SPEC_RESOURCE = "/core_issues_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
@@ -61,7 +60,7 @@ final public class ComboIssuesSpecTest extends CoreRendererSpecTest {
                 .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
         );
     }
-    public ComboIssuesSpecTest(@NotNull SpecExample example) {
+    public ComboIssuesSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

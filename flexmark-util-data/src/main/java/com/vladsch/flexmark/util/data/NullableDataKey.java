@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -15,7 +14,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
      * @param defaultValue default to use when data holder is null
      * @param factory      data value factory for creating a new default value for the key for a non-null data holder
      */
-    public NullableDataKey(@NotNull String name, @Nullable T defaultValue, @NotNull DataValueFactory<T> factory) {
+    public NullableDataKey(String name, @Nullable T defaultValue, DataValueFactory<T> factory) {
         super(name, defaultValue, factory);
     }
 
@@ -27,7 +26,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
      * @param name    See {@link #getName()}.
      * @param factory data value factory for creating a new default value for the key
      */
-    public NullableDataKey(@NotNull String name, @NotNull DataValueNullableFactory<T> factory) {
+    public NullableDataKey(String name, DataValueNullableFactory<T> factory) {
         super(name, factory.apply(null), factory);
     }
 
@@ -39,7 +38,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
      * @param name     See {@link #getName()}.
      * @param supplier data value factory for creating a new default value for the key not dependent on dataHolder
      */
-    public NullableDataKey(@NotNull String name, @NotNull Supplier<T> supplier) {
+    public NullableDataKey(String name, Supplier<T> supplier) {
         super(name, supplier.get(), (holder) -> supplier.get());
     }
 
@@ -52,11 +51,11 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
      * @param name       See {@link #getName()}.
      * @param defaultKey The NullableDataKey to take the default value from at time of construction.
      */
-    public NullableDataKey(@NotNull String name, @NotNull DataKeyBase<T> defaultKey) {
+    public NullableDataKey(String name, DataKeyBase<T> defaultKey) {
         this(name, defaultKey.getDefaultValue(), defaultKey::get);
     }
 
-    public NullableDataKey(@NotNull String name, @Nullable T defaultValue) {
+    public NullableDataKey(String name, @Nullable T defaultValue) {
         this(name, defaultValue, options -> defaultValue);
     }
 
@@ -65,7 +64,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
      *
      * @param name key name
      */
-    public NullableDataKey(@NotNull String name) {
+    public NullableDataKey(String name) {
         this(name, null, options -> null);
     }
 
@@ -75,7 +74,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
     }
 
     @Nullable
-    public T getDefaultValue(@NotNull DataHolder holder) {
+    public T getDefaultValue(DataHolder holder) {
         return super.getDefaultValue(holder);
     }
 
@@ -85,7 +84,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
     }
 
     @Override
-    public @NotNull MutableDataHolder set(@NotNull MutableDataHolder dataHolder, @Nullable T value) {
+    public MutableDataHolder set(MutableDataHolder dataHolder, @Nullable T value) {
         return dataHolder.set(this, value);
     }
 

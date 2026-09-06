@@ -6,5 +6,8 @@
  * <li>{@link com.vladsch.flexmark.html} for HTML rendering</li>
  * </ul>
  */
+@NullMarked
 package com.vladsch.flexmark;
+
+import org.jspecify.annotations.NullMarked;
 

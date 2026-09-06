@@ -11,7 +11,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +57,7 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -78,7 +77,7 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new SpecExampleNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

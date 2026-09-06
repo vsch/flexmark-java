@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -50,7 +49,7 @@ public class TextCollectingVisitor {
         )
         {
             @Override
-            public void processNode(@NotNull Node node, boolean withChildren, @NotNull BiConsumer<Node, Visitor<Node>> processor) {
+            public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
                 Visitor<Node> visitor = getAction(node);
                 if (visitor != null) {
                     processor.accept(node, visitor);

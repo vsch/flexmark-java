@@ -10,14 +10,13 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
 
 public class ComboAttributesTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_attributes_translation_format_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AttributesExtension.create()))
             .toImmutable();
@@ -33,7 +32,7 @@ public class ComboAttributesTranslationFormatterSpecTest extends TranslationForm
         optionsMap.put("no-text-attributes", new MutableDataSet().set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, false));
     }
     //
-    public ComboAttributesTranslationFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboAttributesTranslationFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

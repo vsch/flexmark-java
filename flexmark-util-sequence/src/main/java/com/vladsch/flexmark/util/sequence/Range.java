@@ -1,22 +1,18 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.jetbrains.annotations.NotNull;
 
 public class Range {
     final public static Range NULL = new Range(Integer.MAX_VALUE, Integer.MIN_VALUE);
     final public static Range EMPTY = new Range(0, 0);
 
-    @NotNull
     public static Range of(int start, int end) {
         return start == NULL.start && end == NULL.end ? NULL : new Range(start, end);
     }
 
-    @NotNull
     public static Range emptyOf(int position) {
         return new Range(position, position);
     }
 
-    @NotNull
     public static Range ofLength(int start, int length) {
         return new Range(start, start + length);
     }
@@ -35,8 +31,7 @@ public class Range {
         this.end = end;
     }
 
-    @NotNull
-    protected Range(@NotNull Range other) {
+    protected Range(Range other) {
         start = other.start;
         end = other.end;
     }
@@ -86,8 +81,8 @@ public class Range {
 
     // TEST:
     // @formatter:off
-    public boolean contains(@NotNull Range other) { return end >= other.end && start <= other.start; }
-    public boolean doesContain(@NotNull Range other) { return end >= other.end && start <= other.start; }
+    public boolean contains(Range other) { return end >= other.end && start <= other.start; }
+    public boolean doesContain(Range other) { return end >= other.end && start <= other.start; }
 
     public boolean contains(int index) { return start <= index && index < end;}
     public boolean doesContain(int index) { return start <= index && index < end; }
@@ -95,31 +90,31 @@ public class Range {
     public boolean contains(int start, int end) { return this.start <= start && end <= this.end;}
     public boolean doesContain(int start, int end) { return this.start <= start && end <= this.end;}
 
-    public boolean overlaps(@NotNull Range other) { return !(other.end <= start || other.start >= end); }
-    public boolean doesOverlap(@NotNull Range other) { return !(other.end <= start || other.start >= end); }
-    public boolean doesNotOverlap(@NotNull Range other) { return other.end <= start || other.start >= end; }
+    public boolean overlaps(Range other) { return !(other.end <= start || other.start >= end); }
+    public boolean doesOverlap(Range other) { return !(other.end <= start || other.start >= end); }
+    public boolean doesNotOverlap(Range other) { return other.end <= start || other.start >= end; }
 
-    public boolean overlapsOrAdjacent(@NotNull Range other) { return !(other.end < start || other.start > end); }
-    public boolean doesOverlapOrAdjacent(@NotNull Range other) { return !(other.end < start || other.start > end); }
-    public boolean doesNotOverlapOrAdjacent(@NotNull Range other) { return other.end < start || other.start > end; }
-    public boolean doesNotOverlapNorAdjacent(@NotNull Range other) { return other.end < start || other.start > end; }
+    public boolean overlapsOrAdjacent(Range other) { return !(other.end < start || other.start > end); }
+    public boolean doesOverlapOrAdjacent(Range other) { return !(other.end < start || other.start > end); }
+    public boolean doesNotOverlapOrAdjacent(Range other) { return other.end < start || other.start > end; }
+    public boolean doesNotOverlapNorAdjacent(Range other) { return other.end < start || other.start > end; }
 
-    public boolean properlyContains(@NotNull Range other) { return end > other.end && start < other.start; }
-    public boolean doesProperlyContain(@NotNull Range other) { return end > other.end && start < other.start; }
+    public boolean properlyContains(Range other) { return end > other.end && start < other.start; }
+    public boolean doesProperlyContain(Range other) { return end > other.end && start < other.start; }
 
     public boolean isAdjacent(int index) { return index == start - 1 || index == end;}
     public boolean isAdjacentAfter(int index) { return start - 1 == index;}
     public boolean isAdjacentBefore(int index) { return end == index;}
-    public boolean isAdjacent(@NotNull Range other) { return start == other.end || end == other.start;}
-    public boolean isAdjacentBefore(@NotNull Range other) { return end == other.start;}
-    public boolean isAdjacentAfter(@NotNull Range other) { return start == other.end;}
+    public boolean isAdjacent(Range other) { return start == other.end || end == other.start;}
+    public boolean isAdjacentBefore(Range other) { return end == other.start;}
+    public boolean isAdjacentAfter(Range other) { return start == other.end;}
 
-    public boolean isContainedBy(@NotNull Range other) { return other.end >= end && other.start <= start; }
+    public boolean isContainedBy(Range other) { return other.end >= end && other.start <= start; }
     public boolean isContainedBy(int start, int end) { return end >= this.end && start <= this.start; }
-    public boolean isProperlyContainedBy(@NotNull Range other) { return other.end > end && other.start < start; }
+    public boolean isProperlyContainedBy(Range other) { return other.end > end && other.start < start; }
     public boolean isProperlyContainedBy(int start, int end) { return end > this.end && start < this.start; }
 
-    public boolean isEqual(@NotNull Range other) { return end == other.end && start == other.start; }
+    public boolean isEqual(Range other) { return end == other.end && start == other.start; }
 
     public boolean isValidIndex(int index) { return index >= start && index <= end; }
     public boolean isStart(int index) { return index == start;}
@@ -132,8 +127,7 @@ public class Range {
     public boolean trails(int index) { return index <= start;}
     // @formatter:on
 
-    @NotNull
-    public Range intersect(@NotNull Range other) {
+    public Range intersect(Range other) {
         int thisStart = Math.max(start, other.start);
         int thisEnd = Math.min(end, other.end);
 
@@ -141,8 +135,7 @@ public class Range {
         return withRange(thisStart, thisEnd);
     }
 
-    @NotNull
-    public Range exclude(@NotNull Range other) {
+    public Range exclude(Range other) {
         int thisStart = start;
         if (thisStart >= other.start && thisStart < other.end) thisStart = other.end;
 
@@ -153,7 +146,7 @@ public class Range {
         return withRange(thisStart, thisEnd);
     }
 
-    public int compare(@NotNull Range other) {
+    public int compare(Range other) {
         if (start < other.start) {
             return -1;
         } else if (start > other.start) {
@@ -166,27 +159,22 @@ public class Range {
         return 0;
     }
 
-    @NotNull
-    public Range include(@NotNull Range other) {
+    public Range include(Range other) {
         return other.isNull() ? (this.isNull() ? NULL : this) : expandToInclude(other);
     }
 
-    @NotNull
     public Range include(int pos) {
         return include(pos, pos);
     }
 
-    @NotNull
     public Range include(int start, int end) {
         return this.isNull() ? Range.of(start, end) : expandToInclude(start, end);
     }
 
-    @NotNull
-    public Range expandToInclude(@NotNull Range other) {
+    public Range expandToInclude(Range other) {
         return expandToInclude(other.start, other.end);
     }
 
-    @NotNull
     public Range expandToInclude(int start, int end) {
         return withRange(Math.min(this.start, start), Math.max(this.end, end));
     }
@@ -198,41 +186,34 @@ public class Range {
      * @return resulting based subsequence
      * @deprecated use {@link #basedSubSequence(CharSequence)} instead
      */
-    @NotNull
     @Deprecated
-    public BasedSequence subSequence(@NotNull CharSequence charSequence) {
+    public BasedSequence subSequence(CharSequence charSequence) {
         return basedSubSequence(charSequence);
     }
 
-    @NotNull
-    public BasedSequence basedSubSequence(@NotNull CharSequence charSequence) {
+    public BasedSequence basedSubSequence(CharSequence charSequence) {
         return BasedSequence.of(charSequence).subSequence(start, end);
     }
 
-    @NotNull
-    public BasedSequence basedSafeSubSequence(@NotNull CharSequence charSequence) {
+    public BasedSequence basedSafeSubSequence(CharSequence charSequence) {
         int end = Math.min(charSequence.length(), this.end);
         return isNull() ? BasedSequence.NULL : BasedSequence.of(charSequence).subSequence(Math.min(end, Math.max(0, start)), end);
     }
 
-    @NotNull
-    public RichSequence richSubSequence(@NotNull CharSequence charSequence) {
+    public RichSequence richSubSequence(CharSequence charSequence) {
         return RichSequence.of(charSequence.subSequence(start, end));
     }
 
-    @NotNull
-    public RichSequence richSafeSubSequence(@NotNull CharSequence charSequence) {
+    public RichSequence richSafeSubSequence(CharSequence charSequence) {
         int end = Math.min(charSequence.length(), this.end);
         return isNull() ? RichSequence.NULL : RichSequence.of(charSequence, Math.min(end, Math.max(0, start)), end);
     }
 
-    @NotNull
-    public CharSequence charSubSequence(@NotNull CharSequence charSequence) {
+    public CharSequence charSubSequence(CharSequence charSequence) {
         return charSequence.subSequence(start, end);
     }
 
-    @NotNull
-    public CharSequence safeSubSequence(@NotNull CharSequence charSequence) {
+    public CharSequence safeSubSequence(CharSequence charSequence) {
         int end = Math.min(charSequence.length(), this.end);
         return isNull() ? charSequence.subSequence(0, 0) : charSequence.subSequence(Math.min(end, Math.max(0, start)), end);
     }

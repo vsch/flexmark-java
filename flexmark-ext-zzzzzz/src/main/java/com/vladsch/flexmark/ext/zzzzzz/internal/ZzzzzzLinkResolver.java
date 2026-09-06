@@ -11,8 +11,7 @@ import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
@@ -28,9 +27,8 @@ public class ZzzzzzLinkResolver implements LinkResolver {
         );
     }
 
-    @NotNull
     @Override
-    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
         return nodeAdapter.resolveLink(node, context, link);
     }
 
@@ -52,9 +50,8 @@ public class ZzzzzzLinkResolver implements LinkResolver {
             return false;
         }
 
-        @NotNull
         @Override
-        public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+        public LinkResolver apply(LinkResolverBasicContext context) {
             return new ZzzzzzLinkResolver(context);
         }
     }

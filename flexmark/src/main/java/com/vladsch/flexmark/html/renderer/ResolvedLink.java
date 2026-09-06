@@ -4,20 +4,19 @@ import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttribute;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class ResolvedLink {
-    final private @NotNull LinkType myLinkType;
-    final private @NotNull String myUrl;
-    final private @NotNull LinkStatus myStatus;
+    final private LinkType myLinkType;
+    final private String myUrl;
+    final private LinkStatus myStatus;
     private @Nullable MutableAttributes myAttributes;
 
-    public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url) {
+    public ResolvedLink(LinkType linkType, CharSequence url) {
         this(linkType, url, null, LinkStatus.UNKNOWN);
     }
 
-    public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Attributes attributes) {
+    public ResolvedLink(LinkType linkType, CharSequence url, @Nullable Attributes attributes) {
         this(linkType, url, attributes, LinkStatus.UNKNOWN);
     }
 
@@ -26,21 +25,21 @@ public class ResolvedLink {
         return myAttributes == null ? null : myAttributes.toImmutable();
     }
 
-    public  @NotNull Attributes getNonNullAttributes() {
+    public  Attributes getNonNullAttributes() {
         if (myAttributes == null) {
             myAttributes = new MutableAttributes();
         }
         return myAttributes.toImmutable();
     }
 
-    public  @NotNull MutableAttributes getMutableAttributes() {
+    public  MutableAttributes getMutableAttributes() {
         if (myAttributes == null) {
             myAttributes = new MutableAttributes();
         }
         return myAttributes;
     }
 
-    public ResolvedLink(@NotNull LinkType linkType, CharSequence url, @Nullable Attributes attributes, @NotNull LinkStatus status) {
+    public ResolvedLink(LinkType linkType, CharSequence url, @Nullable Attributes attributes, LinkStatus status) {
         myLinkType = linkType;
         myUrl = String.valueOf(url);
         myStatus = status;
@@ -50,31 +49,28 @@ public class ResolvedLink {
     }
 
     // @formatter:off
-    public ResolvedLink withLinkType(@NotNull LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myAttributes, myStatus); }
-    public ResolvedLink withStatus(@NotNull LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myAttributes, status); }
+    public ResolvedLink withLinkType(LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myAttributes, myStatus); }
+    public ResolvedLink withStatus(LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myAttributes, status); }
     // @formatter:on
 
-    @NotNull
     public LinkType getLinkType() {
         return myLinkType;
     }
 
-    @NotNull
     public LinkStatus getStatus() {
         return myStatus;
     }
 
-    public @NotNull ResolvedLink withUrl(@NotNull CharSequence url) {
+    public ResolvedLink withUrl(CharSequence url) {
         String useUrl = String.valueOf(url);
         return this.myUrl.equals(useUrl) ? this : new ResolvedLink(myLinkType, useUrl, myAttributes, myStatus);
     }
 
-    @NotNull
     public String getUrl() {
         return myUrl;
     }
 
-    public @NotNull String getPageRef() {
+    public String getPageRef() {
         // parse out the anchor marker and ref
         int pos = myUrl.indexOf('#');
         if (pos < 0) {
@@ -94,7 +90,7 @@ public class ResolvedLink {
         }
     }
 
-    public @NotNull ResolvedLink withTitle(@Nullable CharSequence title) {
+    public ResolvedLink withTitle(@Nullable CharSequence title) {
         String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
         if (title == haveTitle || haveTitle != null && title != null && haveTitle.contentEquals(title)) return this;
 
@@ -112,7 +108,7 @@ public class ResolvedLink {
         return myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
     }
 
-    public @NotNull ResolvedLink withTarget(@Nullable CharSequence target) {
+    public ResolvedLink withTarget(@Nullable CharSequence target) {
         String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
         if (target == haveTarget || haveTarget != null && target != null && haveTarget.contentEquals(target)) return this;
 

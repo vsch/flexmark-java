@@ -16,7 +16,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -33,9 +32,8 @@ public class TocSubContextSample {
 
     static class CustomNodeRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new CustomNodeRenderer();
             }
 
@@ -75,12 +73,12 @@ public class TocSubContextSample {
 
     static class CustomExtension implements HtmlRendererExtension {
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
+        public void rendererOptions(MutableDataHolder options) {
 
         }
 
         @Override
-        public void extend(@NotNull Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(Builder htmlRendererBuilder, String rendererType) {
             htmlRendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 

@@ -5,8 +5,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 
@@ -75,18 +74,17 @@ public class SegmentTree {
         return findSegmentPos(index, treeData, 0, size());
     }
 
-    @NotNull
-    public Segment getSegment(int byteOffset, int pos, int startIndex, @NotNull BasedSequence baseSeq) {
+    public Segment getSegment(int byteOffset, int pos, int startIndex, BasedSequence baseSeq) {
         return Segment.getSegment(segmentBytes, byteOffset, pos, startIndex, baseSeq);
     }
 
     @Nullable
-    public Segment findSegment(int index, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+    public Segment findSegment(int index, BasedSequence baseSeq, @Nullable Segment hint) {
         return findSegment(index, 0, size(), baseSeq, hint);
     }
 
     @Nullable
-    public Segment findSegment(int index, int startPos, int endPos, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+    public Segment findSegment(int index, int startPos, int endPos, BasedSequence baseSeq, @Nullable Segment hint) {
         if (hint != null) {
             // NOTE: first try around cached segment for this index
             int startIndex = hint.getStartIndex();
@@ -161,8 +159,7 @@ public class SegmentTree {
         return null;
     }
 
-    @NotNull
-    public SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int startPos, int endPos, @NotNull BasedSequence baseSequence, @Nullable Segment hint) {
+    public SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int startPos, int endPos, BasedSequence baseSequence, @Nullable Segment hint) {
         Segment startSegment;
         Segment endSegment;
 
@@ -239,7 +236,7 @@ public class SegmentTree {
         );
     }
 
-    public int getTextEndOffset(Segment segment, @NotNull BasedSequence baseSequence) {
+    public int getTextEndOffset(Segment segment, BasedSequence baseSequence) {
         assert segment.isText();
 
         if (segment.pos + 1 < size()) {
@@ -251,7 +248,7 @@ public class SegmentTree {
         return -1;
     }
 
-    public int getTextStartOffset(Segment segment, @NotNull BasedSequence baseSequence) {
+    public int getTextStartOffset(Segment segment, BasedSequence baseSequence) {
         assert segment.isText();
 
         Segment prevSegment = getPrevAnchor(segment.pos, baseSequence);
@@ -271,7 +268,7 @@ public class SegmentTree {
      * @param builder   based segment builder
      * @param treeRange treeRange for which to add segments
      */
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder, @NotNull SegmentTreeRange treeRange) {
+    public void addSegments(IBasedSegmentBuilder<?> builder, SegmentTreeRange treeRange) {
         addSegments(builder, treeRange.startIndex, treeRange.endIndex, treeRange.startOffset, treeRange.endOffset, treeRange.startPos, treeRange.endPos);
     }
 
@@ -286,7 +283,7 @@ public class SegmentTree {
      * @param startPos    start pos of sub-sequence segments  in tree
      * @param endPos      end  pos of sub-sequence segments  in tree
      */
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder, int startIndex, int endIndex, int startOffset, int endOffset, int startPos, int endPos) {
+    public void addSegments(IBasedSegmentBuilder<?> builder, int startIndex, int endIndex, int startOffset, int endOffset, int startPos, int endPos) {
         // add our stuff to builder
         if (startOffset != -1) {
             builder.appendAnchor(startOffset);
@@ -341,8 +338,7 @@ public class SegmentTree {
      * @param endPos     end  pos of sub-sequence segments  in tree
      * @return subsequence of segment corresponding to part of it which is in the sub-sequence of the tree
      */
-    @NotNull
-    public static CharSequence getCharSequence(@NotNull Segment segment, int startIndex, int endIndex, int startPos, int endPos) {
+    public static CharSequence getCharSequence(Segment segment, int startIndex, int endIndex, int startPos, int endPos) {
         CharSequence charSequence;
         int pos = segment.pos;
 
@@ -367,18 +363,16 @@ public class SegmentTree {
         return findSegmentPos(index, treeData, startPos, endPos);
     }
 
-    @NotNull
-    public Segment getSegment(int pos, @NotNull BasedSequence baseSeq) {
+    public Segment getSegment(int pos, BasedSequence baseSeq) {
         return Segment.getSegment(segmentBytes, byteOffset(pos), pos, aggrLength(pos - 1), baseSeq);
     }
 
     @Nullable
-    public Segment getPrevAnchor(int pos, @NotNull BasedSequence baseSeq) {
+    public Segment getPrevAnchor(int pos, BasedSequence baseSeq) {
         return getPrevAnchor(pos, treeData, segmentBytes, baseSeq);
     }
 
-    @NotNull
-    public String toString(@NotNull BasedSequence baseSeq) {
+    public String toString(BasedSequence baseSeq) {
         DelimitedBuilder out = new DelimitedBuilder(", ");
         out.append(getClass().getSimpleName()).append("{aggr: {");
         int iMax = size();
@@ -401,7 +395,6 @@ public class SegmentTree {
         return out.toString();
     }
 
-    @NotNull
     @Override
     public String toString() {
         return toString(BasedSequence.NULL);
@@ -471,7 +464,7 @@ public class SegmentTree {
     }
 
     @Nullable
-    public static Segment findSegment(int index, int[] treeData, int startPos, int endPos, byte[] segmentBytes, @NotNull BasedSequence baseSeq) {
+    public static Segment findSegment(int index, int[] treeData, int startPos, int endPos, byte[] segmentBytes, BasedSequence baseSeq) {
         SegmentTreePos treePos = findSegmentPos(index, treeData, startPos, endPos);
         if (treePos != null) {
             return Segment.getSegment(segmentBytes, byteOffset(treePos.pos, treeData), treePos.pos, treePos.startIndex, baseSeq);
@@ -479,13 +472,12 @@ public class SegmentTree {
         return null;
     }
 
-    @NotNull
-    public static Segment getSegment(int pos, int[] treeData, byte[] segmentBytes, @NotNull BasedSequence baseSeq) {
+    public static Segment getSegment(int pos, int[] treeData, byte[] segmentBytes, BasedSequence baseSeq) {
         return Segment.getSegment(segmentBytes, byteOffset(pos, treeData), pos, aggrLength(pos, treeData), baseSeq);
     }
 
     @Nullable
-    public static Segment getPrevAnchor(int pos, int[] treeData, byte[] segmentBytes, @NotNull BasedSequence baseSeq) {
+    public static Segment getPrevAnchor(int pos, int[] treeData, byte[] segmentBytes, BasedSequence baseSeq) {
         int byteOffsetData = byteOffsetData(pos, treeData);
         int anchorOffset = getAnchorOffset(byteOffsetData);
         if (anchorOffset > 0) {
@@ -499,26 +491,24 @@ public class SegmentTree {
     }
 
     protected static class SegmentTreeData {
-        final public @NotNull int[] treeData;           // tuples of aggregated length, segment byte offset with flags for prev anchor offset of 1 to 7
-        final public @NotNull byte[] segmentBytes;      // bytes of serialized segments
-        final public @Nullable int[] startIndices;       // start index for each segment within the string
+        final public int[] treeData;           // tuples of aggregated length, segment byte offset with flags for prev anchor offset of 1 to 7
+        final public byte[] segmentBytes;      // bytes of serialized segments
+        final public int @Nullable [] startIndices;       // start index for each segment within the string
 
-        public SegmentTreeData(@NotNull int[] treeData, @NotNull byte[] segmentBytes, @Nullable int[] startIndices) {
+        public SegmentTreeData(int[] treeData, byte[] segmentBytes, int @Nullable [] startIndices) {
             this.treeData = treeData;
             this.segmentBytes = segmentBytes;
             this.startIndices = startIndices;
         }
     }
 
-    @NotNull
-    public static SegmentTree build(@NotNull Iterable<Seg> segments, @NotNull CharSequence allText) {
-        @NotNull SegmentTreeData segmentTreeData = buildTreeData(segments, allText, true);
+    public static SegmentTree build(Iterable<Seg> segments, CharSequence allText) {
+        SegmentTreeData segmentTreeData = buildTreeData(segments, allText, true);
         return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes);
     }
 
-    @NotNull
-    public static SegmentTree build(@NotNull BasedSegmentBuilder builder) {
-        @NotNull SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
+    public static SegmentTree build(BasedSegmentBuilder builder) {
+        SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
         return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes);
     }
 
@@ -536,8 +526,7 @@ public class SegmentTree {
      * @param buildIndexData true to build index search data, false to build base offset tree data
      * @return segment tree instance with the data
      */
-    @NotNull
-    public static SegmentTreeData buildTreeData(@NotNull Iterable<Seg> segments, @NotNull CharSequence allText, boolean buildIndexData) {
+    public static SegmentTreeData buildTreeData(Iterable<Seg> segments, CharSequence allText, boolean buildIndexData) {
         int byteLength = 0;
         int nonAnchors = 0;
         int lastEndOffset = 0;
@@ -623,8 +612,7 @@ public class SegmentTree {
      * @param baseSeq base sequence for the sequence for this segment tree
      * @return SegmentOffsetTree for this segment tree
      */
-    @NotNull
-    public SegmentOffsetTree getSegmentOffsetTree(@NotNull BasedSequence baseSeq) {
+    public SegmentOffsetTree getSegmentOffsetTree(BasedSequence baseSeq) {
         int nonAnchors = 0;
         int byteLength = segmentBytes.length;
         int segOffset = 0;

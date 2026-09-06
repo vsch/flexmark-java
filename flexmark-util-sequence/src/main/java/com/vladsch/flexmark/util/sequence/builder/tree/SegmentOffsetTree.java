@@ -5,8 +5,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Segment tree which uses offsets instead of aggregated length of segments
@@ -18,28 +17,25 @@ import org.jetbrains.annotations.Nullable;
  * Their use will throw {@link IllegalStateException} if invoked.
  */
 public class SegmentOffsetTree extends SegmentTree {
-    final protected @NotNull int[] startIndices;
+    final protected int[] startIndices;
 
-    protected SegmentOffsetTree(@NotNull int[] treeData, @NotNull byte[] segmentBytes, @NotNull int[] startIndices) {
+    protected SegmentOffsetTree(int[] treeData, byte[] segmentBytes, int[] startIndices) {
         super(treeData, segmentBytes);
         this.startIndices = startIndices;
     }
 
-    @NotNull
-    public static SegmentOffsetTree build(@NotNull Iterable<Seg> segments, @NotNull CharSequence allText) {
+    public static SegmentOffsetTree build(Iterable<Seg> segments, CharSequence allText) {
         SegmentTreeData segmentTreeData = buildTreeData(segments, allText, false);
         assert segmentTreeData.startIndices != null;
         return new SegmentOffsetTree(segmentTreeData.treeData, segmentTreeData.segmentBytes, segmentTreeData.startIndices);
     }
 
-    @NotNull
-    public static SegmentOffsetTree build(@NotNull BasedSegmentBuilder builder) {
-        @NotNull SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
+    public static SegmentOffsetTree build(BasedSegmentBuilder builder) {
+        SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
         return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes).getSegmentOffsetTree(builder.getBaseSequence());
     }
 
-    @NotNull
-    public static SegmentOffsetTree build(@NotNull BasedSequence baseSeq) {
+    public static SegmentOffsetTree build(BasedSequence baseSeq) {
         return baseSeq.getSegmentTree().getSegmentOffsetTree(baseSeq);
     }
 
@@ -51,8 +47,7 @@ public class SegmentOffsetTree extends SegmentTree {
         return pos < 0 ? 0 : pos >= startIndices.length ? startIndices[startIndices.length - 1] : startIndices[pos];
     }
 
-    @NotNull
-    public Segment getSegment(int pos, @NotNull BasedSequence baseSeq) {
+    public Segment getSegment(int pos, BasedSequence baseSeq) {
         return Segment.getSegment(segmentBytes, byteOffset(pos), pos, startIndices[pos], baseSeq);
     }
 
@@ -61,7 +56,7 @@ public class SegmentOffsetTree extends SegmentTree {
     }
 
     @Nullable
-    public Segment getPreviousText(@NotNull Segment segment, @NotNull BasedSequence baseSeq) {
+    public Segment getPreviousText(Segment segment, BasedSequence baseSeq) {
         if (segment.getPos() == 0) {
             if (segment.getStartIndex() > 0) {
                 Segment textSeg = getSegment(0, -1, 0, baseSeq);
@@ -75,7 +70,7 @@ public class SegmentOffsetTree extends SegmentTree {
     }
 
     @Nullable
-    public Segment getNextText(@NotNull Segment segment, @NotNull BasedSequence baseSeq) {
+    public Segment getNextText(Segment segment, BasedSequence baseSeq) {
         if (segment.getByteOffset() + segment.getByteLength() < segmentBytes.length) {
             Segment textSeg = getSegment(segment.getByteOffset() + segment.getByteLength(), -1, segment.getEndIndex(), baseSeq);
             if (textSeg.isText()) return textSeg;
@@ -83,7 +78,7 @@ public class SegmentOffsetTree extends SegmentTree {
         return null;
     }
 
-    public @Nullable Segment findSegmentByOffset(int offset, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+    public @Nullable Segment findSegmentByOffset(int offset, BasedSequence baseSeq, @Nullable Segment hint) {
         int startPos = 0;
         int endPos = size();
 
@@ -95,8 +90,7 @@ public class SegmentOffsetTree extends SegmentTree {
         return null;
     }
 
-    @NotNull
-    public String toString(@NotNull BasedSequence baseSeq) {
+    public String toString(BasedSequence baseSeq) {
         DelimitedBuilder out = new DelimitedBuilder(", ");
         out.append(getClass().getSimpleName()).append("{aggr: {");
         int iMax = size();
@@ -144,31 +138,31 @@ public class SegmentOffsetTree extends SegmentTree {
 
     @Deprecated
     @Override
-    public @Nullable Segment findSegment(int index, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+    public @Nullable Segment findSegment(int index, BasedSequence baseSeq, @Nullable Segment hint) {
         throw new IllegalStateException("Method in SegmentOffsetTree should not be used");
     }
 
     @Deprecated
     @Override
-    public @Nullable Segment findSegment(int index, int startPos, int endPos, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+    public @Nullable Segment findSegment(int index, int startPos, int endPos, BasedSequence baseSeq, @Nullable Segment hint) {
         throw new IllegalStateException("Method in SegmentOffsetTree should not be used");
     }
 
     @Deprecated
     @Override
-    public @NotNull SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int startPos, int endPos, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+    public SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int startPos, int endPos, BasedSequence baseSeq, @Nullable Segment hint) {
         return super.getSegmentRange(startIndex, endIndex, startPos, endPos, baseSeq, hint);
     }
 
     @Deprecated
     @Override
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder, @NotNull SegmentTreeRange treeRange) {
+    public void addSegments(IBasedSegmentBuilder<?> builder, SegmentTreeRange treeRange) {
         throw new IllegalStateException("Method in SegmentOffsetTree should not be used");
     }
 
     @Deprecated
     @Override
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder, int startIndex, int endIndex, int startOffset, int endOffset, int startPos, int endPos) {
+    public void addSegments(IBasedSegmentBuilder<?> builder, int startIndex, int endIndex, int startOffset, int endOffset, int startPos, int endPos) {
         throw new IllegalStateException("Method in SegmentOffsetTree should not be used");
     }
 
@@ -180,7 +174,7 @@ public class SegmentOffsetTree extends SegmentTree {
 
     @Deprecated
     @Override
-    public @Nullable Segment getPrevAnchor(int pos, @NotNull BasedSequence baseSeq) {
+    public @Nullable Segment getPrevAnchor(int pos, BasedSequence baseSeq) {
         throw new IllegalStateException("Method in SegmentOffsetTree should not be used");
     }
 }

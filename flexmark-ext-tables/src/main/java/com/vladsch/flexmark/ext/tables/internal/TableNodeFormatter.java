@@ -13,8 +13,7 @@ import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -233,9 +232,8 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new TableNodeFormatter(options);
         }
     }

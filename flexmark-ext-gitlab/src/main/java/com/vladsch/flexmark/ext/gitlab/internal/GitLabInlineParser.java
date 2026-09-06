@@ -10,8 +10,7 @@ import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,12 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public void finalizeDocument(@NotNull InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(@NotNull InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
         // convert any unclosed ones to text
         for (int j = openInlines.size(); j-- > 0; ) {
             GitLabInline gitLabInline = openInlines.get(j);
@@ -45,7 +44,7 @@ public class GitLabInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(@NotNull LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         char firstChar = inlineParser.peek();
         char secondChar = inlineParser.peek(1);
         if ((firstChar == '{' || firstChar == '[') && (options.insParser && secondChar == '+' || options.delParser && secondChar == '-')) {
@@ -103,7 +102,6 @@ public class GitLabInlineParser implements InlineParserExtension {
             return null;
         }
 
-        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "{[-+";
@@ -115,9 +113,8 @@ public class GitLabInlineParser implements InlineParserExtension {
             return null;
         }
 
-        @NotNull
         @Override
-        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new GitLabInlineParser(lightInlineParser);
         }
 

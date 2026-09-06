@@ -3,8 +3,7 @@ package com.vladsch.flexmark.ext.gitlab.internal;
 import com.vladsch.flexmark.ext.gitlab.GitLabBlockQuote;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -39,9 +38,8 @@ public class GitLabNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new GitLabNodeFormatter(options);
         }
     }

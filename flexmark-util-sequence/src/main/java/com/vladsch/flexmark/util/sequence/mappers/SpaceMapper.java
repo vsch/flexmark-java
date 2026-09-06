@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence.mappers;
 
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
 
 public class SpaceMapper {
     final public static CharMapper toNonBreakSpace = new ToNonBreakSpace();
@@ -12,7 +11,7 @@ public class SpaceMapper {
         return c1 == c2 || (c1 == ' ' && c2 == SequenceUtils.NBSP) || (c2 == ' ' && c1 == SequenceUtils.NBSP);
     }
 
-    public static @NotNull CharMapper toSpaces(@NotNull CharPredicate predicate) {
+    public static CharMapper toSpaces(CharPredicate predicate) {
         return new FromPredicate(predicate);
     }
 
@@ -26,9 +25,9 @@ public class SpaceMapper {
     }
 
     private static class FromPredicate implements CharMapper {
-        final @NotNull CharPredicate myPredicate;
+        final CharPredicate myPredicate;
 
-        FromPredicate(@NotNull CharPredicate predicate) {
+        FromPredicate(CharPredicate predicate) {
             myPredicate = predicate;
         }
 

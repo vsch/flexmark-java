@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -32,9 +31,8 @@ public class TaskListFormatOptions implements MutableDataSetter {
         formatPrioritizedTaskItems = TaskListExtension.FORMAT_PRIORITIZED_TASK_ITEMS.get(options);
     }
 
-    @NotNull
     @Override
-    public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    public MutableDataHolder setIn(MutableDataHolder dataHolder) {
         dataHolder.set(TaskListExtension.FORMAT_LIST_ITEM_CASE, taskListItemCase);
         dataHolder.set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, taskListItemPlacement);
         dataHolder.set(TaskListExtension.FORMAT_ORDERED_TASK_ITEM_PRIORITY, formatOrderedTaskItemPriority);

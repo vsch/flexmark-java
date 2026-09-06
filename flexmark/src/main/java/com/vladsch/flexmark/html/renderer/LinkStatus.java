@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.html.renderer;
 
-import org.jetbrains.annotations.NotNull;
 
 public class LinkStatus {
     final public static LinkStatus UNKNOWN = new LinkStatus("UNKNOWN");
@@ -11,11 +10,11 @@ public class LinkStatus {
 
     final private String myName;
 
-    public LinkStatus(@NotNull String name) {
+    public LinkStatus(String name) {
         this.myName = name;
     }
 
-    public @NotNull String getName() {
+    public String getName() {
         return myName;
     }
 

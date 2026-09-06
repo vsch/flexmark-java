@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
 
@@ -19,7 +18,7 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
         if (node instanceof Link) {
             Node previous = node.getPrevious();
 
@@ -50,9 +49,8 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
             addNodes(Link.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new YouTubeLinkNodePostProcessor(document);
         }
     }

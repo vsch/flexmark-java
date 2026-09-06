@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Implemented by BasedOptionsSequence, use instance of it to pass to {@link BasedSequence#of(CharSequence)} and options enabled in it

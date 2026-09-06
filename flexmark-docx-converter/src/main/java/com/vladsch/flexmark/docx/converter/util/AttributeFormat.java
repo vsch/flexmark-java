@@ -2,8 +2,7 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.docx4j.wml.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.math.BigInteger;
 
@@ -111,8 +110,7 @@ public class AttributeFormat {
         return null;
     }
 
-    @NotNull
-    public <T> CTShd getShd(@NotNull DocxContext<T> docx) {
+    public <T> CTShd getShd(DocxContext<T> docx) {
         CTShd shd = docx.getFactory().createCTShd();
         shd.setColor("auto");
         shd.setFill(fillColor);
@@ -120,7 +118,7 @@ public class AttributeFormat {
         return shd;
     }
 
-    public <T> void setFormatRPr(@NotNull RPrAbstract rPr, @NotNull DocxContext<T> docx) {
+    public <T> void setFormatRPr(RPrAbstract rPr, DocxContext<T> docx) {
         if (textColor != null) {
             Color color = docx.getFactory().createColor();
             rPr.setColor(color);

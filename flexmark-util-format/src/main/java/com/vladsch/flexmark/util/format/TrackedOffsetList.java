@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.sequence.builder.Seg;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTree;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.UnaryOperator;
@@ -13,13 +12,11 @@ import java.util.function.UnaryOperator;
 public class TrackedOffsetList implements List<TrackedOffset> {
     public static TrackedOffsetList EMPTY_LIST = new TrackedOffsetList(BasedSequence.NULL, Collections.emptyList());
 
-    @NotNull
-    public static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull List<TrackedOffset> trackedOffsets) {
+    public static TrackedOffsetList create(BasedSequence baseSeq, List<TrackedOffset> trackedOffsets) {
         return trackedOffsets instanceof TrackedOffsetList ? (TrackedOffsetList) trackedOffsets : new TrackedOffsetList(baseSeq, trackedOffsets);
     }
 
-    @NotNull
-    public static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull int[] offsets) {
+    public static TrackedOffsetList create(BasedSequence baseSeq, int[] offsets) {
         ArrayList<TrackedOffset> trackedOffsets = new ArrayList<>(offsets.length);
         for (int offset : offsets) {
             trackedOffsets.add(TrackedOffset.track(offset));
@@ -27,11 +24,11 @@ public class TrackedOffsetList implements List<TrackedOffset> {
         return new TrackedOffsetList(baseSeq, trackedOffsets);
     }
 
-    final private @NotNull BasedSequence myBaseSeq;
-    final private @NotNull List<TrackedOffset> myTrackedOffsets;
-    final private @NotNull BasedOffsetTracker myBasedOffsetTracker;
+    final private BasedSequence myBaseSeq;
+    final private List<TrackedOffset> myTrackedOffsets;
+    final private BasedOffsetTracker myBasedOffsetTracker;
 
-    private TrackedOffsetList(@NotNull BasedSequence baseSeq, @NotNull List<TrackedOffset> trackedOffsets) {
+    private TrackedOffsetList(BasedSequence baseSeq, List<TrackedOffset> trackedOffsets) {
         myBaseSeq = baseSeq;
         myTrackedOffsets = new ArrayList<>(trackedOffsets);
         myTrackedOffsets.sort(Comparator.comparing(TrackedOffset::getOffset));
@@ -44,7 +41,6 @@ public class TrackedOffsetList implements List<TrackedOffset> {
         assert myBasedOffsetTracker.size() == myTrackedOffsets.size();
     }
 
-    @NotNull
     public TrackedOffsetList getUnresolvedOffsets() {
         ArrayList<TrackedOffset> unresolved = new ArrayList<>();
 
@@ -61,22 +57,18 @@ public class TrackedOffsetList implements List<TrackedOffset> {
         return false;
     }
 
-    @NotNull
     public BasedSequence getBaseSeq() {
         return myBaseSeq;
     }
 
-    @NotNull
     public List<TrackedOffset> getTrackedOffsets() {
         return myTrackedOffsets;
     }
 
-    @NotNull
     public BasedOffsetTracker getBasedOffsetTracker() {
         return myBasedOffsetTracker;
     }
 
-    @NotNull
     public TrackedOffsetList getTrackedOffsets(int startOffset, int endOffset) {
         OffsetInfo startInfo = myBasedOffsetTracker.getOffsetInfo(startOffset, startOffset == endOffset);
         OffsetInfo endInfo = myBasedOffsetTracker.getOffsetInfo(endOffset, true);
@@ -114,10 +106,10 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     @Override public TrackedOffset set(int index, TrackedOffset element) { throw new IllegalStateException("Not supported. Immutable list."); }
     @Override public void add(int index, TrackedOffset element) { throw new IllegalStateException("Not supported. Immutable list."); }
     @Override public TrackedOffset remove(int index) { throw new IllegalStateException("Not supported. Immutable list."); }
-    @Override public boolean addAll(@NotNull Collection<? extends TrackedOffset> c) { throw new IllegalStateException("Not supported. Immutable list."); }
-    @Override public boolean addAll(int index, @NotNull Collection<? extends TrackedOffset> c) { throw new IllegalStateException("Not supported. Immutable list."); }
-    @Override public boolean removeAll(@NotNull Collection<?> c) { throw new IllegalStateException("Not supported. Immutable list."); }
-    @Override public boolean retainAll(@NotNull Collection<?> c) { throw new IllegalStateException("Not supported. Immutable list."); }
+    @Override public boolean addAll(Collection<? extends TrackedOffset> c) { throw new IllegalStateException("Not supported. Immutable list."); }
+    @Override public boolean addAll(int index, Collection<? extends TrackedOffset> c) { throw new IllegalStateException("Not supported. Immutable list."); }
+    @Override public boolean removeAll(Collection<?> c) { throw new IllegalStateException("Not supported. Immutable list."); }
+    @Override public boolean retainAll(Collection<?> c) { throw new IllegalStateException("Not supported. Immutable list."); }
     @Override public void replaceAll(UnaryOperator<TrackedOffset> operator) { throw new IllegalStateException("Not supported. Immutable list."); }
     @Override public void sort(Comparator<? super TrackedOffset> c) { throw new IllegalStateException("Not supported. Immutable list."); }
     @Override public void clear() { throw new IllegalStateException("Not supported. Immutable list."); }
@@ -134,20 +126,17 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     @Override
     public boolean contains(Object o) {return myTrackedOffsets.contains(o);}
 
-    @NotNull
     @Override
     public Iterator<TrackedOffset> iterator() {return myTrackedOffsets.iterator();}
 
-    @NotNull
     @Override
     public Object[] toArray() {return myTrackedOffsets.toArray();}
 
-    @NotNull
     @Override
-    public <T> T[] toArray(@NotNull T[] a) {return myTrackedOffsets.toArray(a);}
+    public <T> T[] toArray(T[] a) {return myTrackedOffsets.toArray(a);}
 
     @Override
-    public boolean containsAll(@NotNull Collection<?> c) {return myTrackedOffsets.containsAll(c);}
+    public boolean containsAll(Collection<?> c) {return myTrackedOffsets.containsAll(c);}
 
     @Override
     public boolean equals(Object o) {return myTrackedOffsets.equals(o);}
@@ -164,15 +153,12 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     @Override
     public int lastIndexOf(Object o) {return myTrackedOffsets.lastIndexOf(o);}
 
-    @NotNull
     @Override
     public ListIterator<TrackedOffset> listIterator() {return myTrackedOffsets.listIterator();}
 
-    @NotNull
     @Override
     public ListIterator<TrackedOffset> listIterator(int index) {return myTrackedOffsets.listIterator(index);}
 
-    @NotNull
     @Override
     public List<TrackedOffset> subList(int fromIndex, int toIndex) {return myTrackedOffsets.subList(fromIndex, toIndex);}
 

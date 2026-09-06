@@ -6,7 +6,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 public class ComboGfmIssuesSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/gfm_issues_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(GfmIssuesExtension.create()))
             .toImmutable();
@@ -28,7 +27,7 @@ public class ComboGfmIssuesSpecTest extends RendererSpecTest {
         optionsMap.put("suffix", new MutableDataSet().set(GfmIssuesExtension.GIT_HUB_ISSUE_URL_SUFFIX, "&"));
         optionsMap.put("bold", new MutableDataSet().set(GfmIssuesExtension.GIT_HUB_ISSUE_HTML_PREFIX, "<strong>").set(GfmIssuesExtension.GIT_HUB_ISSUE_HTML_SUFFIX, "</strong>"));
     }
-    public ComboGfmIssuesSpecTest(@NotNull SpecExample example) {
+    public ComboGfmIssuesSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

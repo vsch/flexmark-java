@@ -15,7 +15,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -40,14 +39,13 @@ public class UnderlineExtensionSample {
         private BasedSequence text = BasedSequence.NULL;
         private BasedSequence closingMarker = BasedSequence.NULL;
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return new BasedSequence[] { openingMarker, text, closingMarker };
         }
 
         @Override
-        public void getAstExtra(@NotNull StringBuilder out) {
+        public void getAstExtra(StringBuilder out) {
             Node.delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
         }
 
@@ -147,9 +145,8 @@ public class UnderlineExtensionSample {
 
         public static class Factory implements NodeRendererFactory {
 
-            @NotNull
             @Override
-            public NodeRenderer apply(@NotNull DataHolder options) {
+            public NodeRenderer apply(DataHolder options) {
                 return new UnderlineNodeRenderer();
             }
         }
@@ -180,7 +177,7 @@ public class UnderlineExtensionSample {
         private UnderlineExtension() { }
 
         @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) { }
+        public void rendererOptions(MutableDataHolder options) { }
 
         @Override
         public void parserOptions(MutableDataHolder options) { }
@@ -191,7 +188,7 @@ public class UnderlineExtensionSample {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
             htmlRendererBuilder.nodeRendererFactory(new UnderlineNodeRenderer.Factory());
         }
 

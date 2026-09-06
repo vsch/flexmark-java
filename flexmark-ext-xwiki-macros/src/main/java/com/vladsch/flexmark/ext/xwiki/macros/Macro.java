@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.xwiki.macros;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,7 +16,6 @@ public class Macro extends Node {
     protected BasedSequence attributeText = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -25,7 +23,7 @@ public class Macro extends Node {
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, name, "name");
         segmentSpanChars(out, attributeText, "attributes");

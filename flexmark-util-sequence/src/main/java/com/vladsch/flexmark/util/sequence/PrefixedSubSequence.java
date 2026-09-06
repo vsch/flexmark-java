@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A BasedSequence with an out of scope of original char sequence prefix
@@ -22,13 +21,11 @@ final public class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         this.base = baseSeq.subSequence(startIndex, endIndex);
     }
 
-    @NotNull
     @Override
     public Object getBase() {
         return base.getBase();
     }
 
-    @NotNull
     @Override
     public BasedSequence getBaseSequence() {
         return base.getBaseSequence();
@@ -44,13 +41,11 @@ final public class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         return base.getEndOffset();
     }
 
-    @NotNull
     @Override
     public Range getSourceRange() {
         return base.getSourceRange();
     }
 
-    @NotNull
     @Override
     public BasedSequence baseSubSequence(int startIndex, int endIndex) {
         return base.baseSubSequence(startIndex, endIndex);
@@ -98,7 +93,7 @@ final public class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     }
 
     @Override
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+    public void addSegments(IBasedSegmentBuilder<?> builder) {
         if (prefix.length() != 0) {
             builder.append(base.getStartOffset(), base.getStartOffset());
             builder.append(prefix.toString());
@@ -118,7 +113,6 @@ final public class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         }
     }
 
-    @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, length());
@@ -138,7 +132,6 @@ final public class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         }
     }
 
-    @NotNull
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

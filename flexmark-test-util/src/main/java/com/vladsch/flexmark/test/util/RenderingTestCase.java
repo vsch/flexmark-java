@@ -5,8 +5,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.misc.Extension;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
@@ -56,22 +55,22 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
      * @param html            html used for comparison to expected html
      * @param ast             ast used for comparison to expected ast
      */
-    public void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
+    public void addFullSpecExample(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, String html, @Nullable String ast) {
 
     }
 
     /*
      * Convenience functions for those tests that do not have an example
      */
-    final protected void assertRendering(@NotNull String source, @NotNull String html) {
+    final protected void assertRendering(String source, String html) {
         assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, null));
     }
 
-    final protected void assertRendering(@NotNull String source, @NotNull String html, @Nullable String ast) {
+    final protected void assertRendering(String source, String html, @Nullable String ast) {
         assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, ast));
     }
 
-    final protected void assertRendering(@NotNull SpecExample specExample) {
+    final protected void assertRendering(SpecExample specExample) {
         SpecExample example = checkExample(specExample);
         String message = example.getFileUrlWithLineNumber();
         String source = example.getSource();

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -36,7 +35,7 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
     }
 
     @Override
-    public void renderDocument(@NotNull NodeRendererContext context, @NotNull HtmlWriter html, @NotNull Document document, @NotNull RenderingPhase phase) {
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.HEAD_TOP) {
             headerIdGenerator.generateIds(document);
         } else if (phase == RenderingPhase.BODY_TOP) {
@@ -155,9 +154,8 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
     }
 
     public static class Factory implements NodeRendererFactory {
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new EnumeratedReferenceNodeRenderer(options);
         }
     }

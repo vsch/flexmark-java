@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.attributes;
 
 import com.vladsch.flexmark.util.misc.CharPredicate;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.containsAny;
 
@@ -19,8 +18,7 @@ public enum AttributeValueQuotes {
     final static CharPredicate P_SINGLE_QUOTES = CharPredicate.anyOf("'");
     final static CharPredicate P_DOUBLE_QUOTES = CharPredicate.anyOf("\"");
 
-    @NotNull
-    public String quotesFor(@NotNull CharSequence text, @NotNull CharSequence defaultQuotes) {
+    public String quotesFor(CharSequence text, CharSequence defaultQuotes) {
         switch (this) {
             case NO_QUOTES_SINGLE_PREFERRED:
                 if (!containsAny(text, P_SPACES_OR_QUOTES)) {

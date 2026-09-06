@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for wikilinks
@@ -77,7 +76,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -98,7 +97,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new WikiLinkNodeRenderer.Factory());
             htmlRendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());

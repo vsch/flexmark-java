@@ -7,7 +7,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.HashMap;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 final public class ComboGitHubCompatibilitySpecTest extends CoreRendererSpecTest {
     final private static String SPEC_RESOURCE = "/core_gfm_doc_compatibility_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .setFrom(ParserEmulationProfile.GITHUB_DOC)
 
@@ -30,7 +29,7 @@ final public class ComboGitHubCompatibilitySpecTest extends CoreRendererSpecTest
     static {
         optionsMap.put("no-loose-non-list-children", new MutableDataSet().set(Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN, false).set(Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH, false));
     }
-    public ComboGitHubCompatibilitySpecTest(@NotNull SpecExample example) {
+    public ComboGitHubCompatibilitySpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

@@ -13,8 +13,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -155,7 +154,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         return new MutableDataSet().set(Formatter.RIGHT_MARGIN, value);
     }
 
-    public FormatterTranslationSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public FormatterTranslationSpecTestBase(SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 }

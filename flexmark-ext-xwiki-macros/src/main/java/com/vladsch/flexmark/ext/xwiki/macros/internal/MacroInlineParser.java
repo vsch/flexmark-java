@@ -8,8 +8,7 @@ import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.LightInlineParser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +25,12 @@ public class MacroInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public void finalizeDocument(@NotNull InlineParser inlineParser) {
+    public void finalizeDocument(InlineParser inlineParser) {
 
     }
 
     @Override
-    public void finalizeBlock(@NotNull InlineParser inlineParser) {
+    public void finalizeBlock(InlineParser inlineParser) {
         for (int j = openMacros.size(); j-- > 0; ) {
             inlineParser.moveNodes(openMacros.get(j), inlineParser.getBlock().getLastChild());
         }
@@ -40,7 +39,7 @@ public class MacroInlineParser implements InlineParserExtension {
     }
 
     @Override
-    public boolean parse(@NotNull LightInlineParser inlineParser) {
+    public boolean parse(LightInlineParser inlineParser) {
         if (inlineParser.peek(1) == '{') {
             BasedSequence input = inlineParser.getInput();
             int index = inlineParser.getIndex();
@@ -129,7 +128,6 @@ public class MacroInlineParser implements InlineParserExtension {
             return null;
         }
 
-        @NotNull
         @Override
         public CharSequence getCharacters() {
             return "{";
@@ -141,9 +139,8 @@ public class MacroInlineParser implements InlineParserExtension {
             return null;
         }
 
-        @NotNull
         @Override
-        public InlineParserExtension apply(@NotNull LightInlineParser lightInlineParser) {
+        public InlineParserExtension apply(LightInlineParser lightInlineParser) {
             return new MacroInlineParser(lightInlineParser);
         }
 

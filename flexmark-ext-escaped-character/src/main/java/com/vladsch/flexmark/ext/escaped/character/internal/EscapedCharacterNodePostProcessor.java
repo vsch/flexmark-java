@@ -13,7 +13,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.ReplacedTextRegion;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
     }
 
     @Override
-    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+    public void process(NodeTracker state, Node node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         // NOTE: needed for its side-effects
@@ -84,9 +83,8 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
             addNodeWithExclusions(Text.class, DoNotDecorate.class);
         }
 
-        @NotNull
         @Override
-        public NodePostProcessor apply(@NotNull Document document) {
+        public NodePostProcessor apply(Document document) {
             return new EscapedCharacterNodePostProcessor(document);
         }
     }

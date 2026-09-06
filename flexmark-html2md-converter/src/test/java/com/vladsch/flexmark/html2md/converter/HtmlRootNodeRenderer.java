@@ -3,7 +3,6 @@ package com.vladsch.flexmark.html2md.converter;
 import com.vladsch.flexmark.test.util.spec.IRenderBase;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -20,7 +19,7 @@ class HtmlRootNodeRenderer extends IRenderBase {
     }
 
     @Override
-    public void render(@NotNull Node document, @NotNull Appendable output) {
+    public void render(Node document, Appendable output) {
         assert document instanceof HtmlConverter.RootNode;
         String text = ((HtmlConverter.RootNode) document).myRootNode;
         try {

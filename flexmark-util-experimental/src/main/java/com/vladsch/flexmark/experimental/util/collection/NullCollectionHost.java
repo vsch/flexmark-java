@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.experimental.util.collection;
 
 import com.vladsch.flexmark.util.collection.CollectionHost;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class NullCollectionHost<K> implements CollectionHost<K> {
     // @formatter:off

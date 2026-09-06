@@ -29,7 +29,7 @@ optimization of implementation classes. Changes are detailed in
 * For Versions 0.62.2 or below, Java 8 or above, Java 9+ compatible. For Versions 0.64.0 or
   above, Java 11 or above.
 * The project is on Maven: `com.vladsch.flexmark`
-* The core has no dependencies other than `org.jetbrains:annotations:24.0.1`. For extensions, see
+* The core has no dependencies other than `org.jspecify:jspecify:1.0.0`. For extensions, see
   extension description below.
 
   The API is still evolving to accommodate new extensions and functionality.

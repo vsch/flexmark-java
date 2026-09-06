@@ -5,7 +5,7 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.options.*;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.regex.Pattern;
 

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for GitHub Users
@@ -33,7 +32,7 @@ public class GfmUsersExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -48,7 +47,7 @@ public class GfmUsersExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new GfmUsersNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

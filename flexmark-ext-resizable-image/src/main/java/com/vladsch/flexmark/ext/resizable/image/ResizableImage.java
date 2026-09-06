@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.resizable.image;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class ResizableImage extends Node implements DoNotDecorate {
     protected BasedSequence source = BasedSequence.NULL;
@@ -11,7 +10,6 @@ public class ResizableImage extends Node implements DoNotDecorate {
     protected BasedSequence width = BasedSequence.NULL;
     protected BasedSequence height = BasedSequence.NULL;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { text, source, width, height };

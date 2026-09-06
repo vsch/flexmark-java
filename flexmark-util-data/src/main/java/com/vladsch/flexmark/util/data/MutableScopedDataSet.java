@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +25,7 @@ public class MutableScopedDataSet extends MutableDataSet {
     }
 
     @Override
-    public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
+    public Map<? extends DataKeyBase<?>, Object> getAll() {
         if (parent != null) {
             HashMap<DataKeyBase<?>, Object> all = new HashMap<>(super.getAll());
             for (DataKeyBase<?> key : parent.getKeys()) {
@@ -42,7 +41,7 @@ public class MutableScopedDataSet extends MutableDataSet {
     }
 
     @Override
-    public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
+    public Collection<? extends DataKeyBase<?>> getKeys() {
         if (parent != null) {
             ArrayList<DataKeyBase<?>> all = new ArrayList<>(super.getKeys());
             for (DataKeyBase<?> key : parent.getKeys()) {
@@ -58,12 +57,12 @@ public class MutableScopedDataSet extends MutableDataSet {
     }
 
     @Override
-    public boolean contains(@NotNull DataKeyBase<?> key) {
+    public boolean contains(DataKeyBase<?> key) {
         return super.contains(key) || (parent != null && parent.contains(key));
     }
 
     @Override
-    public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+    public @Nullable Object getOrCompute(DataKeyBase<?> key, DataValueFactory<?> factory) {
         if (parent == null || super.contains(key) || !parent.contains(key)) {
             return super.getOrCompute(key, factory);
         } else {

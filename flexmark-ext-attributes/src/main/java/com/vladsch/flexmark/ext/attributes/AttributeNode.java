@@ -4,8 +4,7 @@ import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An Attribute node representing a single attribute name and value in attributes node
@@ -17,7 +16,6 @@ public class AttributeNode extends Node implements DoNotDecorate {
     protected BasedSequence value = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -25,7 +23,7 @@ public class AttributeNode extends Node implements DoNotDecorate {
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, name, "name");
         segmentSpanChars(out, attributeSeparator, "sep");
         delimitedSegmentSpanChars(out, openingMarker, value, closingMarker, "value");

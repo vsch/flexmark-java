@@ -6,7 +6,6 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -40,7 +39,7 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     }//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
 
     @Override//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
-    public void renderDocument(@NotNull NodeRendererContext context, @NotNull HtmlWriter html, @NotNull Document document, @NotNull RenderingPhase phase) {//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
     }//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
 
     private void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) {
@@ -60,9 +59,8 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     }
 
     public static class Factory implements NodeRendererFactory {
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new ZzzzzzNodeRenderer(options);
         }
     }

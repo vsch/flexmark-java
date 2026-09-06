@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.tree.iteration;
 
-import org.jetbrains.annotations.NotNull;
 
 public interface ValueIteration<R> extends VoidIteration {
     /**
@@ -8,7 +7,7 @@ public interface ValueIteration<R> extends VoidIteration {
      *
      * @param value value to return from the loop
      */
-    void setResult(@NotNull R value);
+    void setResult(R value);
 
     /**
      * @return true if the current loop result value was never set (ie. only set at loop instantiation with
@@ -22,13 +21,11 @@ public interface ValueIteration<R> extends VoidIteration {
     /**
      * @return defaultValue passed to loop instance
      */
-    @NotNull
     R getDefaultValue();
 
     /**
      * @return current result value
      */
-    @NotNull
     R getResult();
 
     /**
@@ -36,5 +33,5 @@ public interface ValueIteration<R> extends VoidIteration {
      *
      * @param value value to return for the result of the loop
      */
-    void Return(@NotNull R value);
+    void Return(R value);
 }

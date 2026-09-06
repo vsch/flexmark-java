@@ -3,8 +3,7 @@ package com.vladsch.flexmark.ext.aside.internal;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,9 +39,8 @@ public class AsideNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new AsideNodeFormatter(options);
         }
     }

@@ -15,7 +15,6 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TableManipulator;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for GFM tables using "|" pipes (GitHub Flavored Markdown).
@@ -67,7 +66,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -82,7 +81,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

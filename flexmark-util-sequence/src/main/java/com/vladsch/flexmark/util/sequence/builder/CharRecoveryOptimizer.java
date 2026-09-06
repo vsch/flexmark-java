@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
@@ -17,7 +16,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
 
     private int prevEolPos;
 
-    int prevMatchPos(@NotNull CharSequence base, CharSequence chars, int startIndex, int endIndex) {
+    int prevMatchPos(CharSequence base, CharSequence chars, int startIndex, int endIndex) {
         int length = chars.length();
         endIndex = Math.min(base.length(), endIndex);
         int iMax = Math.min(endIndex - startIndex, length);
@@ -32,7 +31,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
         return iMax;
     }
 
-    int nextMatchPos(@NotNull CharSequence base, CharSequence chars, int startIndex, int fromIndex) {
+    int nextMatchPos(CharSequence base, CharSequence chars, int startIndex, int fromIndex) {
         startIndex = Math.max(0, startIndex);
         fromIndex = Math.min(base.length(), fromIndex);
 
@@ -51,13 +50,13 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
         return charsOffset;
     }
 
-    public Object[] apply(@NotNull CharSequence chars, Object[] parts) {
+    public Object[] apply(CharSequence chars, Object[] parts) {
         // optimizer already applied
         if (parts.length != 3 || !(parts[0] instanceof Range && parts[1] instanceof CharSequence && parts[2] instanceof Range)) return parts;
 
-        final @NotNull Range originalPrev = (Range) parts[0];
-        @NotNull CharSequence originalText = (CharSequence) parts[1];
-        final @NotNull Range originalNext = (Range) parts[2];
+        final Range originalPrev = (Range) parts[0];
+        CharSequence originalText = (CharSequence) parts[1];
+        final Range originalNext = (Range) parts[2];
 
         // optimizer already applied
         final int textLength = originalText.length();
@@ -65,9 +64,9 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
 
         final int charsLength = chars.length();
 
-        @NotNull Range prevRange = originalPrev;
-        @NotNull CharSequence text = originalText;
-        @NotNull Range nextRange = originalNext;
+        Range prevRange = originalPrev;
+        CharSequence text = originalText;
+        Range nextRange = originalNext;
 
         prevEolPos = -1;
 

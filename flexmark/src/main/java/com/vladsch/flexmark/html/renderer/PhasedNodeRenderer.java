@@ -2,8 +2,7 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.ast.Document;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
@@ -26,5 +25,5 @@ public interface PhasedNodeRenderer extends NodeRenderer {
      *                 the node renderer calls are made so it is a good place to reset internal structures for
      *                 start of each phase.
      */
-    void renderDocument(@NotNull NodeRendererContext context, @NotNull HtmlWriter html, @NotNull Document document, @NotNull RenderingPhase phase);
+    void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase);
 }

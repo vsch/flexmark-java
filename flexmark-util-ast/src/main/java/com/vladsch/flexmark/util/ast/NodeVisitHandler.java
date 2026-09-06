@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.ast;
 
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Interface to visit variations on specific nodes:
@@ -9,6 +8,6 @@ import org.jetbrains.annotations.NotNull;
  * visitChildren() visit node's children
  */
 public interface NodeVisitHandler extends Visitor<Node> {
-    void visitNodeOnly(@NotNull Node node);
-    void visitChildren(@NotNull Node parent);
+    void visitNodeOnly(Node node);
+    void visitChildren(Node parent);
 }

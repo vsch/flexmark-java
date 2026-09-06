@@ -9,7 +9,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for emoji shortcuts using Emoji-Cheat-Sheet.com.
@@ -35,7 +34,7 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -55,7 +54,7 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new EmojiNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {

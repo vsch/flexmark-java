@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
@@ -47,7 +46,7 @@ public class TypographicSmarts extends Node implements DoNotAttributeDecorate, T
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         out.append(" typographic: ").append(typographicText).append(" ");
     }
 
@@ -59,13 +58,11 @@ public class TypographicSmarts extends Node implements DoNotAttributeDecorate, T
         this.typographicText = typographicText;
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
     }
 
-    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();

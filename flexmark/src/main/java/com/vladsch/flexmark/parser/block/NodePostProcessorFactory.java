@@ -3,8 +3,7 @@ package com.vladsch.flexmark.parser.block;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -52,7 +51,6 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
         return NODE_MAP;
     }
 
-    @NotNull
     @Override
-    abstract public NodePostProcessor apply(@NotNull Document document);
+    abstract public NodePostProcessor apply(Document document);
 }

@@ -6,7 +6,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 public class ComboJekyllTagSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/jekyll_tag_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(JekyllTagExtension.create()))
             .toImmutable();
@@ -37,7 +36,7 @@ public class ComboJekyllTagSpecTest extends RendererSpecTest {
         optionsMap.put("includes", new MutableDataSet().set(JekyllTagExtension.INCLUDED_HTML, content));
         optionsMap.put("embed-includes", new MutableDataSet().set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true));
     }
-    public ComboJekyllTagSpecTest(@NotNull SpecExample example) {
+    public ComboJekyllTagSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

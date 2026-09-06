@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     static final int BRACKET_NESTING_LEVEL = 1;
@@ -34,7 +33,7 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public boolean isMatch(@NotNull BasedSequence nodeChars) {
+    public boolean isMatch(BasedSequence nodeChars) {
         int length = nodeChars.length();
         if (options.imageLinks) {
             if (length >= 5 && nodeChars.charAt(0) == '!') {
@@ -48,9 +47,8 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
         return false;
     }
 
-    @NotNull
     @Override
-    public BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node) {
+    public BasedSequence adjustInlineText(Document document, Node node) {
         // here we remove the page ref from child text and only leave the text part
         assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
@@ -58,14 +56,14 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public boolean allowDelimiters(@NotNull BasedSequence chars, @NotNull Document document, @NotNull Node node) {
+    public boolean allowDelimiters(BasedSequence chars, Document document, Node node) {
         assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
         return node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document) && wikiNode.getText().ifNull(wikiNode.getLink()).containsAllOf(chars);
     }
 
     @Override
-    public void updateNodeElements(@NotNull Document document, @NotNull Node node) {
+    public void updateNodeElements(Document document, Node node) {
         assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
         if (node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document)) {
@@ -77,27 +75,25 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
         }
     }
 
-    @NotNull
     @Override
-    public Node createNode(@NotNull BasedSequence nodeChars) {
+    public Node createNode(BasedSequence nodeChars) {
         return nodeChars.firstChar() == '!' ? new WikiImage(nodeChars, options.linkFirstSyntax, options.allowPipeEscape)
                 : new WikiLink(nodeChars, options.linkFirstSyntax, options.allowAnchors, options.allowPipeEscape, options.allowAnchorEscape);
     }
 
     public static class Factory implements LinkRefProcessorFactory {
-        @NotNull
         @Override
-        public LinkRefProcessor apply(@NotNull Document document) {
+        public LinkRefProcessor apply(Document document) {
             return new WikiLinkLinkRefProcessor(document);
         }
 
         @Override
-        public boolean getWantExclamationPrefix(@NotNull DataHolder options) {
+        public boolean getWantExclamationPrefix(DataHolder options) {
             return WikiLinkExtension.IMAGE_LINKS.get(options);
         }
 
         @Override
-        public int getBracketNestingLevel(@NotNull DataHolder options) {
+        public int getBracketNestingLevel(DataHolder options) {
             return BRACKET_NESTING_LEVEL;
         }
     }

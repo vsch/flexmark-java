@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.xwiki.macros;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -14,12 +13,11 @@ import java.util.Map;
 public class MacroBlock extends Block {
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         if (isClosedTag()) out.append(" isClosed");
         segmentSpanChars(out, getMacroContentChars(), "macroContent");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return Node.EMPTY_SEGMENTS;

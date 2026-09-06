@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 public class ComboTableTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_tables_translation_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .toImmutable();
@@ -44,7 +43,7 @@ public class ComboTableTranslationFormatterSpecTest extends TranslationFormatter
         optionsMap.put("left-align-marker-add", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
         optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
     }
-    public ComboTableTranslationFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboTableTranslationFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * An emoji node containing emoji shortcut text
@@ -18,14 +17,13 @@ public class Emoji extends Node implements DelimitedNode, TextContainer {
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 

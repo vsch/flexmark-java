@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ast.ParagraphContainer;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -19,14 +18,13 @@ public class GitLabBlockQuote extends Block implements ParagraphContainer {
     private BasedSequence closingTrailing = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, openingTrailing, "openTrail");
         segmentSpanChars(out, closingMarker, "close");
         segmentSpanChars(out, closingTrailing, "closeTrail");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, openingTrailing, closingMarker, closingTrailing };

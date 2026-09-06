@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -185,9 +184,8 @@ public class SpecExampleNodeRenderer implements NodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new SpecExampleNodeRenderer(options);
         }
     }

@@ -10,8 +10,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -90,9 +89,8 @@ public class DefinitionNodeFormatter implements NodeFormatter {
     }
 
     public static class Factory implements NodeFormatterFactory {
-        @NotNull
         @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
+        public NodeFormatter create(DataHolder options) {
             return new DefinitionNodeFormatter(options);
         }
     }

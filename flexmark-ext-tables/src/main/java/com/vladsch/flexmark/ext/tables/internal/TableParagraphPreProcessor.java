@@ -17,7 +17,7 @@ import com.vladsch.flexmark.util.ast.NodeIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Pattern;

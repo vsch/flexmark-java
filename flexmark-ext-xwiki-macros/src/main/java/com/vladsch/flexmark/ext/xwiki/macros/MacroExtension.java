@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Extension for macros
@@ -27,12 +26,12 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         htmlRendererBuilder.nodeRendererFactory(new MacroNodeRenderer.Factory());
     }
 

@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A TOC node
@@ -13,14 +12,13 @@ public class TocBlock extends TocBlockBase {
     protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         segmentSpan(out, openingMarker, "openingMarker");
         segmentSpan(out, tocKeyword, "tocKeyword");
         segmentSpan(out, style, "style");
         segmentSpan(out, closingMarker, "closingMarker");
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         BasedSequence[] nodeSegments = new BasedSequence[] { openingMarker, tocKeyword, style, closingMarker };

@@ -3,8 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A BasedSequence implementation which wraps original CharSequence to provide a BasedSequence for
@@ -13,12 +12,11 @@ import org.jetbrains.annotations.Nullable;
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  */
 final public class SubSequence extends BasedSequenceImpl {
-    final private @NotNull CharSequence charSequence;
-    final private @NotNull SubSequence baseSeq;
+    final private CharSequence charSequence;
+    final private SubSequence baseSeq;
     final private int startOffset;
     final private int endOffset;
 
-    @NotNull
     @Override
     public SubSequence getBaseSequence() {
         return baseSeq;
@@ -40,7 +38,7 @@ final public class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public <T> T getOption(@NotNull DataKeyBase<T> dataKey) {
+    public <T> T getOption(DataKeyBase<T> dataKey) {
         return charSequence instanceof BasedOptionsHolder ? ((BasedOptionsHolder) charSequence).getOption(dataKey) : dataKey.get(null);
     }
 
@@ -49,7 +47,6 @@ final public class SubSequence extends BasedSequenceImpl {
         return charSequence instanceof BasedOptionsHolder ? ((BasedOptionsHolder) charSequence).getOptions() : null;
     }
 
-    @NotNull
     @Override
     public CharSequence getBase() {
         return charSequence;
@@ -63,7 +60,7 @@ final public class SubSequence extends BasedSequenceImpl {
         return endOffset;
     }
 
-    private SubSequence(@NotNull CharSequence charSequence) {
+    private SubSequence(CharSequence charSequence) {
         super(charSequence instanceof String ? charSequence.hashCode() : 0);
         assert !(charSequence instanceof BasedSequence);
         baseSeq = this;
@@ -73,7 +70,7 @@ final public class SubSequence extends BasedSequenceImpl {
     }
 
     // NOTE: called only from baseSubSequence
-    private SubSequence(@NotNull SubSequence subSequence, int startIndex, int endIndex) {
+    private SubSequence(SubSequence subSequence, int startIndex, int endIndex) {
         super(0);
 
         assert startIndex >= 0 && endIndex >= startIndex && endIndex <= subSequence.length() : String.format("SubSequence must have startIndex >= 0 && endIndex >= startIndex && endIndex <= %d, got startIndex:%d, endIndex: %d", subSequence.length(), startIndex, endIndex);
@@ -85,7 +82,7 @@ final public class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+    public void addSegments(IBasedSegmentBuilder<?> builder) {
         assert builder.getBaseSequence() == baseSeq || builder.getBaseSequence().equals(baseSeq);
 
         builder.append(startOffset, endOffset);
@@ -96,7 +93,6 @@ final public class SubSequence extends BasedSequenceImpl {
         return endOffset - startOffset;
     }
 
-    @NotNull
     @Override
     public Range getSourceRange() {
         return Range.of(startOffset, endOffset);
@@ -116,14 +112,12 @@ final public class SubSequence extends BasedSequenceImpl {
         return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
     }
 
-    @NotNull
     @Override
     public SubSequence subSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, length());
         return baseSubSequence(startOffset + startIndex, startOffset + endIndex);
     }
 
-    @NotNull
     @Override
     public SubSequence baseSubSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, baseSeq.length());

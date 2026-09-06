@@ -10,8 +10,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -83,7 +82,6 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
                 return null;
             }
 
-            @NotNull
             @Override
             public Set<Class<?>> getBeforeDependents() {
                 HashSet<Class<?>> set = new HashSet<>();

@@ -9,7 +9,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -50,7 +49,7 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     }
 
     @Override
-    public void rendererOptions(@NotNull MutableDataHolder options) {
+    public void rendererOptions(MutableDataHolder options) {
 
     }
 
@@ -71,7 +70,7 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+    public void extend(HtmlRenderer.Builder htmlRendererBuilder, String rendererType) {
         if ("HTML".equals(rendererType)) {
             htmlRendererBuilder.nodeRendererFactory(new JekyllTagNodeRenderer.Factory());
         }

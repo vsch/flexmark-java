@@ -2,8 +2,7 @@ package com.vladsch.flexmark.util.sequence.builder;
 
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.Range;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Iterator;
 
@@ -54,7 +53,6 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
      *
      * @return iterator over segment builder parts
      */
-    @NotNull
     @Override
     Iterator<Object> iterator();
 
@@ -63,14 +61,13 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
      *
      * @return iterator over segment builder segments
      */
-    @NotNull
     Iterable<Seg> getSegments();
 
-    @NotNull S append(int startOffset, int endOffset);
-    @NotNull S append(CharSequence text);
-    @NotNull S appendAnchor(int offset);
-    @NotNull S append(@NotNull Range range);
-    @NotNull String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars);
-    @NotNull String toStringWithRanges(@NotNull CharSequence chars);
-    @NotNull String toString(@NotNull CharSequence chars);
+    S append(int startOffset, int endOffset);
+    S append(CharSequence text);
+    S appendAnchor(int offset);
+    S append(Range range);
+    String toStringWithRangesVisibleWhitespace(CharSequence chars);
+    String toStringWithRanges(CharSequence chars);
+    String toString(CharSequence chars);
 }

@@ -21,7 +21,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -29,12 +28,12 @@ import java.util.List;
 
 public class ComboEscapedCharacterSpecTest extends RendererSpecTest {
     final private static String SPEC_RESOURCE = "/ext_escaped_character_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(EscapedCharacterExtension.create()))
             .toImmutable();
 
-    public ComboEscapedCharacterSpecTest(@NotNull SpecExample example) {
+    public ComboEscapedCharacterSpecTest(SpecExample example) {
         super(example, null, OPTIONS);
     }
 

@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -392,9 +391,8 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new JiraConverterNodeRenderer(options);
         }
     }

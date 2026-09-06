@@ -3,15 +3,14 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.util.collection.iteration.*;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Paired;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-    final private @NotNull OrderedSet<K> keySet;
-    final private @NotNull OrderedSet<V> valueSet;
+    final private OrderedSet<K> keySet;
+    final private OrderedSet<V> valueSet;
     final private @Nullable CollectionHost<Paired<K, V>> host;
     boolean isInKeyUpdate;
     boolean isInValueUpdate;
@@ -25,7 +24,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         this(capacity, null);
     }
 
-    public OrderedMultiMap(@NotNull CollectionHost<Paired<K, V>> host) {
+    public OrderedMultiMap(CollectionHost<Paired<K, V>> host) {
         this(0, host);
     }
 
@@ -264,23 +263,23 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         isInKeyUpdate = false;
     }
 
-    public boolean putEntry(@NotNull Map.Entry<K, V> e) {
+    public boolean putEntry(Map.Entry<K, V> e) {
         return addKeyValue(e.getKey(), e.getValue());
     }
 
-    public boolean putKeyValueEntry(@NotNull Map.Entry<K, V> e) {
+    public boolean putKeyValueEntry(Map.Entry<K, V> e) {
         return addKeyValue(e.getKey(), e.getValue());
     }
 
-    public boolean putValueKeyEntry(@NotNull Map.Entry<V, K> e) {
+    public boolean putValueKeyEntry(Map.Entry<V, K> e) {
         return addKeyValue(e.getValue(), e.getKey());
     }
 
-    public boolean putKeyValuePair(@NotNull Paired<K, V> e) {
+    public boolean putKeyValuePair(Paired<K, V> e) {
         return addKeyValue(e.getFirst(), e.getSecond());
     }
 
-    public boolean putValueKeyPair(@NotNull Paired<V, K> e) {
+    public boolean putValueKeyPair(Paired<V, K> e) {
         return addKeyValue(e.getSecond(), e.getFirst());
     }
 
@@ -357,7 +356,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return removeKey(o);
     }
 
-    public @Nullable Map.Entry<K, V> removeEntry(@NotNull Map.Entry<K, V> e) {
+    public Map.@Nullable Entry<K, V> removeEntry(Map.Entry<K, V> e) {
         boolean b = removeEntryIndex(-1, e.getKey(), e.getValue());
         return b ? e : null;
     }
@@ -421,7 +420,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     @Override
-    public void putAll(@NotNull Map<? extends K, ? extends V> map) {
+    public void putAll(Map<? extends K, ? extends V> map) {
         putAllKeyValues(map);
     }
 
@@ -452,13 +451,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         isInValueUpdate = false;
     }
 
-    @NotNull
     @Override
     public OrderedSet<K> keySet() {
         return keySet;
     }
 
-    @NotNull
     @Override
     public Collection<V> values() {
         if (!keySet.isSparse()) {
@@ -494,7 +491,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return valueSet.getValue(index);
     }
 
-    @NotNull
     @Override
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         return keyValueEntrySet();
@@ -570,7 +566,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
      * Iterable
      */
 
-    @NotNull
     @Override
     public Iterator<Map.Entry<K, V>> iterator() {
         return entrySetIterator();
@@ -590,13 +585,13 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new CollectionHost<Map.Entry<K, V>>() {
             @Override
-            public void adding(int index, @Nullable Map.Entry<K, V> entry, @Nullable Object v) {
+            public void adding(int index, Map.@Nullable Entry<K, V> entry, @Nullable Object v) {
                 assert v == null;
                 OrderedMultiMap.this.putKeyValue(entry.getKey(), entry.getValue());
             }
 
             @Override
-            public Object removing(int index, @Nullable Map.Entry<K, V> entry) {
+            public Object removing(int index, Map.@Nullable Entry<K, V> entry) {
                 boolean b = OrderedMultiMap.this.removeEntryIndex(index, entry.getKey(), entry.getValue());
                 return b ? entry : null;
             }

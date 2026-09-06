@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
@@ -23,14 +22,13 @@ public class TextBase extends Node implements TextContainer {
         super(BasedSequence.of(chars));
     }
 
-    @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
     }
 
     @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
+    public void getAstExtra(StringBuilder out) {
         astExtraChars(out);
     }
 
@@ -46,7 +44,6 @@ public class TextBase extends Node implements TextContainer {
         return false;
     }
 
-    @NotNull
     @Override
     protected String toStringAttributes() {
         return "text=" + getChars();

@@ -8,7 +8,6 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ListBulletMarker;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_gfm_tasklist_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
             .set(Parser.BLANK_LINES_IN_AST, true)
@@ -49,7 +48,7 @@ public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("list-bullet-asterisk", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.ASTERISK));
         optionsMap.put("list-bullet-plus", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.PLUS));
     }
-    public ComboGfmTaskListFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboGfmTaskListFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

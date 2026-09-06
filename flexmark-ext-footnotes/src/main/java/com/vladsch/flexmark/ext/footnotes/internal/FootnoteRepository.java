@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -68,19 +67,16 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
         super(FootnoteExtension.FOOTNOTES_KEEP.get(options));
     }
 
-    @NotNull
     @Override
     public DataKey<FootnoteRepository> getDataKey() {
         return FootnoteExtension.FOOTNOTES;
     }
 
-    @NotNull
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return FootnoteExtension.FOOTNOTES_KEEP;
     }
 
-    @NotNull
     @Override
     public Set<FootnoteBlock> getReferencedElements(Node parent) {
         HashSet<FootnoteBlock> references = new HashSet<>();

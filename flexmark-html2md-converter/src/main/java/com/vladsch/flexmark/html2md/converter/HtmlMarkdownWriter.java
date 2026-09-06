@@ -2,8 +2,7 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
@@ -20,14 +19,13 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
         super(builder, formatOptions);
     }
 
-    @NotNull
     @Override
     public HtmlMarkdownWriter getEmptyAppendable() {
         return new HtmlMarkdownWriter(appendable, appendable.getOptions());
     }
 
     @Override
-    public @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
+    public BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
         Node node = context.getCurrentNode();
 
         if (node instanceof Element) {

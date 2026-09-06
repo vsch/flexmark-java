@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -107,7 +106,6 @@ public class SegmentTest {
             return new DummyCharSequence(myChar, end - start);
         }
 
-        @NotNull
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder(length());

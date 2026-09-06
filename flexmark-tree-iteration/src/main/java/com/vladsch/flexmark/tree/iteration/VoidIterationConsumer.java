@@ -1,17 +1,16 @@
 package com.vladsch.flexmark.tree.iteration;
 
-import org.jetbrains.annotations.NotNull;
 
 public interface VoidIterationConsumer<N> extends IterationConsumer<N> {
-    void accept(@NotNull N it, @NotNull VoidIteration loop);
+    void accept(N it, VoidIteration loop);
 
     // before start of all iterations
-    default void beforeStart(@NotNull VoidIteration iteration) {
+    default void beforeStart(VoidIteration iteration) {
 
     }
 
     // iteration is done, before returning
-    default void afterEnd(@NotNull VoidIteration iteration) {
+    default void afterEnd(VoidIteration iteration) {
 
     }
 }

@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitorBase;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract visitor that visits only children of blocks excluding Paragraphs
@@ -15,11 +14,11 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AnchorRefTargetBlockVisitor extends NodeVisitorBase {
     protected abstract void visit(AnchorRefTarget node);
     
-    protected boolean preVisit(@NotNull Node node) {
+    protected boolean preVisit(Node node) {
         return true;
     }
     
-    public void visit(@NotNull Node node) {
+    public void visit(Node node) {
         if (node instanceof AnchorRefTarget) visit((AnchorRefTarget) node);
         
         if (preVisit(node) && node instanceof Block) {

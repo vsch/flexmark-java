@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.misc.Utils.*;
 
@@ -95,7 +94,7 @@ public class TableCell {
         this.afterDelete = afterDelete;
     }
 
-    public TableCell(@NotNull TableCell other, boolean copyNode, int rowSpan, int columnSpan, CellAlignment alignment) {
+    public TableCell(TableCell other, boolean copyNode, int rowSpan, int columnSpan, CellAlignment alignment) {
         this.tableCellNode = copyNode ? other.tableCellNode : null;
         this.openMarker = other.openMarker;
         this.closeMarker = other.closeMarker;

@@ -24,8 +24,7 @@ import com.vladsch.flexmark.util.options.ParsedOption;
 import com.vladsch.flexmark.util.options.ParsedOptionStatus;
 import com.vladsch.flexmark.util.options.ParserMessage;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
@@ -35,7 +34,7 @@ import java.util.Map;
 
 public class TocOptionsParserTest extends ComboSpecTestCase {
     final private static String SPEC_RESOURCE = "/toc_options_parser_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             //.set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.RENDER_HEADER_ID, true)
@@ -109,19 +108,17 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             return options;
         }
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return EMPTY_SEGMENTS;
         }
 
         @Override
-        public void getAstExtra(@NotNull StringBuilder out) {
+        public void getAstExtra(StringBuilder out) {
             if (status != null) out.append(" status:").append(status.name());
             if (message != null) out.append(" message:").append(message);
         }
 
-        @NotNull
         @Override
         public String getNodeName() {
             return nodeType;
@@ -141,7 +138,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public @NotNull Node parse(@NotNull BasedSequence input) {
+        public Node parse(BasedSequence input) {
             // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
             BasedSequence[] lines = input.split("\n");
             ParserNode example = new ParserNode("Example", input, null, null);
@@ -222,7 +219,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
 
         @Override
-        public void render(@NotNull Node document, @NotNull Appendable output) {
+        public void render(Node document, Appendable output) {
             assert document instanceof ParserNode;
             TocOptions tocOptions = TOC_OPTIONS.get(getOptions());
             HtmlWriter html = new HtmlWriter(2, 0);
@@ -236,7 +233,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         }
     }
 
-    public TocOptionsParserTest(@NotNull SpecExample example) {
+    public TocOptionsParserTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 
@@ -246,7 +243,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     @Override
-    public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder OPTIONS = aggregate(TocOptionsParserTest.OPTIONS, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, OPTIONS, new Parser(OPTIONS), new Renderer(OPTIONS), true);
     }

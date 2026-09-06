@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
     static final boolean WANT_EXCLAMATION_PREFIX = false;
@@ -30,47 +29,44 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public boolean isMatch(@NotNull BasedSequence nodeChars) {
+    public boolean isMatch(BasedSequence nodeChars) {
         return nodeChars.length() >= 4 && nodeChars.charAt(0) == '[' && nodeChars.charAt(1) == '[' && nodeChars.endCharAt(1) == ']' && nodeChars.endCharAt(2) == ']';
     }
 
-    @NotNull
     @Override
-    public BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node) {
+    public BasedSequence adjustInlineText(Document document, Node node) {
         // nothing to do, our prefixes are stripped out of a link ref
         return node.getChars();
     }
 
     @Override
-    public boolean allowDelimiters(@NotNull BasedSequence chars, @NotNull Document document, @NotNull Node node) {
+    public boolean allowDelimiters(BasedSequence chars, Document document, Node node) {
         return true;
     }
 
     @Override
-    public void updateNodeElements(@NotNull Document document, @NotNull Node node) {
+    public void updateNodeElements(Document document, Node node) {
 
     }
 
-    @NotNull
     @Override
-    public Node createNode(@NotNull BasedSequence nodeChars) {
+    public Node createNode(BasedSequence nodeChars) {
         return new Zzzzzz(nodeChars, options.zzzzzzOption2);
     }
 
     public static class Factory implements LinkRefProcessorFactory {
-        @NotNull
         @Override
-        public LinkRefProcessor apply(@NotNull Document document) {
+        public LinkRefProcessor apply(Document document) {
             return new ZzzzzzLinkRefProcessor(document);
         }
 
         @Override
-        public boolean getWantExclamationPrefix(@NotNull DataHolder options) {
+        public boolean getWantExclamationPrefix(DataHolder options) {
             return WANT_EXCLAMATION_PREFIX;
         }
 
         @Override
-        public int getBracketNestingLevel(@NotNull DataHolder options) {
+        public int getBracketNestingLevel(DataHolder options) {
             return BRACKET_NESTING_LEVEL;
         }
     }

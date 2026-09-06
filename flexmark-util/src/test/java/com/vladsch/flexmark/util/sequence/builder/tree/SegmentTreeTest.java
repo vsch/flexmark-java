@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -211,7 +210,7 @@ public class SegmentTreeTest {
         // TEST: need test for this
     }
 
-    void assertCharAt(@NotNull BasedSequence sequence, @NotNull PlainSegmentBuilder segments, @NotNull SegmentTree segTree) {
+    void assertCharAt(BasedSequence sequence, PlainSegmentBuilder segments, SegmentTree segTree) {
         BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
         int iMax = sequenceFull.length();
         System.out.println(segTree.toString(sequence));
@@ -341,7 +340,7 @@ public class SegmentTreeTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        List<BasedSequence> lines = sequence.splitListEOL(false);
 
         for (BasedSequence line : lines) {
             BasedSequence trim = line.trim();
@@ -376,7 +375,7 @@ public class SegmentTreeTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        List<BasedSequence> lines = sequence.splitListEOL(false);
 
         for (BasedSequence line : lines) {
             BasedSequence trim = line.trim();
@@ -420,7 +419,7 @@ public class SegmentTreeTest {
 //        BasedSequence sequence = BasedSequence.of(input);
 //        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 //
-//        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+//        List<BasedSequence> lines = sequence.splitListEOL(false);
 //        for (BasedSequence line : lines) {
 //            BasedSequence trim = line.trim();
 //            if (!trim.isEmpty()) segments.append("  ");
@@ -452,7 +451,7 @@ public class SegmentTreeTest {
 //        CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
 //        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 //
-//        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+//        List<BasedSequence> lines = sequence.splitListEOL(false);
 //        for (BasedSequence line : lines) {
 //            BasedSequence trim = line.trim();
 ////            if (!trim.isEmpty()) segments.append("  ");

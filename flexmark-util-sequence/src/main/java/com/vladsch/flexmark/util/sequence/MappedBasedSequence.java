@@ -4,8 +4,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A BasedSequence which maps characters according to CharMapper
@@ -21,7 +20,6 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         this.mapper = mapper;
     }
 
-    @NotNull
     @Override
     public CharMapper getCharMapper() {
         return mapper;
@@ -32,7 +30,6 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         return mapper.map(baseSeq.charAt(index));
     }
 
-    @NotNull
     @Override
     public BasedSequence getCharSequence() {
         return baseSeq;
@@ -44,7 +41,7 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     }
 
     @Override
-    public @NotNull BasedSequence toMapped(CharMapper mapper) {
+    public BasedSequence toMapped(CharMapper mapper) {
         return mapper == CharMapper.IDENTITY ? this : new MappedBasedSequence(baseSeq, this.mapper.andThen(mapper));
     }
 
@@ -73,7 +70,6 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         return getBaseSequence().getOptions();
     }
 
-    @NotNull
     @Override
     public BasedSequence sequenceOf(@Nullable CharSequence baseSeq, int startIndex, int endIndex) {
         if (baseSeq instanceof MappedBasedSequence) {
@@ -81,7 +77,6 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         } else return new MappedBasedSequence(this.baseSeq.sequenceOf(baseSeq, startIndex, endIndex), mapper);
     }
 
-    @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, length());
@@ -92,13 +87,11 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
         return new MappedBasedSequence(baseSeq.subSequence(startIndex, endIndex), mapper);
     }
 
-    @NotNull
     @Override
     public Object getBase() {
         return baseSeq.getBase();
     }
 
-    @NotNull
     @Override
     public BasedSequence getBaseSequence() {
         return baseSeq.getBaseSequence();
@@ -120,18 +113,16 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     }
 
     @Override
-    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+    public void addSegments(IBasedSegmentBuilder<?> builder) {
         BasedUtils.generateSegments(builder, this);
     }
 
-    @NotNull
     @Override
     public Range getSourceRange() {
         return baseSeq.getSourceRange();
     }
 
-    @NotNull
-    public static BasedSequence mappedOf(@NotNull BasedSequence baseSeq, @NotNull CharMapper mapper) {
+    public static BasedSequence mappedOf(BasedSequence baseSeq, CharMapper mapper) {
         return new MappedBasedSequence(baseSeq, mapper);
     }
 }

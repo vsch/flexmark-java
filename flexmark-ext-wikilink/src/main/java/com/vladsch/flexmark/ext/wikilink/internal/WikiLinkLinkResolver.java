@@ -8,8 +8,7 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
@@ -22,9 +21,8 @@ public class WikiLinkLinkResolver implements LinkResolver {
         this.options = new WikiLinkOptions(context.getOptions());
     }
 
-    @NotNull
     @Override
-    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
         if (link.getLinkType() == WIKI_LINK) {
             StringBuilder sb = new StringBuilder();
             final boolean isWikiImage = node instanceof WikiImage;
@@ -109,9 +107,8 @@ public class WikiLinkLinkResolver implements LinkResolver {
             return false;
         }
 
-        @NotNull
         @Override
-        public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
+        public LinkResolver apply(LinkResolverBasicContext context) {
             return new WikiLinkLinkResolver(context);
         }
     }

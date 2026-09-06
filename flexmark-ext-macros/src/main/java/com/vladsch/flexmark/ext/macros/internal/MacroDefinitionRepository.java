@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -41,19 +40,16 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
         super(MacrosExtension.MACRO_DEFINITIONS_KEEP.get(options));
     }
 
-    @NotNull
     @Override
     public DataKey<MacroDefinitionRepository> getDataKey() {
         return MacrosExtension.MACRO_DEFINITIONS;
     }
 
-    @NotNull
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return MacrosExtension.MACRO_DEFINITIONS_KEEP;
     }
 
-    @NotNull
     @Override
     public Set<MacroDefinitionBlock> getReferencedElements(Node parent) {
         HashSet<MacroDefinitionBlock> references = new HashSet<>();

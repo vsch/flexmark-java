@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Paired;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.Assert;
 
 import java.util.ArrayList;

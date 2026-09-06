@@ -15,8 +15,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         optionsMap.put("details", new MutableDataSet().set(DETAILS, true));
         optionsMap.put("ast-details", new MutableDataSet().set(AST_DETAILS, true));
     }
-    public TranslationFormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
+    public TranslationFormatterSpecTest(SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }
 
@@ -55,11 +54,11 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
     }
 
     @Override
-    final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    final public SpecExampleRenderer getSpecExampleRenderer(SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, getParser(combinedOptions), getRenderer(combinedOptions), true) {
             @Override
-            protected @NotNull String renderAst() {
+            protected String renderAst() {
                 TranslationFormatter translationFormatter = (TranslationFormatter) getRenderer();
                 if (translationFormatter.isShowIntermediateAst()) {
                     return translationFormatter.getAst();
@@ -116,7 +115,6 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
             return myShowIntermediateAst;
         }
 
-        @NotNull
         public String getAst() {
             return myAst == null ? "" : myAst;
         }
@@ -128,7 +126,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         }
 
         @Override
-        public void render(@NotNull Node node, @NotNull Appendable output) {
+        public void render(Node node, Appendable output) {
             Document document = (Document) node;
 
             TranslationHandler handler = myFormatter.getTranslationHandler();

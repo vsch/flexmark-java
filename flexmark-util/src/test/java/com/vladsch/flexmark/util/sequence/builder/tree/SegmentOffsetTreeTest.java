@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.CharRecoveryOptimizer;
 import com.vladsch.flexmark.util.sequence.builder.SegmentBuilderBase;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.List;
@@ -70,7 +69,7 @@ public class SegmentOffsetTreeTest {
         loop(startOffset + 65536, startOffset + 65536 * 8, 8, 3, consumer);
     }
 
-    void assertCharAt(@NotNull BasedSequence sequence, @NotNull SegmentBuilderBase<?> segments, @NotNull SegmentTree segTree) {
+    void assertCharAt(BasedSequence sequence, SegmentBuilderBase<?> segments, SegmentTree segTree) {
         BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
         SegmentOffsetTree segOffsetTree = segTree.getSegmentOffsetTree(sequence);
 
@@ -200,7 +199,7 @@ public class SegmentOffsetTreeTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        List<BasedSequence> lines = sequence.splitListEOL(false);
 
         for (BasedSequence line : lines) {
             BasedSequence trim = line.trim();
@@ -236,7 +235,7 @@ public class SegmentOffsetTreeTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        List<BasedSequence> lines = sequence.splitListEOL(false);
 
         for (BasedSequence line : lines) {
             BasedSequence trim = line.trim();
@@ -282,7 +281,7 @@ public class SegmentOffsetTreeTest {
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
 
-        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
             BasedSequence trim = line.trim();
 //            if (!trim.isEmpty()) segments.append("  ");

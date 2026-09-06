@@ -11,14 +11,13 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
 
 public class ComboAttributesFormatterSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_attributes_format_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AttributesExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
@@ -56,7 +55,7 @@ public class ComboAttributesFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("class-implicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.IMPLICIT_PREFERRED));
         optionsMap.put("class-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.EXPLICIT_PREFERRED));
     }
-    public ComboAttributesFormatterSpecTest(@NotNull SpecExample example) {
+    public ComboAttributesFormatterSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

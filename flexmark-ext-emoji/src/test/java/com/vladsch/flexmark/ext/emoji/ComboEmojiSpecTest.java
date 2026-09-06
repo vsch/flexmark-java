@@ -6,7 +6,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 public class ComboEmojiSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_emoji_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
             .set(EmojiExtension.ROOT_IMAGE_PATH, "/img/")
@@ -35,7 +34,7 @@ public class ComboEmojiSpecTest extends RendererSpecTest {
         optionsMap.put("no-size", new MutableDataSet().set(EmojiExtension.ATTR_IMAGE_SIZE, ""));
         optionsMap.put("no-align", new MutableDataSet().set(EmojiExtension.ATTR_ALIGN, ""));
     }
-    public ComboEmojiSpecTest(@NotNull SpecExample example) {
+    public ComboEmojiSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

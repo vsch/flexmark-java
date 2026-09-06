@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +11,19 @@ public class BlockContent {
     final private ArrayList<BasedSequence> lines = new ArrayList<>();
     final private ArrayList<Integer> lineIndents = new ArrayList<>();
 
-    public @NotNull BasedSequence getLine(int line) {
+    public BasedSequence getLine(int line) {
         return lines.get(line);
     }
 
-    public @NotNull BasedSequence getSpanningChars() {
+    public BasedSequence getSpanningChars() {
         return lines.size() > 0 ? lines.get(0).baseSubSequence(lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : BasedSequence.NULL;
     }
 
-    public @NotNull List<BasedSequence> getLines() {
+    public List<BasedSequence> getLines() {
         return lines;
     }
 
-    public @NotNull List<Integer> getLineIndents() {
+    public List<Integer> getLineIndents() {
         return lineIndents;
     }
 
@@ -35,7 +34,7 @@ public class BlockContent {
     public BlockContent() {
     }
 
-    public BlockContent(@NotNull BlockContent other, int startLine, int lineIndent) {
+    public BlockContent(BlockContent other, int startLine, int lineIndent) {
         // copy content from other
         assert other.lines.size() == other.lineIndents.size() : "lines and eols should be of the same size";
 
@@ -61,12 +60,12 @@ public class BlockContent {
         return lines.size() > 0 ? lines.get(lines.size() - 1).getEndOffset() - lines.get(0).getStartOffset() : -1;
     }
 
-    public void add(@NotNull BasedSequence lineWithEOL, int lineIndent) {
+    public void add(BasedSequence lineWithEOL, int lineIndent) {
         lines.add(lineWithEOL);
         lineIndents.add(lineIndent);
     }
 
-    public void addAll(@NotNull List<BasedSequence> lines, List<Integer> lineIndents) {
+    public void addAll(List<BasedSequence> lines, List<Integer> lineIndents) {
         assert lines.size() == lineIndents.size() : "lines and lineIndents should be of the same size";
         this.lines.addAll(lines);
         this.lineIndents.addAll(lineIndents);
@@ -76,16 +75,16 @@ public class BlockContent {
         return lines.size() == 1;
     }
 
-    public @NotNull BasedSequence getContents() {
+    public BasedSequence getContents() {
         if (lines.size() == 0) return BasedSequence.NULL;
         return getContents(0, lines.size());
     }
 
-    public @NotNull BlockContent subContents(int startLine, int endLine) {
+    public BlockContent subContents(int startLine, int endLine) {
         return new BlockContent(this, startLine, endLine);
     }
 
-    public @NotNull BasedSequence getContents(int startLine, int endLine) {
+    public BasedSequence getContents(int startLine, int endLine) {
         if (lines.size() == 0) return BasedSequence.NULL;
 
         if (startLine < 0) {
@@ -104,7 +103,7 @@ public class BlockContent {
         return SegmentedSequence.create(lines.get(0), lines.subList(startLine, endLine));
     }
 
-    public @NotNull String getString() {
+    public String getString() {
         if (lines.size() == 0) return "";
 
         StringBuilder sb = new StringBuilder();

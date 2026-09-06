@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import static org.junit.Assert.*;
 public class BasedSequenceFullImplTest {
     // TEST: need to complete tests here
 
-    static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
+    static BasedSequence basedSequenceOf(CharSequence chars) {
         return BasedSequence.of(BasedOptionsSequence.of(chars, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
     }
 

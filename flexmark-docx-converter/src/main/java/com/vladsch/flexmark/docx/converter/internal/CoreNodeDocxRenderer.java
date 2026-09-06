@@ -66,7 +66,6 @@ import org.docx4j.relationships.Relationship;
 import org.docx4j.toc.TocException;
 import org.docx4j.toc.TocGenerator;
 import org.docx4j.wml.*;
-import org.jetbrains.annotations.NotNull;
 
 import jakarta.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
@@ -1396,7 +1395,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         docx.addFldCharCreateR(STFldCharType.END);
     }
 
-    @NotNull String getCurrentTime(String useFormat) {
+    String getCurrentTime(String useFormat) {
         Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000230400L)) : new Date();
 
         // change to fixed date so test results do not change
@@ -1409,7 +1408,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         return currentTime;
     }
 
-    @NotNull String getCurrentDate(String useFormat) {
+    String getCurrentDate(String useFormat) {
         Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000230400L)) : new Date();
         String currentDate = "";
         {

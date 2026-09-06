@@ -11,7 +11,6 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -21,7 +20,7 @@ import java.util.Map;
 
 public class ComboAbbreviationSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_abbreviation_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     EscapedCharacterExtension.create(),
@@ -42,7 +41,7 @@ public class ComboAbbreviationSpecTest extends RendererSpecTest {
         optionsMap.put("links", new MutableDataSet().set(AbbreviationExtension.USE_LINKS, true));
         optionsMap.put("no-abbr", new MutableDataSet().set(UNLOAD_EXTENSIONS, Collections.singletonList(AbbreviationExtension.class)));
     }
-    public ComboAbbreviationSpecTest(@NotNull SpecExample example) {
+    public ComboAbbreviationSpecTest(SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

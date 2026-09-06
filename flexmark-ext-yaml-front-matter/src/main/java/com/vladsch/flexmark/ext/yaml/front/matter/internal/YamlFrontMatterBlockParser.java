@@ -11,8 +11,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,9 +148,8 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
             return false;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }

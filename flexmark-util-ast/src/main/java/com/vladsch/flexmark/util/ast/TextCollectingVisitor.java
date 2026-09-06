@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
 
@@ -13,7 +12,7 @@ public class TextCollectingVisitor {
     public TextCollectingVisitor() {
         myVisitor = new NodeVisitor() {
             @Override
-            public void processNode(@NotNull Node node, boolean withChildren, @NotNull BiConsumer<Node, Visitor<Node>> processor) {
+            public void processNode(Node node, boolean withChildren, BiConsumer<Node, Visitor<Node>> processor) {
                 if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
                     out.setLastNode(node);
                     if (node instanceof Block && out.isNotEmpty()) {

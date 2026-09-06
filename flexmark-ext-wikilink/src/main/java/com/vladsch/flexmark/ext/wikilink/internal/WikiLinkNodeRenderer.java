@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -58,9 +57,8 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     }
 
     public static class Factory implements NodeRendererFactory {
-        @NotNull
         @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
+        public NodeRenderer apply(DataHolder options) {
             return new WikiLinkNodeRenderer(options);
         }
     }

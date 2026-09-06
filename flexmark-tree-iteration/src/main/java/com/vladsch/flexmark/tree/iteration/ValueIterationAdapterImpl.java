@@ -1,31 +1,28 @@
 package com.vladsch.flexmark.tree.iteration;
 
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N, T> {
-    final private @NotNull ValueIterationConsumerAdapter<N, T> myConsumerAdapter;
+    final private ValueIterationConsumerAdapter<N, T> myConsumerAdapter;
 
     static class ConsumerAdapter<P, T> implements ValueIterationConsumerAdapter<P, T> {
-        final private @NotNull Function<? super P, ? extends T> myFunction;
+        final private Function<? super P, ? extends T> myFunction;
         final private @Nullable ValueIterationFilter<? super T> myFilter;
 
-        public ConsumerAdapter(@NotNull Function<? super P, ? extends T> function, @Nullable ValueIterationFilter<? super T> filter) {
+        public ConsumerAdapter(Function<? super P, ? extends T> function, @Nullable ValueIterationFilter<? super T> filter) {
             myFunction = function;
             myFilter = filter;
         }
 
-        @NotNull
         @Override
         public <R> ValueIterationConsumer<? super P, R> getConsumer(ValueIterationConsumer<? super T, R> valueConsumer) {
             return new MyValueIterationConsumer<>(myFunction, myFilter, valueConsumer);
         }
 
-        @NotNull
         @Override
         public <R> ValueIterationConsumer<? super P, R> getConsumer(VoidIterationConsumer<? super T> voidConsumer) {
             return new MyValueIterationConsumer<>(myFunction, myFilter, new VoidToValueIConsumerAdapter<>(voidConsumer));
@@ -37,14 +34,14 @@ public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N,
         final private Function<? super P, ? extends T> myFunction;
         final private @Nullable ValueIterationFilter<? super T> myFilter;
 
-        public MyValueIterationConsumer(@NotNull Function<? super P, ? extends T> function, @Nullable ValueIterationFilter<? super T> filter, ValueIterationConsumer<? super T, R> consumer) {
+        public MyValueIterationConsumer(Function<? super P, ? extends T> function, @Nullable ValueIterationFilter<? super T> filter, ValueIterationConsumer<? super T, R> consumer) {
             myFunction = function;
             myFilter = filter;
             myConsumer = consumer;
         }
 
         @Override
-        public void accept(@NotNull P it, @NotNull ValueIteration<R> iteration) {
+        public void accept(P it, ValueIteration<R> iteration) {
             T applied = myFunction.apply(it);
             if (applied == null || myFilter != null && !myFilter.filter(applied, iteration)) {
                 //loop.Continue();
@@ -54,22 +51,22 @@ public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N,
         }
 
         @Override
-        public void beforeStart(@NotNull ValueIteration<R> iteration) {
+        public void beforeStart(ValueIteration<R> iteration) {
             myConsumer.beforeStart(iteration);
         }
 
         @Override
-        public void startRecursion(@NotNull VoidIteration iteration) {
+        public void startRecursion(VoidIteration iteration) {
             myConsumer.startRecursion(iteration);
         }
 
         @Override
-        public void endRecursion(@NotNull VoidIteration iteration) {
+        public void endRecursion(VoidIteration iteration) {
             myConsumer.endRecursion(iteration);
         }
 
         @Override
-        public void afterEnd(@NotNull ValueIteration<R> iteration) {
+        public void afterEnd(ValueIteration<R> iteration) {
             myConsumer.afterEnd(iteration);
         }
     }
@@ -83,44 +80,39 @@ public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N,
             myAfterAdapter = afterAdapter;
         }
 
-        @NotNull
         @Override
         public <R> ValueIterationConsumer<? super P, R> getConsumer(ValueIterationConsumer<? super V, R> valueConsumer) {
             return myBeforeAdapter.getConsumer(myAfterAdapter.getConsumer(valueConsumer));
         }
 
-        @NotNull
         @Override
         public <R> ValueIterationConsumer<? super P, R> getConsumer(VoidIterationConsumer<? super V> voidConsumer) {
             return myBeforeAdapter.getConsumer(myAfterAdapter.getConsumer(voidConsumer));
         }
     }
 
-    public ValueIterationAdapterImpl(@NotNull Function<? super N, T> function) {
+    public ValueIterationAdapterImpl(Function<? super N, T> function) {
         this(function, null);
     }
 
-    public ValueIterationAdapterImpl(@NotNull Function<? super N, T> function, @Nullable ValueIterationFilter<? super T> filter) {
+    public ValueIterationAdapterImpl(Function<? super N, T> function, @Nullable ValueIterationFilter<? super T> filter) {
         this(new ConsumerAdapter<>(function, filter));
     }
 
-    public ValueIterationAdapterImpl(@NotNull ValueIterationConsumerAdapter<N, T> consumerAdapter) {
+    public ValueIterationAdapterImpl(ValueIterationConsumerAdapter<N, T> consumerAdapter) {
         myConsumerAdapter = consumerAdapter;
     }
 
-    @NotNull
     @Override
     public ValueIterationConsumerAdapter<N, T> getConsumerAdapter() {
         return myConsumerAdapter;
     }
 
-    @NotNull
     @Override
     public <V> ValueIterationAdapter<N, V> andThen(ValueIterationAdapter<? super T, V> after) {
         return new ValueIterationAdapterImpl<>(new ChainedConsumerAdapter<>(myConsumerAdapter, after.getConsumerAdapter()));
     }
 
-    @NotNull
     @Override
     public ValueIterationAdapter<N, T> compose(ValueIterationAdapter<? super N, N> before) {
         return new ValueIterationAdapterImpl<>(new ChainedConsumerAdapter<>(before.getConsumerAdapter(), myConsumerAdapter));

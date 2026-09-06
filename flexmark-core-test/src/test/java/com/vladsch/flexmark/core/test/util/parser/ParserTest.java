@@ -16,8 +16,7 @@ import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInStartsWithCharsHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -652,7 +651,6 @@ final public class ParserTest {
         DashBlock() {
         }
 
-        @NotNull
         @Override
         public BasedSequence[] getSegments() {
             return EMPTY_SEGMENTS;
@@ -701,9 +699,8 @@ final public class ParserTest {
             return false;
         }
 
-        @NotNull
         @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
+        public BlockParserFactory apply(DataHolder options) {
             return new BlockFactory(options);
         }
     }
